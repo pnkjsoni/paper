@@ -1,0 +1,959 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Patent Agent Examination — Paper I Practice (2023 – 2026)</title>
+<style>
+  :root{
+    --bg:#f6f7fb; --surface:#ffffff; --text:#0f172a; --muted:#64748b; --line:#e5e8f0;
+    --brand:#4f46e5; --brand2:#7c3aed; --brand-soft:#eef2ff;
+    --ok:#16a34a; --ok-bg:#ecfdf3; --ok-line:#86efac;
+    --bad:#dc2626; --bad-bg:#fef2f2; --bad-line:#fca5a5;
+    --sel-bg:#f3e8ff; --sel-line:#a855f7;
+    --shadow:0 1px 2px rgba(15,23,42,.04),0 8px 24px -12px rgba(15,23,42,.12);
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --bg:#0b1020; --surface:#131a2e; --text:#e6e9f5; --muted:#94a0bd; --line:#232c47;
+      --brand:#818cf8; --brand2:#a78bfa; --brand-soft:#1b2347;
+      --ok:#4ade80; --ok-bg:#0f2a1e; --ok-line:#1f6f45;
+      --bad:#f87171; --bad-bg:#2d1519; --bad-line:#7f2a33;
+      --sel-bg:#2a1b47; --sel-line:#8b5cf6;
+      --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px -12px rgba(0,0,0,.6);
+    }
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;-webkit-font-smoothing:antialiased}
+  header.top{position:relative;overflow:hidden;color:#fff;padding:44px 20px 70px;
+    background:radial-gradient(900px 400px at 85% -20%,rgba(167,139,250,.55),transparent 60%),radial-gradient(700px 380px at 0% 120%,rgba(56,189,248,.35),transparent 60%),linear-gradient(135deg,#1e1b4b,#312e81 55%,#4338ca)}
+  header.top .inner{max-width:900px;margin:0 auto;position:relative}
+  .eyebrow{display:inline-block;font-size:11.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.22);padding:5px 12px;border-radius:999px;margin-bottom:14px;backdrop-filter:blur(6px)}
+  header.top h1{margin:0 0 8px;font-size:clamp(26px,4.6vw,38px);line-height:1.15;letter-spacing:-.02em;font-weight:800}
+  header.top p{margin:0 0 24px;font-size:15px;opacity:.82;max-width:620px}
+  .tabs{display:inline-flex;gap:4px;padding:5px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);border-radius:14px;backdrop-filter:blur(8px);flex-wrap:wrap}
+  .tab{font:inherit;font-size:14.5px;font-weight:700;padding:9px 24px;border-radius:10px;border:0;background:transparent;color:rgba(255,255,255,.85);cursor:pointer;transition:all .18s}
+  .tab:hover{background:rgba(255,255,255,.14);color:#fff}
+  .tab.active{background:#fff;color:#3730a3;box-shadow:0 4px 14px -4px rgba(0,0,0,.35)}
+  .scorebar{position:sticky;top:10px;z-index:30;max-width:900px;margin:-34px auto 0;padding:0 16px}
+  .scorebar .inner{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:12px 14px 14px;background:color-mix(in srgb,var(--surface) 88%,transparent);backdrop-filter:blur(14px);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);position:relative;overflow:hidden}
+  .pill{font-size:13px;font-weight:600;padding:6px 12px;border-radius:10px;background:var(--brand-soft);color:var(--brand);white-space:nowrap}
+  .pill.green{background:var(--ok-bg);color:var(--ok)}
+  .pill.red{background:var(--bad-bg);color:var(--bad)}
+  .pill.gold{background:linear-gradient(135deg,var(--brand),var(--brand2));color:#fff}
+  .spacer{flex:1}
+  button.reset{font:inherit;font-size:13px;font-weight:600;padding:7px 14px;border-radius:10px;border:1px solid var(--line);background:var(--surface);color:var(--muted);cursor:pointer;transition:all .15s}
+  button.reset:hover{color:var(--text);border-color:var(--brand)}
+  .progress{position:absolute;left:0;right:0;bottom:0;height:4px;background:var(--line)}
+  .progress i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--brand),var(--brand2));transition:width .35s ease}
+  main{max-width:900px;margin:0 auto;padding:26px 16px 70px}
+  h2.sechead{display:flex;align-items:center;gap:10px;font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.12em;color:var(--brand);margin:38px 0 14px}
+  h2.sechead:first-child{margin-top:10px}
+  h2.sechead::after{content:"";flex:1;height:1px;background:var(--line)}
+  .qcard{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:22px 22px 18px;margin-bottom:16px;box-shadow:var(--shadow);transition:transform .18s,box-shadow .18s}
+  .qcard:hover{transform:translateY(-1px)}
+  .qtitle{font-size:15.5px;font-weight:500;margin-bottom:14px;white-space:pre-line}
+  .qnum{display:inline-flex;align-items:center;justify-content:center;min-width:30px;height:30px;padding:0 8px;background:linear-gradient(135deg,var(--brand),var(--brand2));color:#fff;border-radius:9px;font-size:13px;margin-right:10px;font-weight:800;vertical-align:1px}
+  .multi{display:inline-block;font-size:12px;color:var(--brand2);background:var(--sel-bg);font-weight:700;margin:-4px 0 10px;padding:3px 10px;border-radius:999px}
+  .opt{display:flex;align-items:flex-start;gap:12px;width:100%;text-align:left;padding:12px 14px;margin:8px 0;border:1.5px solid var(--line);border-radius:12px;background:var(--surface);color:var(--text);font:inherit;font-size:14.5px;line-height:1.5;cursor:pointer;transition:all .14s}
+  .opt:hover:not(:disabled){border-color:var(--brand);background:var(--brand-soft);transform:translateX(2px)}
+  .opt:disabled{cursor:default}
+  .opt b{flex:none;display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:8px;background:var(--brand-soft);color:var(--brand);font-size:12.5px;font-weight:800;transition:all .14s}
+  .opt.sel{background:var(--sel-bg);border-color:var(--sel-line)}
+  .opt.sel b{background:var(--sel-line);color:#fff}
+  .opt.correct{background:var(--ok-bg);border-color:var(--ok-line);color:var(--text);font-weight:600}
+  .opt.correct b{background:var(--ok);color:#fff}
+  .opt.correct::after{content:"✓";margin-left:auto;color:var(--ok);font-weight:800}
+  .opt.wrong{background:var(--bad-bg);border-color:var(--bad-line);color:var(--text);font-weight:600}
+  .opt.wrong b{background:var(--bad);color:#fff}
+  .opt.wrong::after{content:"✕";margin-left:auto;color:var(--bad);font-weight:800}
+  button.check{margin-top:8px;font:inherit;font-size:14px;font-weight:700;padding:10px 22px;border-radius:12px;border:0;background:linear-gradient(135deg,var(--brand),var(--brand2));color:#fff;cursor:pointer;box-shadow:0 8px 18px -8px var(--brand);transition:transform .15s,opacity .15s}
+  button.check:hover:not(:disabled){transform:translateY(-1px)}
+  button.check:disabled{background:var(--line);color:var(--muted);box-shadow:none;cursor:default}
+  .free{margin-top:10px;font-size:12.5px;color:#92400e;background:#fef3c7;border-radius:10px;padding:8px 12px}
+  @media (prefers-color-scheme: dark){.free{background:#3a2a0a;color:#fcd34d}}
+  footer{max-width:900px;margin:0 auto;padding:0 16px 50px;font-size:12.5px;color:var(--muted);text-align:center}
+  @media (max-width:560px){
+    header.top{padding:32px 16px 62px}
+    .tab{padding:8px 16px}
+    .qcard{padding:18px 16px 14px;border-radius:16px}
+    .scorebar{top:6px}
+  }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="inner">
+    <span class="eyebrow">Paper I · Practice Bank</span>
+    <h1>Patent Agent Examination</h1>
+    <p>Pick a year to open that year's question paper. Click an option to check your answer instantly.</p>
+    <div class="tabs" id="tabs"></div>
+  </div>
+</header>
+
+<div class="scorebar">
+  <div class="inner">
+    <span class="pill">Attempted: <span id="attempted">0</span> / <span id="total">50</span></span>
+    <span class="pill green">Correct: <span id="correct">0</span></span>
+    <span class="pill red">Wrong: <span id="wrong">0</span></span>
+    <span class="pill gold">Marks: <span id="marks">0</span> / <span id="maxmarks">100</span></span>
+    <span class="spacer"></span>
+    <button class="reset" id="resetBtn">↺ Reset year</button>
+    <div class="progress"><i id="bar"></i></div>
+  </div>
+</div>
+
+<main id="quiz"></main>
+<footer id="foot"></footer>
+
+<script>
+/* ---------- helpers ---------- */
+const S = (title, m) => ({ s: title, m });
+const Q = (t, o, a, free) => ({ t, o, a, free: !!free });
+
+const TF23 = ["Statement 1 is true, 2 is false","Statement 1 is false, 2 is true","Statement 1 and 2 both are false","Statement 1 and 2 both are true"];
+const AR = ["When both (A) and (R) are true, and (R) is a correct explanation of (A)","When both (A) and (R) are true, but (R) is NOT a correct explanation of (A)","When (A) is true but (R) is false","When (A) is false but (R) is true"];
+const AR24 = ["When Both (A) and (R) are True, and (R) is a correct Explanation of (A)","When Both (A) and (R) are True, but (R) is NOT a correct Explanation of (A)","When (A) is true but (R) is False","When (A) and (R) both are False"];
+const TF = ["When Statement 1 is True, and Statement 2 is False","When Statement 1 is False, and Statement 2 is True","When Both Statements 1 and 2 are True","When Both Statements 1 and 2 are False"];
+
+/* =====================================================================
+   2023 — SET B
+   ===================================================================== */
+const Y2023 = [
+S("Part A — Multiple Choice (2 marks each)", 2),
+Q(`Sagar, who is an applicant of an invention, drafted the specification himself and filed the patent application, and asked his advocate who is not a patent agent to appear for the hearing. Is it allowed in accordance with the Patents Act?`,
+ ["Sagar can draft the specification but only a patent agent can attend the hearing.","As Sagar has drafted and filed the application himself, only he himself can appear for hearing","Sagar can draft the specification and advocate is allowed to attend the hearing.","Only patent agent is allowed to draft the specification and attend the hearing proceedings."],"c"),
+Q(`Students of Easwari Institute of Technology invented a new stabilizer, and designed a particular shape to make it attractive. They have given a name for that stabilizer as 'PASSION'. Further they made an operating manual for the operation of the stabilizer. They need IPR protection for the entire stabilizer. Could you please help them by matching exact legislation?
+
+List 1                                    List 2
+1. Invented stabilizer              (a) Copyright Act
+2. Shape of stabilizer              (b) Trademark Act
+3. PASSION                         (c) Patent Act
+4. Operating manual              (d) Design Act`,
+ ["1a, 2b, 3c, 4d","1c, 2d, 3b, 4a","1b, 2a, 3c, 4d","1c, 2d, 3a, 4b"],"b"),
+Q(`Ms. Manisha wishes to file a patent application in India, but she came to know that some inventions are not patentable in accordance with the Indian Patents Act. Match List 1 and List 2 and select the correct code.
+
+List 1                                                      List 2
+1. Method of cultivating Rose flower      (a) Section 3(e)
+2. Method of treating brain tumor           (b) Section 3(f)
+3. Bucket fitted with torch                      (c) Section 3(h)
+4. Solution of sugar and salt                  (d) Section 3(i)`,
+ ["1d, 2c, 3a, 4b","1c, 2d, 3b, 4a","1a, 2b, 3c, 4d","1b, 2c, 3d, 4a"],"b"),
+Q(`As part of the PCT procedure, an Indian applicant can receive an international search report and written opinion from –`,
+ ["any International Searching Authority under the PCT","any International Searching Authority declared competent by the Receiving Office of India","the International Bureau of WIPO","Both (b) and (c)"],"b"),
+Q(`PRINT INC. is a large corporation having a sizeable portfolio of patents for a single product. The product is very popular in the Indian market and some of the patents have been licensed to other companies. Choose the correct option regarding Form-27 –`,
+ ["Form 27 should be filed by PRINT INC. but not by the licensees.","PRINT INC. can file a single Form 27 for multiple patents that are related to the said product.","The Form 27 should be filed before the expiry of a time period of 3 months counted from the end of the previous financial year in respect of which the form is being filed.","PRINT INC. cannot file a single Form 27 for multiple patents that are related to the said product."],"b"),
+Q(`Your client, being a MNC, filed a patent application and paid all the fees applicable. Your client later on becomes uninterested in the patent application and wishes to seek refund. Please select the options available to your client –`,
+ ["Your client can assign the application to a natural person and claim refund of 'the difference' in the scale of fees between the fees charged from your client and the fees chargeable from the natural person with regard to all the fees paid previously.","Your client can assign the application to a natural person and claim refund of 'the difference' in the scale of fees between the fees charged from your client and the fees chargeable from the natural person with regard to only the fees paid for request for examination.","Your client can make a request for withdrawal of patent application before the issuance of first statement of objection and claim a refund of 90% of fee paid for request for examination.","Your client can make a request for withdrawal of patent application before the issuance of first statement of objection and claim a refund of 50% of fee paid for request for examination."],"c"),
+Q(`An inventor living in Shimla, Himachal Pradesh wants to file his patent application along with a demand draft for the amount of fee payable. Please select the correct options available to the inventor –`,
+ ["The inventor may send his application by a courier company.","The inventor may send his application by speed post.","Both (a) and (b).","Only (a)."],"b"),
+Q(`Your client, a startup which is facing existential challenges, filed a patent application 6 months ago which has not yet been published. Your client recently came to know that a competitor has started selling a product which is based on the invention disclosed in its patent application. The startup seeks your advice on the way forward. Please select the most prudent option(s) –`,
+ ["Your client should file a request for expedited examination along with a request for early publication at the earliest.","Your client should send a legal notice to the competitor that he will have to pay the damages, calculated from the date of filing of patent application.","Your client should send a legal notice to the competitor that he will have to pay the damages, calculated from the date of grant of patent.","Your client should file a request for expedited examination, a request for early publication and a request to the Controller of Patents to stop the competitor from infringing his rights."],"a"),
+Q(`A patent was granted within one year from the date of filing of patent application. The patentee will have to pay the renewal fee, without taking any extension:`,
+ ["before the expiration of the 2nd year from the date of patent in respect of 3rd year;","before the expiration of the 1st year from the date of patent application in respect of 2nd year;","before the expiration of the 3rd year from the date of patent in respect of 3rd year;","None of the above."],"a"),
+Q(`Marco files a patent application in Colombia on 09.01.2021 and thereafter, claiming priority from said application, he files a PCT International Application on 09.01.2022. Marco is interested to file a national phase patent application in India. The deadline to file in India would be:`,
+ ["09.08.2023","09.01.2025","09.08.2024","09.07.2022"],"a"),
+Q(`Nilesh filed a patent application on 24.03.2019 upon which a patent was granted. The fact of grant of patent was published in the Official Journal on 03.01.2022. Nilesh develops a further improvement of the said invention. Upon conducting a patent and non-patent literature search, Nilesh finds out that the 'improvement' is novel as compared to his own patent. However, the 'improvement' was disclosed in someone else's patent application which was published on 23.01.2022. Nilesh is in a position to file the application for patent of addition on 04.01.2023. What should Nilesh do?`,
+ ["Nilesh should file an application for a patent of addition as the improvement is novel vis-à-vis his own patent.","Nilesh should not file an application for a patent of addition as his patent application would be devoid of novelty.","Nilesh should not file an application for a patent of addition as the same cannot be filed beyond the expiry of one year from the date of publication of grant of a patent.","None of the above."],"b"),
+Q(`A post grant opposition is filed against the patent owned by the company Shelf Life Pvt. Ltd. The patentee does not desire to contest the opposition or leave his reply and evidence within the prescribed time limit. The patent shall be –`,
+ ["deemed to have been abandoned","deemed to have been revoked","deemed to have been withdrawn","deemed to have been terminated"],"b"),
+Q(`Your client PatBio wishes to file a patent application in the Indian patent office for an invention which uses a biological material from India. Arrange the following steps for protection of said invention in the most likely chronological order –
+(1) filing of patent application
+(2) deposition of biological material in recognized depository
+(3) submitting permission from National Biodiversity Authority
+(4) publication of patent application
+(5) grant of patent`,
+ ["1, 2, 3, 4, 5","2, 1, 4, 3, 5","2, 3, 1, 4, 5","1, 3, 2, 4, 5"],"b"),
+Q(`Patent application filed by Rajesh is refused by the Controller and the said decision was communicated on 02/05/2023. Rajesh can file an application for the review of the Controller's decision by –`,
+ ["02/08/2023","01/06/2023","01/11/2023","02/05/2024"],"b"),
+Q(`Number of members in an opposition board is –`,
+ ["2 including chairman","3 including chairman","4 including chairman","5 including chairman"],"b"),
+Q(`James, a citizen of Norway –`,
+ ["can file a patent application directly in India.","can file a patent application in India only after filing same in Norway.","can file a patent application in India only through PCT route.","can file application only in Norway and not in India."],"a"),
+Q(`George Sebastian is a US citizen residing at Bangalore and working at a multinational company having offices throughout the world. As part of the research team, George invented a mosquito repellent. However, as per the Company policy, the application for patent should be first filed at the US Patent Office. George approached you for advice as to whether he has to do any formalities with the Indian Patent Office –`,
+ ["As George is a US citizen and company is a multi-national one, there is no requirement from Indian Patent office side.","As George is residing at Bangalore, he has to obtain permission from Indian Patent office to file first application in US.","As George is residing at Bangalore, he has to obtain permission from US embassy in India to file first application in US.","As George is a US citizen, he has to obtain permission from Indian embassy in USA for filing first application in US."],"b"),
+Q(`Three applicants applied for a patent and the patent was granted to them. Which of the following is true? (Note: there is no specific contract between them)`,
+ ["all are having equal undivided share in patent.","first name holder in the Patent application will get major share.","sharing will be based on the alphabetical order.","sharing will be based on the date of birth."],"a"),
+Q(`Mr. Suresh has two inventions related to a table top grinder. He filed patents for both inventions in the Indian Patent office. Patent was granted for one of the inventions and the other was pending. Mr. Suresh assigned all rights in both the cases to M/s Birdfly Industries. Now which forms are required to update the same in Patent Office records?`,
+ ["Form 16 and Form 13","Form 16 and Form 6","Form 6 and Form 13","Two Form 13"],"b"),
+Q(`An application for patent is open to public –`,
+ ["Just after filing of application.","Just after publication of application.","Just after filing of pre-grant opposition in the application.","Just after FER is issued in the application."],"b"),
+Q(`Mohan went to London, where he found a bicycle which works without a chain. He realized that this bicycle is not available in India and wishes to import this bicycle to India and to file a patent for it in India. He approaches you for your advice as per the Patents Act, 1970.`,
+ ["Mohan can be considered as true and first inventor in India because this bicycle is not available in India.","Mohan can be considered as true and first inventor because he is the first person from India to know about this bicycle.","Mohan can be considered as true and first inventor if he is the first importer of the invention to India.","Mohan cannot be considered as true and first inventor."],"d"),
+Q(`Styl & Co., a US company, was granted a patent for a sewing machine in the US. Joe is an entrepreneur engaged in manufacture and distribution of sewing machines in India. Joe came to know that Styl & Co. has not filed a patent application in India. In that case –`,
+ ["Joe will get a patent in India.","Joe will get a patent in Europe.","Joe can freely manufacture the invention and sell it in India.","Joe cannot manufacture the invention in India."],"c"),
+Q(`Mydhili invents a food processor that can chop vegetables and knead flour. Since the work was not complete, she first filed a provisional application on 20.01.2022. She filed complete specification for her invention on 15.04.2022. Later, she invented a fruit juicer unit that can be connected to the food processor. She applied for a patent of addition for the fruit juicer on 15.4.2023. Assuming that both patents will be granted, the patent term will expire on:`,
+ ["20.01.2042 for both the patents.","15.4.2043 for both the patents.","15.04.2042 for the first and 15.04.2043 for the second patent.","20.01.2042 for the first and 15.04.2043 for the second patent."],"a"),
+Q(`Gopal has filed a patent application along with necessary fees. But the application was not published. What could be the reason?`,
+ ["Gopal did not file a request for Examination.","Gopal did not file a request for publication.","A pre-grant representation was filed against the application.","Gopal filed only a provisional specification."],"d"),
+Q(`Gautham made a model of the speed boat which he invented. He files for a patent for the speed boat. Which of the following statements is correct?`,
+ ["Model is part of complete specification and is to be filed at the time of filing of complete specification.","Model is not a part of the complete specification but it has to be filed along with the complete specification.","Model is not a part of the complete specification but has to be furnished if required by the Controller.","The Controller cannot ask for a model."],"c"),
+Q(`Shiva was a great inventor for solar batteries and he filed five patent applications. Though the patents were granted for all the five inventions, Shiva died before the date of grant of patents due to sudden cardiac arrest. Shiva's only son Gana approached you for advice. Which section of the Patents Act will you refer to?`,
+ ["Section 21","Section 44","Section 50","Section 53"],"b"),
+Q(`Raju Gomaz, a US citizen, filed two applications with USPTO on 28.04.2017. He filed a convention application in India on 27.04.2018, claiming priority from one of the US applications. He filed a PCT international application on 25.04.2018 claiming priority from the other application and entered PCT national phase in India on 31.03.2019. The date of patent for the convention application and the national phase application are respectively:`,
+ ["27.04.2018 and 25.04.2018","28.04.2017 and 31.03.2019","27.04.2018 and 31.03.2019","28.04.2017 and 28.04.2017"],"a"),
+Q(`Your client who filed a PCT international application received the international search report from the International Searching Authority. In the search report, category code X is mentioned against a prior art document. Category code X means that when this document is taken alone, the claimed invention is:`,
+ ["not novel but inventive","novel but not inventive","either not novel or not inventive","not industrially applicable"],"c"),
+Q(`Dr. Karan got a patent for a surgical equipment. Dr. Vimala used that patented surgical equipment for research purpose. Dr. Karan issued a legal notice to Dr. Vimala for infringement. Dr. Vimala approached you for your advice. Which one of the following is correct?`,
+ ["Dr. Vimala can use it freely for research.","Dr. Vimala can use it for research but has to pay royalty to Dr Karan.","Dr. Vimala can use it for research but has to take written permission from Dr Karan.","Dr. Vimala need not take permission from Dr Karan, but has to inform the Patent Office about it."],"a"),
+Q(`Limera is a start-up in the field of space engineering. They have applied for patents and wish to get them granted at the earliest so that they can carry out their business.`,
+ ["Limera should file request for early publication and request for expedited examination.","Limera being a startup is not eligible for expedited examination.","Limera need not file request for early publication and request for expedited examination as they are startup.","Limera should file request for early publication along with recommendation from ISRO."],"a"),
+
+S("Part B — True / False Statements (1 mark each)", 1),
+Q(`1. Time for putting an application in order for grant under section 21 shall be six months from the date of first statement of objection issued to the applicant.
+2. Time for putting an application in order for grant may be further extended for a period of six months on a request of extension made in Form-4.`, TF23, "a"),
+Q(`Company X is having place of business at US and filed initial application at USPTO and after six months from the US application, the company has done some modification and filed patent application for the same at Japan. Within 12 months from the date of US filing, Company X filed an Indian application claiming priority of earlier two applications from US and Japan.
+1. Company X is allowed to claim priority of US application only.
+2. Company X is allowed to claim both the priorities.`, TF23, "b"),
+Q(`1. The term of every patent starts from the date of filing of the patent application.
+2. No suit or other proceeding shall be commenced or prosecuted in respect of an infringement committed before the date of publication of the application.`, TF23, "d"),
+Q(`Sandip has filed a patent application on 01/01/2019 for his invention missile tracking device and the application is considered to prejudice defence; subsequently on 25/12/2022 said secrecy direction is revoked.
+1. The request for examination shall be made within forty eight months from the date of filing.
+2. The request for examination shall be made within forty eight months from the date of revocation of secrecy direction.`, TF23, "a", true),
+Q(`Gautami filed a patent application and wishes to get her application examined at the earliest –
+1. She should file an expedited request for publication.
+2. She should file an express request for examination.`, TF23, "c"),
+Q(`1. The claims lack inventive step due to prior art disclosure in a single document combined with common general knowledge.
+2. The claims lack inventive step due to combination of prior art disclosure in two or more citations.`, TF23, "d"),
+Q(`In a case where an application processed by a startup is partly transferred to a multinational company –
+1. The new applicant is not required to pay the difference in the scale of fees between the fees charged from a startup and the fees chargeable from multinational company.
+2. The new applicant shall file a request for change in name of applicant.`, TF23, "b"),
+Q(`While doing amendments in the specification –
+1. Applicant shall provide a marked copy clearly identifying the amendments carried out.
+2. Applicant shall provide a statement clearly indicating the portion of the specification or drawing being amended along with the reason shall be filed.`, TF23, "d"),
+Q(`An application for patent is refused by the Controller. The applicant wishes to challenge the refusal.
+1. Applicant can approach Intellectual Property Appellate Board.
+2. Applicant can approach District Court.`, TF23, "c"),
+Q(`1. Legal representative means a person who in law represents the estate of a deceased person.
+2. Legal representative means a person who files an application on behalf of the applicant.`, TF23, "a"),
+
+S("Part C — Multiple Correct Answers (3 marks each; at least two options correct)", 3),
+Q(`Rajesh, a patent agent registered with the Patent Office, may be disqualified on the grounds that –`,
+ ["He is an undischarged insolvent.","He has been adjudged by competent court to be of unsound mind.","He being a chartered accountant has been guilty of negligence.","He has been convicted by a competent court outside India of an offence to undergo a term of imprisonment."],"a,b,c,d"),
+Q(`Mr. Ujjwal would like to know time limits generally available for extension of time using Form-4 in accordance with the Patents law –`,
+ ["Extension of three months is allowed for filing of declaration of inventorship.","Extension of six months is allowed for filing renewal fees.","Extension of three months is allowed for filing reply to first examination report.","Extension of one month is allowed for filing review petition."],"b,c,d"),
+Q(`After receiving the international search report and written opinion of ISA, the applicant may –`,
+ ["Enter national phase.","Submit informal comments to IB.","Amend claims and file a demand for international preliminary examination.","Submit reply to ISR and written opinion to ISA."],"a,b,c"),
+Q(`Patent office has objected to novelty based on a cited document and issued First Statement of Objection to you. You can do the following acts –`,
+ ["Show to the satisfaction of the Controller that priority date of the claim of your complete specification is not later than the date on which cited document was published.","You can amend claims of the complete specification to overcome the citation.","You can withdraw your application.","You can challenge the objection of novelty in Court."],"a,b,c"),
+Q(`Term of the Patent application starts from –`,
+ ["Date of filing of Provisional specification.","Date of filing of Complete specification, if the Provisional specification is followed by the complete specification.","Date of entry in India in case of PCT national Phase application.","Date of filing in India in case of Convention application."],"a,d"),
+Q(`Who are eligible for Expedited Examination of applications?`,
+ ["Natural persons as applicants wherein at least one of them is a female.","Natural persons as applicants wherein at least one of them is an Indian citizen.","Start up but not Small entity.","Start up or Small entity."],"a,d"),
+Q(`Which is true about statement and undertaking regarding foreign applications –`,
+ ["Statement and undertaking under Section 8(1) shall be filed within six months from the date of filing the application.","Applicant shall keep informed the Controller regarding details of same application or similar applications filed outside India within 3 months from the date of filing of such application under section 8(1).","Applicant shall furnish information relating to objections, in respect of novelty and patentability of the invention within six months from the date of requirement by the Controller.","Applicant shall furnish information relating to objections, in respect of novelty and patentability of the invention immediately as and when required by the Controller."],"a,c"),
+Q(`Rohan happened to visit Himalaya along with a trekking team. While staying there he wrote a book related to Himalayan mountain ranges, took some video, made a novel and attractive device for easy trekking and discovered a stone naturally occurring there. He wishes to get IP rights on all of them and approached you for filing the application. He can apply/register for –`,
+ ["copyright for the book and video.","design for the stone and copyright for the book.","patent for the device, but not design for the device.","patent and design for the device."],"a,d"),
+Q(`A patent application was filed by a company A on 01.01.2021 and was published in the Patent Office Journal on 01.07.2022. The first statement of objections was issued by the Patent Office on 03.08.2022 and the applicant filed a response complying with all the objections on 05.10.2022. On 10.10.2022, the applicant noticed that a competitor, company B, is selling a product which utilises the applicant's invention that was disclosed in the patent application. Choose the correct options –`,
+ ["The company A may send a legal notice to the company B.","The company A may file an infringement suit in Court.","Upon the grant of a patent, the company A is entitled to seek damages from 01.01.2021.","Upon the grant of a patent, the company A is entitled to seek damages from 01.07.2022."],"a,d"),
+Q(`A company X files a patent application which upon examination was objected on the ground that the application contains a plurality of distinct inventions. X files a further application in response to the objection raised in the examination report. Choose the correct options –`,
+ ["The complete specification of the further application should include only that matter which was not in substance disclosed in the complete specification of the first mentioned application as otherwise it would amount to double patenting.","The Controller may require such amendment of the complete specification filed in pursuance of either the original or the further application as may be necessary to ensure that neither of the said complete specifications includes a claim for any matter claimed in the other.","The complete specification of the further application should not include any matter not in substance disclosed in the complete specification filed in pursuance of the first mentioned application.","Both (a) and (b)."],"b,c")
+];
+
+/* =====================================================================
+   2024 — SET C
+   ===================================================================== */
+const Y2024 = [
+S("Part A — Multiple Choice (2 marks each)", 2),
+Q(`In a revocation proceeding in Court, Dr. Desai was able to prove that a patent granted to one of his students Mr. Rohan was wrongfully obtained. Post Court's revocation order and permission of grant of the whole patent to him, Dr. Desai files a petition before the Controller to grant the said patent in his name. What would be the date of patent granted to Dr. Desai after such proceeding:`,
+ ["Date on which controller revokes the patent","International filing date","Same as revoked patent","Date on which controller grant a new patent"],"c"),
+Q(`Ms. Ragini has composed an interesting and soothing Raga composition. This Raga can be used in yoga, meditation, medication to relax or treat patients suffering from anxiety and depression. She would like to protect her IP rights. Which is the most appropriate IP Act for her to apply for protection:`,
+ ["The Copyright Act, 1957","The Trade Marks Act, 1999","The Patents Act, 1970","The Designs Act, 2000"],"a"),
+Q(`A novel sunscreen formulation 'AlZo' is made by mixing jojoba oil and Almond oil in a certain ratio along with other excipients. The sunscreen formulation is patentable if:`,
+ ["SPF value of jojoba oil = SPF value of Almond oil = SPF value of sunscreen 'AlZo'","(SPF value of jojoba oil + SPF value of Almond oil) = SPF value of sunscreen 'AlZo'","(SPF value of jojoba oil + SPF value of Almond oil) < SPF value of sunscreen 'AlZo'","(SPF value of jojoba oil + SPF value of Almond oil) > SPF value of sunscreen 'AlZo'"],"c"),
+Q(`Under the Doctrine of National treatment, as regards to the protection of industrial property, each country must grant the same protection as it grants to its own nationals, to
+i. Nationals of the other member countries of Paris Convention
+ii. Nationals of all member countries of United Nations
+iii. Nationals of all the countries of Paris Convention but the same legal remedy against infringement of their rights is not available to nationals of those countries with which it fought wars in the past
+iv. Nationals of countries that are not party to the Paris Convention if they are domiciled in a member country or if they have a real and effective industrial or commercial establishment in such a country.`,
+ ["Only (i)","Only (i) and (iii)","Only (iii)","Only (i) and (iv)"],"d"),
+Q(`Mr. Ramayuna filed an application for the grant of patent with provisional specification on 06/11/2012 in Patent Office, Delhi. Subsequently, complete specification was filed on 05/11/2013. As per the provisions of section 13, the examiner after conducting the prior art search shall report:
+i. Patent literatures anticipating the claims and published before 05/11/2013
+ii. Patent literatures wherein the invention as claimed in Mr. Ramayuna's application is claimed in any claim of complete specification published after 05/11/2013 but having priority before 06/11/2012 and filed in India
+iii. Non-Patent literatures anticipating the claims and published before 05/11/2013`,
+ ["Only (i)","Only (i) and (ii)","Only (ii) and (iii)","All of the above"],"d"),
+Q(`Over the years in the field of IPRs significant Indian jurisprudence has got created with regard to various aspects of patenting in India. Match the following case laws with their relevant focus:
+1. Biswanath Prasad Radhey Shyam Vs Hindustan Metal Industries Ltd        a. Post Dating
+2. Standipack Pvt. Ltd. Vs M/s Oswal Trading Co. Ltd.                                  b. Person skilled in the art and Inventive Step
+3. Novartis AG Vs Union of India                                                                     c. Software related Patents
+4. Ferid Allani Vs Union of India                                                                      d. Therapeutic Efficacy`,
+ ["1-b, 2-a, 3-c, 4-d","1-d, 2-a, 3-c, 4-b","1-a, 2-b, 3-d, 4-c","1-b, 2-a, 3-d, 4-c"],"d"),
+Q(`Match the following examples which are not patentable under relevant clauses of the Act:
+1. Section 3(j)   a. Turmeric aqueous extract for pimple care
+2. Section 3(h)   b. Method of aerating soil for improved yield in agriculture
+3. Section 3(i)    c. Method of surgical removal of teeth
+4. Section 3(p)   d. Isolated insulin gene
+5. Section 3(c)    e. Mouse cell`,
+ ["1-a, 2-c, 3-b, 4-d, 5-e","1-e, 2-b, 3-c, 4-a, 5-d","1-a, 2-b, 3-d, 4-e, 5-c","1-c, 2-a, 3-d, 4-b, 5-e"],"b"),
+Q(`Dr. Sunita wants to file a patent application involving gene and protein data in India. As a patent agent, you advise her that she also needs to file the sequence listing of nucleotides or amino acid sequences. The correct way for filing sequence listing in India is:`,
+ ["the sequence listing shall be filed in computer readable text format along with the application, and no print form of the sequence listing is required to be given","the sequence listing shall be filed in normal format same as the application, and no print form of the sequence listing is required to be given","the sequence listing shall be filed in computer readable text format along with the application, and print form of the sequence listing is required to be given","the sequence listing shall be filed in same format as that of the application, and print form of the sequence listing is required to be given"],"a"),
+Q(`Mr. Madhav is a plant science researcher specialized in developing transgenic rice. After he quits from his organization, his organization has filed a patent application based on Madhav's work and the same was granted with several of his colleagues as inventors. Mr. Madhav came across this news in a newspaper that a patent has been granted this month for the transgenic rice developed by him. But Mr. Madhav's name is not mentioned as inventor. He consults you. What among these options will be your correct advice as per the provisions of the Act:`,
+ ["Madhav can file a post grant opposition u/s 25(1) with form 7 and fee","Madhav can file a post grant opposition u/s 25(2) with form 7A and without any fee","Madhav can file a post grant opposition u/s 25(1) with form 7A and fee","Madhav can file a post grant opposition u/s 25(2) with form 7 and fee"],"d"),
+Q(`Dr Sita filed a provisional application for an innovative beeper technology on 01/01/2018. The timeline to file the complete application is near, however the same is not complete and she needs few more months. Dr. Sita consults you for professional advice. The possible correct option is:`,
+ ["Dr. Sita can post date the application for a maximum of 3 months at once if she files the request for post-dating before 01/04/2019","Dr. Sita could file petition under rule 138 for extension of period for filing complete specification by 1 more month","Dr. Sita can post date the application for a maximum of 6 months by applying for it anytime before the term of patent expires","Dr. Sita can post date the application for a maximum of 6 months, provided she requests for post-dating the application before 01/01/2019"],"d"),
+Q(`Mr. John and Ms. Prakshi jointly made an invention and wish to file a PCT international application. Mr. John is a resident of PCT contracting state but Ms. Prakshi is not. What would be a situation permitted under PCT:`,
+ ["They cannot file any PCT international application jointly as Ms. Prakshi is not a national/resident of PCT contracting state","They can file jointly as Mr. John is a resident/national of PCT contracting state","Ms. Prakshi need to sign an affidavit about non-resident of PCT-State and then they can jointly file","They both can make a joint declaration under PCT Rule 34 bis(i) to become eligible to file joint PCT international application"],"b"),
+Q(`Company Hassium found that a patent filed by its rival company Rhenium is a copy of its patented invention. It approached a patent agent and asked to file a pre-grant opposition. Match the following grounds with relevant section/sub-section/clauses:
+1. Publicly known/used in India         a. 25(1)(f)
+2. Obviousness                                  b. 25(1)(b)
+3. Prior anticipation                          c. 25(1)(a)
+4. Claims not patentable                    d. 25(1)(e)
+5. Wrongfully obtained                      e. 25(1)(d)`,
+ ["1-a, 2-b, 3-d, 4-e, 5-c","1-b, 2-c, 3-e, 4-a, 5-d","1-e, 2-d, 3-c, 4-a, 5-b","1-e, 2-d, 3-b, 4-a, 5-c"],"d"),
+Q(`Mr. Neelesh started a business of making sports shoes. He realized that some companies used patented technologies to claim higher price for their product. Being fancied, he decided to put a stamp 'patented' on his article without actually filing any patent. What would be possible consequences as per the provisions of the Act:`,
+ ["He shall be punishable with imprisonment","He shall be liable to fine/penalty","He may be punishable with both fine and imprisonment","He will be warned by patent office first for first offence without any fine/penalty and then for subsequent offences shall be liable for fine or imprisonment or both."],"b"),
+Q(`Mr. Alpha has two patent applications filed on valve structure of an IC Engine. The first application A was filed on 01/04/2019 and the second application B, which actually is an improvement on first application, was filed on 31/03/2019. Both the applications proceeded to grant of patents individually. Application A was granted on 01/07/2022 and application B was granted on 30/10/2022. However, Mr. Alpha later on came to know about the provisions and related benefits of patent of addition and requested the controller to revoke the patent B and convert the same as patent of addition of patent A. In this context, select the correct option:`,
+ ["It is possible to convert B to a patent of addition of A","It is not possible to convert B to a patent of addition of A","It is possible to convert B on condition that the patent term of B will co-terminate with A","None of the above"],"b"),
+Q(`Which of the following statements regarding WIPO services are correct:
+i. WIPO DAS is an electronic system to access priority document to be securely exchanged between participatory countries
+ii. WIPO CASE enables different patent offices to securely share priority document and translation thereof
+iii. WIPO CASE is an arrangement for work-sharing between offices
+iv. India is a participating country to WIPO DAS but not WIPO CASE`,
+ ["Only (i) and (ii)","Only (i) and (iii)","Only (i), (ii) and (iii)","All are correct"],"b"),
+Q(`Mr. Akram is a student from Central college, Jaipur. He has invented an innovative AI Nanobot which can be designed to take any form in a swap of a finger and is indestructible. He filed a patent application in Indian patent office. The controller identified the potential of the invention in defense and immediately placed it under secrecy direction. What are the possible consequences of this move:
+i. the Controller shall not pass an order refusing to grant the same
+ii. any order of the Controller passed in respect thereof is appealable`,
+ ["Only (i)","Only (ii)","Both (i) and (ii)","None of the above"],"a"),
+Q(`Mr. Vikrant was granted a patent for a novel coating over the photovoltaic cell to enhance its light absorption capacity in 2016. The granted patent lapsed and Mr. Vikrant filed an application for the restoration of the lapsed patent. His opponent Mr. Pran, who is also working in the same field, can file opposition to the application for restoration of the lapsed patent on which of the following ground(s):
+i. Failure to pay the renewal fees by Mr. Vikrant was intentional
+ii. There was undue delay in making of the application for restoration
+iii. Propriety of the patentee is questionable
+iv. The patent was wrongfully obtained`,
+ ["Only (i) and (ii)","Only (iii) and (iv)","Only (i), (ii) and (iii)","All of the above"],"a"),
+Q(`Over years in the field of IPRs various Treaties/Agreements/Conventions have been entered by many countries. Match the following with the relevant subject matter:
+1. PCT                      a. Registration of Marks
+2. Hague                  b. Copyright
+3. Berne                   c. Patent
+4. Madrid                 d. Industrial Design
+5. Budapest Treaty   e. Deposit of Micro-organization`,
+ ["1-c, 2-b, 3-d, 4-a, 5-e","1-c, 2-d, 3-a, 4-b, 5-e","1-c, 2-d, 3-b, 4-a, 5-e","1-a, 2-d, 3-b, 4-c, 5-e"],"c"),
+Q(`A company Novel Corporation has got patent for a water purifier technology that auto adjusts the water quality. Novel Corporation comes to know that another company Inventive Corporation has flooded the market with similar products. Novel Corporation files infringement suit in the district court. Inventive Corporation in response files a counter-claim for revocation of the patent of Novel Corporation. In the matter, the future course of action will be:`,
+ ["The infringement suit shall proceed in the District Court and revocation proceedings at the Patent office simultaneously","The infringement suit shall proceed in the District Court and revocation proceedings at the concerned High Court simultaneously","The infringement suit along with the counter claim for revocation shall be transferred to the concerned High Court","The District Court shall appoint a Scientific advisor and shall proceed in line with such advice"],"c"),
+Q(`Hafnium Corporation filed a PCT international application and received an International Search report (ISR) and Written opinion (WO) from ISA-India. Based on the ISR/WO report, Hafnium Corporation wishes to file amendments. Which of the following option is correct:`,
+ ["Amendment is possible in description and claims anytime during the international phase under PCT Article 6","Only Claims can be amended under article 34 within 2 months from transmission of ISR/WO","Claims can be amended under Article 19 within 3 months from transmission of ISR/WO","None of the above"],"d"),
+Q(`If A = Technical advance as compared to the existing knowledge
+B = Having economic significance
+C = That makes the invention not obvious to a person skilled in the art;
+Then, Inventive Step under the Patents Act, 1970 means a feature of an invention that involves:`,
+ ["(A and B) or C","A or B or C or (A and B)","(A or B or (A and B)) and C","A or B or C"],"c"),
+Q(`Bharat Institute of Engineering and Technology (BIET) is a privately run educational institute. Their student/faculty invented an air purifier and wants to file a patent application at Indian Patent Office by exploiting all the benefits extended to an educational institute by the Govt. of India. Which of the following option would be correct:`,
+ ["BIET can file expedited examination request and a reduction in fee in filing application","BIET can take advantage of fee reduction but cannot file expedited request for examination","BIET is not eligible for any fee reduction being a privately owned educational institute but can file expedited request for examination","BIET can take advantage of both fee reduction and expedited examination after getting an approval from UGC/AICTE"],"b"),
+Q(`Dr. Kavya is a scientist of one of the Government Research Laboratories in India. She got a research funding from Department of Research, Govt of India. As per the agreement, she communicated her research updates regularly to the funding agency, which were consequently reported in their internal departmental periodic proceedings. Later on, her research turned out to be having huge market potential and the Laboratory applied for a patent at Indian Patent Office. Which of the following is true while considering prior anticipation:`,
+ ["The patent application is liable to be refused on ground of prior anticipation due to internal departmental periodic proceedings.","Dr. Kavya's laboratory, being a government organization is relaxed from the consideration of prior anticipation.","Inventor, Dr. Kavya may apply for relaxation in prior anticipation under a special scheme in this regard for women.","Patent application is not deemed to have been anticipated by communication to Government agency."],"d"),
+Q(`Mr. Daivam filed an application for the grant of patent for an innovative operating instrument, which was granted and published on 19/02/2018. Later the specification and claims were amended by the patentee, which was published on 19/05/2018. Under the provisions of the Patents Act, 1970 and Rules made therein, which of the following statement(s) is/are correct:
+i. Post-Grant Opposition can be filed by any person till 19/02/2019
+ii. Post-Grant Opposition can be filed with regard to amended portion by any interested person till 19/05/2019
+iii. The whole application can be opposed till 19/05/2022 by any interested person`,
+ ["Only (i)","Only (i) and (ii)","All (i), (ii) and (iii)","None"],"d"),
+Q(`Mr. Hirva wants to correct few mistakes which are there in his patent specification. He asks his friend, who tells him that there are different ways prescribed under the Patents Act, 1970 and Rules made therein to correct such mistakes. Which of the following statement(s) is/are correct:
+i. Clerical mistakes may be corrected under section 78 without paying any fees
+ii. Amendment by way of correction under section 57 by filing Form-13 and prescribed fees
+iii. Both correction under sections 78 as well as section 57 are considered as amendment under the Patents Act, 1970`,
+ ["Only (i)","Only (ii)","All (i), (ii) and (iii)","None"],"b"),
+Q(`An application for grant of patent for an invention was filed on 19/05/2014. The invention uses a biological material which is not commonly available to the public and the same was deposited in the depository institution on 19/02/2014. The application got published on 26/11/2015 and granted on 19/05/2018. In provisions of the Act:
+i. The depository institution shall make the biological material mentioned in the specification available to the public 19/05/2014 onwards
+ii. The Patent office shall make the specification and drawing of the application available to the public 26/11/2015 onwards
+iii. Applicant shall be entitled to institute any proceedings for infringement 19/05/2014 onwards
+iv. The applicant shall have the like privileges and rights as if the patent for the invention had been granted on 26/11/2015`,
+ ["Only (i)","Only (ii) and (iv)","Only (iii) and (iv)","Only (iv)"],"b"),
+Q(`Ms. Ritu has genetically modified a microorganism from Goa sea beach which has the capacity to degrade petroleum. She has drafted the complete specification and would like to protect the microorganism too. What are the correct options with respect to disclosure requirements:
+i. the deposit of the material shall be made not later than the date of filing the patent application in India and a reference thereof shall be made in the specification within the prescribed period;
+ii. the deposit of the material shall be made not later than date of publication of the patent application in India and a reference thereof shall be made in the specification within the prescribed period;
+iii. all the available characteristics of the material required for it to be correctly identified or indicated are included in the specification including the name, address of the depository institution and the date and number of the deposit of the material at the institution;
+iv. disclosure of the source and geographical origin of the biological material in the specification is not required even if used in an invention.`,
+ ["Only (i)","Only (ii) and (iv)","Only (i) and (iii)","All of the above"],"c"),
+Q(`Which of the following is/are patent classification system(s):
+i. International Patent Classification
+ii. Cooperative Patent Classification
+iii. File Index and File Forming Term
+iv. European Classification System`,
+ ["Only (i) and (ii)","Only (i), (ii) and (iii)","Only (i), (ii) and (iv)","All of the above"],"d"),
+Q(`As an authorized patent agent, you just received a controller's refusal under section 15 on an application prosecuted by you. However, after careful scrutiny of the order, your client observed that the controller did not consider one important document filed during prosecution and asked you to file a review petition. The same may be filed on form ______ and within ______ from the date of communication of order.`,
+ ["24, one month","25, three months","14, twelve months","22, six months"],"a"),
+Q(`Mr. Swamy filed a patent application which was granted on 31/03/2023. Unfortunately, just before the grant, Mr. Swamy passed away on 25/02/2023. You, as the authorized patent agent, are now requested by his only son (who is the legal heir) to change the name in the patent. You are required to file form ______ under section ______.`,
+ ["11, 42","10, 44","10, 45","11, 46"],"b"),
+
+S("Part B — Assertion & Reasoning (Q31–35) and True / False (Q36–40) (1 mark each)", 1),
+Q(`Assertion (A): The Examination process under the Act warrants the validity of the Patents granted under the Act.
+Reasoning (R): The Examination of patent application under section 12 and 13 ensures the above validity of the patent.`, AR24, "d"),
+Q(`Assertion (A): In India, an applicant who is not an inventor must submit Proof of Right/Assignment from the inventor(s).
+Reasoning (R): Under Section 6 of the Act, true and first inventor or his assignee or his legal representative only are entitled to apply for patent.`, AR24, "a"),
+Q(`Assertion (A): The claims define in technical terms the extent, i.e. the scope, of the protection conferred by a patent, or the protection sought in a patent application.
+Reasoning (R): Product claims specify the characteristics and features of a particular invention. On the other hand, process claims outline the methods or steps involved in creating or using the invention.`, AR24, "b"),
+Q(`Assertion (A): Every patentee and licensee has to furnish a statement regarding working of the patented invention on commercial scale in India at regular intervals.
+Reasoning (R): Patents are not granted merely to enable patentees to enjoy a monopoly for the importation of the patented articles; rather patents are granted to encourage inventions and to secure that the inventions are worked in India on a commercial scale.`, AR24, "a"),
+Q(`Assertion (A): The Patent Facilitators Scheme, introduced by the Government of India, involves engaging professionals and organizations to assist startups in preparing and filing patent applications.
+Reasoning (R): The remuneration to be paid to the facilitator varies as per the field of technology in which the patent application has been filed.`, AR24, "c"),
+Q(`Statement 1: The timeline for filing a request for expedited examination can be extended by the Controller in response to a petition filed by the applicant to do so.
+Statement 2: The extension of time given to applicant by Controller under section 81 is not appealable.`, TF, "b"),
+Q(`Statement 1: In a PCT application, applicant name may be different for different designated states at national phase.
+Statement 2: In a PCT national phase application designating India, the complete specification filed in the international application shall be taken as complete specification in India.`, TF, "c"),
+Q(`Statement 1: In India, Term of Patent has been 20 years ever since the Patents Act, 1970 came into force on 20/04/1972.
+Statement 2: Irrespective of the field of invention, the term of patent has been uniform since 1999 in India.`, TF, "d"),
+Q(`Statement 1: The date of priority once decided for an application may not be amended.
+Statement 2: It is not possible to derive priorities from more than five earlier applications in a single application for grant of patent.`, TF, "d"),
+Q(`Statement 1: An exclusive licensee can institute infringement proceedings on his own.
+Statement 2: An exclusive licensee can be awarded damages/compensation in an infringement suit by the Court.`, TF, "c"),
+
+S("Part C — Multiple Choice (3 marks each)", 3),
+Q(`In view of the provisions of the Patents Act, 1970, which of the following entities may file a petition for revocation of a granted patent:
+i. Any person
+ii. Any interested person
+iii. Central Government
+iv. State Government
+v. Controller of Patent
+vi. Defendant in any infringement suit by way of a counter-claim`,
+ ["Only (i), (ii) and (iii)","Only (ii), (iii) and (iv)","Only (ii), (iii) and (vi)","All of the above"],"c"),
+Q(`Requirement of proper enablement of a patent specification is the basis of patenting regime philosophy of quid pro quo. However, this requirement is judged differently at different stages of the prosecution of a patent application/granted patent, which is evident from different phrases used by the legislature in different sections. In view of the same, which of the following sections are correctly matched with the relevant phrases:
+i. Section 10(4)(a) – fully and particularly
+ii. Section 25(1)(g) – sufficiently and clearly
+iii. Section 25(2)(g) – fully and sufficiently
+iv. Section 64(1)(h) – sufficiently and fairly`,
+ ["Only (i) and (ii)","Only (i), (ii), and (iii)","Only (i), (ii), and (iv)","All of the above"],"c"),
+Q(`Mr. Tanaka, a national and resident of Japan, filed a patent application in Japan on 25/07/2015. He assigned his right to Ms. Oto. Now Ms. Oto, taking priority of the said application, wants to file a conventional application in India on 24/07/2016. While doing so, she wants to take her friend Ms. Meenakshi as the co-applicant in India. What could be the correct option(s) related to this:
+i. The applicant is free to choose any other applicant and Ms. Meenakshi can surely be a co-applicant without any further legal procedures
+ii. Only the applicant in priority application can be the applicant in conventional application in India and Ms. Meenakshi cannot be a co-applicant in this case
+iii. Ms. Oto may assign her partial rights to Ms. Meenakshi before she can be taken as co-applicant
+iv. None of the above shall work as the timeline is breached`,
+ ["(i) and (ii)","(ii) and (iii)","(i) and (iv)","All of the above"],"b"),
+Q(`Provisions under the Patents Act, 1970 and Rules made therein provide various timelines for different actions. Which are the places where these timelines are mentioned:
+i. Timeline to file Complete Specification after filing Provisional Specification
+ii. Term of Patent
+iii. Period under which restoration can be filed after the patent has lapsed
+iv. Time period under which Post-Grant Opposition is to be filed
+v. Time for filing Request for Examination
+vi. Time to file review petition after the decision of Controller`,
+ ["Under Patents Act - (i), (ii) and (iii); Under Patents Rules – (iv), (v) and (vi)","Under Patents Act - (i), (ii); Under Patents Rules – (iii), (iv), (v) and (vi)","Under Patents Act - (i), (ii), (iii) and (iv); Under Patents Rules – (v) and (vi)","Under Patents Act - (i), (ii), (iii), (iv) and (v); Under Patents Rules – (vi)"],"c"),
+Q(`Recently at National IPR Conference 2023 in Delhi, WIPO IP Diagnostics – Indian Adaptation was launched, which is a collaborative effort of WIPO and the Government of India, executed through the Office of the CGPDTM. In this context, the correct statement(s) is/are:
+i. It is a software-based tool that enables SMEs and MSMEs to undertake the self-assessment of their IP Assets
+ii. The tool generates reports based on targeted questions related to Intellectual Property Rights
+iii. It provides a Global Perspective of IPR including the Indian Context with Illustrative Local Examples
+iv. It also enables exchange of search reports between patent examiners of different countries to diagnose the deficiency in their searching technique
+v. It also includes information regarding Plant Varieties and Farmer's rights as it is crucial to Indian Aspect`,
+ ["Only (i), (ii) and (iii)","Only (ii), (iii) and (iv)","Only (i), (ii) and (v)","All are correct"],"a"),
+Q(`In the context of filing Form 27 on working of patents, which of the following is true:
+i. Every patentee is required to file Form 27
+ii. Exclusive licensee should file Form 27, but it's not mandatory for non-exclusive licensee
+iii. For joint applicants, all such patentees may file Form 27 jointly
+iv. Different licensee of same patent may file jointly`,
+ ["Only (i), (ii) and (iii)","Only (i) and (ii)","Only (i), (ii) and (iv)","Only (i) and (iii)"],"d"),
+Q(`Look at the table below:
+Topic                                                                            Form            Relevant Section and Rules
+1. Restoration of Lapsed Patents                                     I. Form 3       A. Section 57, Rule 81(1)
+2. Statement and Undertaking regarding foreign application  II. Form 7     B. Section 8, Rule 12
+3. Notice of Opposition                                                    III. Form 13    C. Section 60, Rule 84
+4. Application for Amendment of application/complete specification/other related documents   IV. Form 15   D. Section 25(2), Rule 55A
+
+With reference to the table above, which of the following options is NOT matching the provisions of the Act correctly?`,
+ ["1-IV-C","2-I-B","3-IV-A","4-III-A"],"c"),
+Q(`Jack and Jill ventured up the hill and encountered the welcoming Oompa-Dumpa tribe, who graciously offered them a revitalizing root to chew. Overwhelmed by its unique and refreshing flavor, they expressed their gratitude and took the opportunity to gather plant samples before returning home. With great care and respect, they developed this extraordinary find into a delightful chocolate product, patented it, and introduced it to the market where it received an overwhelmingly positive response. They request your professional advice regarding how to proceed with sharing the benefits with the tribe. Which among the following are appropriate option(s):
+i. To partnership with the tribe, ensuring fair compensation for their cultural knowledge and contribution
+ii. A percentage of the profits from the chocolate's success may be directed back to the tribe, for supporting their community and preserving their traditions
+iii. Profits may be used to uplift the lives of the tribal community that had shared their wisdom
+iv. To keep all profits for themselves, acknowledging the tribe privately
+v. Share a percentage of profits with the Oompa-Dumpa tribe as fair compensation
+vi. Make a one-time charitable donation unrelated to the tribe's contribution
+vii. Disregard any obligation to share benefits with the tribe due to the discovery process`,
+ ["Only iv, vi and vii","Only i, iv, v and vii","Only iv, v, vi and vii","Only i, ii, iii and v"],"d"),
+Q(`Mr. Allu's name was removed from register of Patent Agent on 25/03/2023. Now, Mr. Allu wants to file an application for restoration of his name in the register of Patent Agents. Regarding this:
+i. Application for restoration of name in the register of Patent Agents can only be made after 25/05/2023
+ii. Application for restoration of name in the register of Patent Agents can only be made within 25/05/2023
+iii. Application for restoration of name in the register of Patent Agents can be made on Form-23 by Mr. Allu
+iv. Application for restoration of name in the register of Patent Agents can be made on Form-22 by Mr. Allu`,
+ ["Only (ii) and (iii)","Only (i) and (iii)","None are correct","All are correct"],"a"),
+Q(`Dr. Sudha is unable to exploit her patent commercially. None of the dealers or companies in the same field approached her for commercial deals and assignments. She is unable to maintain the patent nor file renewal fee. What among the following options are correct with respect to surrendering her patent:
+i. Dr. Sudha could give notice to controller offering to surrender her patent u/s 63
+ii. By surrendering her patent under section 63 she could claim refund of fees paid to patent office
+iii. The controller based on her surrender request under section 63 may accept the offer and, by order, revoke the patent following due procedure of opposition proceedings, if any
+iv. The controller based on her surrender request under section 62 may accept the offer and, by order, revoke the patent following due procedure of opposition proceedings, if any
+v. The controller based on her surrender request under section 62 may accept the offer and she could claim refund of fees paid to patent office`,
+ ["Only (ii) and (iii)","Only (i) and (iii)","Only (iv) and (v)","None are correct"],"b")
+];
+
+/* =====================================================================
+   2025 — SET A
+   ===================================================================== */
+const Y2025 = [
+S("Part A — Multiple Choice (2 marks each)", 2),
+Q(`Mr. Shatrughan is an Associate Professor in Eminent College of Engineering. He filed two patent applications, A1 on 19/02/2024 and A2 on 20/03/2024. On 05/11/2024, during an IPR Awareness Program in his college, he came to know that for a patent application to be examined, a request for examination must be filed. What would be the prescribed timeline for filing Request for Examination for both his patent applications:`,
+ ["Before 19/09/2026 for A1 and Before 20/10/2026 for A2","Before 19/02/2028 for A1 and Before 20/03/2028 for A2","Before 19/09/2026 for A1 and Before 20/03/2028 for A2","Before 19/02/2028 for A1 and Before 20/10/2026 for A2"],"d"),
+Q(`Innovate Pharmaceuticals patented a drug which is immensely important for public health in India. Medvate Corporation, after three years of grant of the patent, was successful in getting a compulsory license for the same product. However, another company PharmaWonders Inc., which is also into drug manufacturing business and willing to enter into the same product market, gathered the data that even after the Compulsory License to Medvate Corporation, the invention in the patent in question has still not been worked in India and the reasonable requirement of the public has not been met. Which of the following could be a possible situation under the provision of the Act?
+1. PharmaWonders Inc. can only apply for a second CL but may not request for revocation of the patent
+2. PharmaWonders Inc. can file a request for revocation of the patent only after the expiration of two years from the date of the order granting the first compulsory license.
+3. Only Central Govt. is eligible to apply for revocation of a granted patent for which one CL is already granted.
+4. Both PharmaWonders Inc. and Central govt. may file a request for revocation of the patent but only after three years from the date of the order granting the first compulsory license.`,
+ ["Only 1","Both 2 and 4","Only 2","None"],"c"),
+Q(`Dr. Chinnappa Swaminathan is an ex-employee of Hydra Power Technology (HPT) and was involved in development of Hydrogen technology. He recently came to know about a granted patent obtained by HPT, in which he made a substantial contribution towards the claimed subject matter during his employment. However, his name was not included as an inventor in the granted patent register and complete specification. Dr. Chinnappa Swaminathan is willing to explore the possibilities in the Patents Act to include his name as an inventor in the said granted patent. He does not expect any support from the applicant HPT as their relationship is no longer friendly. In this context which of the following is possible:`,
+ ["Dr. Chinnappa Swaminathan can file a Form-8 to include his name as an inventor in the said patent with a statement setting out the circumstances under which this application is made.","Only the applicant/patentee HPT can make a request on form 8 to include Dr. Chinnappa Swaminathan and no other person.","Dr. Chinnappa Swaminathan must seek an approval/consent from the patentee HPT before applying to include his name in the patent","Dr. Chinnappa Swaminathan's name in the patent register and complete specification cannot be included now"],"d"),
+Q(`Which of the following ground(s) may NOT be used for availing "Grace period" provision under the Patents Rules:
+i. the display of invention occurred with the consent of the true and first inventor or a person deriving title from him at an industrial or other exhibition to which the provisions of the Patents Act have been extended by the Central Government by notification in the Official Gazette
+ii. the publication of any description of the invention happened in consequence of the display or use of the invention at any such exhibition
+iii. the description of the invention in a paper read by the true and first inventor before a learned society or published with his consent in the transactions of such a society,`,
+ ["Only (i) and (ii)","Only (i) and (iii)","Only (iii)","None of the above"],"d"),
+Q(`Your client comes to you and expresses his willingness to file an international application. According to the laid down procedure, for international phase of the application, your client (an Indian applicant) needs to choose a competent international searching authority. Govt. of India had recognized few ISA as competent authority for Indian applicants. Which is NOT a competent International Searching Authority under the Act for an Indian Applicant:`,
+ ["Australian Patent Office","Japan Patent Office","Austrian Patent Office","Swedish Patent Office"],"b"),
+Q(`If
+X: Known substance; Y: New form of a known substance;
+P: New property or new use of a known substance;
+A: Known process, machine, or apparatus;
+C: Enhancement of known efficacy; Cᶜ represents the complement of C (meaning no enhancement of efficacy);
+Thus, the set of Patentable and Non-patentable inventions under section 3(d) of the Patents Act, 1970 (as amended) can be summarized as:`,
+ ["Non-Patentable = (Y∩Cᶜ)∪(P∪A);\nPatentable = (Y∩C)∪(A∩(New Reactant))∪(A∪(New Product))","Patentable = (Y∩Cᶜ)∪(P∪A);\nNon-Patentable = (Y∩C)∪(A∩(New Reactant))∪(A∪(New Product))","Patentable = (Y∩Cᶜ)∪(P∪C);\nNon-Patentable = (Y∩C)∪(A∩(New Reactant))∪(A∪(New Product))","None of above"],"a"),
+Q(`Under the Designs Act, who is eligible for filing:
+1. A petition for cancellation of a registered design                       a. Any person
+2. Application for rectification of register of design                      b. Any person interested
+3. Information regarding the existence of registration in respect of design   c. Any person
+4. Inspection of and extracts from registers                                    d. Any person aggrieved`,
+ ["1-c, 2-a, 3-b, 4-d","1-b, 2-d, 3-a, 4-c","1-d, 2-b, 3-a, 4-c","1-a, 2-d, 3-c, 4-b"],"b"),
+Q(`In the journal publication of IPO, a company InnoSol Corporation found that a design is registered which is prejudicial to their business operation. The company therefore approached you for help in order to file a petition for cancellation of the registered design. In this context, which of the following statement(s)/ground(s) is/are applicable for such a petition?
+1. Your client should be a person interested
+2. The design has been published in some publication in USA and not in India prior to the date of registration
+3. Design is not new or original
+4. The design contains a property mark`,
+ ["Only 2 and 3","Only 1 and 3","Only 3 and 4","All of the above"],"d"),
+Q(`Mr Sunil designed a beautiful piece of jewellery and registered a design for the same on 01/01/2023. Few months later, Mr. Kamal came up with a substantially similar design, and is willing to apply it on a different article of same class. Mr. Kamal sees a huge market and business for the upcoming product and is desperate to obtain the design IP. In this context, which of the following is possible under the Designs Act 2000:`,
+ ["Mr. Kamal can register the same/substantially same design for a different article of same class where a previous design is already registered by Mr. Sunil","Mr. Kamal will have to become a registered proprietor of the design previously registered by Mr. Sunil, then only the second design as mentioned above may be registered.","Irrespective of proprietor of the registered design, the earlier registered design will always be prejudicial to the newness or originality of any later applied similar design.","All of the above"],"b"),
+Q(`Prof. Ranganathan found that one of his students had patented his research work without including his name. You, as his Patent Agent, successfully proved during a post-grant opposition proceeding that the invention so far as claimed in any claim of the complete specification was wrongfully obtained from Prof. Ranganathan in a manner set out in clause (a) of sub-section (2) of section 25. Hence the controller ordered for revocation of the granted patent. Now, in order to amend the patent in the name of Prof. Ranganathan, you are required to file form ______ within ______ months.`,
+ ["10, 6","12, 3","17, 3","15, 6"],"b"),
+Q(`A patent having a priority date 01/06/2023 was filed in patent office on 01/01/2024. The controller had marked the application for secrecy u/s 35 and sought central govt. permission. A communication was sent to the central govt. Central govt., however, declared the application to be non-prejudicial and consequently the secrecy direction was removed by the controller on 06/06/2024. In the given situation, when can the application be published:`,
+ ["Normally within Three months of 06/06/2024","Normally within One month of 01/06/2024","Normally within One month of 01/12/2024","Normally within Three months of 01/01/2025"],"c"),
+Q(`A foreign based MNC Enervate Corp filed a patent application on renewable energy systems. During examination, the controller had a doubt that such a device is against the well established law of nature and hence may not be industrially applicable. In order to clear his doubt that the claimed device is not a perpetual motion machine (PMM), the controller asked the applicant to supplement the complete specification with a working model illustrating the alleged invention. In this context what would be permissible under the provision of the Act:`,
+ ["A complete specification is always a written document and controller may not ask for additional model or sample to supplement it.","Controller may ask for model or sample, but that shall not be deemed to form part of the complete specification","Controller can ask for model/sample only from the domestic applicants and not from the foreign applicants.","None of the above is true as per the provisions of the Act"],"b"),
+Q(`Which of the following is true in respect of registration of design of particular article under the Designs Act:
+1. A design may be registered in respect of any or all of the articles comprised in a particular class
+2. Controller is the appropriate authority to decide the class of any article
+3. A design application shall be invalidated on the ground of the design not being new, as the same design was previously registered in respect of another article belonging to a different class of articles.
+4. There are 31 different classes and a miscellaneous class in the classification system for design registration.`,
+ ["All are true","Only 1, 2 and 3 are true","None is true","1, 2 and 4 are true"],"d"),
+Q(`Under the Patents Act, 1970, the provision of revocation of a granted patent in public interest is an important aspect to balance the monopolistic rights with public interest. In reference to the same, which of the following is the Correct option:`,
+ ["Where the Central Government or State Government is of opinion that a patent or the mode in which it is exercised is prejudicial to the public, it may make a declaration to that effect in the Official Gazette and thereupon the patent shall be deemed to be revoked.","Where the Central Government is of opinion that a patent was wrongly granted overlooking the provisions of section 3 of the Patents Act, it may direct the Controller to revoke the same and make publication to that effect.","Where the High Court is of opinion that a patent or the mode in which it is exercised is mischievous to the State or generally prejudicial to the public, it may, after giving the patentee an opportunity to be heard, make a declaration to that effect in the Official Gazette and thereupon the patent shall be deemed to be revoked.","Where the Central Government is of opinion that a patent or the mode in which it is exercised is mischievous to the State or generally prejudicial to the public, it may, after giving the patentee an opportunity to be heard, make a declaration to that effect in the Official Gazette and thereupon the patent shall be deemed to be revoked."],"d"),
+Q(`A patent was granted to an invention titled "Storage facility" on 19/05/2022. On 22/08/2023, the Central Government is satisfied that the granted patent is disguised in its title and in reality it is for an invention relating to atomic energy for which no patent can be granted under sub-section (1) of section 20 of the Atomic Energy Act, 1962 (33 of 1962). In this regard, which of the following(s) is/are correct statement(s):
+i. Central Government may direct the Controller to revoke the patent,
+ii. On direction of Central Government the Controller, after giving notice to the patentee and every other person whose name has been entered in the register as having an interest in the patent, and after giving them an opportunity of being heard, may revoke the patent.
+iii. The Controller may allow the patentee to amend the complete specification in such manner as he considers necessary instead of revoking the patent.`,
+ ["Only (i)","Only (i) and (ii)","All (i), (ii) and (iii)","None of the above"],"c"),
+Q(`If a patent application fails to disclose or wrongly mentions the source or geographical origin of biological material used for the invention, which of the following action is NOT possible:
+i. A pre-grant opposition may be filed against such application for patent on this ground
+ii. It can be used as a ground for filing post-grant opposition
+iii. A petition for revocation can be filed on this ground
+iv. Controller can suo-moto revoke such patent, if already granted`,
+ ["Only (iv)","Only (i) and (ii)","Only (i), (ii) and (iii)","None of the above"],"a"),
+Q(`A patent was granted on 10/06/2022 to CanSon Pvt. Ltd. On 03/08/2022, they issued a cease-and-desist notice to its competitor Alma Private Limited, stating that the latter's planned product "KONDUCT" infringes on their patent for the composition sold under the name "REWIRE". CanSon asserts exclusive rights granted under the Patents Act, 1970. Which of the following statements is correct?`,
+ ["Alma Private Limited has sufficient time to file a post grant opposition on the grounds of the cease-and-desist notice dated 03/08/2022","Alma Private Limited has sufficient time to file a post grant opposition under section 25(2) of the Act on the grounds listed in clauses (a) to (k), and on no other grounds","Alma Private Limited has sufficient time to file a post grant opposition under section 25(1) of the Act on the grounds listed in clauses (a) to (k), and on no other grounds","None of above"],"b"),
+Q(`In an infringement suit, your client managed to convince the court that part of the claims of the Patentee is wrongfully obtained from him. What could be the possible consequences of the above situation under the provision of the Act:
+i. The patent shall be revoked in totality
+ii. The patent shall be amended excluding the claims in contest
+iii. The entire Patent right may be shifted/granted to your client in a petition
+iv. A Patent may be granted to your client for the claims wrongfully obtained by the patentee.`,
+ ["Only i and iii","Only ii and iv","Only ii and iii","Only i and iv"],"b"),
+Q(`An Indian resident Dr. Pandit filed a patent application with the European Patent Office (EPO) on January 1, 2022. The application entered into India through the conventional route on December 23, 2022. After receiving a First Examination Report (FER), the applicant received an objection related to the written permission under Section 39, which requires prior permission for filing patents outside India. In response to this objection, the applicant submitted a request for post facto permission under Section 39 by filing form 25 after receiving the FER. Which of the following statements is correct?`,
+ ["Post facto permission under Section 39 can be obtained by filing Form 25 when the application has entered India through the conventional route.","Permission under Section 39 by filing Form 25 is required only for PCT applications.","His application for a patent under this Act shall be deemed abandoned under Section 40.","There is no need to obtain permission under Section 39 when the application has entered India through the conventional route."],"c"),
+Q(`Ms. Shivagami Devi has qualified the patent agent exam and wants to get her name registered in the Patent Agent Register. She will file her details by filing ______. Later after 4 years, due to not filing of the fee, her name was removed from the register. She rectified the mistake and wants her name to be restored in the register. She needs to apply for the same on ______.`,
+ ["Form-22, Form-23","Form-23, Form-22","Form-22, Form-20","Form-21, Form-20"],"a"),
+Q(`Mr. Sundaram makes an application for registration of a design under certain class. However, due to some negligence on the part of the applicant, the application got abandoned. However, he decides to make a fresh application again for the same design. In this context, which of the following is/are true:
+1. The first application shall become a prior art for the fresh application.
+2. Once abandoned, it was not possible to make a fresh application for the same design.
+3. It is possible to make a fresh application on the same design if the earlier application is abandoned, and the earlier one may not be a prior art.
+4. It is not possible to make the fresh application in the same class.`,
+ ["All of the above","Only 3","Only 3 and 4","Only 1, 2 and 3"],"b"),
+Q(`Which of the following ground of revocation is not a ground of post grant opposition?`,
+ ["that the subject of any claim of the complete specification is not an invention within the meaning of this Act;","that the invention so far as claimed in any claim of the complete specification is obvious or does not involve any inventive step, having regard to what was publicly known or publicly used in India or what was published in India or elsewhere before the priority date of the claim;","that the applicant contravened any direction for secrecy passed under section 35 or made or caused to be made an application for the grant of a patent outside India in contravention of section 39;","None of above"],"c"),
+Q(`As per the definition provided in the Patents Act, 1970 (as amended), "capable of industrial application", in relation to an invention, means that the invention is capable of being ______ or ______ in ______;`,
+ ["manufactured, used, an industry","made, utilised, an industry","produced, exported, an industry","made, used, an industry"],"d"),
+Q(`A demand for international preliminary examination may be filed at any time prior to the expiration of:`,
+ ["3 months from the date of transmittal of the ISR and WO of the ISA, or 22 months from the priority date, whichever time limit expires later","3 months from the date of transmittal of the ISR and WO of the ISA, or 22 months from the priority date, whichever time limit expires earlier.","6 months from the date of transmittal of the ISR and WO of the ISA, or 22 months from the priority date, whichever time limit expires later","3 months from the date of transmittal of the ISR and WO of the ISA, or 20 months from the priority date, whichever time limit expires later"],"a"),
+Q(`According to the prevailing major classification systems observed in patent publications globally, match the system of the classification to that of the example:
+1. IPC                          (a) 57/224
+2. CPC                         (b) Y02A 10/00
+3. FI/F-Term                (c) G06F 1/16
+4. US Classification    (d) G06F 1/16 312M 5E322`,
+ ["1-c, 2-a, 3-d, 4-b","1-c, 2-b, 3-d, 4-a","1-c, 2-b, 3-a, 4-d","1-b, 2-c, 3-a, 4-d"],"b"),
+Q(`Xeronious Corporation is willing to start working on a 6G technology. It came to know that Yashobhav Inc. has filed a patent application on a similar technology. However, the patent office is yet to examine the application as no Request for Examination (RFE) was filed by Yashobhav Inc. yet. In order to decide whether to enter into working in that particular technology, Xeronious Corporation decides to file a request for examination for the patent application filed by Yashobhav Inc. In this context, which of the following is true:`,
+ ["Xeronious Corporation is not eligible to file RFE for an application filed by company Yashobhav Inc.","Xeronious Corporation can file RFE, however, the examination report will be sent to the applicant, i.e. Yashobhav Inc.","Xeronious Corporation can file an expedited RFE for an application filed by company Yashobhav Inc., but it cannot file a normal RFE.","None of the above is true"],"b"),
+Q(`Dr. Ramaswamy has obtained an exclusive license for a patent from the original patentee, Ms. Priya. After a few months, Dr. Ramaswamy notices that a third party is infringing the patent rights covered under his exclusive license. He decides to take legal action. Based on provisions of the Patents Act, 1970, which of the following is/are true about Dr. Ramaswamy's legal rights in this situation?
+i. Dr. Ramaswamy can sue the infringer and has the same right as Priya (the patentee) to take legal action.
+ii. The court will ignore any potential losses Dr. Ramaswamy may have incurred due to the infringement when awarding damages.
+iii. Ms. Priya may be added as a defendant in the lawsuit, unless she is already part of the case as a plaintiff.
+iv. Ms. Priya, once added as a defendant, will automatically be liable for the legal costs, regardless of her participation in the case.`,
+ ["Only (i) and (ii)","Only (i), (iii) and (iv)","Only (i) and (iii)","Only (ii) and (iv)"],"c"),
+Q(`An invention relates to an ophthalmic solution container with a laminate structure consisting of an inner layer of cyclic olefin interpolymer with a thickness of 500 μm and an outer layer of polyethylene resin with a thickness of 1,500 μm. Prior art document D1 discloses a squeeze bottle with a layered structure, including an inner layer of cyclic olefin interpolymer of 500 μm thickness and an outer polyethylene layer. The total thickness of the bottle is 2,000 μm. Which of the following is most accurate regarding the novelty of the claimed invention under Section 2(1)(j) of the Patents Act?`,
+ ["The invention lacks novelty over D1 because D1 discloses all the essential features of the claimed ophthalmic solution container.","The invention is novel over D1 because D1 does not disclose the exact thickness of the outer polyethylene layer.","The invention is novel over D1 because D1 does not disclose the total laminate thickness.","None of the above."],"a"),
+Q(`(Scenario for Q29 and Q30) Dr. Bhuvan has invented a cradle made of titanium which has a swing and five or more supporting structures, wherein the fifth support is strategically positioned to provide better stability and safety. The cradle has provisions for hanging toys and it can be folded up. Claim 1 of Dr. Bhuvan's patent application as filed reads: "A cradle comprising a plurality of supporting structures and a provision for hanging toys".
+Patent Office has found the following documents in prior art search:
+D1: describes a foldable wooden cradle with four supporting structures having hanging hooks for toys
+D2: describes a non-foldable titanium cradle with four supporting beams
+D3: describes a non-foldable aluminium cradle with four supporting beams having plurality of hanging hooks
+Dr. Bhuvan has amended his claim and has drafted the following three versions of claim:
+1. "A titanium cradle comprising a plurality of supporting structures and a provision for hanging toys"
+2. "A foldable titanium cradle comprising at least five supporting structures and a provision for hanging toys"
+3. "A foldable titanium cradle comprising a plurality of supporting structures and a provision for hanging toys"
+
+Q29. Which of the above version(s) of amended claim would be new over the above mentioned documents?`,
+ ["1 only","1 and 2 only","2 and 3 only","All above claim versions are new"],"d"),
+Q(`(Refer to the scenario in the previous question — cradle, documents D1–D3 and claim versions 1, 2 and 3.)
+
+Q30. Which of the above version(s) of amended claim would be non-obvious over the above mentioned documents?`,
+ ["2 only","1 and 2 only","2 and 3 only","All above claim versions are non-obvious"],"a"),
+
+S("Part B1 — Assertion & Reasoning (1 mark each)", 1),
+Q(`Assertion (A): In India, for filing a divisional application existence of plurality of inventions is not a sine qua non.
+Reasoning (R): A patent applicant may suo-moto file a divisional application in respect of an invention disclosed in the provisional or complete specification or an already filed divisional application.`, AR, "d"),
+Q(`Assertion (A): In India, a sequence listing must be submitted as part of the patent application when the invention involves a nucleotide or amino acid sequence.
+Reasoning (R): The requirement for a sequence listing is intended to ensure that the patent office can properly assess the novelty and inventiveness of biotechnological inventions based on specific sequences.`, AR, "a"),
+Q(`Assertion (A): A stamp or label can be considered an article for the purpose of registration of design under the Designs Act, 2000
+Reasoning (R): Article must have its existence independent of Design applied to it.`, AR, "d"),
+Q(`Assertion (A): The TRIPS agreement is often seen as both a protector of intellectual property and a tool for equitable access.
+Reasoning (R): The design of TRIPS agreement, while promoting a global standard for protection of intellectual property rights, also provides countries with the flexibility to prioritize essential goods, public health and economic development based on local needs.`, AR, "a"),
+Q(`Assertion (A): The publication of a patent application is an important step in the patent administration system.
+Reasoning (R): The publication of a patent application provides the public with information about the invention before the grant of a patent with the option for opposition as per the Act.`, AR, "a"),
+
+S("Part B2 — True / False Statements (1 mark each)", 1),
+Q(`Statement 1: No suit or other proceedings shall be commenced in respect of an infringement committed before the date of grant of the application for patent.
+Statement 2: It shall not be competent for any person in a suit or other such proceeding to take any objection to a patent on the ground that a patent has been granted for more than one invention.`, TF, "c"),
+Q(`Statement 1: Only the registered proprietor of a design may obtain a certified copy of any registered design.
+Statement 2: In one particular design application, a design can be registered for more than one class.`, TF, "d"),
+Q(`Statement 1: In India, the duration of grace period in Designs Act is same as is the Patents Act, when exhibited in the Govt. notified exhibitions.
+Statement 2: In a registered design, the registered proprietor of the design has copyright of the design for 10 years which is extendable for a further period of 5 years.`, TF, "b"),
+Q(`Statement 1: As per definition provided in the Patents Act, a "patented article" includes the article which utilizes patented ingredients.
+Statement 2: As per definition provided in the Patents Act, a "patentee" includes non-exclusive licensee.`, TF, "d"),
+Q(`Statement 1: A patent of addition application can be filed on another patent of addition application.
+Statement 2: A patent of addition can only be granted after the main application is granted.`, TF, "b"),
+
+S("Part C1 — Matching / Multiple Choice (3 marks each)", 3),
+Q(`With reference to various schemes/programmes related to intellectual property, match the following and select the right option below:
+1. CIPAM          a. WIPO support programme for innovators in developing countries
+2. NIPAM          b. IP programme for Higher Educational Institutes
+3. TISC             c. IP Awareness mission programme
+4. IP Saarthi      d. Professional Body for IP promotion
+5. KAPILA         e. Technology enabled IP Assistant`,
+ ["1-d, 2-c, 3-a, 4-e, 5-b","1-d, 2-c, 3-e, 4-a, 5-b","1-c, 2-d, 3-b, 4-e, 5-a","1-c, 2-d, 3-e, 4-b, 5-a"],"a"),
+Q(`The Patents Act, while extending certain rights to the patentee, also includes certain exceptions and limitations to balance the exclusive rights. In this context, match the subject of exclusion/limitation to the appropriate availability and sections as given below:
+Subject:
+1. Acts for making a patented product for obtaining regulatory approval from authorities, not an infringement
+2. Experimental use and/or scientific research not meaning infringement
+3. Use of articles on foreign vessels, aircrafts and land vehicles without infringing the patent rights, not an infringement
+4. Exhaustion of patent rights when imported by any person from a duly authorized person under the law
+5. Exceptions and limitations related to farmers' and/or breeders' use of patented inventions
+Availability of provision in the Act/Rules:
+a. No Explicit provision   b. Section 107A(b)   c. Section 107A(a)   d. Section 47(3)   e. Section 49`,
+ ["1-c, 2-d, 3-e, 4-b, 5-a","1-b, 2-d, 3-e, 4-c, 5-a","1-d, 2-c, 3-e, 4-b, 5-a","1-d, 2-a, 3-e, 4-b, 5-c"],"a"),
+Q(`Match the following case laws and related subject matter that was highlighted in them:
+1. Microfibres Inc. v. Girdhar & Co
+2. Saurav Chaudhary v. Union of India & ANR
+3. Syngenta v. Controller of Patents
+4. Telefonktiebolaget Lm Ericsson (Publ) v. Lava International Ltd.
+5. Reckitt Benckiser (India) Ltd. v. Wyeth Ltd.
+6. Whirlpool of India Ltd. v. Videocon Industries Ltd.
+
+(a) Regulating Conduct of Patent/TM Agents for negligence
+(b) Indian Jurisprudence related to Standard Essential Patents (SEP)/FRAND
+(c) Copyright and Design overlap, exclusivity and 50 times rule
+(d) Divisional application contents and condition of filing
+(e) Newness and originality of designs
+(f) Right to owner of design for application to articles`,
+ ["1-c, 2-a, 3-d, 4-b, 5-e, 6-f","1-e, 2-a, 3-d, 4-b, 5-f, 6-c","1-a, 2-c, 3-b, 4-d, 5-f, 6-e","1-d, 2-c, 3-a, 4-b, 5-e, 6-f"],"a"),
+Q(`Under the provision of the Patents Act and Rules, failure to comply certain requirements may lead to possible consequences with patent application/granted patents. In this context, match the following:
+Action:
+1. Complete Specification not followed within 12 months of Provisional Specification
+2. Contravention to any direction of secrecy
+3. Govt. opines patent as generally prejudicial to public after due procedure
+4. International application not entering in national phase in India within prescribed time
+5. The patentee does not desire to contest or leave his reply and evidence against post grant opposition within prescribed time
+Possible Consequence:
+a. Deemed to be revoked   b. Deemed to be withdrawn   c. Deemed to be abandoned   d. Deemed to have been abandoned   e. Deemed to have been revoked`,
+ ["1-b, 2-c, 3-d, 4-a, 5-e","1-c, 2-b, 3-d, 4-a, 5-e","1-c, 2-d, 3-a, 4-b, 5-e","1-d, 2-c, 3-a, 4-b, 5-e"],"c"),
+Q(`The Designs Act, 2000 prohibits certain designs to be registered/published under various sections of the Act. In this context, match the subject-matter to the appropriate section:
+1. a chair design that is nearly identical to a classic iconic chair design that is protected in multiple countries and has won international awards
+2. a camouflage pattern applied to outdoor apparel having application in defense
+3. a design application for a footwear which has a religious symbol engraved
+4. a design application for fibre glass model of the Taj Mahal
+5. a design for luxury kitchenware featuring abstract shapes that subtly resembles nude human body parts
+Sections:  a. Section 4(b)   b. Section 46(a)   c. Section 35(1)   d. Section 4(a)   e. Section 4(d)`,
+ ["1-c, 2-a, 3-d, 4-b, 5-e","1-e, 2-a, 3-d, 4-b, 5-c","1-a, 2-c, 3-b, 4-d, 5-e","1-a, 2-b, 3-c, 4-d, 5-e"],"d"),
+
+S("Part C2 — Multiple Choice (3 marks each)", 3),
+Q(`You have a foreign client which is a company of small scale. While applying for patent in India, the company wishes to take advantage of reduced fee being a small entity (as per the definition in India). Which among the following is/are true?
+1. Small entity fee benefit can only be taken by Indian SMEs as per MSME Act
+2. Your client can take the advantage by filing any other supporting document in support of their claim of being a small entity.
+3. The foreign company can avail fee reduction benefit if they meet the criteria as defined for SME in India
+4. They need to file evidence of registration under MSME Development Act 2006`,
+ ["Only 1","Only 2","Both 2 and 3","Both 1 and 4"],"c"),
+Q(`In the prevailing Patents Act and Rules made thereunder, for which of the following act(s), no fee is prescribed:
+i. Application for withdrawing a application
+ii. Filing a statement regarding working of a patented invention on a commercial scale in India
+iii. For preparation of certified copy of priority document and e-transmission through WIPO DAS
+iv. Transmittal fee for international application (for ePCT filing).
+v. Surrendering a patent`,
+ ["Only (i), (ii) and (iii)","Only (i), (ii) and (iv)","Only (i), (ii), (iii) and (iv)","All (i), (ii), (iii), (iv) and (v)"],"d"),
+Q(`After due examination process, a patent for efficiently cleaning polluted air and water was granted to Mr. Samayveer on 19/05/2024. Mr. Samayveer comes to you for professional advice regarding payment of renewal fees. Which of the following is/are correct advice to Mr. Samayveer regarding payment of renewal fee:
+i. To keep the granted patent in force, renewal fees shall be payable at the expiration of the second year from the date of the patent or of any succeeding year and the same shall be remitted to the patent office before the expiration of the second or the succeeding year.
+ii. Since the patent is of the nature wherein it solves the public health related issues by efficiently cleaning polluted air and water, there is no need to pay renewal fees for its maintenance.
+iii. Where the renewal fees payable in respect of two or more years is paid in advance through electronic mode for a period of at least 4 years, a 20% per cent reduction in fee shall be applicable for such renewal.
+iv. There is only 10% reduction in fee shall be applicable in case of advance payment of renewal fees for at least 4 years when the fee is paid through physical means of bank draft.`,
+ ["Only (i) and (ii)","Only (iii) and (iv)","Only (ii)","Only (i)"],"d"),
+Q(`Which of the following act or order or power of controller as provided in the Patents Act or the Designs Act and Rules is/are NOT appealable?
+i. Controller may refuse to register a design being contrary to public order or morality under the Designs Act, 2000
+ii. Disposal of applications for extension of time by the Controller
+iii. Controller terminates a granted compulsory license under section 84 on an application by the patentee when the circumstance that gave rise to the grant of compulsory license no longer exists
+iv. Controller may, on application by an eligible person, order for rectifying the register of design
+v. Controller may give directions for prohibiting or restricting the publication of information with respect to the invention when it appears to the controller that the invention is relevant for defence of India`,
+ ["Only (i) and (ii)","Only (iii) and (iv)","Only (ii) and (v)","Only (iv) and (v)"],"c"),
+Q(`Recently WIPO Member States adopted WIPO Treaty on Intellectual Property, Genetic Resources and Associated Traditional Knowledge. Which of the following is/are NOT correct statement(s) with regard to the same:
+i. The Treaty aims to enhance the efficacy, transparency and quality of the patent system with regard to genetic resources and traditional knowledge associated with genetic resources, and prevent patents from being granted erroneously for inventions that are not novel or inventive with regard to genetic resources and associated TK
+ii. It is first WIPO Treaty to include provisions specifically for Indigenous Peoples as well as local communities
+iii. The Treaty establishes an optional patent disclosure requirement for patent applicants to disclose the country of origin of the genetic resources and/or the Indigenous Peoples or local community providing the associated TK, if the claimed inventions are 'based on' genetic resources and/or associated TK.
+iv. Patent offices would have obligation to verify the authenticity of such disclosures.
+v. Patent applications filed prior to the entry into force of this Treaty would have a grace period of twelve month to comply with the obligations of the treaty.
+vi. This Treaty is open for signature by any eligible Party for one year after its adoption, i.e. up to May 23, 2025. The Treaty will enter into force three months after 15 eligible Parties have deposited their instruments of ratification or accession.`,
+ ["Only (ii) and (iv)","Only (iii) and (iv)","Only (iii), (iv) and (v)","Only (vi)"],"c")
+];
+
+const Y2026 = [
+S("Part A — Multiple Choice (2 marks each)", 2),
+Q("Which of the following articles do not satisfy the conventional requirements to be regarded as a ‘set’ as per the definition of the Designs Act, 2000?\n\n (The paper shows pictures; described here in words.)",
+ ["🫖 A teapot and a cup","🛋️ A table lamp and a sofa","🍾 Two bottles and a jar","🪑 A table with two chairs"], "b"),
+Q("Three patent applications were filed in India as per the following details:\n\n Application Type | Filed on | Priority detail\n Ordinary Application | 01/01/2023 | Nil\n Convention Application | 01/01/2023 | claiming priority of a Japanese patent application dated 01/01/2022\n PCT-NP Application | 01/01/2023 with International filing date 01/06/2021 | claiming priority of a US patent application dated 01/06/2020\n Considering that all three patents were granted, answer the following:\n\n Statement I: The patent term expires simultaneously (on the same date) for the above mentioned ordinary and convention applications.\n\n Statement II: The patent term of the PCT-NP application expires last.",
+ ["Statement I is true and II is false","Both Statements I and II are true","Both Statements I and II are false","Statement I is false and II is true"], "a"),
+Q("An Indian company, PenTech has a patent on its latest innovation roller point pens. A second company, PenSphere started producing and selling a similar pen in the market. PenTech filed an infringement suit against PenSphere. In the infringement suit, the alleged infringer (defendant) PenSphere claimed that it was not aware of the patent and had no reasonable grounds for believing that the patent existed. However, the Plaintiff PenTech argued that each of their product marketed clearly bears the indication that it is a patented product through the use of the term \"Patented\". Under these circumstances what is possible under the provisions of the Patents Act:\n\n I. Defendant shall be deemed to have been aware that the patent had existed as the products of the Plaintiff are identified as \"Patented\".\n\n II. Defendant shall not be deemed to have been aware that the patent had existed, even though the products of the Plaintiff are identified as \"Patented\".\n\n III. The Defendant shall be held accountable and the court shall grant damages or an account of profit against the defendant.\n\n IV. The court shall not grant damages or an account of profit against the defendant unless the number of the patent accompanies the word \"Patented\".",
+ ["Only I is correct","Only II is correct","I and III are correct","II and IV are correct"], "d"),
+Q("Considering the PCT timeline given below (in months), what are the correct values of A, B, C, D, E, F calculated from the 0th month?\n\n File priority application (0) → File PCT international application (A) → International Search Report & Written Opinion (B) → International publication (C) → File demand for International Preliminary Examination (D) → International preliminary report on patentability (E) → Enter national phase (F).",
+ ["A = 12, B = 15, C = 18, D = 21, E = 28, F = 30/31","A = 12, B = 16, C = 18, D = 20, E = 25, F = 30/31","A = 12, B = 14, C = 16, D = 24, E = 27, F = 30/31","A = 12, B = 16, C = 18, D = 22, E = 28, F = 30/31"], "d"),
+Q("Which of the following is/are true with respect to a patent of addition:\n\n I. A patent of addition application is a modification of the invention disclosed in the main application and can be filed only after the filing of the main application and not on the same date and granted only after the grant of the main application.\n\n II. A patent of addition application may not be refused on the ground only that the invention claimed does not involve an inventive step in view of the main application.\n\n III. Only one patent of addition application is allowable on one main invention application.\n\n IV. The applicant/patentee must be the same for both the main application and the patent of addition.",
+ ["I and II","II and III","III and IV","II and IV"], "d"),
+Q("The Indian Patent Office has recently updated the Roll of Scientific Advisors. Which of the following is NOT true about the scientific advisors as per the Patents Act?\n\n I. A scientific advisor may assist the court in an infringement matter.\n\n II. A scientific advisor may help the court in the interpretation of the law.\n\n III. A scientific advisor may inquire and report on a technical matter related to patent in question.\n\n IV. A scientific advisor may assist patent controller in deciding an opposition matter.",
+ ["IV only","I and III only","II and IV only","I, II and III"], "c"),
+Q("Which combination is correct with regard to post dating provision under Section 17(1) of the Patents Act?\n\n I. It requires applicant request with fee.\n\n II. It can be ordered suo-motu by the Controller.\n\n III. An application can be post-dated to a maximum period of 6 months under this provision.\n\n IV. It is available only before grant.",
+ ["I, II and III","I, III and IV","II, III and IV","I, II, III and IV"], "b"),
+Q("Which of the following is not open to the public or published?\n\n I. The information received by the controller (on demand) as to the extent to which the patented invention has been commercially worked in India.\n\n II. The examination report of the examiner made to the controller.\n\n III. The offer to surrender a patent by the patentee.\n\n IV. An application for a compulsory license under section 84, which the controller prima facie finds eligible.",
+ ["II and IV only","I and IV only","II and III only","II only"], "d"),
+Q("An inventor filed the following applications for an improved water bottle with a seal mechanism to prevent spillage:\n\n 1. A conventional application C1 was filed in Japan on 15/02/2024, claiming a bottle design with basic sealing feature A.\n\n 2. A second conventional application C2 was filed in Japan on 15/06/2024, claiming the bottle design with an advanced self-locking sealing mechanism B.\n\n 3. A complete specification was filed in India on 14/02/2025 claiming priority from both the previous applications claiming \"Bottle with basic sealing feature A, and characterized by advanced self-locking sealing mechanism B\".\n\n In this context, what would be the priority date for the above claim?",
+ ["15/02/2024","15/06/2024","14/02/2025","None of them"], "b"),
+Q("Dr. Neha is the patentee of a special 3D printing process used to manufacture customized medical implants. She is willing to license the technology to MedShape Pvt. Ltd. with following conditions:\n\n 1. MedShape must purchase all raw materials only from Dr. Neha's company.\n\n 2. MedShape shall not use any other 3D printing process for making implants.\n\n 3. MedShape shall not challenge the validity of Dr. Neha's patent in any court.\n\n Which of the following statements is/are correct according to the Patents Act, 1970?",
+ ["Such conditions are valid if they are approved by the Controller before execution of the licence","Only condition (3) is invalid, while the others can be enforced under patent rights","All the above conditions are void as they are restrictive and unlawful","Only condition (1) is void because it restricts the licensee's right to buy materials from others; the rest are valid"], "c"),
+Q("An architectural startup wishes to record an assignment in respect of two different registered designs (Design No. D-100 and Design No. D-101) in the Register of Designs under the Designs Act, 2000. They use the prescribed Form 10. What is the official government fee they must pay to the Office of the Controller of Designs?",
+ ["X for the first design + Y for the second design, where X = Y","X for the first design + Y for the second design, where Y < X","X for the first design + Y for the second design, where Y > X","They both can be bulk filed with only one fee X, when filed together in the same class"], "b"),
+Q("Mr. Sukumar has invented a water bottle, which looks very unique and aesthetic compared to the available water bottles in the market and has a cap which works on a specially designed seal to prevent leakage, even when the bottle is turned or shaken. He has labelled the bottle 'AquaZen' and is looking forward to launch his product in the market. What type of IP protection(s) may be relevant in this case?\n\n 1. Patent 2. Design 3. Trade Mark 4. GI",
+ ["1 and 2 both","1 and 3 only","1, 2 and 3 only","3 and 4 both"], "c"),
+Q("As per the definition of \"new invention\" under section 2(1)(l) of the Act, the test of anticipation is carried out based on:",
+ ["Non-publication and non-use of the invention before the date of filing of the application anywhere in India or elsewhere in the world","Non-publication of the invention before the date of filing of the application anywhere in the world and non-use in India only","Non-publication of the invention before the date of filing of the application anywhere in India and non-use elsewhere in the world","Non-publication and non-use of the invention before the date of filing of the application anywhere in India"], "a"),
+Q("A PCT application is filed directly in India by an Indian applicant. In the context of section 39 of the Act, does the applicant need to seek permission?",
+ ["No, the permission is not required as the PCT application is filed in India","Yes, the permission is still required as it's considered an application filed outside India","No, this requirement is only for PCT applications filed outside India","Yes, permission is required for all resident and non-resident Indians"], "a"),
+Q("Recently, the Government of India amended Section 4 of the Patents Act, 1970 from \"No patent shall be granted in respect of an invention relating to atomic energy falling within __________ of the __________\" to \"The patents may be granted for inventions relating to nuclear energy subject to the provisions of this Act and of the __________\".\n\n Which of the following is the correct option for the fill in the blanks?",
+ ["Sub-section (1) of section 21, Atomic Energy Act, 1962 (33 of 1962); section 39, Sustainable Harnessing and Advancement of Nuclear Energy for Transforming India Act, 2025","Sub-section (1) of section 20, Atomic Energy Act, 1961 (33 of 1961); section 38, Sustainable Harnessing and Advancement of Nuclear Energy for Transforming India Act, 2025","Sub-section (1) of section 20, Atomic Energy Act, 1962 (33 of 1962); section 38, Sustainable Harnessing and Advancement of Nuclear Energy for Transforming India Act, 2025","Sub-section (1) of section 21, Atomic Energy Act, 1961 (33 of 1961); section 38, Sustainable Harnessing and Advancement of Nuclear Energy for Transforming India Act, 2025"], "c"),
+Q("Mr. Arun is the patentee of Patent No. 123456 relating to a new pharmaceutical drug. He files a suit for infringement against Ms. Neena, alleging that she has used his patented drug in her research. Under the provisions of the Patents Act, which of the following statements is NOT correct?",
+ ["Ms. Neena can take the defence that her usage is protected as it was for experiment or research","Every ground for revocation of a patent is also available as a defence in a suit for infringement","Commercial activities by third parties, without consent, are grounds for infringement","Acts done for research or instruction purposes always amount to patent infringement"], "d"),
+Q("A patent for an innovative solar-powered water purifier was jointly granted to Dr. Rhea and Mr. Aarav. After a year, Dr. Rhea wanted to grant a license to EcoBlue Pvt. Ltd. to commercialize the invention. Mr. Aarav refused to consent and declined to sign the agreement even after multiple written requests. In the above situation, what is the correct legal course of action available to Dr. Rhea?",
+ ["She may unilaterally grant a licence to EcoBlue Pvt. Ltd. because, under Section 50(2), each co-owner may exercise rights under the patent for his own benefit","She can apply to the Controller, who may issue directions regarding the grant of a licence under Section 51(1), after giving both co-owners an opportunity to be heard","She may transfer (assign) her undivided share in the patent to EcoBlue Pvt. Ltd. without Mr. Aarav's consent, since each co-owner's share is distinct","The Controller may direct that only Dr. Rhea has exclusive rights to use the patent"], "b"),
+Q("A patent application titled \"Coir Pith-Based Car Air Freshener Gel\" was filed on 02/07/2024 in India wherein the specific ratios of the constituent components were claimed. Before filing, on 13/01/2024, the applicant posted a LinkedIn post stating \"Cocoaura base has been made out of coco pith, making the freshener an excellent choice for places where children spend time.\" Which of the following is correct?",
+ ["The applicant can claim grace period relief under section 31(d)","Since the LinkedIn post was general in nature and lacked technical details it does not anticipate the claimed invention","Any disclosure made by the inventor on social media or in newspapers within 12 months prior to filing is automatically protected","Social media posts are not considered as public disclosure within the meaning of prior art for anticipation under section 13"], "b"),
+Q("Co-Applicants (1) Dr. Aruna of Lakshadweep Islands, and (2) Dr. Bhairavi of Dadra & Nagar Haveli, wish to file an Indian patent application for a skin treatment regime under the Act. Which Patent Office shall have the jurisdiction to receive the application?",
+ ["Kolkata Patent Office","Mumbai Patent Office","Chennai Patent Office","Delhi Patent Office"], "c"),
+Q("With regard to Standard Essential Patents (SEPs), which of the following is/are correct?\n\n I. SEPs are patents which may be essential while implementing a Standard.\n\n II. SEPs are relevant only for the telecom sector.\n\n III. Patent holders propose SEPs and Patent Office lists them, but the \"essential\" status is ultimately proven in practice.\n\n IV. Once a technology standard is adopted, SEP owners generally become liable to license their SEPs to implementers under FRAND terms.\n\n V. FRAND terms are intended to create restrictive market conditions for SEP owners and inhibit innovation within industries relying on standardized technologies.",
+ ["I and III","Only I, II and III","Only I and IV","All of the above"], "c"),
+Q("As per the definition of \"proprietor of a new or original design\", who amongst the following may be considered as the proprietor:\n\n I. Author of an original design.\n\n II. A person who gets the design executed (for some consideration) by the author of the design.\n\n III. Any person who acquires the right to apply the design to any article.\n\n IV. Any other person to whom the right to apply the design has devolved from the original proprietor.",
+ ["I and II","I and III","I, II and III","All of the above"], "d"),
+Q("Ms. Heena physically filed an international patent application under the PCT with the Indian Patent Office as the Receiving Office (RO/IN). Which of the following combinations of fees is applicable?",
+ ["International filing fee, search fee and preliminary examination fee","National fee, international filing fee and search fee","International filing fee, search fee and transmittal fee","Transmittal fee, national fee and designation fee"], "c"),
+Q("Under the Jan Vishwas (Amendment of Provisions) Act, 2023, amendments were introduced to provisions governing compliance obligations and penalties under the Patents Act, 1970, including information furnished under Section 146(2). Which of the following statements most accurately reflects the legal and policy effect of these changes?",
+ ["Failure to furnish information under Section 146(2) is a criminal offence punishable with imprisonment, as it directly affects public disclosure obligations","The amendment decriminalizes such failure, replacing imprisonment with a monetary penalty","The amendment eliminates all penalties for non-filing of working statements, thereby removing the Controller's power to call for such information","The amendment introduces criminal prosecution only when public interest is affected, maintaining imprisonment as an optional penalty in exceptional cases"], "b"),
+Q("Which of the following is/are true in respect of registration of design of a particular article under the Designs Act:\n\n I. It is not possible to register the same design in multiple classes of articles.\n\n II. When a design is to be applied to a set, any doubt whether the given articles do or do not constitute a set shall be determined by the proprietor of the design.\n\n III. Reports to the Controller made under the Designs Act shall not be open to public inspection.\n\n IV. Registered designs shall be open to public inspection immediately after the grant and even before the notification of the said design in the official journal.",
+ ["I and III","II and III","III only","II and IV only"], "c"),
+Q("Consider the following statements regarding the Patents Act, 1970:\n\n 1. The Central Government may, by notification in the Official Gazette, make rules for carrying out the purposes of the Act.\n\n 2. Every rule shall be laid before both Houses of Parliament, which may modify or annul such rule.\n\n 3. The power under Section 159 enables the Central Government to make rules even with retrospective effect, provided it serves the objects of the Act.\n\n 4. The power under Section 159 enables the Central Government to make rules regarding the conduct and procedure in respect of all proceedings before the High Court.\n\n Which of the above statements are correct?",
+ ["1 and 2 only","1, 2, and 3 only","2 and 4 only","All of the above"], "a"),
+Q("Dr. Meera, a scientist, developed a novel drug compound while working for BioGen Labs Ltd. Before the patent application was filed, Dr. Meera passed away, and her legal heir, Arya, filed an application alone on the same drug, describing herself as the true inventor. Subsequently, BioGen Labs Ltd. also filed a separate application claiming ownership of the same drug based on the employment contract of Dr. Meera having an IPR clause which automatically passes the IPR rights for work during the employment to the employer. Which of the following statements is correct?",
+ ["Only Arya, as legal heir of the true inventor, is entitled to apply for the patent","Only BioGen Labs Ltd. is entitled to apply","Both Arya and BioGen Labs Ltd. must jointly apply, since rights devolve on the employer and legal heir together","Neither application is valid until the Controller determines entitlement under Section 6"], "b"),
+Q("Under Section 2(a) of the Designs Act, 2000, which of the following would qualify as an \"article\" for the purpose of registration of a design?\n\n I. A car door handle manufactured separately and sold as a spare part.\n\n II. A built-in dashboard of a car that cannot be removed.\n\n III. A sculpture carved from natural stone without any modification.\n\n IV. A bottle cap produced through an industrial process and sold independently.",
+ ["I and II","II and III","I and IV","III and IV"], "c"),
+Q("An application 'A' filed as a patent of addition of the main application 'B'. A first examination report for the application 'A' is issued on 01/01/2024. The status of main application 'B' is granted and a revocation suit is filed in the High Court of Delhi. The applicant now comes to you with a dilemma about when to file the reply to FER under section 21 of the Patents Act. Advice the applicant by choosing the correct alternative available to him:",
+ ["The timeline to file FER-reply under section 21(1) is six months, extendable up to another three months. This timeline is fixed and not extendable","The applicant may file a petition before the Controller explaining the case related to the main patent and request for further extension, based on which the Controller may extend the timeline","In this case, based on the application of the applicant before the expiration of period under section 21(1), the Hon'ble High Court shall determine the extended timeline","In the above scenario, the timeline to file FER-Reply for application 'A' is six months from the date of FER or six months from the disposal of the case related to main application 'B' in High Court, whichever is later"], "c"),
+Q("As an inventor from a research organisation, while looking for a patent agent, you discover that Mr. Sunil is offering patent-related services and representing himself as a patent agent. Upon verification, you found that his name does not appear in the Register of Patent Agents and Mr. Sunil is not a registered patent agent. You decide to file a formal complaint. Under the recent amendments to the Patent Rules, which of the following statements is correct?",
+ ["A complaint against an unregistered person falsely claiming to be a patent agent can be filed with Form 32 through electronic or physical means, only by a person aggrieved","A complaint against an unregistered person falsely claiming to be a patent agent can be filed directly with Form 33, in physical or electronic form, only by a person aggrieved","A complaint against an unregistered person falsely claiming to be a patent agent can be filed directly with Form 32, through electronic means, by any person","A complaint against an unregistered person falsely claiming to be a patent agent can be filed directly with Form 33, in physical or electronic form, by any person"], "c"),
+Q("In the context of Patents, which of the following best describes the objective of a defensive publication?\n\n I. To delay disclosure of the invention until the commercial launch of the product.\n\n II. To put a disclosure in the public domain to block future patent grants in similar technology.\n\n III. To obtain a limited-time monopoly on the invention without a full patent filing and prosecution.\n\n IV. An alternative to filing a patent application to prevent any charge of infringement in future by others.",
+ ["I and II","II and III","II and IV","I and IV"], "c"),
+S("Part B1 — Assertion & Reasoning (1 mark each)", 1),
+Q("Assertion (A): Publication of patents and design applications serves the same purpose — to place all applications before the public for opposition.\n\n Reasoning (R): Patent and design applications are subject to automatic publication after a fixed statutory period from the filing date, unless secrecy directions or deferment.",
+ ["When both (A) and (R) are true, and (R) is a correct explanation of (A)","When both (A) and (R) are true, but (R) is NOT a correct explanation of (A)","When (A) is true but (R) is false","When (A) is false but (R) is true"], "c"),
+Q("Assertion (A): A design applied to more than 50 articles loses copyright.\n\n Reasoning (R): Industrial application transforms the artistic work into a \"design\" within the Designs Act, 2000.",
+ ["When both (A) and (R) are true, and (R) is a correct explanation of (A)","When both (A) and (R) are true, but (R) is NOT a correct explanation of (A)","When (A) is true but (R) is false","When (A) is false but (R) is true"], "a"),
+Q("Assertion (A): The WIPO Treaty on Intellectual Property, Genetic Resources, and Associated Traditional Knowledge (2024) obliges states to incorporate benefit-sharing and disclosure requirements into their national IP systems.\n\n Reasoning (R): Indigenous and local communities must have their rights over genetic resources and associated traditional knowledge recognized to prevent misappropriation and ensure equitable sharing of benefits arising from their use.",
+ ["When both (A) and (R) are true, and (R) is a correct explanation of (A)","When both (A) and (R) are true, but (R) is NOT a correct explanation of (A)","When (A) is true but (R) is false","When (A) is false but (R) is true"], "a"),
+Q("Assertion (A): Under Section 18 of the Designs Act, 2000, any person may request the Controller to cause a search to ascertain whether a particular design has been previously registered in India.\n\n Reasoning (R): On request, under Rule 28 of the Designs Rules, 2001, the Controller shall furnish certified copies of the registered design and its representation if it is found to be registered.",
+ ["When both (A) and (R) are true, and (R) is a correct explanation of (A)","When both (A) and (R) are true, but (R) is NOT a correct explanation of (A)","When (A) is true but (R) is false","When (A) is false but (R) is true"], "c"),
+Q("Assertion (A): A design that has been applied to an article and commercially exhibited in an industrial trade fair outside India before the filing date shall be refused registration in India under Section 4 of the Designs Act, 2000.\n\n Reasoning (R): Section 4 of the Designs Act, 2000 treats prior publication as a bar to registration only when such publication occurs in India and not when it occurs in a foreign country.",
+ ["When both (A) and (R) are true, and (R) is a correct explanation of (A)","When both (A) and (R) are true, but (R) is NOT a correct explanation of (A)","When (A) is true but (R) is false","When (A) is false but (R) is true"], "c"),
+S("Part B2 — True / False Statements (1 mark each)", 1),
+Q("Statement I: Dependent claims generally narrow the scope of an independent claim by adding limitations or additional features.\n\n Statement II: If the independent claim is rejected for lack of novelty or inventive step, dependent claims offer backup protection by ensuring some aspects of the invention remain patentable.",
+ ["Statement I is True, and Statement II is False","Statement I is False, and Statement II is True","Both Statements I and II are True","Both Statements I and II are False"], "c"),
+Q("Statement I: The Patent Office maintains a register of patents wherein the particulars of the patentee, assignments, licenses, amendments, revocation etc. are entered.\n\n Statement II: The Patent Register is a confidential document and not open for public inspection; only the 'interested persons' can obtain certified copies after paying suitable fees.",
+ ["Statement I is True, and Statement II is False","Statement I is False, and Statement II is True","Both Statements I and II are True","Both Statements I and II are False"], "a"),
+Q("Statement I: An exclusive licensee of a patent is not eligible to challenge validity of the patent under section 64.\n\n Statement II: It would not be considered lawful for a patentee to insert a clause in the license agreement which restricts the rights of a licensee vis-à-vis patent validity.",
+ ["Statement I is True, and Statement II is False","Statement I is False, and Statement II is True","Both Statements I and II are True","Both Statements I and II are False"], "b"),
+Q("Statement I: An international search is carried out by an international searching authority, which may either be a national office or an intergovernmental organization.\n\n Statement II: The international searching authority carrying out the international search in respect of an international application shall not be competent to carry out a supplementary international search in respect of that application.",
+ ["Statement I is True, and Statement II is False","Statement I is False, and Statement II is True","Both Statements I and II are True","Both Statements I and II are False"], "c"),
+Q("Statement I: A dependent claim is found to be neither novel nor inventive in view of certain prior art. This will automatically mean that the independent claim, on which the dependent claim is based, is also not novel and not inventive.\n\n Statement II: A dependent claim may be novel and inventive even though the independent claim, on which the dependent claim is based, is found to be not novel and not inventive.",
+ ["Statement I is True, and Statement II is False","Statement I is False, and Statement II is True","Both Statements I and II are True","Both Statements I and II are False"], "c"),
+S("Part C1 — Multiple Choice (3 marks each)", 3),
+Q("A patent application X for a pharmaceutical compound is filed in India. An identical compound is also found to be claimed in two different applications in US (D1) and in India (D2). However, both of these applications were filed before the filing date of X, but published after the filing date of X. When considering anticipation, which of the following is/are true?\n\n I. The US application (D1) destroys novelty of X, but the Indian application (D2) doesn't destroy the novelty.\n\n II. The compound is novel, since the disclosure in the US and Indian applications are not considered as valid.\n\n III. The US application is valid for novelty if it was filed by the same inventor.\n\n IV. The US application (D1) doesn't destroy novelty of X, but the Indian application (D2) does destroy the novelty.",
+ ["Only III is correct","Both II and III are correct","Only IV is correct","Both II and IV are correct"], "c"),
+Q("In a patent application, claim 1 consists of features A, B, and C. Further, a dependent claim 2 (dependent on claim 1) consists of a feature D. Subsequently, another dependent claim 3 (dependent on claim 2) consists of feature E. You have a prior art D1 which discloses features A and B. Feature C is disclosed in document D2. Another document, D3, discloses features A, C, and E. Considering that all the prior arts D1–D3 are relevant to the concerned field of technology, choose the correct option(s):\n\n I. Documents D1 and D2 in combination destroy the inventive step of claim 1.\n\n II. Documents D1, D2 and D3 in combination destroy the inventive step of claim 3.\n\n III. Claim 2 and claim 3 are novel and inventive, while claim 1 is novel but not inventive in view of D1–D3.\n\n IV. Claims 2 and 3 cannot be considered inventive, as they are dependent on claim 1, which is not inventive in view of D1–D3.",
+ ["Statements I, II, and III are correct","Statements I, II and IV are correct","Statements II, III, and IV are correct","Statements I and III are correct"], "d"),
+Q("Dr. Asha and Dr. Mehra are co-patentees of three related patents granted for different aspects of the same medical device technology. One patent has been exclusively licensed to MedEquip Pvt. Ltd., and another has been non-exclusively licensed to BioHealth Ltd. All parties are commercially exploiting the inventions in India. Dr. Mehra is also the sole patentee of a separate patent on a biodegradable packaging technology, which is not yet being commercially worked, but she is interested in licensing it. Which of the above statements are correct?\n\n I. Dr. Asha, Dr. Mehra, MedEquip Pvt. Ltd., and BioHealth Ltd. are each required to file Form-27 individually for their respective patents or licenses.\n\n II. Dr. Asha and Dr. Mehra can file a single consolidated Form-27 for all three related patents, since they are co-owners and the patents relate to the same technology.\n\n III. Both MedEquip Pvt. Ltd. and BioHealth Ltd. can file their own Form-27 separately from the patentees for the patents they are licensed to use.\n\n IV. The revised Form-27 now includes a provision requiring patentees or licensees to state whether the patent is available for licensing.\n\n V. Form-27 is required to be filed only once during the lifetime of the patent, irrespective of whether it continues to be worked or not.",
+ ["I, II, III and IV only","II, III, IV and V only","I, II and III only","All of the above"], "a"),
+Q("Mr. Arjun is the patentee of Patent No. 123456 which relates to a new pharmaceutical composition. He requests surrender of his patent under Section 63 of the Act, which is duly published. One of the licensees, Ms. Meera, comes across this publication and feels that surrendering the patent would reduce her profits. In this situation, which of the following statements are correct under the Patents Act, 1970?\n\n I. Ms. Meera, being a person having an interest in the patent, may file a notice of opposition to the surrender within the prescribed period.\n\n II. The Controller must provide both Mr. Arjun and Ms. Meera an opportunity to be heard before deciding whether to accept the surrender.\n\n III. The patent stands automatically revoked upon Mr. Arjun's submission of the surrender notice.\n\n IV. The Controller may accept the patentee's request of surrender after hearing the patentee only.",
+ ["I and II only","II and III only","I and IV only","All of the above"], "a"),
+Q("With reference to sequence-listing fees under the Indian Patent Rules, consider the following statements:\n\n I. Natural persons, startups, and small entities are liable to pay a per-page sequence-listing fee subject to a maximum cap of X, irrespective of the number of pages.\n\n II. Large entities are liable to pay a per-page sequence-listing fee subject to a maximum cap of 5X.\n\n III. The sequence-listing fee is calculated strictly on a per-page basis without any upper monetary limit.\n\n IV. Filing the sequence listing in electronic form exempts the applicant from payment of any sequence-listing fee.\n\n V. The sequence-listing fee is determined with reference to the number of pages of the sequence listing.\n\n VI. The obligation to pay sequence-listing fees is independent of whether the biological material is deposited under the Budapest Treaty.\n\n Which of the above statements are correct?",
+ ["I, II, V and VI only","I, II, III and V only","I, II, IV and VI only","II, III, V and VI only"], "a"),
+S("Part C2 — Matching Questions (3 marks each)", 3),
+Q("Under the Patents Act, who can file the following?\n\n Action | Who can file\n 1. Against surrender of a patent u/s 63 | I. Any person interested\n 2. Against an order of the adjudicating officer in respect of any contravention committed under sections 120, 122 or 123 of the Act | II. Any person aggrieved\n 3. Against any contravention committed under sections 120, 122 or 123 of the Act | III. Any person\n 4. Against any amendment of a granted patent | IV. Any person interested\n 5. Against a request for rectification of any error in any entry in the patent register before the High Court | V. Any person aggrieved\n Choose the correct matching combination:",
+ ["1-I, 2-II, 3-IV, 4-III, 5-V","1-I, 2-II, 3-III, 4-IV, 5-V","1-III, 2-I, 3-II, 4-IV, 5-V","1-II, 2-III, 3-I, 4-V, 5-IV"], "b"),
+Q("Concerning the provisions of Compulsory Licensing (CL), match the following:\n\n Provision | Content\n 1. Section 84 | I. Request for revocation of a patent for which a CL was granted more than two years ago\n 2. Section 85 | II. CL when a reasonable requirement of the public is not met and the patented invention is not worked in India\n 3. Section 91 | III. CL extended to a second patent, without which working with the first CL is hindered or prevented\n 4. Section 92 | IV. CL for manufacture and export of a patented pharmaceutical product\n 5. Section 92A | V. CL by the Central Government in situations of national emergency or extreme urgency for public non-commercial use\n Choose the correct matching combination:",
+ ["1-III, 2-I, 3-II, 4-IV, 5-V","1-II, 2-III, 3-I, 4-V, 5-IV","1-II, 2-I, 3-III, 4-V, 5-IV","1-I, 2-II, 3-III, 4-IV, 5-V"], "c"),
+Q("Match the following Patent Forms with their respective purposes and statutory provisions under the Patents Act, 1970 and the Patents Rules, 2003:\n\n Form No. | Purpose | Relevant Section / Rule\n 1. Form 17 | (i) Application for a compulsory licence | (a) Sections 84(1), 91, 92(1) or 92A read with Rule 96\n 2. Form 19 | (ii) Request for revocation of a patent for non-working | (b) Section 85(1) read with Rule 96\n 3. Form 15 | (iii) Request for restoration of a lapsed patent | (c) Section 60(1) read with Rule 84\n 4. Form 21 | (iv) Request for termination of a compulsory licence | (d) Section 94 read with Rule 102(1)\n Choose the correct matching combination:",
+ ["1-i-a, 2-ii-b, 3-iii-c, 4-iv-d","1-ii-b, 2-i-a, 3-iv-d, 4-iii-c","1-i-a, 2-iv-d, 3-iii-c, 4-ii-b","1-iii-c, 2-ii-b, 3-i-a, 4-iv-d"], "a"),
+Q("Match the subject/principle of the case to the appropriate case citation:\n\n Column A (Case) | Column B (Subject / Principle)\n a. Natera Inc. & Anr. v. Assistant Controller of Patents & Designs | i. Section 3(d)\n b. DS BioPharma Limited v. The Controller of Patents and Designs | ii. Section 3(i)\n c. Immunas Pharma, Inc. v. Assistant Controller of Patents | iii. Patentability of products containing living microorganisms\n d. Dimminaco AG v. Controller | iv. Requirement under Sections 10(4) and 10(5) is mandatory\n e. VIFOR (International) Limited & Anr v. MSN Laboratories Pvt Ltd & Anr | v. Principles governing product-by-process claims\n f. The Regents of the University of California v. The Controller of Patents | vi. Section 3(c)",
+ ["a-ii, b-iv, c-vi, d-iii, e-i, f-v","a-ii, b-ii, c-iii, d-iv, e-v, f-vi","a-ii, b-i, c-vi, d-iii, e-v, f-iv","a-ii, b-iv, c-i, d-iii, e-vi, f-iv"], "c"),
+Q("Match the following:\n\n Column I (Provision) | Column II (Definition)\n a. Section 2(1)(ta) | 1. \"patented article\" and \"patented process\" mean respectively an article or process in respect of which a patent is in force\n b. Section 2(1)(la) | 2. \"pharmaceutical substance\" means any new entity involving one or more inventive steps\n c. Section 2(1)(n) | 3. \"Opposition Board\" means an Opposition Board constituted under sub-section (4) of section 25\n d. Section 2(1)(o) | 4. \"patent agent\" means a person for the time being registered under this Act as a patent agent",
+ ["a-1, b-2, c-3, d-4","a-3, b-4, c-1, d-2","a-4, b-1, c-2, d-3","a-2, b-3, c-4, d-1"], "d")
+];
+
+/* ---------- registry ---------- */
+const YEARS = {
+  "2023": { list: Y2023, note: "2023 paper: Set B, with the official answer key. Part C has more than one correct option — select all that apply, then press “Check answer”. Full marks were awarded to all candidates for Q34 (Set B), so it is counted as correct." },
+  "2024": { list: Y2024, note: "2024 paper: Set C, with the official answer key (Paper 1)." },
+  "2025": { list: Y2025, note: "2025 paper: Set A, with the official answer key. Q29 and Q30 share one scenario (the cradle claims)." },
+  "2026": { list: Y2026, note: "2026 paper: combined practice bank of unique questions from Sets A–D, with the answer keys supplied (Set A ordering followed where sets repeated a question). Q1 shows pictures in the paper; they are described in words here." }
+};
+
+/* ---------- build flat question arrays ---------- */
+const BANK = {};
+Object.keys(YEARS).forEach(y => {
+  let sec = null, n = 0; const flat = [];
+  YEARS[y].list.forEach(it => {
+    if (it.s) { sec = it; return; }
+    n++;
+    flat.push({ n, sec: sec.s, m: sec.m, t: it.t, o: it.o, free: it.free,
+      a: it.a.split(',').map(x => 'abcd'.indexOf(x.trim())) });
+  });
+  BANK[y] = flat;
+});
+
+/* ---------- state ---------- */
+const STATE = {};
+Object.keys(BANK).forEach(y => STATE[y] = { res: {}, draft: {} });
+let year = "2023";
+
+const $ = id => document.getElementById(id);
+const esc = s => s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+
+function cardHTML(y, i) {
+  const q = BANK[y][i], st = STATE[y];
+  const r = st.res[i], multi = q.a.length > 1;
+  const draft = st.draft[i] || [];
+  let h = `<div class="qcard" data-i="${i}"><div class="qtitle"><span class="qnum">${q.n}</span>${esc(q.t)}</div>`;
+  if (multi && !r) h += `<div class="multi">More than one option is correct — select all that apply.</div>`;
+  q.o.forEach((opt, oi) => {
+    let cls = 'opt';
+    if (r) {
+      if (q.a.includes(oi)) cls += ' correct';
+      else if (r.chosen.includes(oi)) cls += ' wrong';
+    } else if (draft.includes(oi)) cls += ' sel';
+    h += `<button class="${cls}" data-i="${i}" data-o="${oi}" ${r ? 'disabled' : ''}><b>${'ABCD'[oi]}.</b> ${esc(opt)}</button>`;
+  });
+  if (multi && !r) h += `<button class="check" data-i="${i}" ${draft.length ? '' : 'disabled'}>Check answer</button>`;
+  if (r && q.free) h += `<div class="free">Note: full marks were awarded to all candidates for this question.</div>`;
+  return h + `</div>`;
+}
+
+function renderYear() {
+  const flat = BANK[year];
+  let h = '', last = '';
+  flat.forEach((q, i) => {
+    if (q.sec !== last) { last = q.sec; h += `<h2 class="sechead">${esc(q.sec)}</h2>`; }
+    h += cardHTML(year, i);
+  });
+  $('quiz').innerHTML = h;
+  $('foot').textContent = YEARS[year].note;
+  updateScore();
+}
+
+function updateScore() {
+  const flat = BANK[year], st = STATE[year];
+  let c = 0, w = 0, marks = 0, max = 0;
+  flat.forEach((q, i) => {
+    max += q.m;
+    const r = st.res[i];
+    if (!r) return;
+    if (r.ok) { c++; marks += q.m; } else w++;
+  });
+  $('attempted').textContent = c + w;
+  $('total').textContent = flat.length;
+  $('correct').textContent = c;
+  $('wrong').textContent = w;
+  $('marks').textContent = marks;
+  $('maxmarks').textContent = max;
+  $('bar').style.width = (flat.length ? (c + w) / flat.length * 100 : 0) + '%';
+}
+
+function refreshCard(i) {
+  const old = document.querySelector(`.qcard[data-i="${i}"]`);
+  const tmp = document.createElement('div');
+  tmp.innerHTML = cardHTML(year, i);
+  old.replaceWith(tmp.firstChild);
+}
+
+function evaluate(i, chosen) {
+  const q = BANK[year][i];
+  const ok = q.free || (chosen.length === q.a.length && q.a.every(x => chosen.includes(x)));
+  STATE[year].res[i] = { chosen, ok };
+  refreshCard(i);
+  updateScore();
+}
+
+$('quiz').addEventListener('click', e => {
+  const chk = e.target.closest('.check');
+  if (chk) {
+    const i = +chk.dataset.i;
+    evaluate(i, STATE[year].draft[i] || []);
+    return;
+  }
+  const btn = e.target.closest('.opt');
+  if (!btn || btn.disabled) return;
+  const i = +btn.dataset.i, o = +btn.dataset.o;
+  const q = BANK[year][i];
+  if (q.a.length > 1) {
+    const d = STATE[year].draft[i] || [];
+    const k = d.indexOf(o);
+    if (k >= 0) d.splice(k, 1); else d.push(o);
+    STATE[year].draft[i] = d;
+    refreshCard(i);
+  } else {
+    evaluate(i, [o]);
+  }
+});
+
+$('resetBtn').addEventListener('click', () => {
+  STATE[year] = { res: {}, draft: {} };
+  renderYear();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+
+function buildTabs() {
+  $('tabs').innerHTML = Object.keys(YEARS).map(y =>
+    `<button class="tab ${y === year ? 'active' : ''}" data-y="${y}">${y}</button>`).join('');
+}
+$('tabs').addEventListener('click', e => {
+  const t = e.target.closest('.tab');
+  if (!t) return;
+  year = t.dataset.y;
+  buildTabs();
+  renderYear();
+  window.scrollTo({ top: 0 });
+});
+
+buildTabs();
+renderYear();
+</script>
+</body>
+</html>
