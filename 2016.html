@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Patent Agent Examination — Paper I Practice (2016)</title>
+<style>
+  :root{
+    --bg:#f6f7fb; --surface:#ffffff; --text:#0f172a; --muted:#64748b; --line:#e5e8f0;
+    --brand:#4f46e5; --brand2:#7c3aed; --brand-soft:#eef2ff;
+    --ok:#16a34a; --ok-bg:#ecfdf3; --ok-line:#86efac;
+    --bad:#dc2626; --bad-bg:#fef2f2; --bad-line:#fca5a5;
+    --sel-bg:#f3e8ff; --sel-line:#a855f7;
+    --shadow:0 1px 2px rgba(15,23,42,.04),0 8px 24px -12px rgba(15,23,42,.12);
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --bg:#0b1020; --surface:#131a2e; --text:#e6e9f5; --muted:#94a0bd; --line:#232c47;
+      --brand:#818cf8; --brand2:#a78bfa; --brand-soft:#1b2347;
+      --ok:#4ade80; --ok-bg:#0f2a1e; --ok-line:#1f6f45;
+      --bad:#f87171; --bad-bg:#2d1519; --bad-line:#7f2a33;
+      --sel-bg:#2a1b47; --sel-line:#8b5cf6;
+      --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px -12px rgba(0,0,0,.6);
+    }
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;-webkit-font-smoothing:antialiased}
+  header.top{position:relative;overflow:hidden;color:#fff;padding:44px 20px 70px;
+    background:radial-gradient(900px 400px at 85% -20%,rgba(167,139,250,.55),transparent 60%),radial-gradient(700px 380px at 0% 120%,rgba(56,189,248,.35),transparent 60%),linear-gradient(135deg,#1e1b4b,#312e81 55%,#4338ca)}
+  header.top .inner{max-width:900px;margin:0 auto;position:relative}
+  .eyebrow{display:inline-block;font-size:11.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.22);padding:5px 12px;border-radius:999px;margin-bottom:14px;backdrop-filter:blur(6px)}
+  header.top h1{margin:0 0 8px;font-size:clamp(26px,4.6vw,38px);line-height:1.15;letter-spacing:-.02em;font-weight:800}
+  header.top p{margin:0 0 24px;font-size:15px;opacity:.82;max-width:620px}
+  .tabs{display:inline-flex;gap:4px;padding:5px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);border-radius:14px;backdrop-filter:blur(8px);flex-wrap:wrap}
+  .tab{font:inherit;font-size:14.5px;font-weight:700;padding:9px 24px;border-radius:10px;border:0;background:transparent;color:rgba(255,255,255,.85);cursor:pointer;transition:all .18s}
+  .tab:hover{background:rgba(255,255,255,.14);color:#fff}
+  .tab.active{background:#fff;color:#3730a3;box-shadow:0 4px 14px -4px rgba(0,0,0,.35)}
+  .scorebar{position:sticky;top:10px;z-index:30;max-width:900px;margin:-34px auto 0;padding:0 16px}
+  .scorebar .inner{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:12px 14px 14px;background:color-mix(in srgb,var(--surface) 88%,transparent);backdrop-filter:blur(14px);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);position:relative;overflow:hidden}
+  .pill{font-size:13px;font-weight:600;padding:6px 12px;border-radius:10px;background:var(--brand-soft);color:var(--brand);white-space:nowrap}
+  .pill.green{background:var(--ok-bg);color:var(--ok)}
+  .pill.red{background:var(--bad-bg);color:var(--bad)}
+  .pill.gold{background:linear-gradient(135deg,var(--brand),var(--brand2));color:#fff}
+  .spacer{flex:1}
+  button.reset{font:inherit;font-size:13px;font-weight:600;padding:7px 14px;border-radius:10px;border:1px solid var(--line);background:var(--surface);color:var(--muted);cursor:pointer;transition:all .15s}
+  button.reset:hover{color:var(--text);border-color:var(--brand)}
+  .progress{position:absolute;left:0;right:0;bottom:0;height:4px;background:var(--line)}
+  .progress i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--brand),var(--brand2));transition:width .35s ease}
+  main{max-width:900px;margin:0 auto;padding:26px 16px 70px}
+  h2.sechead{display:flex;align-items:center;gap:10px;font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.12em;color:var(--brand);margin:38px 0 14px}
+  h2.sechead:first-child{margin-top:10px}
+  h2.sechead::after{content:"";flex:1;height:1px;background:var(--line)}
+  .qcard{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:22px 22px 18px;margin-bottom:16px;box-shadow:var(--shadow);transition:transform .18s,box-shadow .18s}
+  .qcard:hover{transform:translateY(-1px)}
+  .qtitle{font-size:15.5px;font-weight:500;margin-bottom:14px;white-space:pre-line}
+  .qnum{display:inline-flex;align-items:center;justify-content:center;min-width:30px;height:30px;padding:0 8px;background:linear-gradient(135deg,var(--brand),var(--brand2));color:#fff;border-radius:9px;font-size:13px;margin-right:10px;font-weight:800;vertical-align:1px}
+  .multi{display:inline-block;font-size:12px;color:var(--brand2);background:var(--sel-bg);font-weight:700;margin:-4px 0 10px;padding:3px 10px;border-radius:999px}
+  .opt{display:flex;align-items:flex-start;gap:12px;width:100%;text-align:left;padding:12px 14px;margin:8px 0;border:1.5px solid var(--line);border-radius:12px;background:var(--surface);color:var(--text);font:inherit;font-size:14.5px;line-height:1.5;cursor:pointer;transition:all .14s}
+  .opt:hover:not(:disabled){border-color:var(--brand);background:var(--brand-soft);transform:translateX(2px)}
+  .opt:disabled{cursor:default}
+  .opt b{flex:none;display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:8px;background:var(--brand-soft);color:var(--brand);font-size:12.5px;font-weight:800;transition:all .14s}
+  .opt.sel{background:var(--sel-bg);border-color:var(--sel-line)}
+  .opt.sel b{background:var(--sel-line);color:#fff}
+  .opt.correct{background:var(--ok-bg);border-color:var(--ok-line);color:var(--text);font-weight:600}
+  .opt.correct b{background:var(--ok);color:#fff}
+  .opt.correct::after{content:"✓";margin-left:auto;color:var(--ok);font-weight:800}
+  .opt.wrong{background:var(--bad-bg);border-color:var(--bad-line);color:var(--text);font-weight:600}
+  .opt.wrong b{background:var(--bad);color:#fff}
+  .opt.wrong::after{content:"✕";margin-left:auto;color:var(--bad);font-weight:800}
+  button.check{margin-top:8px;font:inherit;font-size:14px;font-weight:700;padding:10px 22px;border-radius:12px;border:0;background:linear-gradient(135deg,var(--brand),var(--brand2));color:#fff;cursor:pointer;box-shadow:0 8px 18px -8px var(--brand);transition:transform .15s,opacity .15s}
+  button.check:hover:not(:disabled){transform:translateY(-1px)}
+  button.check:disabled{background:var(--line);color:var(--muted);box-shadow:none;cursor:default}
+  .free{margin-top:10px;font-size:12.5px;color:#92400e;background:#fef3c7;border-radius:10px;padding:8px 12px}
+  @media (prefers-color-scheme: dark){.free{background:#3a2a0a;color:#fcd34d}}
+  footer{max-width:900px;margin:0 auto;padding:0 16px 50px;font-size:12.5px;color:var(--muted);text-align:center}
+  @media (max-width:560px){
+    header.top{padding:32px 16px 62px}
+    .tab{padding:8px 16px}
+    .qcard{padding:18px 16px 14px;border-radius:16px}
+    .scorebar{top:6px}
+  }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="inner">
+    <span class="eyebrow">Paper I · 2016 Practice Bank</span>
+    <h1>Patent Agent Examination — 2016</h1>
+    <p>Click an option to check your answer instantly. Part C questions have more than one correct option — select all that apply, then press “Check answer”.</p>
+    <div class="tabs" id="tabs"></div>
+  </div>
+</header>
+
+<div class="scorebar">
+  <div class="inner">
+    <span class="pill">Attempted: <span id="attempted">0</span> / <span id="total">50</span></span>
+    <span class="pill green">Correct: <span id="correct">0</span></span>
+    <span class="pill red">Wrong: <span id="wrong">0</span></span>
+    <span class="pill gold">Marks: <span id="marks">0</span> / <span id="maxmarks">100</span></span>
+    <span class="spacer"></span>
+    <button class="reset" id="resetBtn">↺ Reset year</button>
+    <div class="progress"><i id="bar"></i></div>
+  </div>
+</div>
+
+<main id="quiz"></main>
+<footer id="foot"></footer>
+
+<script>
+/* ---------- helpers ---------- */
+const S = (title, m) => ({ s: title, m });
+const Q = (t, o, a, free) => ({ t, o, a, free: !!free });
+
+const TF16 = [
+  "Statement 1 is true, 2 is false",
+  "Statement 1 is false, 2 is true",
+  "Statement 1 and 2 both are false",
+  "Statement 1 and 2 both are true"
+];
+
+/* =====================================================================
+   2016 — PAPER I
+   ===================================================================== */
+const Y2016 = [
+S("Part A — Multiple Choice (2 marks each)", 2),
+
+Q(`Which section of the Patents Act refers to the powers of the Controller to make orders regarding substitution of applicants?`,
+["Section 19","Section 20","Section 21","Section 22"],"b"),
+
+Q(`The condoning of delay or irregularity in procedure within the powers of the Controller can be requested by way of filing:`,
+["Form 30","Petition","Affidavit","Form 4"],"b"),
+
+Q(`An application for revision of the terms and conditions of a compulsory licence can be filed under the provisions of:`,
+["Section 88","Section 86","Section 94","Section 85"],"a"),
+
+Q(`An applicant residing in the UK files a patent application in India claiming priority from the first application in the UK. The term of the patent granted in India will be:`,
+[
+"20 years from the date of filing of the priority application",
+"20 years from the date of filing of the application in India",
+"20 years from the date of grant of the application in India",
+"20 years from the date of publication of the grant u/s 43(2)"
+],"b"),
+
+Q(`A ground for opposition to the restoration of a patent can be:`,
+["Non-working of a patent","Invention is already in the public domain","Failure to pay the renewal fee was intentional","None of the above"],"c"),
+
+Q(`The time period for paying the renewal fee, without extension, as per section 142(4), after the record of the patent is:`,
+["6 months","3 months","9 months","12 months"],"a"),
+
+Q(`A new ester of a known medicine with a carboxylic acid chain is patentable if:`,
+[
+"It shows significantly improved therapeutic efficacy than the said acid",
+"It shows a higher melting point",
+"It has better solubility",
+"None of the above"
+],"a"),
+
+Q(`Which form is required to be filed for expedited examination of a patent application u/s 11B and Rule 24C?`,
+["Form 18A","Form 18","Form 18C","Form 19"],"a"),
+
+Q(`Which of the following decisions or orders or directions are appealable before the IPAB?`,
+["Section 15 and Section 16","Section 65","Section 116 and Section 117","Section 92A"],"a"),
+
+Q(`The Controller shall neither refuse to grant a patent nor shall a patent be revoked by reason only of any of the circumstances under:`,
+["Sections 29 and 31","Sections 30 and 32","Sections 35 and 37","Either (a) or (b) or both"],"d"),
+
+Q(`Grant of a compulsory licence for manufacture and export of patented pharmaceutical products to any country having insufficient or no manufacturing capacity in the pharmaceutical sector to address public health problems falls under the following provision of the Patents Act:`,
+["Section 92A","Section 91(1)","Section 100","Section 102(1)"],"a"),
+
+Q(`The information that a patentee is required to submit regarding the extent to which the patented invention has been commercially used in India is under:`,
+[
+"Section 146(2) and Rule 131(1)",
+"Section 87(2) and Rule 130(1)",
+"Section 89 and Rule 113",
+"Section 145(3) and Rule 113(1)"
+],"a"),
+
+Q(`If the Central Government is of the opinion that the patent is against the public interest, then:`,
+[
+"The Central Government has to pursue the patentee to withdraw the patent",
+"The Central Government, after giving the patentee an opportunity of being heard, may make a declaration to that effect in the Official Gazette and thereupon the patent shall be deemed to be revoked",
+"The Central Government has no power to revoke the patent",
+"The Central Government has to approach the IPAB"
+],"b"),
+
+Q(`How can the patent application be withdrawn once a request has been filed under Rule 7(4A) and Rule 26?`,
+["By submitting Form 25","By submitting Form 27","By submitting Form 29","By submitting Form 24"],"c"),
+
+Q(`On a successful opposition to a patent under Section 25(2) on the ground of wrongful obtaining, the opponent has to file the application for changing the name of the patentee in his favour in:`,
+["Form 10","Form 11","Form 12","Form 19"],"a"),
+
+Q(`Under section 2(1)(ja) of the Indian Patents Act, 1970, inventive step means an invention that involves:`,
+[
+"Technical advancement as compared to existing knowledge",
+"Economic significance",
+"Technical advance as compared to the existing knowledge or having economic significance or both and that makes the invention not obvious to a person skilled in the art",
+"None of the above"
+],"c"),
+
+Q(`"International application" means:`,
+[
+"An application filed in WTO",
+"An application filed under CBD",
+"An application for patent made in accordance with the Patent Cooperation Treaty",
+"An application for patent made in accordance with the Budapest Treaty"
+],"c"),
+
+Q(`Discovery of a new galaxy is:`,
+[
+"A patentable subject matter subject to fulfilment of novelty and inventive step",
+"Not patentable under Section 3(a) of the Patents Act, 1970",
+"Not patentable under Section 3(b) of the Patents Act, 1970",
+"Not patentable under Section 3(c) of the Patents Act, 1970"
+],"d"),
+
+Q(`Under which section of the Patents Act does the examiner, to whom the application is referred, conduct the examination?`,
+["Section 11","Section 12","Section 13","Section 14"],"b"),
+
+Q(`A granted patent gives the patentee the right to claim damages:`,
+[
+"From the priority date of the patent",
+"From the date of grant of the patent",
+"From the date of filing of the complete specification",
+"From the date of publication of the patent application in the Official Journal"
+],"d"),
+
+Q(`Which section of the Patents Act refers to the mention of inventors as such in the patent certificate?`,
+["Section 27","Section 28","Section 29","Section 30"],"b"),
+
+Q(`The Opposition Board is constituted:`,
+[
+"On the receipt of the notice of opposition",
+"On the receipt of the written statement of opposition",
+"On the receipt of the reply statement of opposition",
+"On the receipt of the reply evidence of opposition"
+],"a"),
+
+Q(`The display of an invention with the consent of the true and first inventor at an industrial or other exhibition which has been notified by the Central Government in conformity with section 31 of the Patents Act shall not be treated as anticipation if:`,
+[
+"The application for the patent is made by him not later than twelve months after the display",
+"The application for the patent is made by him later than twelve months after the display",
+"The application for the patent is made by him after eighteen months after the display",
+"The application for the patent is made by him not later than eighteen months after the display"
+],"a"),
+
+Q(`The date of recordal is the same as the date of:`,
+[
+"Filing of the patent application",
+"Grant of the application",
+"Recording the date of grant in the register of patents",
+"Publication of the grant of the patent"
+],"c"),
+
+Q(`Time limit to oppose an application for amendment of a patent made after the grant of the patent is:`,
+["2 months from the publication","3 months from the publication","4 months from the publication","None of the above"],"b"),
+
+Q(`An application for termination of a compulsory licence can be filed under the provisions of:`,
+["Section 94","Section 92","Section 91","Section 93"],"a"),
+
+Q(`As per the Indian Patents Act, a resident in India:`,
+[
+"Is free to file an application for patent in a foreign country without first filing an application for patent for the same invention in India",
+"Can file an application for patent in a foreign country without first filing an application for patent for the same invention in India, only under certain special circumstances",
+"Can file an application for patent in a foreign country only after filing a PCT application on the same subject matter",
+"None of the above"
+],"b"),
+
+Q(`A patentee may offer to surrender his patent within a period of:`,
+[
+"One year from the grant of the patent",
+"Any time from the grant of the patent",
+"Before paying renewal fees of the patent",
+"After paying renewal fees of the patent"
+],"b"),
+
+Q(`As per the Indian Patents Act, 1970, "patentee" means:`,
+[
+"The person for the time being entered on the register as the grantee or proprietor of the patent",
+"The applicant(s) of the patent",
+"The inventor(s)",
+"Both the applicant(s) and the inventor(s) as named in Form 1 of the Second Schedule"
+],"a"),
+
+Q(`Prior art does NOT include:`,
+[
+"Knowledge disclosed in publications",
+"Knowledge disclosed only to a closed group of members bound by a non-disclosure agreement",
+"Knowledge disclosed only in patents",
+"Knowledge available in the public domain"
+],"b"),
+
+S("Part B — True / False Statements (1 mark each)", 1),
+
+Q(`1. An applicant filed a provisional specification and filed a request for early publication before filing the complete specification; his application will be published within one month from the date of such request, notwithstanding his failure to file a complete specification till that time.
+2. His application can be published only after filing the complete specification.`, TF16, "a"),
+
+Q(`1. Any person can make a request to the Controller for mention as inventor in a patent at any time during the life of a patent.
+2. The mention of any person as inventor under section 28 shall not confer or derogate from any rights under the patent.`, TF16, "b"),
+
+Q(`1. If the nature of the biological material is not clearly understood from the description, or if it is not publicly available, the application shall be completed by depositing the material with an International Depositary Authority under the Budapest Treaty not later than the date of filing the patent application in India, and a reference thereto shall be made in the specification within the prescribed period.
+2. There is no need for deposition of the biological material mentioned in the application and specification.`, TF16, "a"),
+
+Q(`1. A convention application can be filed within 12 months from the earliest priority application.
+2. A convention application can be filed beyond 12 months from the earliest priority application by taking an extension.`, TF16, "a"),
+
+Q(`1. An application for a patent for an invention may be made by any person claiming to be the true and first inventor of the invention.
+2. An application for a patent for an invention may be made by any person being the assignee of the person claiming to be the true and first inventor.`, TF16, "d"),
+
+Q(`1. For the grant of a compulsory licence, the reasonable requirements of the public shall be deemed not to have been met if, by reason of the refusal of the patentee to grant a licence on reasonable terms, the establishment or development of commercial activities in India is prejudiced.
+2. For the grant of a compulsory licence, the reasonable requirements of the public shall be deemed not to have been met if, by reason of the refusal of the patentee to grant a licence on reasonable terms, the demand for the patented article has not been met to an adequate extent.`, TF16, "d"),
+
+Q(`1. An applicant is entitled to file a divisional application only after the issuance of the FER.
+2. An applicant is entitled to file a divisional application at any time before the grant of the patent, if he so desires, or on the direction of the Controller.`, TF16, "b"),
+
+Q(`1. An application for a patent of addition shall be made before the grant of the patent for the main invention.
+2. The patent for the main invention is granted after the grant of the patent of addition.`, TF16, "c"),
+
+Q(`1. A request for examination of a patent application can be filed by any interested person.
+2. A request for examination of a patent application can be filed only by the applicant, inventor or his assignee and no other person.`, TF16, "a"),
+
+Q(`1. The declaration of inventorship should be filed on the day of filing of the provisional specification.
+2. The declaration of inventorship should be filed for a convention application.`, TF16, "b"),
+
+S("Part C — Multiple Correct Answers (3 marks each; at least two options correct)", 3),
+
+Q(`If any person uses on his place of business the words "Patent Office", he is punishable with:`,
+[
+"Imprisonment for a term which may extend up to six months",
+"Imprisonment or fine",
+"Imprisonment and fine",
+"Warning by the Controller"
+],"a,b,c"),
+
+Q(`A provisional application X was filed in India on 01.01.2010. Another provisional application Y was filed on 01.03.2010. Thereafter, on the request of the applicant, the Controller allowed both the applications to be cognated and allowed a single complete specification to be filed. Which of the following are valid dates for submission of the complete specification?`,
+["01.02.2011","01.01.2011","31.12.2010","27.02.2011"],"b,c"),
+
+Q(`The definition of "startup" includes an entity with the following attribute(s):`,
+[
+"More than five years have not lapsed from the date of its incorporation or registration",
+"The turnover for any of the financial years, within five years of its incorporation or registration, did not exceed rupees twenty-five crores",
+"It is working towards innovation, development, deployment or commercialisation of new products, processes or services driven by technology or intellectual property",
+"Even after the expiration of five years, the turnover is less than 5 crores"
+],"a,b,c"),
+
+Q(`An expedited examination request can be filed by an applicant when the applicant is:`,
+[
+"A startup company certified in India",
+"An international applicant who has chosen India as ISA",
+"An applicant who has requested early publication",
+"Any applicant who has entered the national phase in 31 months"
+],"a,b"),
+
+Q(`For an ordinary patent application filed on 1.1.2010, a request u/s 11B and Rule 24B can be filed:`,
+[
+"After 60 months from the date of priority",
+"Within 48 months from the date of filing of the application",
+"6 months from the date of revocation of the secrecy direction, whichever is later",
+"All of the above"
+],"b,c"),
+
+Q(`Under section 40, if a person contravenes any direction u/s 35 or 39:`,
+[
+"The application for patent shall be deemed to have been abandoned",
+"The patent granted, if any, shall be revoked under section 64",
+"Only option (a) is correct and option (b) is false",
+"Both options (a) and (b) are false"
+],"a,b"),
+
+Q(`The patent of Mr. X ceased due to non-payment of renewal fees. His rival Mr. Y comes to know that Mr. X has applied for restoration. On which grounds can Mr. Y oppose the application for restoration of Mr. X?`,
+[
+"The price of the patented product is exorbitant",
+"Failure to pay the renewal fee was not unintentional",
+"The claimed invention is non-patentable under section 3",
+"There has been undue delay in the making of the application for restoration"
+],"b,d"),
+
+Q(`X and Y make a patent application in the Indian Patent Office naming A as the true and first inventor. The application should be examined when:`,
+[
+"X files a request for examination",
+"Y files a request for examination",
+"A files a request for examination",
+"Another interested person Z files a request for examination"
+],"a,b,d"),
+
+Q(`X decides to oppose the amendment, after grant, to the description of a patent obtained by his rival Y. The options before him are:`,
+[
+"File Form 7",
+"File Form 14",
+"Apply for a compulsory licence",
+"Request a hearing after filing Form 14"
+],"b,d"),
+
+Q(`An application for review of the Controller's decision and an application for setting aside an order passed ex parte can be filed under the provisions of the Patents Act under:`,
+["Sec 77(1)(d)","Sec 77(1)(f)","Sec 77(1)(c)","Sec 77(1)(g)"],"b,d")
+];
+
+/* ---------- registry ---------- */
+const YEARS = {
+  "2016": {
+    list: Y2016,
+    note: "2016 Paper I practice bank. The supplied 2016 answer-key PDF contained only unreadable binary output, so the answers here are worked out from the Patents Act, 1970 and the Patents Rules, 2003 as applicable to the 2016 paper — please verify against the official key before relying on them. Part C questions have more than one correct option — select all that apply, then press “Check answer”."
+  }
+};
+
+/* ---------- build flat question arrays ---------- */
+const BANK = {};
+Object.keys(YEARS).forEach(y => {
+  let sec = null, n = 0; const flat = [];
+  YEARS[y].list.forEach(it => {
+    if (it.s) { sec = it; return; }
+    n++;
+    flat.push({
+      n,
+      sec: sec.s,
+      m: sec.m,
+      t: it.t,
+      o: it.o,
+      free: it.free,
+      a: it.a.split(',').map(x => 'abcd'.indexOf(x.trim()))
+    });
+  });
+  BANK[y] = flat;
+});
+
+/* ---------- state ---------- */
+const STATE = {};
+Object.keys(BANK).forEach(y => STATE[y] = { res: {}, draft: {} });
+let year = "2016";
+
+const $ = id => document.getElementById(id);
+const esc = s => s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+
+function cardHTML(y, i) {
+  const q = BANK[y][i], st = STATE[y];
+  const r = st.res[i], multi = q.a.length > 1;
+  const draft = st.draft[i] || [];
+  let h = `<div class="qcard" data-i="${i}"><div class="qtitle"><span class="qnum">${q.n}</span>${esc(q.t)}</div>`;
+  if (multi && !r) h += `<div class="multi">More than one option is correct — select all that apply.</div>`;
+  q.o.forEach((opt, oi) => {
+    let cls = 'opt';
+    if (r) {
+      if (q.a.includes(oi)) cls += ' correct';
+      else if (r.chosen.includes(oi)) cls += ' wrong';
+    } else if (draft.includes(oi)) cls += ' sel';
+    h += `<button class="${cls}" data-i="${i}" data-o="${oi}" ${r ? 'disabled' : ''}><b>${'ABCD'[oi]}.</b> ${esc(opt)}</button>`;
+  });
+  if (multi && !r) h += `<button class="check" data-i="${i}" ${draft.length ? '' : 'disabled'}>Check answer</button>`;
+  if (r && q.free) h += `<div class="free">Note: full marks were awarded to all candidates for this question.</div>`;
+  return h + `</div>`;
+}
+
+function renderYear() {
+  const flat = BANK[year];
+  let h = '', last = '';
+  flat.forEach((q, i) => {
+    if (q.sec !== last) { last = q.sec; h += `<h2 class="sechead">${esc(q.sec)}</h2>`; }
+    h += cardHTML(year, i);
+  });
+  $('quiz').innerHTML = h;
+  $('foot').textContent = YEARS[year].note;
+  updateScore();
+}
+
+function updateScore() {
+  const flat = BANK[year], st = STATE[year];
+  let c = 0, w = 0, marks = 0, max = 0;
+  flat.forEach((q, i) => {
+    max += q.m;
+    const r = st.res[i];
+    if (!r) return;
+    if (r.ok) { c++; marks += q.m; } else w++;
+  });
+  $('attempted').textContent = c + w;
+  $('total').textContent = flat.length;
+  $('correct').textContent = c;
+  $('wrong').textContent = w;
+  $('marks').textContent = marks;
+  $('maxmarks').textContent = max;
+  $('bar').style.width = (flat.length ? (c + w) / flat.length * 100 : 0) + '%';
+}
+
+function refreshCard(i) {
+  const old = document.querySelector(`.qcard[data-i="${i}"]`);
+  const tmp = document.createElement('div');
+  tmp.innerHTML = cardHTML(year, i);
+  old.replaceWith(tmp.firstChild);
+}
+
+function evaluate(i, chosen) {
+  const q = BANK[year][i];
+  const ok = q.free || (chosen.length === q.a.length && q.a.every(x => chosen.includes(x)));
+  STATE[year].res[i] = { chosen, ok };
+  refreshCard(i);
+  updateScore();
+}
+
+$('quiz').addEventListener('click', e => {
+  const chk = e.target.closest('.check');
+  if (chk) {
+    const i = +chk.dataset.i;
+    evaluate(i, STATE[year].draft[i] || []);
+    return;
+  }
+  const btn = e.target.closest('.opt');
+  if (!btn || btn.disabled) return;
+  const i = +btn.dataset.i, o = +btn.dataset.o;
+  const q = BANK[year][i];
+  if (q.a.length > 1) {
+    const d = STATE[year].draft[i] || [];
+    const k = d.indexOf(o);
+    if (k >= 0) d.splice(k, 1); else d.push(o);
+    STATE[year].draft[i] = d;
+    refreshCard(i);
+  } else {
+    evaluate(i, [o]);
+  }
+});
+
+$('resetBtn').addEventListener('click', () => {
+  STATE[year] = { res: {}, draft: {} };
+  renderYear();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+
+function buildTabs() {
+  $('tabs').innerHTML = Object.keys(YEARS).map(y =>
+    `<button class="tab ${y === year ? 'active' : ''}" data-y="${y}">${y}</button>`).join('');
+}
+$('tabs').addEventListener('click', e => {
+  const t = e.target.closest('.tab');
+  if (!t) return;
+  year = t.dataset.y;
+  buildTabs();
+  renderYear();
+  window.scrollTo({ top: 0 });
+});
+
+buildTabs();
+renderYear();
+</script>
+</body>
+</html>
