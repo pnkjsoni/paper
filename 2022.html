@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Patent Agent Examination — Paper I Practice (2022)</title>
+<style>
+  :root{
+    --bg:#f6f7fb; --surface:#ffffff; --text:#0f172a; --muted:#64748b; --line:#e5e8f0;
+    --brand:#4f46e5; --brand2:#7c3aed; --brand-soft:#eef2ff;
+    --ok:#16a34a; --ok-bg:#ecfdf3; --ok-line:#86efac;
+    --bad:#dc2626; --bad-bg:#fef2f2; --bad-line:#fca5a5;
+    --sel-bg:#f3e8ff; --sel-line:#a855f7;
+    --shadow:0 1px 2px rgba(15,23,42,.04),0 8px 24px -12px rgba(15,23,42,.12);
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --bg:#0b1020; --surface:#131a2e; --text:#e6e9f5; --muted:#94a0bd; --line:#232c47;
+      --brand:#818cf8; --brand2:#a78bfa; --brand-soft:#1b2347;
+      --ok:#4ade80; --ok-bg:#0f2a1e; --ok-line:#1f6f45;
+      --bad:#f87171; --bad-bg:#2d1519; --bad-line:#7f2a33;
+      --sel-bg:#2a1b47; --sel-line:#8b5cf6;
+      --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px -12px rgba(0,0,0,.6);
+    }
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;-webkit-font-smoothing:antialiased}
+  header.top{position:relative;overflow:hidden;color:#fff;padding:44px 20px 70px;
+    background:radial-gradient(900px 400px at 85% -20%,rgba(167,139,250,.55),transparent 60%),radial-gradient(700px 380px at 0% 120%,rgba(56,189,248,.35),transparent 60%),linear-gradient(135deg,#1e1b4b,#312e81 55%,#4338ca)}
+  header.top .inner{max-width:900px;margin:0 auto;position:relative}
+  .eyebrow{display:inline-block;font-size:11.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.22);padding:5px 12px;border-radius:999px;margin-bottom:14px;backdrop-filter:blur(6px)}
+  header.top h1{margin:0 0 8px;font-size:clamp(26px,4.6vw,38px);line-height:1.15;letter-spacing:-.02em;font-weight:800}
+  header.top p{margin:0 0 24px;font-size:15px;opacity:.82;max-width:620px}
+  .tabs{display:inline-flex;gap:4px;padding:5px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);border-radius:14px;backdrop-filter:blur(8px);flex-wrap:wrap}
+  .tab{font:inherit;font-size:14.5px;font-weight:700;padding:9px 24px;border-radius:10px;border:0;background:transparent;color:rgba(255,255,255,.85);cursor:pointer;transition:all .18s}
+  .tab:hover{background:rgba(255,255,255,.14);color:#fff}
+  .tab.active{background:#fff;color:#3730a3;box-shadow:0 4px 14px -4px rgba(0,0,0,.35)}
+  .scorebar{position:sticky;top:10px;z-index:30;max-width:900px;margin:-34px auto 0;padding:0 16px}
+  .scorebar .inner{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:12px 14px 14px;background:color-mix(in srgb,var(--surface) 88%,transparent);backdrop-filter:blur(14px);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);position:relative;overflow:hidden}
+  .pill{font-size:13px;font-weight:600;padding:6px 12px;border-radius:10px;background:var(--brand-soft);color:var(--brand);white-space:nowrap}
+  .pill.green{background:var(--ok-bg);color:var(--ok)}
+  .pill.red{background:var(--bad-bg);color:var(--bad)}
+  .pill.gold{background:linear-gradient(135deg,var(--brand),var(--brand2));color:#fff}
+  .spacer{flex:1}
+  button.reset{font:inherit;font-size:13px;font-weight:600;padding:7px 14px;border-radius:10px;border:1px solid var(--line);background:var(--surface);color:var(--muted);cursor:pointer;transition:all .15s}
+  button.reset:hover{color:var(--text);border-color:var(--brand)}
+  .progress{position:absolute;left:0;right:0;bottom:0;height:4px;background:var(--line)}
+  .progress i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--brand),var(--brand2));transition:width .35s ease}
+  main{max-width:900px;margin:0 auto;padding:26px 16px 70px}
+  h2.sechead{display:flex;align-items:center;gap:10px;font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.12em;color:var(--brand);margin:38px 0 14px}
+  h2.sechead:first-child{margin-top:10px}
+  h2.sechead::after{content:"";flex:1;height:1px;background:var(--line)}
+  .qcard{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:22px 22px 18px;margin-bottom:16px;box-shadow:var(--shadow);transition:transform .18s,box-shadow .18s}
+  .qcard:hover{transform:translateY(-1px)}
+  .qtitle{font-size:15.5px;font-weight:500;margin-bottom:14px;white-space:pre-line}
+  .qnum{display:inline-flex;align-items:center;justify-content:center;min-width:30px;height:30px;padding:0 8px;background:linear-gradient(135deg,var(--brand),var(--brand2));color:#fff;border-radius:9px;font-size:13px;margin-right:10px;font-weight:800;vertical-align:1px}
+  .multi{display:inline-block;font-size:12px;color:var(--brand2);background:var(--sel-bg);font-weight:700;margin:-4px 0 10px;padding:3px 10px;border-radius:999px}
+  .opt{display:flex;align-items:flex-start;gap:12px;width:100%;text-align:left;padding:12px 14px;margin:8px 0;border:1.5px solid var(--line);border-radius:12px;background:var(--surface);color:var(--text);font:inherit;font-size:14.5px;line-height:1.5;cursor:pointer;transition:all .14s}
+  .opt:hover:not(:disabled){border-color:var(--brand);background:var(--brand-soft);transform:translateX(2px)}
+  .opt:disabled{cursor:default}
+  .opt b{flex:none;display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:8px;background:var(--brand-soft);color:var(--brand);font-size:12.5px;font-weight:800;transition:all .14s}
+  .opt.sel{background:var(--sel-bg);border-color:var(--sel-line)}
+  .opt.sel b{background:var(--sel-line);color:#fff}
+  .opt.correct{background:var(--ok-bg);border-color:var(--ok-line);color:var(--text);font-weight:600}
+  .opt.correct b{background:var(--ok);color:#fff}
+  .opt.correct::after{content:"✓";margin-left:auto;color:var(--ok);font-weight:800}
+  .opt.wrong{background:var(--bad-bg);border-color:var(--bad-line);color:var(--text);font-weight:600}
+  .opt.wrong b{background:var(--bad);color:#fff}
+  .opt.wrong::after{content:"✕";margin-left:auto;color:var(--bad);font-weight:800}
+  button.check{margin-top:8px;font:inherit;font-size:14px;font-weight:700;padding:10px 22px;border-radius:12px;border:0;background:linear-gradient(135deg,var(--brand),var(--brand2));color:#fff;cursor:pointer;box-shadow:0 8px 18px -8px var(--brand);transition:transform .15s,opacity .15s}
+  button.check:hover:not(:disabled){transform:translateY(-1px)}
+  button.check:disabled{background:var(--line);color:var(--muted);box-shadow:none;cursor:default}
+  .free{margin-top:10px;font-size:12.5px;color:#92400e;background:#fef3c7;border-radius:10px;padding:8px 12px}
+  @media (prefers-color-scheme: dark){.free{background:#3a2a0a;color:#fcd34d}}
+  footer{max-width:900px;margin:0 auto;padding:0 16px 50px;font-size:12.5px;color:var(--muted);text-align:center}
+  @media (max-width:560px){
+    header.top{padding:32px 16px 62px}
+    .tab{padding:8px 16px}
+    .qcard{padding:18px 16px 14px;border-radius:16px}
+    .scorebar{top:6px}
+  }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="inner">
+    <span class="eyebrow">Paper I · 2022 Practice Bank</span>
+    <h1>Patent Agent Examination — 2022</h1>
+    <p>Click an option to check your answer instantly. Part C questions have more than one correct option — select all that apply, then press “Check answer”.</p>
+    <div class="tabs" id="tabs"></div>
+  </div>
+</header>
+
+<div class="scorebar">
+  <div class="inner">
+    <span class="pill">Attempted: <span id="attempted">0</span> / <span id="total">50</span></span>
+    <span class="pill green">Correct: <span id="correct">0</span></span>
+    <span class="pill red">Wrong: <span id="wrong">0</span></span>
+    <span class="pill gold">Marks: <span id="marks">0</span> / <span id="maxmarks">100</span></span>
+    <span class="spacer"></span>
+    <button class="reset" id="resetBtn">↺ Reset year</button>
+    <div class="progress"><i id="bar"></i></div>
+  </div>
+</div>
+
+<main id="quiz"></main>
+<footer id="foot"></footer>
+
+<script>
+/* ---------- helpers ---------- */
+const S = (title, m) => ({ s: title, m });
+const Q = (t, o, a, free) => ({ t, o, a, free: !!free });
+
+const TF22 = [
+  "Statement 1 is true, 2 is false",
+  "Statement 1 is false, 2 is true",
+  "Statement 1 and 2 both are false",
+  "Statement 1 and 2 both are true"
+];
+
+/* =====================================================================
+   2022 — PAPER I
+   ===================================================================== */
+const Y2022 = [
+S("Part A — Multiple Choice (2 marks each)", 2),
+
+Q(`Nile Inc. is a global e-commerce major with operations in multiple countries. Nile had filed a patent application in Korea on 01.06.2020. Subsequently, Nile filed a patent application for the same invention in Canada on 01.05.2021, claiming priority of the Korean application. Finally, Nile filed a convention application in India on 01.11.2021, claiming priority of the Canadian application. The Korean application was published on 02.12.2021. Which of the following statement is true?`,
+[
+"Nile is entitled to claim the priority of the Canadian application. The claims of the Indian application are not anticipated by publication of Korean application.",
+"Nile is entitled to claim the priority of the Canadian application. The claims of the Indian application are anticipated by publication of Korean application.",
+"Nile is not entitled to claim the priority of the Canadian application. The claims of the Indian application are not anticipated by the publication of Korean application.",
+"Nile is not entitled to claim the priority of the Canadian application. The claims of the Indian application are anticipated by the publication of Korean application."
+],"a"),
+
+Q(`Your client, IP India Inc wishes to file a PCT application claiming priority from an application that they are going to file in India. If they wish to utilise the time limits available under PCT to the fullest extent, how will you organise the following items related to his PCT application in most likely chronological order?
+
+(1) Filing of PCT international application
+(2) Filing of Priority application in India
+(3) PCT international publication
+(4) Grant of patent in a designated country
+(5) PCT national phase entry in designated country`,
+["2, 5, 1, 3, 4","2, 1, 3, 5, 4","1, 2, 3, 4, 5","2, 1, 5, 3, 4"],"b"),
+
+Q(`Which of the following is NOT a ground of pre-grant opposition u/s 25(1)?`,
+[
+"that applicant has failed to disclose to the Controller the information required by section 8",
+"that the subject of any claim of the complete specification is not an invention",
+"that the claims of the complete specification is not clear",
+"that the invention so far as claimed in any claim of the complete specification is anticipated"
+],"c"),
+
+Q(`Which of the following is NOT a requirement of the complete specification under Section 10 of the Act?`,
+[
+"fully and particularly describe the invention and its operation or use and the method by which it is to be performed",
+"end with a claim or claims defining the scope of the invention for which protection is claimed",
+"a declaration by inventors that the information given in the specification is true to their knowledge",
+"None of the above"
+],"c"),
+
+Q(`An application for restoration of a lapsed patent may be filed within ______ from the date on which the patent ceased to have effect.`,
+["18 months","12 months","6 months","9 months"],"a"),
+
+Q(`Which section of the Patents Act empowers the Central Government to revoke a patent in public interest?`,
+["25","57","66","84"],"c"),
+
+Q(`The Patent Office is established under which section of the Act?`,
+["1","3","138","74"],"d"),
+
+Q(`Which of the following is NOT a ground for making an application for compulsory licence?`,
+[
+"The reasonable requirements of the public with respect to the patented invention have not been satisfied",
+"The patentee is a company which has gone bankrupt",
+"The patented invention is not available to the public at a reasonably affordable price",
+"The patented invention is not worked in the territory of India"
+],"b"),
+
+Q(`Which of the following could be the minimum fees to be paid for an application for patent filed by an educational institution as on March 2022?`,
+["1000","1600","4000","8000"],"c"),
+
+Q(`Prarthi is an inventor for an application for patent filed by a university. If her name has to appear in the patent certificate, a request has to be made in ______.`,
+["Form 7","Form 15","Form 8","Form 11"],"c"),
+
+Q(`Ms. Lakshmi Priya wishes to file a patent application in India, but she came to know that some inventions are not patentable in accordance with the Indian Patents Act. Match List 1 with List 2 and select the correct code.
+
+List 1
+1. Section 3(l)
+2. Section 3(m)
+3. Section 3(n)
+4. Section 3(o)
+
+List 2
+(a) Presentation of information
+(b) Topography of integrated circuits
+(c) Method of performing mental act
+(d) Television productions`,
+["1d, 2c, 3a, 4b","1a, 2b, 3c, 4d","1c, 2a, 3b, 4d","1b, 2c, 3d, 4a"],"c"),
+
+Q(`Time limit under Rule 130(2), within which an application for setting aside an ex parte order passed by the Controller shall be made from the date of communication of the order:`,
+["One month","Four months","Three months","None of the above"],"a"),
+
+Q(`Antony owns a small workshop in Mangalore. He has invented a new coconut grater. He has filed a provisional specification on 01.06.2021. As the time limit for filing the complete specification is only a fortnight away, Antony realises that he needs 4 more months to complete his invention and file a complete specification. Which of the following is appropriate (as per statute) advice to Antony?`,
+[
+"The time limit for filing complete specification can be extended by 4 months by filing Form 4.",
+"Antony can file the complete specification after 4 months along with a request for post-dating of the application by 4 months.",
+"Antony can allow this application to be abandoned by not filing complete specification and file a new application after 4 months with complete specification.",
+"Antony can file a request for post-dating the current application by 4 months immediately and file complete specification within 4 months."
+],"d"),
+
+Q(`CovidMed Ltd. wants to manufacture an anti-malaria drug in India solely for exporting to an Island nation. Accacia, a Swedish MNC, holds the patent for the drug in India. Which of the following is NOT a requirement to be met by CovidMed for obtaining a compulsory licence for the export of the drug to the Island nation?`,
+[
+"that CovidMed has obtained a compulsory licence for the drug in the Island nation or by notification allowed the import",
+"that CovidMed has obtained a compulsory licence in India under section 84",
+"that the Island nation does not have sufficient manufacturing facility in the pharmaceutical sector",
+"that the Island nation is using the importation of the drug for addressing their public health problems"
+],"b"),
+
+Q(`A Danish citizen who is residing in India wishes to file a first application in Denmark. Whether:`,
+[
+"he has to take permission from Patent Office India before filing in Denmark",
+"he has to take permission from Danish Patent Office before filing in Denmark",
+"he has to take permission from Denmark embassy in India before filing in Denmark",
+"he has to take permission from Indian embassy in Denmark before filing in Denmark"
+],"a"),
+
+Q(`Arrange the following items related to post-grant opposition in the most likely chronological order:
+1. Revocation of patent
+2. Opposition board formation
+3. Filing of post-grant opposition
+4. Grant of patent`,
+["1, 3, 4, 2","1, 2, 3, 4","4, 3, 2, 1","1, 4, 2, 3"],"c"),
+
+Q(`Mr. Daivam would like to know the time limits generally available to meet requirements in accordance with the Patents law. Match List 1 and List 2 and select the correct answer.
+
+List 1
+1. Information and undertaking under section 8(1)
+2. Reply to First Examination Report with extension
+3. PCT national phase entry to India
+4. Request for Examination`,
+["1a, 2b, 3c, 4d","1c, 2d, 3a, 4b","1b, 2c, 3d, 4a","1d, 2a, 3b, 4c"],"a"),
+
+Q(`Minimum age limit for a person to be mentioned as inventor in a patent application shall be:`,
+["18 years","21 years","14 years","None of the above"],"d"),
+
+Q(`The Controller has which one of the following powers of a civil court?`,
+[
+"Issue an order to arrest a person in case of infringement with the help of police",
+"Order imprisonment of the defaulter",
+"Examine a person on oath and take evidence on oath",
+"None of the above"
+],"c"),
+
+Q(`Which of the following time limits can be extended by the Controller on a petition filed under Rule 138?`,
+[
+"time limit for putting the application in order for grant",
+"time limit for filing the request for examination",
+"time limit for paying national phase application in India",
+"time limit for furnishing proof of right"
+],"a"),
+
+Q(`Radhamani, an IPR student, wishes to know the important case laws on various provisions related to patents in India. Match List 1 and List 2 and select the correct code.
+
+List 1
+1. Compulsory licence
+2. Section 3(d)
+3. Date of grant of patent
+4. Infringement
+
+List 2
+(a) Novartis AG v. Union of India
+(b) Bayer Corporation v. Natco Pharma
+(c) Bajaj Auto Limited v. TVS Motor Company
+(d) Dr. Snehalata C. Gupta v. Union of India`,
+["1a, 2b, 3c, 4d","1b, 2a, 3d, 4c","1d, 2a, 3b, 4c","1c, 2d, 3b, 4a"],"b"),
+
+Q(`Assertion (A): Patent right is a negative right.
+Reason (R): Patentee has exclusive right to prevent third parties, who do not have his consent, from using his invention.`,
+[
+"Both (A) and (R) are true, and (R) is the correct explanation of (A).",
+"Both (A) and (R) are true, but (R) is not the correct explanation of (A).",
+"(A) is true, but (R) is false.",
+"(A) is false, but (R) is true."
+],"a"),
+
+Q(`Arrange the following items related to pre-grant opposition procedure (section 25(1)) under the Patents Act in the most likely chronological order:
+1. Filing of pre-grant opposition by way of representation
+2. Publication of patent application
+3. Applicant filing reply to the pre-grant representation
+4. Hearing before the Controller`,
+["1, 2, 3, 4","2, 1, 3, 4","4, 3, 1, 2","2, 3, 4, 1"],"b"),
+
+Q(`Mr. Akhil has already filed his patent application, but he is confused with the applicability of the forms provided. Match List 1 with List 2 and select the correct code.
+
+List 1
+1. Request for publication
+2. Request for expedited examination
+3. Application for amendment of the application for patent
+4. Request regarding change in applicant for patent
+
+List 2
+(a) Form 6
+(b) Form 13
+(c) Form 9
+(d) Form 18A`,
+["(a) (b) (c) (d)","(c) (d) (b) (a)","(d) (b) (a) (c)","(b) (c) (d) (a)"],"b"),
+
+Q(`Assertion (A): Applicant does not have unconditional freedom to file a divisional application.
+Reason (R): A divisional application can be filed by the applicant only when there is more than one invention in the specification.`,
+[
+"Both A and R are true; and R is a correct explanation for A",
+"Both A and R are true; and R is not a correct explanation for A",
+"A is true, but R is false",
+"A is false; but R is false"
+],"a"),
+
+Q(`You have filed an application for patent. Claim 1 of the specification recites features A, B, C and D of the invention. Claim 2 is a dependent claim reciting a feature E. The examination report cites document D1 for anticipation (lack of novelty) and has identified A, B and D in D1. Which of the following is most likely to be your response to the examination report?`,
+[
+"Amend claim 1 to add the feature E of claim 2 into claim 1 to render claim 1 novel.",
+"Withdraw the application as it is likely to be refused.",
+"Retain claim 1 as such and point out to the Controller that D1 does not disclose feature E.",
+"Retain claim 1 as such and point out to the Controller that D1 does not disclose all features of claim 1."
+],"d"),
+
+Q(`A patent shall not be granted before the expiry of ______ months from the date of publication of the application under Section 11A.`,
+["6 months","8 months","12 months","9 months"],"a"),
+
+Q(`A US citizen is a patentee in India; his patent rights are valid in:`,
+["India","USA","India and USA","All of the above"],"a"),
+
+Q(`Meenakshi filed an application accompanied with a provisional specification. She filed a complete specification within 6 months. Claim 1 is partially disclosed in the provisional application and partially disclosed in the complete specification. The priority date of the claim shall be:`,
+[
+"Date of filing of the complete specification",
+"Date of filing of the provisional specification",
+"Controller shall decide based on the disclosure of the specifications and the content of the claims",
+"As the subject matter of claims is partially disclosed, the priority date will be considered as between the date of filing of the provisional and complete specification"
+],"a"),
+
+Q(`Nirmala, an Indian scientist working in NASA, files an International Patent Application (PCT) with basic application in USA on 30th Jan 2010. She plans to file a National Phase application in India. Which of the following is correct?`,
+[
+"She has to file the National Phase application within 31 months from the basic (USA) application filing date.",
+"She has to file the National Phase application within 48 months from the basic (USA) application filing date.",
+"She has to file the National Phase application within 12 months from the basic (USA) application filing date.",
+"None of the above"
+],"a"),
+
+S("Part B — True / False Statements (1 mark each)", 1),
+
+Q(`1. A request for examination under Section 11B can be filed by the applicant or any interested person.
+2. If a request for examination is filed by any interested person, then the First Statement of Objections (FER) is issued to the interested person who has filed the request for examination.`, TF22, "a"),
+
+Q(`1. An application for review of decision shall be filed in Form 24 within three months from the date of communication of the decision.
+2. An application for review of decision shall be filed in Form 23 within one month from the date of communication of the decision.`, TF22, "c"),
+
+Q(`You have filed an application on behalf of an SME client. The distinguishing feature of the invention is a hinge made of aluminium. The Controller has cited a prior art for anticipation which teaches all limitations of your claim 1, except that the hinge is taught to be made of any metal.
+1. The claims are anticipated. Even though aluminium is not specifically disclosed in the prior art, a person skilled in the art readily recognises aluminium as a metal.
+2. The claims are NOT anticipated. Even though aluminium is readily recognised as a metal by a person skilled in the art, aluminium has not been specifically disclosed in the prior art.`, TF22, "b"),
+
+Q(`Gita and Sita are final year B.Tech students in the College of Engineering, Bhavnagar. They have assigned their invention to ABC Inc.
+1. Gita and Sita can sign the declaration of inventors in Form 1 and ABC can furnish it as proof of right.
+2. Gita and Sita can sign a deed of assignment transferring their rights to apply for patent to ABC and ABC can furnish the assignment deed as proof of right.`, TF22, "b"),
+
+Q(`1. A patent agent can appear for a hearing before the Controller in proceedings related to a patent application.
+2. An advocate, who is not a patent agent, can appear for a hearing before the Controller in proceedings related to a patent application.`, TF22, "a"),
+
+Q(`1. Renewal fees shall not be paid for a patent of addition.
+2. Renewal fees shall not be paid for a patent granted for a divisional application.`, TF22, "a"),
+
+Q(`1. Patent agents shall file all documents at the Patent Office only by electronic transmission duly authenticated, when acting on behalf of multinational companies.
+2. Patent agents may file physical copies of documents at the Patent Office when acting on behalf of applicants who are natural persons.`, TF22, "b"),
+
+Q(`Gautam has filed an ordinary application for his invention. Later on he came to know that he can file a PCT international application within twelve months from the date of filing of the Indian application. Claiming Indian priority, he has filed a PCT application and he has filed the national phase application in India.
+1. Gautam shall make the request for examination for both the applications filed in India.
+2. Gautam shall make the request for examination only for one of the applications filed in India.`, TF22, "a"),
+
+Q(`A company CoviCare Pharma wants to change its address of service and also wants to make a voluntary technical amendment in the specification of the same application. The above two statutory actions shall be completed by:
+1. Filing two Form 13
+2. Filing one Form 13 and one Form 6`, TF22, "c"),
+
+Q(`Barbara, a US citizen, has been residing in India continuously for the past 2 years. She is a scientist at the global research centre of a US automobile company in Bangalore. Barbara has invented a novel airbag release mechanism for which her employer wishes to apply for patent in USA. Her employer does not wish to file any patent application in India as their products are not sold here.
+1. Barbara and her employer can proceed with the US application without making any request for permission u/s 39 as she is a US citizen working with a US company.
+2. Barbara has to make a request for permission to apply for patent outside India u/s 39 before proceeding with the patent application in USA.`, TF22, "b"),
+
+S("Part C — Multiple Correct Answers (3 marks each; at least two options correct)", 3),
+
+Q(`An application for a patent shall be published under section 11A EXCEPT in cases where the application:`,
+[
+"in which a secrecy direction is imposed under section 35",
+"has been abandoned under section 9(1)",
+"has been withdrawn after the issuance of FER",
+"has been withdrawn three months prior to publication u/s 11A"
+],"a,b,d"),
+
+Q(`An application for patent has been filed along with filing fees of ₹1930. Which of the following could be true about the said application?`,
+[
+"Application is filed by a startup",
+"Complete specification has 31 pages and 7 claims",
+"Complete specification has 24 pages and 11 claims",
+"Application has been filed online"
+],"a,d"),
+
+Q(`Florina is a housewife. She has made modifications on a mopping device which have made her task much easier now. If she were to approach you for applying for a patent, which of the following would be your advice to her as her patent agent?`,
+[
+"Florina's invention is not patentable as it is a modification of an existing device.",
+"Florina can file a request for expedited examination if she is the applicant for the invention.",
+"Florina, being a woman applicant, is entitled to waiver of application fee.",
+"Florina can assign her right to apply for patent to a home appliances MNC."
+],"b,d"),
+
+Q(`An applicant may file a request for expedited examination on the following grounds:`,
+[
+"that India has been indicated as the competent International Searching Authority",
+"that the applicant is a startup",
+"that the applicant is a small entity",
+"that the applicant is a department of the Government"
+],"a,b,c,d"),
+
+Q(`Kavya is a teacher residing in Thrissur, Kerala. She wishes to file an application for patent in physical mode. Which of the following is a correct means for her to pay the fee payable as per Rule 7?`,
+[
+"in cash at the appropriate patent office",
+"in the form of a DD drawn in favour of Controller General of Patents, payable at Mumbai",
+"in the form of a DD drawn in favour of the head of office, Patent Office, payable at Chennai",
+"in the form of a DD drawn in favour of Controller of Patents, payable at Chennai"
+],"a,d"),
+
+Q(`The claim or claims of a complete specification shall relate to:`,
+[
+"a single invention",
+"a group of inventions linked so as to form a single inventive concept",
+"shall be clear and succinct",
+"shall be fairly based on the matter disclosed in the specification"
+],"a,b,c,d"),
+
+Q(`In reliefs in suits for patent infringement under section 108 of the Act:`,
+[
+"Court may grant injunction",
+"Court may grant either damages or an account of profits",
+"Court may order arrest of the infringer",
+"Court may order forfeiture or destruction of the infringing goods"
+],"a,b,d"),
+
+Q(`Who are the persons entitled to apply for patents?`,
+[
+"Any person claiming to be the true and first inventor of the invention",
+"Any person being the assignee of the person claiming to be the true and first inventor in respect of the right to make such an application",
+"Any legal representative of any deceased person who immediately before his death was entitled to make such an application",
+"Importer of the invention"
+],"a,b,c"),
+
+Q(`The patent application can be treated as withdrawn under which of the following circumstances?`,
+[
+"if the applicant or any other interested person does not make a request for examination of the application for patent within the prescribed period",
+"if the applicant withdraws the application at any time after filing but before grant by making a request in the prescribed manner",
+"if response to the First Examination Report is not filed within the prescribed time",
+"if a pre-grant opposition has been filed for the patent application"
+],"a,b"),
+
+Q(`Aditya has filed two applications for patent with provisional specifications. Which of the following conditions ought to be met for the Controller to allow Aditya to file one complete specification in respect of the two provisional specifications?`,
+[
+"Inventions of the two provisional specifications are cognate or one is a modification of the other",
+"The complete specification shall be filed within 12 months from the date of filing of the last filed provisional specification",
+"Inventors for both the applications should be the same",
+"The complete specification shall be filed within 12 months from the date of filing of the first provisional application"
+],"a,d")
+];
+
+/* ---------- registry ---------- */
+const YEARS = {
+  "2022": {
+    list: Y2022,
+    note: "2022 Paper I practice bank. The supplied answer-key PDF contains Sets A, B and D; this bank follows the legally correct options for the 2022 paper, cross-checked against the available keys where the option text is identical. Part C questions have more than one correct option — select all that apply, then press “Check answer”."
+  }
+};
+
+/* ---------- build flat question arrays ---------- */
+const BANK = {};
+Object.keys(YEARS).forEach(y => {
+  let sec = null, n = 0; const flat = [];
+  YEARS[y].list.forEach(it => {
+    if (it.s) { sec = it; return; }
+    n++;
+    flat.push({
+      n,
+      sec: sec.s,
+      m: sec.m,
+      t: it.t,
+      o: it.o,
+      free: it.free,
+      a: it.a.split(',').map(x => 'abcd'.indexOf(x.trim()))
+    });
+  });
+  BANK[y] = flat;
+});
+
+/* ---------- state ---------- */
+const STATE = {};
+Object.keys(BANK).forEach(y => STATE[y] = { res: {}, draft: {} });
+let year = "2022";
+
+const $ = id => document.getElementById(id);
+const esc = s => s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+
+function cardHTML(y, i) {
+  const q = BANK[y][i], st = STATE[y];
+  const r = st.res[i], multi = q.a.length > 1;
+  const draft = st.draft[i] || [];
+  let h = `<div class="qcard" data-i="${i}"><div class="qtitle"><span class="qnum">${q.n}</span>${esc(q.t)}</div>`;
+  if (multi && !r) h += `<div class="multi">More than one option is correct — select all that apply.</div>`;
+  q.o.forEach((opt, oi) => {
+    let cls = 'opt';
+    if (r) {
+      if (q.a.includes(oi)) cls += ' correct';
+      else if (r.chosen.includes(oi)) cls += ' wrong';
+    } else if (draft.includes(oi)) cls += ' sel';
+    h += `<button class="${cls}" data-i="${i}" data-o="${oi}" ${r ? 'disabled' : ''}><b>${'ABCD'[oi]}.</b> ${esc(opt)}</button>`;
+  });
+  if (multi && !r) h += `<button class="check" data-i="${i}" ${draft.length ? '' : 'disabled'}>Check answer</button>`;
+  if (r && q.free) h += `<div class="free">Note: full marks were awarded to all candidates for this question.</div>`;
+  return h + `</div>`;
+}
+
+function renderYear() {
+  const flat = BANK[year];
+  let h = '', last = '';
+  flat.forEach((q, i) => {
+    if (q.sec !== last) { last = q.sec; h += `<h2 class="sechead">${esc(q.sec)}</h2>`; }
+    h += cardHTML(year, i);
+  });
+  $('quiz').innerHTML = h;
+  $('foot').textContent = YEARS[year].note;
+  updateScore();
+}
+
+function updateScore() {
+  const flat = BANK[year], st = STATE[year];
+  let c = 0, w = 0, marks = 0, max = 0;
+  flat.forEach((q, i) => {
+    max += q.m;
+    const r = st.res[i];
+    if (!r) return;
+    if (r.ok) { c++; marks += q.m; } else w++;
+  });
+  $('attempted').textContent = c + w;
+  $('total').textContent = flat.length;
+  $('correct').textContent = c;
+  $('wrong').textContent = w;
+  $('marks').textContent = marks;
+  $('maxmarks').textContent = max;
+  $('bar').style.width = (flat.length ? (c + w) / flat.length * 100 : 0) + '%';
+}
+
+function refreshCard(i) {
+  const old = document.querySelector(`.qcard[data-i="${i}"]`);
+  const tmp = document.createElement('div');
+  tmp.innerHTML = cardHTML(year, i);
+  old.replaceWith(tmp.firstChild);
+}
+
+function evaluate(i, chosen) {
+  const q = BANK[year][i];
+  const ok = q.free || (chosen.length === q.a.length && q.a.every(x => chosen.includes(x)));
+  STATE[year].res[i] = { chosen, ok };
+  refreshCard(i);
+  updateScore();
+}
+
+$('quiz').addEventListener('click', e => {
+  const chk = e.target.closest('.check');
+  if (chk) {
+    const i = +chk.dataset.i;
+    evaluate(i, STATE[year].draft[i] || []);
+    return;
+  }
+  const btn = e.target.closest('.opt');
+  if (!btn || btn.disabled) return;
+  const i = +btn.dataset.i, o = +btn.dataset.o;
+  const q = BANK[year][i];
+  if (q.a.length > 1) {
+    const d = STATE[year].draft[i] || [];
+    const k = d.indexOf(o);
+    if (k >= 0) d.splice(k, 1); else d.push(o);
+    STATE[year].draft[i] = d;
+    refreshCard(i);
+  } else {
+    evaluate(i, [o]);
+  }
+});
+
+$('resetBtn').addEventListener('click', () => {
+  STATE[year] = { res: {}, draft: {} };
+  renderYear();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+
+function buildTabs() {
+  $('tabs').innerHTML = Object.keys(YEARS).map(y =>
+    `<button class="tab ${y === year ? 'active' : ''}" data-y="${y}">${y}</button>`).join('');
+}
+$('tabs').addEventListener('click', e => {
+  const t = e.target.closest('.tab');
+  if (!t) return;
+  year = t.dataset.y;
+  buildTabs();
+  renderYear();
+  window.scrollTo({ top: 0 });
+});
+
+buildTabs();
+renderYear();
+</script>
+</body>
+</html>
