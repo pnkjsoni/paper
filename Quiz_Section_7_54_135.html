@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Patents Quiz — Sections 7, 54 &amp; 135</title>
+<style>
+  *{box-sizing:border-box}
+  body{
+    margin:0;padding-bottom:110px;
+    font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+    background:#eef2f7;color:#1b2531;line-height:1.55;
+  }
+  header.top{
+    background:linear-gradient(135deg,#0f3b63,#1f7fa8);
+    color:#fff;padding:30px 0 26px;
+  }
+  .wrap{max-width:920px;margin:0 auto;padding:0 20px}
+  header.top h1{margin:0 0 6px;font-size:1.45rem;letter-spacing:.2px}
+  header.top p{margin:0;opacity:.85;font-size:.92rem}
+
+  .result{
+    background:#fff;border-radius:14px;padding:20px 22px;margin:22px 0;
+    box-shadow:0 6px 24px rgba(15,59,99,.12);border-left:6px solid #1f7fa8;
+  }
+  .result.hidden{display:none}
+  .result h2{margin:0 0 10px;font-size:1.15rem}
+  .score-row{display:flex;flex-wrap:wrap;gap:14px;align-items:center;margin-bottom:10px}
+  .bigscore{font-size:2.1rem;font-weight:700;color:#0f3b63;line-height:1}
+  .chips{display:flex;gap:8px;flex-wrap:wrap}
+  .chip{padding:4px 12px;border-radius:999px;font-size:.82rem;font-weight:600}
+  .chip.good{background:#e3f6e8;color:#1a7f37}
+  .chip.bad{background:#fde8e6;color:#b3261e}
+  .chip.skip{background:#eceff3;color:#4a5768}
+  .verdict{margin:8px 0 0;font-weight:600}
+
+  .sectionhead{
+    margin:30px 0 10px;font-size:.8rem;font-weight:700;letter-spacing:.12em;
+    text-transform:uppercase;color:#5a6b80;
+  }
+  .sectionhead:first-of-type{margin-top:18px}
+
+  .card{
+    background:#fff;border-radius:14px;padding:18px 20px 16px;margin:0 0 14px;
+    box-shadow:0 2px 10px rgba(15,59,99,.07);border:2px solid transparent;
+    transition:border-color .2s,box-shadow .2s;
+  }
+  .cardhead{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+  .num{
+    display:inline-flex;align-items:center;justify-content:center;
+    width:28px;height:28px;border-radius:8px;background:#0f3b63;color:#fff;
+    font-size:.85rem;font-weight:700;flex:0 0 auto;
+  }
+  .tag{font-size:.72rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
+       color:#1f7fa8;background:#e6f2f8;padding:3px 9px;border-radius:999px}
+  .qtext{white-space:pre-line;margin:0 0 14px;font-size:.97rem}
+  .opts{display:flex;flex-direction:column;gap:8px}
+  .opt{
+    display:flex;gap:10px;align-items:flex-start;cursor:pointer;
+    padding:9px 12px;border:1.5px solid #d9e1ea;border-radius:10px;
+    background:#fbfcfe;transition:background .15s,border-color .15s;
+  }
+  .opt:hover{background:#f1f6fb;border-color:#b9cde0}
+  .opt input{margin-top:4px;accent-color:#1f7fa8;flex:0 0 auto}
+  .ltr{
+    font-weight:700;color:#1f7fa8;min-width:16px;flex:0 0 auto;
+  }
+  .txt{font-size:.93rem}
+  .opt.picked{background:#eef6fc;border-color:#1f7fa8}
+
+  /* graded states */
+  .opt.is-correct{border-color:#1a7f37;background:#eefaf1}
+  .opt.is-correct .ltr{color:#1a7f37}
+  .opt.is-wrong{border-color:#b3261e;background:#fdf0ef}
+  .opt.is-wrong .ltr{color:#b3261e}
+  .card.state-correct{border-color:#8fd6a2}
+  .card.state-wrong{border-color:#f0a8a2}
+  .card.state-blank{border-color:#cfd8e3}
+
+  .fb{display:none;margin-top:12px;padding-top:12px;border-top:1px dashed #dbe3ec;font-size:.9rem}
+  .card.state-correct .fb,.card.state-wrong .fb,.card.state-blank .fb{display:block}
+  .badge{display:inline-block;padding:2px 10px;border-radius:999px;font-size:.75rem;
+         font-weight:700;margin-right:8px;vertical-align:1px}
+  .b-correct{background:#1a7f37;color:#fff}
+  .b-wrong{background:#b3261e;color:#fff}
+  .b-blank{background:#7b8794;color:#fff}
+  .why{color:#4a5768;margin-top:7px;font-size:.88rem}
+
+  .bar{
+    position:fixed;left:0;right:0;bottom:0;z-index:20;
+    background:#fff;border-top:1px solid #dbe3ec;box-shadow:0 -4px 18px rgba(15,59,99,.10);
+    padding:12px 0;
+  }
+  .bar .wrap{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+  .progress{flex:1 1 200px;min-width:150px}
+  .ptrack{height:8px;background:#e6ecf3;border-radius:999px;overflow:hidden}
+  .pfill{height:100%;width:0%;background:linear-gradient(90deg,#1f7fa8,#27a06a);
+         border-radius:999px;transition:width .25s}
+  .plabel{font-size:.8rem;color:#5a6b80;margin-top:5px;font-weight:600}
+  button{
+    font:inherit;font-weight:700;border:none;border-radius:10px;padding:11px 22px;
+    cursor:pointer;transition:transform .08s,opacity .2s,background .2s;
+  }
+  button:active{transform:translateY(1px)}
+  #submit{background:#0f3b63;color:#fff}
+  #submit:hover{background:#12496f}
+  #submit:disabled{background:#9aa9b8;cursor:not-allowed}
+  #reset{background:#e6ecf3;color:#28394d}
+  #reset:hover{background:#d8e2ec}
+  @media(max-width:520px){
+    .bar .wrap{gap:10px}
+    button{padding:10px 16px}
+  }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <h1>Patents Quiz — Sections 7, 54 &amp; 135</h1>
+    <p>21 questions from previous papers (2016–2026). Select your answers, then submit to see what's right and what's wrong.</p>
+  </div>
+</header>
+
+<main class="wrap">
+  <div id="result" class="result hidden"></div>
+  <div id="quiz"></div>
+</main>
+
+<div class="bar">
+  <div class="wrap">
+    <div class="progress">
+      <div class="ptrack"><div class="pfill" id="pfill"></div></div>
+      <div class="plabel" id="plabel">Answered 0 of 21</div>
+    </div>
+    <button id="submit" type="button">Submit answers</button>
+    <button id="reset" type="button">Reset</button>
+  </div>
+</div>
+
+<script>
+const LETTERS = ['A','B','C','D','E'];
+
+const QUESTIONS = [
+  /* ---------- Section 54 ---------- */
+  {
+    section: 'Patent of Addition — Section 54',
+    tag: 'S. 54 / S. 56',
+    q: "Nilesh's patent was granted and published on 03.01.2022. He develops an improvement that is novel over his own patent, but the improvement was disclosed in someone else's application published on 23.01.2022. He can file on 04.01.2023. What should he do?",
+    opts: [
+      'File a patent of addition, as the improvement is novel over his own patent',
+      'Not file, as the application would lack novelty',
+      'Not file, as a patent of addition cannot be filed more than one year after publication of grant',
+      'None of the above'
+    ],
+    ans: 1,
+    why: 'S. 56(2): novelty of a patent of addition is judged with regard to the main specification too. The improvement was already published in 2022, so it lacks novelty.'
+  },
+  {
+    section: 'Patent of Addition — Section 54',
+    tag: 'Term / S. 55',
+    q: 'Mydhili filed a provisional specification on 20.01.2022 and the complete specification on 15.04.2022. She filed a patent of addition on 15.04.2023. Assuming both are granted, when does the patent term expire?',
+    opts: [
+      '20.01.2042 for both',
+      '15.04.2043 for both',
+      '15.04.2042 for the first and 15.04.2043 for the second',
+      '20.01.2042 for the first and 15.04.2043 for the second'
+    ],
+    ans: 0,
+    why: 'Term runs 20 years from the filing date (s. 53), here the provisional filing date. A patent of addition has the same term as the main patent (s. 55(1)).'
+  },
+  {
+    section: 'Patent of Addition — Section 54',
+    tag: 'S. 54(3)',
+    q: 'Mr. Alpha filed application A on 01/04/2019 and application B (an improvement on A) on 31/03/2019. Both were granted separately. He now asks the Controller to revoke patent B and convert it into a patent of addition of A.',
+    opts: [
+      'It is possible to convert B to a patent of addition of A',
+      'It is not possible',
+      "It is possible on condition that B's term co-terminates with A",
+      'None of the above'
+    ],
+    ans: 1,
+    why: 'S. 54(3): a patent of addition cannot be filed earlier than the main application. B was filed first.'
+  },
+  {
+    section: 'Patent of Addition — Section 54',
+    tag: 'Statements',
+    q: 'Statement 1: A patent of addition application can be filed on another patent of addition application.\nStatement 2: A patent of addition can only be granted after the main application is granted.',
+    opts: ['1 true, 2 false', '1 false, 2 true', 'Both true', 'Both false'],
+    ans: 1,
+    why: 'S. 54(4): a patent of addition cannot be granted before the main patent. The official key marks Statement 1 false.'
+  },
+  {
+    section: 'Patent of Addition — Section 54',
+    tag: 'S. 54 / S. 56',
+    q: 'Which of the following is/are true of a patent of addition?\nI. It can be filed only after the main application, not on the same date, and granted only after the main application is granted.\nII. It may not be refused only because the claimed invention lacks an inventive step over the main application.\nIII. Only one patent of addition is allowed on one main application.\nIV. The applicant/patentee must be the same for both.',
+    opts: ['I and II', 'II and IV', 'III and IV', 'II and III'],
+    ans: 1,
+    why: 'Statement I is wrong because s. 54(3) allows filing on the same date. III is wrong because there is no one-addition limit. II is s. 56(1), and IV is s. 54(1).'
+  },
+  {
+    section: 'Patent of Addition — Section 54',
+    tag: 'S. 21(2)(b)',
+    q: "The first examination report for patent of addition application 'A' was issued on 01/01/2024. The main application 'B' is granted and a revocation suit is pending in the Delhi High Court. How should the applicant proceed on the FER reply under s. 21?",
+    opts: [
+      'Six months, extendable by three months; the timeline is fixed',
+      "On the applicant's application made before the s. 21(1) period expires, the High Court determines the extended timeline",
+      'The applicant petitions the Controller, who may extend the time',
+      'Six months from the FER or from disposal of the High Court case, whichever is later'
+    ],
+    ans: 1,
+    why: 'S. 21(2)(b): where a suit is pending, the High Court sets the extended time.'
+  },
+  {
+    section: 'Patent of Addition — Section 54',
+    tag: 'Renewal fees',
+    q: 'Statement 1: Renewal fees shall not be paid for a patent of addition.\nStatement 2: Renewal fees shall not be paid for a patent granted on a divisional application.',
+    opts: ['1 true, 2 false', '1 false, 2 true', 'Both false', 'Both true'],
+    ans: 0,
+    why: 'S. 55(2): no renewal fees on a patent of addition. A divisional patent does pay them.'
+  },
+  {
+    section: 'Patent of Addition — Section 54',
+    tag: 'Statements',
+    q: 'Statement 1: An application for a patent of addition shall be made before the grant of the patent for the main invention.\nStatement 2: The patent for the main invention is granted after the grant of the patent of addition.',
+    opts: ['1 true, 2 false', '1 false, 2 true', 'Both false', 'Both true'],
+    ans: 2,
+    why: 'A patent of addition can be filed any time for an improvement, and s. 54(4) bars grant before the main patent.'
+  },
+
+  /* ---------- Section 135 ---------- */
+  {
+    section: 'Convention Applications & Priority — Section 135',
+    tag: 'Basic application',
+    q: 'Nile Inc filed in Korea on 01.06.2020. It then filed in Canada on 01.05.2021 claiming Korean priority. Finally it filed a convention application in India on 01.11.2021, claiming priority of the Canadian application. The Korean application was published on 02.12.2021. Which is true?',
+    opts: [
+      'Nile can claim Canadian priority, and the Indian claims are not anticipated by the Korean publication',
+      'Nile can claim Canadian priority, and the claims are anticipated by the Korean publication',
+      'Nile cannot claim Canadian priority, and the claims are not anticipated by the Korean publication',
+      'Nile cannot claim Canadian priority, and the claims are anticipated by the Korean publication'
+    ],
+    ans: 2,
+    why: 'Canada was not the "basic" (first) application, and India was filed beyond 12 months of Korea. The Korean publication came after the Indian filing date, so it does not anticipate.'
+  },
+  {
+    section: 'Convention Applications & Priority — Section 135',
+    tag: 'S. 135(3) proviso',
+    q: 'Gautam filed an ordinary application in India. He then filed a PCT application within twelve months claiming Indian priority, and entered national phase in India.\nStatement 1: He shall make the request for examination for both applications filed in India.\nStatement 2: He shall make the request for examination only for one of them.',
+    opts: ['1 true, 2 false', '1 false, 2 true', 'Both false', 'Both true'],
+    ans: 1,
+    why: 'S. 135(3) proviso: examination is requested for only one of the two applications.'
+  },
+  {
+    section: 'Convention Applications & Priority — Section 135',
+    tag: 'Date of patent',
+    q: 'Raju Gomaz, a US citizen, filed two applications at the USPTO on 28.04.2017. He filed a convention application in India on 27.04.2018 claiming priority of one of them. He also filed a PCT application on 25.04.2018 claiming priority of the other, and entered Indian national phase on 31.03.2019. What are the "date of patent" for the convention application and the national phase application respectively?',
+    opts: [
+      '27.04.2018 and 25.04.2018',
+      '28.04.2017 and 31.03.2019',
+      '27.04.2018 and 31.03.2019',
+      '28.04.2017 and 28.04.2017'
+    ],
+    ans: 0,
+    why: 'A convention application is dated on its Indian filing date; priority only fixes the priority date. A PCT-NP application takes the international filing date (s. 7(1B)).'
+  },
+  {
+    section: 'Convention Applications & Priority — Section 135',
+    tag: 'S. 137',
+    q: 'Company X filed at the USPTO. Six months later it filed a related application in Japan. Within 12 months of the US filing, it filed an Indian application claiming priority of both.\nStatement 1: X may claim priority of the US application only.\nStatement 2: X may claim both priorities.',
+    opts: ['1 true, 2 false', '1 false, 2 true', 'Both false', 'Both true'],
+    ans: 1,
+    why: 'S. 137: multiple priorities are allowed for related inventions.'
+  },
+  {
+    section: 'Convention Applications & Priority — Section 135',
+    tag: 'Applicant / assignment',
+    q: 'Mr. Tanaka (Japan) filed in Japan on 25/07/2015 and assigned his rights to Ms. Oto. On 24/07/2016 she files a convention application in India claiming that priority, and wants her friend Ms. Meenakshi as co-applicant.\ni. The applicant is free to choose any co-applicant, and Meenakshi can be one without further legal procedure.\nii. Only the applicant of the priority application can be the applicant in India, so Meenakshi cannot be a co-applicant.\niii. Oto may assign partial rights to Meenakshi before she can be taken as a co-applicant.\niv. None of this works, as the timeline is breached.',
+    opts: ['(i) and (ii)', '(ii) and (iii)', '(i) and (iv)', 'All of the above'],
+    ans: 1,
+    why: 'Official answer key: B — (ii) and (iii). Only the priority applicant (or its assignee) can be the applicant in India, so Meenakshi needs a partial assignment before she can be a co-applicant.'
+  },
+  {
+    section: 'Convention Applications & Priority — Section 135',
+    tag: 'S. 57(5) / S. 137',
+    q: 'Statement 1: The date of priority once decided may not be amended.\nStatement 2: It is not possible to derive priorities from more than five earlier applications in a single application.',
+    opts: ['1 true, 2 false', '1 false, 2 true', 'Both true', 'Both false'],
+    ans: 3,
+    why: 'S. 57(5) allows amending the priority date. S. 137 has no five-application cap.'
+  },
+  {
+    section: 'Convention Applications & Priority — Section 135',
+    tag: 'Partial priority',
+    q: 'An inventor filed Japanese application C1 on 15/02/2024 for a bottle with basic sealing feature A, and C2 on 15/06/2024 for an advanced self-locking mechanism B. A complete specification filed in India on 14/02/2025 claims priority from both and claims "a bottle with feature A, and characterized by mechanism B". What is the priority date of this claim?',
+    opts: ['15/06/2024', '15/02/2024', '14/02/2025', 'None of them'],
+    ans: 0,
+    why: 'A claim based on matter partly in one and partly in another application takes the later priority date.'
+  },
+  {
+    section: 'Convention Applications & Priority — Section 135',
+    tag: 'S. 135(1)',
+    q: 'Statement 1: A convention application can be filed within 12 months from the earliest priority application.\nStatement 2: A convention application can be filed beyond 12 months from the earliest priority application by taking an extension.',
+    opts: ['1 true, 2 false', '1 false, 2 true', 'Both false', 'Both true'],
+    ans: 0,
+    why: 'The 12 months of s. 135(1) cannot be extended.'
+  },
+
+  /* ---------- Section 7 ---------- */
+  {
+    section: 'Filing, Form 1 & PCT National Phase — Section 7',
+    tag: 'Fees',
+    q: 'What could be the minimum fee for a patent application filed by an educational institution as of March 2022?',
+    opts: ['₹1000', '₹1600', '₹4000', '₹8000'],
+    ans: 1,
+    why: 'Entry 1 of the First Schedule (Form 1, ss. 7, 54, 135, e-filing) is ₹1600 for educational institutions.'
+  },
+  {
+    section: 'Filing, Form 1 & PCT National Phase — Section 7',
+    tag: 'PCT timeline',
+    q: 'Your client wants to file a PCT application claiming priority of an Indian application, using the PCT time limits to the fullest. Arrange the items in the most likely order:\n(1) Filing the PCT application\n(2) Filing the Indian priority application\n(3) PCT international publication\n(4) Grant of patent in a designated country\n(5) PCT national phase entry',
+    opts: ['2, 5, 1, 3, 4', '2, 1, 3, 5, 4', '1, 2, 3, 4, 5', '2, 1, 5, 3, 4'],
+    ans: 1,
+    why: 'Priority filing, then PCT, then publication at 18 months, then national phase at 31 months, then grant.'
+  },
+  {
+    section: 'Filing, Form 1 & PCT National Phase — Section 7',
+    tag: '31-month deadline',
+    q: 'Marco files in Colombia on 09.01.2021, then a PCT application on 09.01.2022 claiming that priority. What is the deadline to enter Indian national phase?',
+    opts: ['09.08.2023', '09.01.2025', '09.08.2024', '09.07.2022'],
+    ans: 0,
+    why: '31 months from the 09.01.2021 priority date is 09.08.2023.'
+  },
+  {
+    section: 'Filing, Form 1 & PCT National Phase — Section 7',
+    tag: 'S. 10(4A) / S. 138(4)',
+    q: "Statement 1: In a PCT application, the applicant's name may differ for different designated states at national phase.\nStatement 2: In a PCT national phase application designating India, the complete specification filed in the international application is taken as the complete specification in India.",
+    opts: ['1 true, 2 false', '1 false, 2 true', 'Both true', 'Both false'],
+    ans: 2,
+    why: 'Official answer key: C — both statements are true. See s. 10(4A) and s. 138(4).'
+  },
+  {
+    section: 'Filing, Form 1 & PCT National Phase — Section 7',
+    tag: 'Term',
+    q: 'Three applications were filed in India, all on 01/01/2023: an ordinary application (no priority), a convention application claiming a Japanese application of 01/01/2022, and a PCT-NP application with international filing date 01/06/2021 claiming a US application of 01/06/2020. All are granted.\nStatement I: The term expires on the same date for the ordinary and convention applications.\nStatement II: The PCT-NP application\'s term expires last.',
+    opts: ['Both true', 'Both false', 'I false, II true', 'I true, II false'],
+    ans: 3,
+    why: 'The ordinary and convention applications each run 20 years from 01/01/2023. The PCT-NP application runs from its international filing date, 01/06/2021, so it expires first, not last.'
+  }
+];
+
+const quizEl    = document.getElementById('quiz');
+const resultEl  = document.getElementById('result');
+const submitBtn = document.getElementById('submit');
+const resetBtn  = document.getElementById('reset');
+const pfill     = document.getElementById('pfill');
+const plabel    = document.getElementById('plabel');
+const TOTAL     = QUESTIONS.length;
+let graded = false;
+
+/* ---------- build the quiz ---------- */
+(function build(){
+  let html = '';
+  let currentSection = null;
+  QUESTIONS.forEach((q, i) => {
+    const n = i + 1;
+    if (q.section !== currentSection) {
+      currentSection = q.section;
+      html += `<h2 class="sectionhead">${currentSection}</h2>`;
+    }
+    const optsHtml = q.opts.map((o, j) => `
+      <label class="opt" data-opt="${j}">
+        <input type="radio" name="q${n}" value="${j}">
+        <span class="ltr">${LETTERS[j]}</span>
+        <span class="txt">${o}</span>
+      </label>`).join('');
+
+    html += `
+      <article class="card" id="q${n}">
+        <div class="cardhead">
+          <span class="num">${n}</span>
+          <span class="tag">${q.tag}</span>
+        </div>
+        <p class="qtext">${q.q}</p>
+        <div class="opts">${optsHtml}</div>
+        <div class="fb"></div>
+      </article>`;
+  });
+  quizEl.innerHTML = html;
+})();
+
+/* ---------- progress ---------- */
+function answeredCount(){
+  return QUESTIONS.reduce((acc, _, i) =>
+    acc + (document.querySelector(`input[name="q${i+1}"]:checked`) ? 1 : 0), 0);
+}
+function updateProgress(){
+  const a = answeredCount();
+  pfill.style.width = (a / TOTAL * 100) + '%';
+  plabel.textContent = `Answered ${a} of ${TOTAL}`;
+}
+quizEl.addEventListener('change', updateProgress);
+updateProgress();
+
+/* ---------- grading ---------- */
+function grade(){
+  if (graded) return;
+  graded = true;
+
+  let correct = 0, wrong = 0, blank = 0;
+
+  QUESTIONS.forEach((q, i) => {
+    const n = i + 1;
+    const card = document.getElementById('q' + n);
+    const fb   = card.querySelector('.fb');
+    const sel  = document.querySelector(`input[name="q${n}"]:checked`);
+    const chosen = sel ? Number(sel.value) : -1;
+
+    card.querySelectorAll('.opt').forEach((lab, j) => {
+      lab.classList.remove('is-correct', 'is-wrong');
+      if (j === q.ans) lab.classList.add('is-correct');
+      if (j === chosen && chosen !== q.ans) lab.classList.add('is-wrong');
+    });
+    card.querySelectorAll('input').forEach(inp => inp.disabled = true);
+
+    if (chosen === -1) {
+      blank++;
+      card.classList.add('state-blank');
+      fb.innerHTML = `<span class="badge b-blank">Not answered</span>
+        Correct answer: <b>${LETTERS[q.ans]}</b>
+        <div class="why">${q.why}</div>`;
+    } else if (chosen === q.ans) {
+      correct++;
+      card.classList.add('state-correct');
+      fb.innerHTML = `<span class="badge b-correct">Correct</span>
+        <div class="why">${q.why}</div>`;
+    } else {
+      wrong++;
+      card.classList.add('state-wrong');
+      fb.innerHTML = `<span class="badge b-wrong">Incorrect</span>
+        Correct answer: <b>${LETTERS[q.ans]}. ${q.opts[q.ans]}</b>
+        <div class="why">${q.why}</div>`;
+    }
+  });
+
+  const pct = Math.round(correct / TOTAL * 100);
+  let verdict;
+  if (pct === 100)      verdict = 'Perfect score — outstanding.';
+  else if (pct >= 80)   verdict = 'Excellent — you have a solid grip on these sections.';
+  else if (pct >= 60)   verdict = 'Good — revise the ones you missed and try again.';
+  else if (pct >= 40)   verdict = 'Fair — go back to the bare provisions and the official keys.';
+  else                  verdict = 'Keep going — read each explanation carefully, then reset and retry.';
+
+  resultEl.classList.remove('hidden');
+  resultEl.innerHTML = `
+    <h2>Your result</h2>
+    <div class="score-row">
+      <div class="bigscore">${correct}<span style="font-size:1.1rem;color:#5a6b80">/${TOTAL}</span></div>
+      <div class="chips">
+        <span class="chip good">${correct} correct</span>
+        <span class="chip bad">${wrong} wrong</span>
+        <span class="chip skip">${blank} unanswered</span>
+        <span class="chip skip">${pct}%</span>
+      </div>
+    </div>
+    <p class="verdict">${verdict}</p>
+    <p class="verdict" style="font-weight:400;color:#4a5768;font-size:.9rem">
+      Every question now shows the correct option and the reason. Scroll down to review.
+    </p>`;
+
+  submitBtn.disabled = true;
+  submitBtn.textContent = 'Graded';
+  resultEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+submitBtn.addEventListener('click', grade);
+
+/* ---------- reset ---------- */
+resetBtn.addEventListener('click', () => {
+  graded = false;
+  resultEl.classList.add('hidden');
+  resultEl.innerHTML = '';
+
+  quizEl.querySelectorAll('.card').forEach(card => {
+    card.classList.remove('state-correct', 'state-wrong', 'state-blank');
+    card.querySelector('.fb').innerHTML = '';
+    card.querySelectorAll('.opt').forEach(l => l.classList.remove('is-correct', 'is-wrong', 'picked'));
+    card.querySelectorAll('input').forEach(inp => { inp.disabled = false; inp.checked = false; });
+  });
+
+  submitBtn.disabled = false;
+  submitBtn.textContent = 'Submit answers';
+  updateProgress();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+</script>
+</body>
+</html>
