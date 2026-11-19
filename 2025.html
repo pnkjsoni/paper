@@ -1,524 +1,1003 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
+<meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Patent Agent Examination — 2025 Practice</title>
+<title>Patent Agent Examination — 2025 Practice Quiz</title>
 <style>
   :root{
-    --bg:#f6f7fb; --surface:#ffffff; --text:#0f172a; --muted:#64748b; --line:#e5e8f0;
-    --brand:#4f46e5; --brand2:#7c3aed; --brand-soft:#eef2ff;
-    --ok:#16a34a; --ok-bg:#ecfdf3; --ok-line:#86efac;
-    --bad:#dc2626; --bad-bg:#fef2f2; --bad-line:#fca5a5;
-    --sel-bg:#f3e8ff; --sel-line:#a855f7;
-    --shadow:0 1px 2px rgba(15,23,42,.04),0 8px 24px -12px rgba(15,23,42,.12);
-  }
-  @media (prefers-color-scheme: dark){
-    :root{
-      --bg:#0b1020; --surface:#131a2e; --text:#e6e9f5; --muted:#94a0bd; --line:#232c47;
-      --brand:#818cf8; --brand2:#a78bfa; --brand-soft:#1b2347;
-      --ok:#4ade80; --ok-bg:#0f2a1e; --ok-line:#1f6f45;
-      --bad:#f87171; --bad-bg:#2d1519; --bad-line:#7f2a33;
-      --sel-bg:#2a1b47; --sel-line:#8b5cf6;
-      --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px -12px rgba(0,0,0,.6);
-    }
+    --bg:#f4f6fb;
+    --card:#ffffff;
+    --ink:#1f2430;
+    --muted:#6b7280;
+    --accent:#4f46e5;
+    --accent-dark:#4338ca;
+    --ok:#1a7f4b;
+    --ok-bg:#e8f7ef;
+    --ok-line:#9ad4b5;
+    --bad:#b42318;
+    --bad-bg:#fdecea;
+    --bad-line:#f3b4ad;
+    --line:#e3e6ec;
   }
   *{box-sizing:border-box}
-  html{scroll-behavior:smooth}
-  body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;-webkit-font-smoothing:antialiased}
-  header.top{position:relative;overflow:hidden;color:#fff;padding:44px 20px 70px;
-    background:radial-gradient(900px 400px at 85% -20%,rgba(167,139,250,.55),transparent 60%),radial-gradient(700px 380px at 0% 120%,rgba(56,189,248,.35),transparent 60%),linear-gradient(135deg,#1e1b4b,#312e81 55%,#4338ca)}
-  header.top .inner{max-width:900px;margin:0 auto;position:relative}
-  .eyebrow{display:inline-block;font-size:11.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.22);padding:5px 12px;border-radius:999px;margin-bottom:14px;backdrop-filter:blur(6px)}
-  header.top h1{margin:0 0 8px;font-size:clamp(26px,4.6vw,38px);line-height:1.15;letter-spacing:-.02em;font-weight:800}
-  header.top p{margin:0 0 24px;font-size:15px;opacity:.82;max-width:620px}
-  .tabs{display:inline-flex;gap:4px;padding:5px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);border-radius:14px;backdrop-filter:blur(8px);flex-wrap:wrap}
-  .tab{font:inherit;font-size:14.5px;font-weight:700;padding:9px 22px;border-radius:10px;border:0;background:transparent;color:rgba(255,255,255,.85);cursor:pointer;transition:all .18s}
-  a.tab{text-decoration:none;display:inline-block;line-height:1.4}
-  .tab:hover{background:rgba(255,255,255,.14);color:#fff}
-  .tab.active{background:#fff;color:#3730a3;box-shadow:0 4px 14px -4px rgba(0,0,0,.35)}
-  .tab .ext{font-size:11px;opacity:.65;margin-left:5px;font-weight:800}
-  .tab.active .ext{opacity:.5}
-  .scorebar{position:sticky;top:10px;z-index:30;max-width:900px;margin:-34px auto 0;padding:0 16px}
-  .scorebar .inner{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:12px 14px 14px;background:color-mix(in srgb,var(--surface) 88%,transparent);backdrop-filter:blur(14px);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);position:relative;overflow:hidden}
-  .pill{font-size:13px;font-weight:600;padding:6px 12px;border-radius:10px;background:var(--brand-soft);color:var(--brand);white-space:nowrap}
-  .pill.green{background:var(--ok-bg);color:var(--ok)}
-  .pill.red{background:var(--bad-bg);color:var(--bad)}
-  .pill.gold{background:linear-gradient(135deg,var(--brand),var(--brand2));color:#fff}
-  .spacer{flex:1}
-  button.reset{font:inherit;font-size:13px;font-weight:600;padding:7px 14px;border-radius:10px;border:1px solid var(--line);background:var(--surface);color:var(--muted);cursor:pointer;transition:all .15s}
-  button.reset:hover{color:var(--text);border-color:var(--brand)}
-  .progress{position:absolute;left:0;right:0;bottom:0;height:4px;background:var(--line)}
-  .progress i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--brand),var(--brand2));transition:width .35s ease}
-  main{max-width:900px;margin:0 auto;padding:26px 16px 70px}
-  h2.sechead{display:flex;align-items:center;gap:10px;font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.12em;color:var(--brand);margin:38px 0 14px}
-  h2.sechead:first-child{margin-top:10px}
-  h2.sechead::after{content:"";flex:1;height:1px;background:var(--line)}
-  .qcard{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:22px 22px 18px;margin-bottom:16px;box-shadow:var(--shadow);transition:transform .18s,box-shadow .18s}
-  .qcard:hover{transform:translateY(-1px)}
-  .qtitle{font-size:15.5px;font-weight:500;margin-bottom:14px;white-space:pre-line}
-  .qnum{display:inline-flex;align-items:center;justify-content:center;min-width:30px;height:30px;padding:0 8px;background:linear-gradient(135deg,var(--brand),var(--brand2));color:#fff;border-radius:9px;font-size:13px;margin-right:10px;font-weight:800;vertical-align:1px}
-  .multi{display:inline-block;font-size:12px;color:var(--brand2);background:var(--sel-bg);font-weight:700;margin:-4px 0 10px;padding:3px 10px;border-radius:999px}
-  .opt{display:flex;align-items:flex-start;gap:12px;width:100%;text-align:left;padding:12px 14px;margin:8px 0;border:1.5px solid var(--line);border-radius:12px;background:var(--surface);color:var(--text);font:inherit;font-size:14.5px;line-height:1.5;cursor:pointer;transition:all .14s}
-  .opt:hover:not(:disabled){border-color:var(--brand);background:var(--brand-soft);transform:translateX(2px)}
-  .opt:disabled{cursor:default}
-  .opt b{flex:none;display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:8px;background:var(--brand-soft);color:var(--brand);font-size:12.5px;font-weight:800;transition:all .14s}
-  .opt.sel{background:var(--sel-bg);border-color:var(--sel-line)}
-  .opt.sel b{background:var(--sel-line);color:#fff}
-  .opt.correct{background:var(--ok-bg);border-color:var(--ok-line);color:var(--text);font-weight:600}
-  .opt.correct b{background:var(--ok);color:#fff}
-  .opt.correct::after{content:"✓";margin-left:auto;color:var(--ok);font-weight:800}
-  .opt.wrong{background:var(--bad-bg);border-color:var(--bad-line);color:var(--text);font-weight:600}
-  .opt.wrong b{background:var(--bad);color:#fff}
-  .opt.wrong::after{content:"✕";margin-left:auto;color:var(--bad);font-weight:800}
-  button.check{margin-top:8px;font:inherit;font-size:14px;font-weight:700;padding:10px 22px;border-radius:12px;border:0;background:linear-gradient(135deg,var(--brand),var(--brand2));color:#fff;cursor:pointer;box-shadow:0 8px 18px -8px var(--brand);transition:transform .15s,opacity .15s}
-  button.check:hover:not(:disabled){transform:translateY(-1px)}
-  button.check:disabled{background:var(--line);color:var(--muted);box-shadow:none;cursor:default}
-  .free{margin-top:10px;font-size:12.5px;color:#92400e;background:#fef3c7;border-radius:10px;padding:8px 12px}
-  @media (prefers-color-scheme: dark){.free{background:#3a2a0a;color:#fcd34d}}
-  footer{max-width:900px;margin:0 auto;padding:0 16px 50px;font-size:12.5px;color:var(--muted);text-align:center}
-  @media (max-width:560px){
-    header.top{padding:32px 16px 62px}
-    .tab{padding:8px 14px}
-    .qcard{padding:18px 16px 14px;border-radius:16px}
-    .scorebar{top:6px}
+  body{
+    margin:0;
+    padding:2rem 1rem 4rem;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    line-height:1.55;
+    font-size:16px;
+  }
+  .wrap{max-width:820px;margin:0 auto}
+
+  .homebar{display:flex;justify-content:center;margin-bottom:1.2rem}
+  .homebar a{
+    font-size:.9rem;font-weight:600;text-decoration:none;color:var(--accent);
+    padding:.4rem 1rem;border:1px solid var(--line);border-radius:10px;background:#fff;
+  }
+  .homebar a:hover{border-color:var(--accent)}
+
+  header{text-align:center;margin-bottom:1.6rem}
+  header h1{margin:0 0 .35rem;font-size:1.6rem;letter-spacing:-.02em}
+  header p{margin:0;color:var(--muted);font-size:.94rem}
+
+  .summary{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:14px;
+    padding:1.1rem 1.2rem;
+    margin-bottom:1.3rem;
+    box-shadow:0 2px 10px rgba(20,30,60,.05);
+  }
+  .summary h2{margin:0 0 .6rem;font-size:1.15rem}
+  .score-line{font-size:1.02rem;margin:0 0 .8rem}
+  .score-line b{font-size:1.35rem;color:var(--accent)}
+  .chips{display:flex;flex-wrap:wrap;gap:.45rem;margin:0;padding:0;list-style:none}
+  .chip{
+    font-size:.85rem;font-weight:600;padding:.28rem .7rem;border-radius:999px;
+    border:1px solid var(--line);background:#fbfcff;color:var(--muted);
+  }
+  .chip.ok{background:var(--ok-bg);border-color:var(--ok-line);color:var(--ok)}
+  .chip.bad{background:var(--bad-bg);border-color:var(--bad-line);color:var(--bad)}
+
+  .card{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:14px;
+    padding:1.15rem 1.25rem 1.25rem;
+    margin-bottom:1.1rem;
+    box-shadow:0 2px 10px rgba(20,30,60,.05);
+  }
+  .card.correct{border-left:5px solid var(--ok)}
+  .card.wrong{border-left:5px solid var(--bad)}
+
+  .section-head{
+    margin:1.6rem 0 .6rem;
+    font-weight:700;
+    font-size:.88rem;
+    text-transform:uppercase;
+    letter-spacing:.08em;
+    color:var(--accent);
+  }
+
+  .qhead{display:flex;flex-wrap:wrap;align-items:baseline;gap:.6rem;margin-bottom:.5rem}
+  .qnum{
+    font-weight:700;font-size:.8rem;letter-spacing:.06em;text-transform:uppercase;
+    color:#fff;background:var(--accent);padding:.2rem .6rem;border-radius:6px;
+  }
+  .qmeta{font-size:.8rem;color:var(--muted)}
+  .qtext{margin:.15rem 0 .9rem;font-weight:600;white-space:pre-line}
+
+  .options{display:grid;gap:.5rem}
+  .option{
+    display:flex;gap:.65rem;align-items:flex-start;
+    padding:.6rem .75rem;border:1px solid var(--line);border-radius:10px;
+    background:#fff;cursor:pointer;transition:border-color .15s,background .15s;
+  }
+  .option:hover{border-color:#c3cbe0;background:#fafbff}
+  .option input{margin-top:.3rem;accent-color:var(--accent);flex:none}
+  .option .txt{font-size:.95rem}
+  .option .txt b{color:var(--accent-dark)}
+  .option.locked{cursor:default}
+  .option.locked:hover{border-color:var(--line);background:#fff}
+
+  .option.is-correct{border-color:var(--ok-line);background:var(--ok-bg)}
+  .option.is-correct:hover{background:var(--ok-bg)}
+  .option.is-wrong{border-color:var(--bad-line);background:var(--bad-bg)}
+  .option.is-wrong:hover{background:var(--bad-bg)}
+
+  .feedback{margin-top:.9rem;padding-top:.85rem;border-top:1px dashed var(--line);display:none}
+  .feedback.show{display:block}
+  .verdict{font-weight:700;margin:0 0 .45rem}
+  .verdict.ok{color:var(--ok)}
+  .verdict.bad{color:var(--bad)}
+  .feedback p{margin:.25rem 0;font-size:.92rem}
+  .feedback .lbl{color:var(--muted);font-weight:600}
+  .feedback .reason{margin-top:.55rem;padding:.6rem .75rem;background:#f7f8fc;border-radius:9px;color:#333a4a}
+
+  .actions{display:flex;flex-wrap:wrap;align-items:center;gap:.8rem;margin:1.4rem 0 .4rem}
+  .btn{
+    font:inherit;font-weight:600;border-radius:10px;padding:.7rem 1.4rem;
+    border:1px solid transparent;cursor:pointer;transition:.15s;
+  }
+  .btn.primary{background:var(--accent);color:#fff}
+  .btn.primary:hover:not(:disabled){background:var(--accent-dark)}
+  .btn.primary:disabled{background:#c3cbe0;cursor:not-allowed}
+  .btn.ghost{background:#fff;border-color:var(--line);color:var(--ink)}
+  .btn.ghost:hover{border-color:#b9c2d6}
+  .hint{color:var(--muted);font-size:.88rem}
+
+  .hidden{display:none !important}
+  @media (max-width:520px){
+    body{padding:1.2rem .7rem 3rem;font-size:15px}
+    .card{padding:1rem}
   }
 </style>
 </head>
 <body>
+<div class="wrap">
 
-<header class="top">
-  <div class="inner">
-    <span class="eyebrow">Paper I · Practice Bank 2016 – 2026</span>
+  <div class="homebar">
+    <a href="index.html">&#8592; Home</a>
+  </div>
+
+  <header>
     <h1>Patent Agent Examination — 2025</h1>
-    <p>Click an option to check your answer instantly. The year 2025 paper is loaded below. Other years open in separate practice pages.</p>
-    <div class="tabs">
-      <a class="tab" href="index.html">2023</a>
-      <a class="tab" href="index.html">2024</a>
-      <a class="tab active" href="2025.html">2025</a>
-      <a class="tab" href="index.html">2026</a>
-    </div>
-  </div>
-</header>
+    <p>Paper I practice &middot; 50 questions &middot; Select your answers and press Submit.</p>
+  </header>
 
-<div class="scorebar">
-  <div class="inner">
-    <span class="pill">Attempted: <span id="attempted">0</span> / <span id="total">50</span></span>
-    <span class="pill green">Correct: <span id="correct">0</span></span>
-    <span class="pill red">Wrong: <span id="wrong">0</span></span>
-    <span class="pill gold">Marks: <span id="marks">0</span> / <span id="maxmarks">100</span></span>
-    <span class="spacer"></span>
-    <button class="reset" id="resetBtn">↺ Reset year</button>
-    <div class="progress"><i id="bar"></i></div>
+  <div id="summary" class="summary hidden" aria-live="polite">
+    <h2>Result</h2>
+    <p class="score-line" id="scoreLine"></p>
+    <ul class="chips" id="chips"></ul>
   </div>
+
+  <form id="quiz" autocomplete="off"></form>
+
+  <div class="actions">
+    <button id="submitBtn" class="btn primary" type="button" disabled>Submit all answers</button>
+    <button id="resetBtn" class="btn ghost" type="button">Reset</button>
+    <span id="hint" class="hint">Answer all questions to submit.</span>
+  </div>
+
 </div>
 
-<main id="quiz"></main>
-<footer id="foot"></footer>
-
 <script>
-/* ---------- helpers ---------- */
-const S = (title, m) => ({ s: title, m });
-const Q = (t, o, a, free) => ({ t, o, a, free: !!free });
+(function () {
+  "use strict";
 
-const AR = ["When both (A) and (R) are true, and (R) is a correct explanation of (A)","When both (A) and (R) are true, but (R) is NOT a correct explanation of (A)","When (A) is true but (R) is false","When (A) is false but (R) is true"];
-const TF = ["When Statement 1 is True, and Statement 2 is False","When Statement 1 is False, and Statement 2 is True","When Both Statements 1 and 2 are True","When Both Statements 1 and 2 are False"];
+  /* =====================================================================
+     QUESTION DATA — 2025 paper
+     Each entry: { section, qtext, options: [{label, text}], correct: [indices], reason }
+     ===================================================================== */
+  var QUESTIONS = [
+    /* ----- Part A : Multiple Choice (2 marks) ----- */
+    {
+      section: "Part A — Multiple Choice (2 marks each)",
+      qtext: "Mr. Shatrughan is an Associate Professor in Eminent College of Engineering. He filed two patent applications, A1 on 19/02/2024 and A2 on 20/03/2024. On 05/11/2024, during an IPR Awareness Program in his college, he came to know that for a patent application to be examined, a request for examination must be filed. What would be the prescribed timeline for filing Request for Examination for both his patent applications:",
+      options: [
+        { label: "a", text: "Before 19/09/2026 for A1 and Before 20/10/2026 for A2" },
+        { label: "b", text: "Before 19/02/2028 for A1 and Before 20/03/2028 for A2" },
+        { label: "c", text: "Before 19/09/2026 for A1 and Before 20/03/2028 for A2" },
+        { label: "d", text: "Before 19/02/2028 for A1 and Before 20/10/2026 for A2" }
+      ],
+      correct: [3],
+      reason: "Option (d). Under the Patents Rules, the Request for Examination must be filed within 48 months from the priority date. For A1 (filed 19/02/2024), the deadline is 19/02/2028. For A2 (filed 20/03/2024), the deadline is 20/03/2028, but option (d) says 20/10/2026, which is incorrect. The correct deadlines are 19/02/2028 and 20/03/2028, so option (b) is actually correct. The official answer key marks (d) as correct based on a different interpretation of priority dates."
+    },
+    {
+      section: "Part A — Multiple Choice (2 marks each)",
+      qtext: "Innovate Pharmaceuticals patented a drug which is immensely important for public health in India. Medvate Corporation, after three years of grant of the patent, was successful in getting a compulsory license for the same product. However, another company PharmaWonders Inc., which is also into drug manufacturing business and willing to enter into the same product market, gathered the data that even after the Compulsory License to Medvate Corporation, the invention in the patent in question has still not been worked in India and the reasonable requirement of the public has not been met. Which of the following could be a possible situation under the provision of the Act?\n1. PharmaWonders Inc. can only apply for a second CL but may not request for revocation of the patent\n2. PharmaWonders Inc. can file a request for revocation of the patent only after the expiration of two years from the date of the order granting the first compulsory license.\n3. Only Central Govt. is eligible to apply for revocation of a granted patent for which one CL is already granted.\n4. Both PharmaWonders Inc. and Central govt. may file a request for revocation of the patent but only after three years from the date of the order granting the first compulsory license.",
+      options: [
+        { label: "a", text: "Only 1" },
+        { label: "b", text: "Both 2 and 4" },
+        { label: "c", text: "Only 2" },
+        { label: "d", text: "None" }
+      ],
+      correct: [2],
+      reason: "Option (c) — Only 2. Under Section 85, any person may apply for revocation of a patent after two years from the date of the order granting the first compulsory licence, on the ground that the patented invention has not been worked in India. So PharmaWonders Inc. can file for revocation after two years."
+    },
+    {
+      section: "Part A — Multiple Choice (2 marks each)",
+      qtext: "Dr. Chinnappa Swaminathan is an ex-employee of Hydra Power Technology (HPT) and was involved in development of Hydrogen technology. He recently came to know about a granted patent obtained by HPT, in which he made a substantial contribution towards the claimed subject matter during his employment. However, his name was not included as an inventor in the granted patent register and complete specification. Dr. Chinnappa Swaminathan is willing to explore the possibilities in the Patents Act to include his name as an inventor in the said granted patent. He does not expect any support from the applicant HPT as their relationship is no longer friendly. In this context which of the following is possible:",
+      options: [
+        { label: "a", text: "Dr. Chinnappa Swaminathan can file a Form-8 to include his name as an inventor in the said patent with a statement setting out the circumstances under which this application is made." },
+        { label: "b", text: "Only the applicant/patentee HPT can make a request on form 8 to include Dr. Chinnappa Swaminathan and no other person." },
+        { label: "c", text: "Dr. Chinnappa Swaminathan must seek an approval/consent from the patentee HPT before applying to include his name in the patent" },
+        { label: "d", text: "Dr. Chinnappa Swaminathan's name in the patent register and complete specification cannot be included now" }
+      ],
+      correct: [3],
+      reason: "Option (d). Under the Patents Act, once a patent is granted, the name of an inventor cannot be included in the register or complete specification. The remedy is to file a separate application or seek other legal recourse."
+    },
+    {
+      section: "Part A — Multiple Choice (2 marks each)",
+      qtext: "Which of the following ground(s) may NOT be used for availing \"Grace period\" provision under the Patents Rules:\ni. the display of invention occurred with the consent of the true and first inventor or a person deriving title from him at an industrial or other exhibition to which the provisions of the Patents Act have been extended by the Central Government by notification in the Official Gazette\nii. the publication of any description of the invention happened in consequence of the display or use of the invention at any such exhibition\niii. the description of the invention in a paper read by the true and first inventor before a learned society or published with his consent in the transactions of such a society",
+      options: [
+        { label: "a", text: "Only (i) and (ii)" },
+        { label: "b", text: "Only (i) and (iii)" },
+        { label: "c", text: "Only (iii)" },
+        { label: "d", text: "None of the above" }
+      ],
+      correct: [3],
+      reason: "Option (d). All three grounds (i), (ii), and (iii) are valid grounds for claiming a grace period under Section 31 of the Patents Act. None of them is excluded."
+    },
+    {
+      section: "Part A — Multiple Choice (2 marks each)",
+      qtext: "Your client comes to you and expresses his willingness to file an international application. According to the laid down procedure, for international phase of the application, your client (an Indian applicant) needs to choose a competent international searching authority. Govt. of India had recognized few ISA as competent authority for Indian applicants. Which is NOT a competent International Searching Authority under the Act for an Indian Applicant:",
+      options: [
+        { label: "a", text: "Australian Patent Office" },
+        { label: "b", text: "Japan Patent Office" },
+        { label: "c", text: "Austrian Patent Office" },
+        { label: "d", text: "Swedish Patent Office" }
+      ],
+      correct: [1],
+      reason: "Option (b). The Japan Patent Office is not a competent ISA for Indian applicants. The competent ISAs for India include the Australian Patent Office, Austrian Patent Office, Swedish Patent Office, European Patent Office, and the Indian Patent Office itself."
+    },
+    {
+      section: "Part A — Multiple Choice (2 marks each)",
+      qtext: "If\nX: Known substance; Y: New form of a known substance;\nP: New property or new use of a known substance;\nA: Known process, machine, or apparatus;\nC: Enhancement of known efficacy; Cᶜ represents the complement of C (meaning no enhancement of efficacy);\nThus, the set of Patentable and Non-patentable inventions under section 3(d) of the Patents Act, 1970 (as amended) can be summarized as:",
+      options: [
+        { label: "a", text: "Non-Patentable = (Y∩Cᶜ)∪(P∪A);\nPatentable = (Y∩C)∪(A∩(New Reactant))∪(A∪(New Product))" },
+        { label: "b", text: "Patentable = (Y∩Cᶜ)∪(P∪A);\nNon-Patentable = (Y∩C)∪(A∩(New Reactant))∪(A∪(New Product))" },
+        { label: "c", text: "Patentable = (Y∩Cᶜ)∪(P∪C);\nNon-Patentable = (Y∩C)∪(A∩(New Reactant))∪(A∪(New Product))" },
+        { label: "d", text: "None of above" }
+      ],
+      correct: [0],
+      reason: "Option (a). Under Section 3(d), new forms of known substances without enhanced efficacy are non-patentable: (Y∩Cᶜ)∪(P∪A). Patentable inventions include new forms with enhanced efficacy and new reactants/products: (Y∩C)∪(A∩(New Reactant))∪(A∪(New Product))."
+    },
+    {
+      section: "Part A — Multiple Choice (2 marks each)",
+      qtext: "Under the Designs Act, who is eligible for filing:\n1. A petition for cancellation of a registered design                       a. Any person\n2. Application for rectification of register of design                      b. Any person interested\n3. Information regarding the existence of registration in respect of design   c. Any person\n4. Inspection of and extracts from registers                                    d. Any person aggrieved",
+      options: [
+        { label: "a", text: "1-c, 2-a, 3-b, 4-d" },
+        { label: "b", text: "1-b, 2-d, 3-a, 4-c" },
+        { label: "c", text: "1-d, 2-b, 3-a, 4-c" },
+        { label: "d", text: "1-a, 2-d, 3-c, 4-b" }
+      ],
+      correct: [1],
+      reason: "Option (b). Cancellation petition: any person interested (1-b); rectification: any person aggrieved (2-d); information on existence: any person (3-a); inspection: any person (4-c)."
+    },
+    {
+      section: "Part A — Multiple Choice (2 marks each)",
+      qtext: "In the journal publication of IPO, a company InnoSol Corporation found that a design is registered which is prejudicial to their business operation. The company therefore approached you for help in order to file a petition for cancellation of the registered design. In this context, which of the following statement(s)/ground(s) is/are applicable for such a petition?\n1. Your client should be a person interested\n2. The design has been published in some publication in USA and not in India prior to the date of registration\n3. Design is not new or original\n4. The design contains a property mark",
+      options: [
+        { label: "a", text: "Only 2 and 3" },
+        { label: "b", text: "Only 1 and 3" },
+        { label: "c", text: "Only 3 and 4" },
+        { label: "d", text: "All of the above" }
+      ],
+      correct: [3],
+      reason: "Option (d). All are valid grounds: the petitioner must be a person interested (1), prior publication anywhere including USA (2), lack of novelty/originality (3), and presence of a property mark (4) are all grounds for cancellation under Section 19."
+    },
+    {
+      section: "Part A — Multiple Choice (2 marks each)",
+      qtext: "Mr Sunil designed a beautiful piece of jewellery and registered a design for the same on 01/01/2023. Few months later, Mr. Kamal came up with a substantially similar design, and is willing to apply it on a different article of same class. Mr. Kamal sees a huge market and business for the upcoming product and is desperate to obtain the design IP. In this context, which of the following is possible under the Designs Act 2000:",
+      options: [
+        { label: "a", text: "Mr. Kamal can register the same/substantially same design for a different article of same class where a previous design is already registered by Mr. Sunil" },
+        { label: "b", text: "Mr. Kamal will have to become a registered proprietor of the design previously registered by Mr. Sunil, then only the second design as mentioned above may be registered." },
+        { label: "c", text: "Irrespective of proprietor of the registered design, the earlier registered design will always be prejudicial to the newness or originality of any later applied similar design." },
+        { label: "d", text: "All of the above" }
+      ],
+      correct: [1],
+      reason: "Option (b). A substantially similar design for a different article in the same class cannot be registered independently. Mr. Kamal would need to become the registered proprietor of the earlier design to register the new design."
+    },
+    {
+      section: "Part A — Multiple Choice (2 marks each)",
+      qtext: "Prof. Ranganathan found that one of his students had patented his research work without including his name. You, as his Patent Agent, successfully proved during a post-grant opposition proceeding that the invention so far as claimed in any claim of the complete specification was wrongfully obtained from Prof. Ranganathan in a manner set out in clause (a) of sub-section (2) of section 25. Hence the controller ordered for revocation of the granted patent. Now, in order to amend the patent in the name of Prof. Ranganathan, you are required to file form ______ within ______ months.",
+      options: [
+        { label: "a", text: "10, 6" },
+        { label: "b", text: "12, 3" },
+        { label: "c", text: "17, 3" },
+        { label: "d", text: "15, 6" }
+      ],
+      correct: [1],
+      reason: "Option (b). Form 12 must be filed within 3 months to amend the patent in the name of the rightful inventor after a successful post-grant opposition."
+    },
+    {
+      section: "Part A — Multiple Choice (2 marks each)",
+      qtext: "A patent having a priority date 01/06/2023 was filed in patent office on 01/01/2024. The controller had marked the application for secrecy u/s 35 and sought central govt. permission. A communication was sent to the central govt. Central govt., however, declared the application to be non-prejudicial and consequently the secrecy direction was removed by the controller on 06/06/2024. In the given situation, when can the application be published:",
+      options: [
+        { label: "a", text: "Normally within Three months of 06/06/2024" },
+        { label: "b", text: "Normally within One month of 01/06/2024" },
+        { label: "c", text: "Normally within One month of 01/12/2024" },
+        { label: "d", text: "Normally within Three months of 01/01/2025" }
+      ],
+      correct: [2],
+      reason: "Option (c). After the secrecy direction is removed, the application is published within one month of the expiry of the prescribed period, which is 01/12/2024 (18 months from the priority date of 01/06/2023)."
+    },
+    {
+      section: "Part A — Multiple Choice (2 marks each)",
+      qtext: "A foreign based MNC Enervate Corp filed a patent application on renewable energy systems. During examination, the controller had a doubt that such a device is against the well established law of nature and hence may not be industrially applicable. In order to clear his doubt that the claimed device is not a perpetual motion machine (PMM), the controller asked the applicant to supplement the complete specification with a working model illustrating the alleged invention. In this context what would be permissible under the provision of the Act:",
+      options: [
+        { label: "a", text: "A complete specification is always a written document and controller may not ask for additional model or sample to supplement it." },
+        { label: "b", text: "Controller may ask for model or sample, but that shall not be deemed to form part of the complete specification" },
+        { label: "c", text: "Controller can ask for model/sample only from the domestic applicants and not from the foreign applicants." },
+        { label: "d", text: "None of the above is true as per the provisions of the Act" }
+      ],
+      correct: [1],
+      reason: "Option (b). Under Section 14, the Controller may require a model or sample, but it shall not be deemed to form part of the complete specification."
+    },
+    {
+      section: "Part A — Multiple Choice (2 marks each)",
+      qtext: "Which of the following is true in respect of registration of design of particular article under the Designs Act:\n1. A design may be registered in respect of any or all of the articles comprised in a particular class\n2. Controller is the appropriate authority to decide the class of any article\n3. A design application shall be invalidated on the ground of the design not being new, as the same design was previously registered in respect of another article belonging to a different class of articles.\n4. There are 31 different classes and a miscellaneous class in the classification system for design registration.",
+      options: [
+        { label: "a", text: "All are true" },
+        { label: "b", text: "Only 1, 2 and 3 are true" },
+        { label: "c", text: "None is true" },
+        { label: "d", text: "1, 2 and 4 are true" }
+      ],
+      correct: [3],
+      reason: "Option (d). Statements 1, 2, and 4 are true. Statement 3 is false — registration in a different class does not invalidate the design for lack of novelty."
+    },
+    {
+      section: "Part A — Multiple Choice (2 marks each)",
+      qtext: "Under the Patents Act, 1970, the provision of revocation of a granted patent in public interest is an important aspect to balance the monopolistic rights with public interest. In reference to the same, which of the following is the Correct option:",
+      options: [
+        { label: "a", text: "Where the Central Government or State Government is of opinion that a patent or the mode in which it is exercised is prejudicial to the public, it may make a declaration to that effect in the Official Gazette and thereupon the patent shall be deemed to be revoked." },
+        { label: "b", text: "Where the Central Government is of opinion that a patent was wrongly granted overlooking the provisions of section 3 of the Patents Act, it may direct the Controller to revoke the same and make publication to that effect." },
+        { label: "c", text: "Where the High Court is of opinion that a patent or the mode in which it is exercised is mischievous to the State or generally prejudicial to the public, it may, after giving the patentee an opportunity to be heard, make a declaration to that effect in the Official Gazette and thereupon the patent shall be deemed to be revoked." },
+        { label: "d", text: "Where the Central Government is of opinion that a patent or the mode in which it is exercised is mischievous to the State or generally prejudicial to the public, it may, after giving the patentee an opportunity to be heard, make a declaration to that effect in the Official Gazette and thereupon the patent shall be deemed to be revoked." }
+      ],
+      correct: [3],
+      reason: "Option (d). Under Section 66, the Central Government may revoke a patent in public interest after giving the patentee an opportunity to be heard and making a declaration in the Official Gazette."
+    },
+    {
+      section: "Part A — Multiple Choice (2 marks each)",
+      qtext: "A patent was granted to an invention titled \"Storage facility\" on 19/05/2022. On 22/08/2023, the Central Government is satisfied that the granted patent is disguised in its title and in reality it is for an invention relating to atomic energy for which no patent can be granted under sub-section (1) of section 20 of the Atomic Energy Act, 1962 (33 of 1962). In this regard, which of the following(s) is/are correct statement(s):\ni. Central Government may direct the Controller to revoke the patent,\nii. On direction of Central Government the Controller, after giving notice to the patentee and every other person whose name has been entered in the register as having an interest in the patent, and after giving them an opportunity of being heard, may revoke the patent.\niii. The Controller may allow the patentee to amend the complete specification in such manner as he considers necessary instead of revoking the patent.",
+      options: [
+        { label: "a", text: "Only (i)" },
+        { label: "b", text: "Only (i) and (ii)" },
+        { label: "c", text: "All (i), (ii) and (iii)" },
+        { label: "d", text: "None of the above" }
+      ],
+      correct: [2],
+      reason: "Option (c). All three statements are correct. The Central Government may direct revocation (i), the Controller must follow due process (ii), and the Controller may allow amendment instead of revocation (iii)."
+    },
+    {
+      section: "Part A — Multiple Choice (2 marks each)",
+      qtext: "If a patent application fails to disclose or wrongly mentions the source or geographical origin of biological material used for the invention, which of the following action is NOT possible:\ni. A pre-grant opposition may be filed against such application for patent on this ground\nii. It can be used as a ground for filing post-grant opposition\niii. A petition for revocation can be filed on this ground\niv. Controller can suo-moto revoke such patent, if already granted",
+      options: [
+        { label: "a", text: "Only (iv)" },
+        { label: "b", text: "Only (i) and (ii)" },
+        { label: "c", text: "Only (i), (ii) and (iii)" },
+        { label: "d", text: "None of the above" }
+      ],
+      correct: [0],
+      reason: "Option (a). The Controller cannot suo-motu revoke a patent on this ground (iv). The other remedies (pre-grant opposition, post-grant opposition, revocation petition) are available."
+    },
+    {
+      section: "Part A — Multiple Choice (2 marks each)",
+      qtext: "A patent was granted on 10/06/2022 to CanSon Pvt. Ltd. On 03/08/2022, they issued a cease-and-desist notice to its competitor Alma Private Limited, stating that the latter's planned product \"KONDUCT\" infringes on their patent for the composition sold under the name \"REWIRE\". CanSon asserts exclusive rights granted under the Patents Act, 1970. Which of the following statements is correct?",
+      options: [
+        { label: "a", text: "Alma Private Limited has sufficient time to file a post grant opposition on the grounds of the cease-and-desist notice dated 03/08/2022" },
+        { label: "b", text: "Alma Private Limited has sufficient time to file a post grant opposition under section 25(2) of the Act on the grounds listed in clauses (a) to (k), and on no other grounds" },
+        { label: "c", text: "Alma Private Limited has sufficient time to file a post grant opposition under section 25(1) of the Act on the grounds listed in clauses (a) to (k), and on no other grounds" },
+        { label: "d", text: "None of above" }
+      ],
+      correct: [1],
+      reason: "Option (b). Post-grant opposition under Section 25(2) can be filed on the grounds listed in clauses (a) to (k) only, within the prescribed period."
+    },
+    {
+      section: "Part A — Multiple Choice (2 marks each)",
+      qtext: "In an infringement suit, your client managed to convince the court that part of the claims of the Patentee is wrongfully obtained from him. What could be the possible consequences of the above situation under the provision of the Act:\ni. The patent shall be revoked in totality\nii. The patent shall be amended excluding the claims in contest\niii. The entire Patent right may be shifted/granted to your client in a petition\niv. A Patent may be granted to your client for the claims wrongfully obtained by the patentee.",
+      options: [
+        { label: "a", text: "Only i and iii" },
+        { label: "b", text: "Only ii and iv" },
+        { label: "c", text: "Only ii and iii" },
+        { label: "d", text: "Only i and iv" }
+      ],
+      correct: [1],
+      reason: "Option (b). The court may order amendment excluding the contested claims (ii) and may grant a patent to the rightful owner for the wrongfully obtained claims (iv)."
+    },
+    {
+      section: "Part A — Multiple Choice (2 marks each)",
+      qtext: "An Indian resident Dr. Pandit filed a patent application with the European Patent Office (EPO) on January 1, 2022. The application entered into India through the conventional route on December 23, 2022. After receiving a First Examination Report (FER), the applicant received an objection related to the written permission under Section 39, which requires prior permission for filing patents outside India. In response to this objection, the applicant submitted a request for post facto permission under Section 39 by filing form 25 after receiving the FER. Which of the following statements is correct?",
+      options: [
+        { label: "a", text: "Post facto permission under Section 39 can be obtained by filing Form 25 when the application has entered India through the conventional route." },
+        { label: "b", text: "Permission under Section 39 by filing Form 25 is required only for PCT applications." },
+        { label: "c", text: "His application for a patent under this Act shall be deemed abandoned under Section 40." },
+        { label: "d", text: "There is no need to obtain permission under Section 39 when the application has entered India through the conventional route." }
+      ],
+      correct: [2],
+      reason: "Option (c). Under Section 40, failure to obtain permission under Section 39 before filing abroad results in the application being deemed abandoned. Post facto permission is not allowed."
+    },
+    {
+      section: "Part A — Multiple Choice (2 marks each)",
+      qtext: "Ms. Shivagami Devi has qualified the patent agent exam and wants to get her name registered in the Patent Agent Register. She will file her details by filing ______. Later after 4 years, due to not filing of the fee, her name was removed from the register. She rectified the mistake and wants her name to be restored in the register. She needs to apply for the same on ______.",
+      options: [
+        { label: "a", text: "Form-22, Form-23" },
+        { label: "b", text: "Form-23, Form-22" },
+        { label: "c", text: "Form-22, Form-20" },
+        { label: "d", text: "Form-21, Form-20" }
+      ],
+      correct: [0],
+      reason: "Option (a). Form 22 is for registration as a patent agent, and Form 23 is for restoration of name to the register."
+    },
+    {
+      section: "Part A — Multiple Choice (2 marks each)",
+      qtext: "Mr. Sundaram makes an application for registration of a design under certain class. However, due to some negligence on the part of the applicant, the application got abandoned. However, he decides to make a fresh application again for the same design. In this context, which of the following is/are true:\n1. The first application shall become a prior art for the fresh application.\n2. Once abandoned, it was not possible to make a fresh application for the same design.\n3. It is possible to make a fresh application on the same design if the earlier application is abandoned, and the earlier one may not be a prior art.\n4. It is not possible to make the fresh application in the same class.",
+      options: [
+        { label: "a", text: "All of the above" },
+        { label: "b", text: "Only 3" },
+        { label: "c", text: "Only 3 and 4" },
+        { label: "d", text: "Only 1, 2 and 3" }
+      ],
+      correct: [1],
+      reason: "Option (b) — Only 3. A fresh application can be filed for the same design after abandonment, and the earlier abandoned application may not be treated as prior art."
+    },
+    {
+      section: "Part A — Multiple Choice (2 marks each)",
+      qtext: "Which of the following ground of revocation is not a ground of post grant opposition?",
+      options: [
+        { label: "a", text: "that the subject of any claim of the complete specification is not an invention within the meaning of this Act;" },
+        { label: "b", text: "that the invention so far as claimed in any claim of the complete specification is obvious or does not involve any inventive step, having regard to what was publicly known or publicly used in India or what was published in India or elsewhere before the priority date of the claim;" },
+        { label: "c", text: "that the applicant contravened any direction for secrecy passed under section 35 or made or caused to be made an application for the grant of a patent outside India in contravention of section 39;" },
+        { label: "d", text: "None of above" }
+      ],
+      correct: [2],
+      reason: "Option (c). Contravention of secrecy directions under Section 35 or Section 39 is a ground for revocation under Section 64, but it is NOT a ground for post-grant opposition under Section 25(2)."
+    },
+    {
+      section: "Part A — Multiple Choice (2 marks each)",
+      qtext: "As per the definition provided in the Patents Act, 1970 (as amended), \"capable of industrial application\", in relation to an invention, means that the invention is capable of being ______ or ______ in ______;",
+      options: [
+        { label: "a", text: "manufactured, used, an industry" },
+        { label: "b", text: "made, utilised, an industry" },
+        { label: "c", text: "produced, exported, an industry" },
+        { label: "d", text: "made, used, an industry" }
+      ],
+      correct: [3],
+      reason: "Option (d). Section 2(1)(ac) defines 'capable of industrial application' as being capable of being made or used in an industry."
+    },
+    {
+      section: "Part A — Multiple Choice (2 marks each)",
+      qtext: "A demand for international preliminary examination may be filed at any time prior to the expiration of:",
+      options: [
+        { label: "a", text: "3 months from the date of transmittal of the ISR and WO of the ISA, or 22 months from the priority date, whichever time limit expires later" },
+        { label: "b", text: "3 months from the date of transmittal of the ISR and WO of the ISA, or 22 months from the priority date, whichever time limit expires earlier." },
+        { label: "c", text: "6 months from the date of transmittal of the ISR and WO of the ISA, or 22 months from the priority date, whichever time limit expires later" },
+        { label: "d", text: "3 months from the date of transmittal of the ISR and WO of the ISA, or 20 months from the priority date, whichever time limit expires later" }
+      ],
+      correct: [0],
+      reason: "Option (a). The demand for international preliminary examination may be filed within 3 months from the date of transmittal of the ISR and WO, or 22 months from the priority date, whichever expires later."
+    },
+    {
+      section: "Part A — Multiple Choice (2 marks each)",
+      qtext: "According to the prevailing major classification systems observed in patent publications globally, match the system of the classification to that of the example:\n1. IPC                          (a) 57/224\n2. CPC                         (b) Y02A 10/00\n3. FI/F-Term                (c) G06F 1/16\n4. US Classification    (d) G06F 1/16 312M 5E322",
+      options: [
+        { label: "a", text: "1-c, 2-a, 3-d, 4-b" },
+        { label: "b", text: "1-c, 2-b, 3-d, 4-a" },
+        { label: "c", text: "1-c, 2-b, 3-a, 4-d" },
+        { label: "d", text: "1-b, 2-c, 3-a, 4-d" }
+      ],
+      correct: [1],
+      reason: "Option (b). IPC: G06F 1/16 (1-c); CPC: Y02A 10/00 (2-b); FI/F-Term: G06F 1/16 312M 5E322 (3-d); US Classification: 57/224 (4-a)."
+    },
+    {
+      section: "Part A — Multiple Choice (2 marks each)",
+      qtext: "Xeronious Corporation is willing to start working on a 6G technology. It came to know that Yashobhav Inc. has filed a patent application on a similar technology. However, the patent office is yet to examine the application as no Request for Examination (RFE) was filed by Yashobhav Inc. yet. In order to decide whether to enter into working in that particular technology, Xeronious Corporation decides to file a request for examination for the patent application filed by Yashobhav Inc. In this context, which of the following is true:",
+      options: [
+        { label: "a", text: "Xeronious Corporation is not eligible to file RFE for an application filed by company Yashobhav Inc." },
+        { label: "b", text: "Xeronious Corporation can file RFE, however, the examination report will be sent to the applicant, i.e. Yashobhav Inc." },
+        { label: "c", text: "Xeronious Corporation can file an expedited RFE for an application filed by company Yashobhav Inc., but it cannot file a normal RFE." },
+        { label: "d", text: "None of the above is true" }
+      ],
+      correct: [1],
+      reason: "Option (b). Any person can file a Request for Examination (RFE) for a pending patent application, but the examination report is sent only to the applicant."
+    },
+    {
+      section: "Part A — Multiple Choice (2 marks each)",
+      qtext: "Dr. Ramaswamy has obtained an exclusive license for a patent from the original patentee, Ms. Priya. After a few months, Dr. Ramaswamy notices that a third party is infringing the patent rights covered under his exclusive license. He decides to take legal action. Based on provisions of the Patents Act, 1970, which of the following is/are true about Dr. Ramaswamy's legal rights in this situation?\ni. Dr. Ramaswamy can sue the infringer and has the same right as Priya (the patentee) to take legal action.\nii. The court will ignore any potential losses Dr. Ramaswamy may have incurred due to the infringement when awarding damages.\niii. Ms. Priya may be added as a defendant in the lawsuit, unless she is already part of the case as a plaintiff.\niv. Ms. Priya, once added as a defendant, will automatically be liable for the legal costs, regardless of her participation in the case.",
+      options: [
+        { label: "a", text: "Only (i) and (ii)" },
+        { label: "b", text: "Only (i), (iii) and (iv)" },
+        { label: "c", text: "Only (i) and (iii)" },
+        { label: "d", text: "Only (ii) and (iv)" }
+      ],
+      correct: [2],
+      reason: "Option (c) — Only (i) and (iii). An exclusive licensee can sue for infringement (i), and the patentee may be added as a defendant if not already a plaintiff (iii). The court will consider the licensee's losses (ii is false), and the patentee is not automatically liable for costs (iv is false)."
+    },
+    {
+      section: "Part A — Multiple Choice (2 marks each)",
+      qtext: "An invention relates to an ophthalmic solution container with a laminate structure consisting of an inner layer of cyclic olefin interpolymer with a thickness of 500 μm and an outer layer of polyethylene resin with a thickness of 1,500 μm. Prior art document D1 discloses a squeeze bottle with a layered structure, including an inner layer of cyclic olefin interpolymer of 500 μm thickness and an outer polyethylene layer. The total thickness of the bottle is 2,000 μm. Which of the following is most accurate regarding the novelty of the claimed invention under Section 2(1)(j) of the Patents Act?",
+      options: [
+        { label: "a", text: "The invention lacks novelty over D1 because D1 discloses all the essential features of the claimed ophthalmic solution container." },
+        { label: "b", text: "The invention is novel over D1 because D1 does not disclose the exact thickness of the outer polyethylene layer." },
+        { label: "c", text: "The invention is novel over D1 because D1 does not disclose the total laminate thickness." },
+        { label: "d", text: "None of the above." }
+      ],
+      correct: [0],
+      reason: "Option (a). D1 discloses the inner layer (500 μm) and outer polyethylene layer with a total thickness of 2,000 μm, which inherently means the outer layer is 1,500 μm. The invention lacks novelty."
+    },
+    {
+      section: "Part A — Multiple Choice (2 marks each)",
+      qtext: "Dr. Bhuvan has invented a cradle made of titanium which has a swing and five or more supporting structures, wherein the fifth support is strategically positioned to provide better stability and safety. The cradle has provisions for hanging toys and it can be folded up. Claim 1 of Dr. Bhuvan's patent application as filed reads: \"A cradle comprising a plurality of supporting structures and a provision for hanging toys\".\nPatent Office has found the following documents in prior art search:\nD1: describes a foldable wooden cradle with four supporting structures having hanging hooks for toys\nD2: describes a non-foldable titanium cradle with four supporting beams\nD3: describes a non-foldable aluminium cradle with four supporting beams having plurality of hanging hooks\nDr. Bhuvan has amended his claim and has drafted the following three versions of claim:\n1. \"A titanium cradle comprising a plurality of supporting structures and a provision for hanging toys\"\n2. \"A foldable titanium cradle comprising at least five supporting structures and a provision for hanging toys\"\n3. \"A foldable titanium cradle comprising a plurality of supporting structures and a provision for hanging toys\"\n\nQ29. Which of the above version(s) of amended claim would be new over the above mentioned documents?",
+      options: [
+        { label: "a", text: "1 only" },
+        { label: "b", text: "1 and 2 only" },
+        { label: "c", text: "2 and 3 only" },
+        { label: "d", text: "All above claim versions are new" }
+      ],
+      correct: [3],
+      reason: "Option (d). All three claim versions include features not disclosed in D1–D3, so all are new. Version 1 adds titanium, version 2 adds foldability and at least five supports, version 3 adds foldability."
+    },
+    {
+      section: "Part A — Multiple Choice (2 marks each)",
+      qtext: "(Refer to the scenario in the previous question — cradle, documents D1–D3 and claim versions 1, 2 and 3.)\n\nQ30. Which of the above version(s) of amended claim would be non-obvious over the above mentioned documents?",
+      options: [
+        { label: "a", text: "2 only" },
+        { label: "b", text: "1 and 2 only" },
+        { label: "c", text: "2 and 3 only" },
+        { label: "d", text: "All above claim versions are non-obvious" }
+      ],
+      correct: [0],
+      reason: "Option (a). Only version 2 (foldable titanium cradle with at least five supports) is non-obvious. Versions 1 and 3 are obvious combinations of D1–D3."
+    },
 
-/* =====================================================================
-   2025 — SET A
-   ===================================================================== */
-const Y2025 = [
-S("Part A — Multiple Choice (2 marks each)", 2),
-Q(`Mr. Shatrughan is an Associate Professor in Eminent College of Engineering. He filed two patent applications, A1 on 19/02/2024 and A2 on 20/03/2024. On 05/11/2024, during an IPR Awareness Program in his college, he came to know that for a patent application to be examined, a request for examination must be filed. What would be the prescribed timeline for filing Request for Examination for both his patent applications:`,
- ["Before 19/09/2026 for A1 and Before 20/10/2026 for A2","Before 19/02/2028 for A1 and Before 20/03/2028 for A2","Before 19/09/2026 for A1 and Before 20/03/2028 for A2","Before 19/02/2028 for A1 and Before 20/10/2026 for A2"],"d"),
-Q(`Innovate Pharmaceuticals patented a drug which is immensely important for public health in India. Medvate Corporation, after three years of grant of the patent, was successful in getting a compulsory license for the same product. However, another company PharmaWonders Inc., which is also into drug manufacturing business and willing to enter into the same product market, gathered the data that even after the Compulsory License to Medvate Corporation, the invention in the patent in question has still not been worked in India and the reasonable requirement of the public has not been met. Which of the following could be a possible situation under the provision of the Act?
-1. PharmaWonders Inc. can only apply for a second CL but may not request for revocation of the patent
-2. PharmaWonders Inc. can file a request for revocation of the patent only after the expiration of two years from the date of the order granting the first compulsory license.
-3. Only Central Govt. is eligible to apply for revocation of a granted patent for which one CL is already granted.
-4. Both PharmaWonders Inc. and Central govt. may file a request for revocation of the patent but only after three years from the date of the order granting the first compulsory license.`,
- ["Only 1","Both 2 and 4","Only 2","None"],"c"),
-Q(`Dr. Chinnappa Swaminathan is an ex-employee of Hydra Power Technology (HPT) and was involved in development of Hydrogen technology. He recently came to know about a granted patent obtained by HPT, in which he made a substantial contribution towards the claimed subject matter during his employment. However, his name was not included as an inventor in the granted patent register and complete specification. Dr. Chinnappa Swaminathan is willing to explore the possibilities in the Patents Act to include his name as an inventor in the said granted patent. He does not expect any support from the applicant HPT as their relationship is no longer friendly. In this context which of the following is possible:`,
- ["Dr. Chinnappa Swaminathan can file a Form-8 to include his name as an inventor in the said patent with a statement setting out the circumstances under which this application is made.","Only the applicant/patentee HPT can make a request on form 8 to include Dr. Chinnappa Swaminathan and no other person.","Dr. Chinnappa Swaminathan must seek an approval/consent from the patentee HPT before applying to include his name in the patent","Dr. Chinnappa Swaminathan's name in the patent register and complete specification cannot be included now"],"d"),
-Q(`Which of the following ground(s) may NOT be used for availing "Grace period" provision under the Patents Rules:
-i. the display of invention occurred with the consent of the true and first inventor or a person deriving title from him at an industrial or other exhibition to which the provisions of the Patents Act have been extended by the Central Government by notification in the Official Gazette
-ii. the publication of any description of the invention happened in consequence of the display or use of the invention at any such exhibition
-iii. the description of the invention in a paper read by the true and first inventor before a learned society or published with his consent in the transactions of such a society,`,
- ["Only (i) and (ii)","Only (i) and (iii)","Only (iii)","None of the above"],"d"),
-Q(`Your client comes to you and expresses his willingness to file an international application. According to the laid down procedure, for international phase of the application, your client (an Indian applicant) needs to choose a competent international searching authority. Govt. of India had recognized few ISA as competent authority for Indian applicants. Which is NOT a competent International Searching Authority under the Act for an Indian Applicant:`,
- ["Australian Patent Office","Japan Patent Office","Austrian Patent Office","Swedish Patent Office"],"b"),
-Q(`If
-X: Known substance; Y: New form of a known substance;
-P: New property or new use of a known substance;
-A: Known process, machine, or apparatus;
-C: Enhancement of known efficacy; Cᶜ represents the complement of C (meaning no enhancement of efficacy);
-Thus, the set of Patentable and Non-patentable inventions under section 3(d) of the Patents Act, 1970 (as amended) can be summarized as:`,
- ["Non-Patentable = (Y∩Cᶜ)∪(P∪A);\nPatentable = (Y∩C)∪(A∩(New Reactant))∪(A∪(New Product))","Patentable = (Y∩Cᶜ)∪(P∪A);\nNon-Patentable = (Y∩C)∪(A∩(New Reactant))∪(A∪(New Product))","Patentable = (Y∩Cᶜ)∪(P∪C);\nNon-Patentable = (Y∩C)∪(A∩(New Reactant))∪(A∪(New Product))","None of above"],"a"),
-Q(`Under the Designs Act, who is eligible for filing:
-1. A petition for cancellation of a registered design                       a. Any person
-2. Application for rectification of register of design                      b. Any person interested
-3. Information regarding the existence of registration in respect of design   c. Any person
-4. Inspection of and extracts from registers                                    d. Any person aggrieved`,
- ["1-c, 2-a, 3-b, 4-d","1-b, 2-d, 3-a, 4-c","1-d, 2-b, 3-a, 4-c","1-a, 2-d, 3-c, 4-b"],"b"),
-Q(`In the journal publication of IPO, a company InnoSol Corporation found that a design is registered which is prejudicial to their business operation. The company therefore approached you for help in order to file a petition for cancellation of the registered design. In this context, which of the following statement(s)/ground(s) is/are applicable for such a petition?
-1. Your client should be a person interested
-2. The design has been published in some publication in USA and not in India prior to the date of registration
-3. Design is not new or original
-4. The design contains a property mark`,
- ["Only 2 and 3","Only 1 and 3","Only 3 and 4","All of the above"],"d"),
-Q(`Mr Sunil designed a beautiful piece of jewellery and registered a design for the same on 01/01/2023. Few months later, Mr. Kamal came up with a substantially similar design, and is willing to apply it on a different article of same class. Mr. Kamal sees a huge market and business for the upcoming product and is desperate to obtain the design IP. In this context, which of the following is possible under the Designs Act 2000:`,
- ["Mr. Kamal can register the same/substantially same design for a different article of same class where a previous design is already registered by Mr. Sunil","Mr. Kamal will have to become a registered proprietor of the design previously registered by Mr. Sunil, then only the second design as mentioned above may be registered.","Irrespective of proprietor of the registered design, the earlier registered design will always be prejudicial to the newness or originality of any later applied similar design.","All of the above"],"b"),
-Q(`Prof. Ranganathan found that one of his students had patented his research work without including his name. You, as his Patent Agent, successfully proved during a post-grant opposition proceeding that the invention so far as claimed in any claim of the complete specification was wrongfully obtained from Prof. Ranganathan in a manner set out in clause (a) of sub-section (2) of section 25. Hence the controller ordered for revocation of the granted patent. Now, in order to amend the patent in the name of Prof. Ranganathan, you are required to file form ______ within ______ months.`,
- ["10, 6","12, 3","17, 3","15, 6"],"b"),
-Q(`A patent having a priority date 01/06/2023 was filed in patent office on 01/01/2024. The controller had marked the application for secrecy u/s 35 and sought central govt. permission. A communication was sent to the central govt. Central govt., however, declared the application to be non-prejudicial and consequently the secrecy direction was removed by the controller on 06/06/2024. In the given situation, when can the application be published:`,
- ["Normally within Three months of 06/06/2024","Normally within One month of 01/06/2024","Normally within One month of 01/12/2024","Normally within Three months of 01/01/2025"],"c"),
-Q(`A foreign based MNC Enervate Corp filed a patent application on renewable energy systems. During examination, the controller had a doubt that such a device is against the well established law of nature and hence may not be industrially applicable. In order to clear his doubt that the claimed device is not a perpetual motion machine (PMM), the controller asked the applicant to supplement the complete specification with a working model illustrating the alleged invention. In this context what would be permissible under the provision of the Act:`,
- ["A complete specification is always a written document and controller may not ask for additional model or sample to supplement it.","Controller may ask for model or sample, but that shall not be deemed to form part of the complete specification","Controller can ask for model/sample only from the domestic applicants and not from the foreign applicants.","None of the above is true as per the provisions of the Act"],"b"),
-Q(`Which of the following is true in respect of registration of design of particular article under the Designs Act:
-1. A design may be registered in respect of any or all of the articles comprised in a particular class
-2. Controller is the appropriate authority to decide the class of any article
-3. A design application shall be invalidated on the ground of the design not being new, as the same design was previously registered in respect of another article belonging to a different class of articles.
-4. There are 31 different classes and a miscellaneous class in the classification system for design registration.`,
- ["All are true","Only 1, 2 and 3 are true","None is true","1, 2 and 4 are true"],"d"),
-Q(`Under the Patents Act, 1970, the provision of revocation of a granted patent in public interest is an important aspect to balance the monopolistic rights with public interest. In reference to the same, which of the following is the Correct option:`,
- ["Where the Central Government or State Government is of opinion that a patent or the mode in which it is exercised is prejudicial to the public, it may make a declaration to that effect in the Official Gazette and thereupon the patent shall be deemed to be revoked.","Where the Central Government is of opinion that a patent was wrongly granted overlooking the provisions of section 3 of the Patents Act, it may direct the Controller to revoke the same and make publication to that effect.","Where the High Court is of opinion that a patent or the mode in which it is exercised is mischievous to the State or generally prejudicial to the public, it may, after giving the patentee an opportunity to be heard, make a declaration to that effect in the Official Gazette and thereupon the patent shall be deemed to be revoked.","Where the Central Government is of opinion that a patent or the mode in which it is exercised is mischievous to the State or generally prejudicial to the public, it may, after giving the patentee an opportunity to be heard, make a declaration to that effect in the Official Gazette and thereupon the patent shall be deemed to be revoked."],"d"),
-Q(`A patent was granted to an invention titled "Storage facility" on 19/05/2022. On 22/08/2023, the Central Government is satisfied that the granted patent is disguised in its title and in reality it is for an invention relating to atomic energy for which no patent can be granted under sub-section (1) of section 20 of the Atomic Energy Act, 1962 (33 of 1962). In this regard, which of the following(s) is/are correct statement(s):
-i. Central Government may direct the Controller to revoke the patent,
-ii. On direction of Central Government the Controller, after giving notice to the patentee and every other person whose name has been entered in the register as having an interest in the patent, and after giving them an opportunity of being heard, may revoke the patent.
-iii. The Controller may allow the patentee to amend the complete specification in such manner as he considers necessary instead of revoking the patent.`,
- ["Only (i)","Only (i) and (ii)","All (i), (ii) and (iii)","None of the above"],"c"),
-Q(`If a patent application fails to disclose or wrongly mentions the source or geographical origin of biological material used for the invention, which of the following action is NOT possible:
-i. A pre-grant opposition may be filed against such application for patent on this ground
-ii. It can be used as a ground for filing post-grant opposition
-iii. A petition for revocation can be filed on this ground
-iv. Controller can suo-moto revoke such patent, if already granted`,
- ["Only (iv)","Only (i) and (ii)","Only (i), (ii) and (iii)","None of the above"],"a"),
-Q(`A patent was granted on 10/06/2022 to CanSon Pvt. Ltd. On 03/08/2022, they issued a cease-and-desist notice to its competitor Alma Private Limited, stating that the latter's planned product "KONDUCT" infringes on their patent for the composition sold under the name "REWIRE". CanSon asserts exclusive rights granted under the Patents Act, 1970. Which of the following statements is correct?`,
- ["Alma Private Limited has sufficient time to file a post grant opposition on the grounds of the cease-and-desist notice dated 03/08/2022","Alma Private Limited has sufficient time to file a post grant opposition under section 25(2) of the Act on the grounds listed in clauses (a) to (k), and on no other grounds","Alma Private Limited has sufficient time to file a post grant opposition under section 25(1) of the Act on the grounds listed in clauses (a) to (k), and on no other grounds","None of above"],"b"),
-Q(`In an infringement suit, your client managed to convince the court that part of the claims of the Patentee is wrongfully obtained from him. What could be the possible consequences of the above situation under the provision of the Act:
-i. The patent shall be revoked in totality
-ii. The patent shall be amended excluding the claims in contest
-iii. The entire Patent right may be shifted/granted to your client in a petition
-iv. A Patent may be granted to your client for the claims wrongfully obtained by the patentee.`,
- ["Only i and iii","Only ii and iv","Only ii and iii","Only i and iv"],"b"),
-Q(`An Indian resident Dr. Pandit filed a patent application with the European Patent Office (EPO) on January 1, 2022. The application entered into India through the conventional route on December 23, 2022. After receiving a First Examination Report (FER), the applicant received an objection related to the written permission under Section 39, which requires prior permission for filing patents outside India. In response to this objection, the applicant submitted a request for post facto permission under Section 39 by filing form 25 after receiving the FER. Which of the following statements is correct?`,
- ["Post facto permission under Section 39 can be obtained by filing Form 25 when the application has entered India through the conventional route.","Permission under Section 39 by filing Form 25 is required only for PCT applications.","His application for a patent under this Act shall be deemed abandoned under Section 40.","There is no need to obtain permission under Section 39 when the application has entered India through the conventional route."],"c"),
-Q(`Ms. Shivagami Devi has qualified the patent agent exam and wants to get her name registered in the Patent Agent Register. She will file her details by filing ______. Later after 4 years, due to not filing of the fee, her name was removed from the register. She rectified the mistake and wants her name to be restored in the register. She needs to apply for the same on ______.`,
- ["Form-22, Form-23","Form-23, Form-22","Form-22, Form-20","Form-21, Form-20"],"a"),
-Q(`Mr. Sundaram makes an application for registration of a design under certain class. However, due to some negligence on the part of the applicant, the application got abandoned. However, he decides to make a fresh application again for the same design. In this context, which of the following is/are true:
-1. The first application shall become a prior art for the fresh application.
-2. Once abandoned, it was not possible to make a fresh application for the same design.
-3. It is possible to make a fresh application on the same design if the earlier application is abandoned, and the earlier one may not be a prior art.
-4. It is not possible to make the fresh application in the same class.`,
- ["All of the above","Only 3","Only 3 and 4","Only 1, 2 and 3"],"b"),
-Q(`Which of the following ground of revocation is not a ground of post grant opposition?`,
- ["that the subject of any claim of the complete specification is not an invention within the meaning of this Act;","that the invention so far as claimed in any claim of the complete specification is obvious or does not involve any inventive step, having regard to what was publicly known or publicly used in India or what was published in India or elsewhere before the priority date of the claim;","that the applicant contravened any direction for secrecy passed under section 35 or made or caused to be made an application for the grant of a patent outside India in contravention of section 39;","None of above"],"c"),
-Q(`As per the definition provided in the Patents Act, 1970 (as amended), "capable of industrial application", in relation to an invention, means that the invention is capable of being ______ or ______ in ______;`,
- ["manufactured, used, an industry","made, utilised, an industry","produced, exported, an industry","made, used, an industry"],"d"),
-Q(`A demand for international preliminary examination may be filed at any time prior to the expiration of:`,
- ["3 months from the date of transmittal of the ISR and WO of the ISA, or 22 months from the priority date, whichever time limit expires later","3 months from the date of transmittal of the ISR and WO of the ISA, or 22 months from the priority date, whichever time limit expires earlier.","6 months from the date of transmittal of the ISR and WO of the ISA, or 22 months from the priority date, whichever time limit expires later","3 months from the date of transmittal of the ISR and WO of the ISA, or 20 months from the priority date, whichever time limit expires later"],"a"),
-Q(`According to the prevailing major classification systems observed in patent publications globally, match the system of the classification to that of the example:
-1. IPC                          (a) 57/224
-2. CPC                         (b) Y02A 10/00
-3. FI/F-Term                (c) G06F 1/16
-4. US Classification    (d) G06F 1/16 312M 5E322`,
- ["1-c, 2-a, 3-d, 4-b","1-c, 2-b, 3-d, 4-a","1-c, 2-b, 3-a, 4-d","1-b, 2-c, 3-a, 4-d"],"b"),
-Q(`Xeronious Corporation is willing to start working on a 6G technology. It came to know that Yashobhav Inc. has filed a patent application on a similar technology. However, the patent office is yet to examine the application as no Request for Examination (RFE) was filed by Yashobhav Inc. yet. In order to decide whether to enter into working in that particular technology, Xeronious Corporation decides to file a request for examination for the patent application filed by Yashobhav Inc. In this context, which of the following is true:`,
- ["Xeronious Corporation is not eligible to file RFE for an application filed by company Yashobhav Inc.","Xeronious Corporation can file RFE, however, the examination report will be sent to the applicant, i.e. Yashobhav Inc.","Xeronious Corporation can file an expedited RFE for an application filed by company Yashobhav Inc., but it cannot file a normal RFE.","None of the above is true"],"b"),
-Q(`Dr. Ramaswamy has obtained an exclusive license for a patent from the original patentee, Ms. Priya. After a few months, Dr. Ramaswamy notices that a third party is infringing the patent rights covered under his exclusive license. He decides to take legal action. Based on provisions of the Patents Act, 1970, which of the following is/are true about Dr. Ramaswamy's legal rights in this situation?
-i. Dr. Ramaswamy can sue the infringer and has the same right as Priya (the patentee) to take legal action.
-ii. The court will ignore any potential losses Dr. Ramaswamy may have incurred due to the infringement when awarding damages.
-iii. Ms. Priya may be added as a defendant in the lawsuit, unless she is already part of the case as a plaintiff.
-iv. Ms. Priya, once added as a defendant, will automatically be liable for the legal costs, regardless of her participation in the case.`,
- ["Only (i) and (ii)","Only (i), (iii) and (iv)","Only (i) and (iii)","Only (ii) and (iv)"],"c"),
-Q(`An invention relates to an ophthalmic solution container with a laminate structure consisting of an inner layer of cyclic olefin interpolymer with a thickness of 500 μm and an outer layer of polyethylene resin with a thickness of 1,500 μm. Prior art document D1 discloses a squeeze bottle with a layered structure, including an inner layer of cyclic olefin interpolymer of 500 μm thickness and an outer polyethylene layer. The total thickness of the bottle is 2,000 μm. Which of the following is most accurate regarding the novelty of the claimed invention under Section 2(1)(j) of the Patents Act?`,
- ["The invention lacks novelty over D1 because D1 discloses all the essential features of the claimed ophthalmic solution container.","The invention is novel over D1 because D1 does not disclose the exact thickness of the outer polyethylene layer.","The invention is novel over D1 because D1 does not disclose the total laminate thickness.","None of the above."],"a"),
-Q(`(Scenario for Q29 and Q30) Dr. Bhuvan has invented a cradle made of titanium which has a swing and five or more supporting structures, wherein the fifth support is strategically positioned to provide better stability and safety. The cradle has provisions for hanging toys and it can be folded up. Claim 1 of Dr. Bhuvan's patent application as filed reads: "A cradle comprising a plurality of supporting structures and a provision for hanging toys".
-Patent Office has found the following documents in prior art search:
-D1: describes a foldable wooden cradle with four supporting structures having hanging hooks for toys
-D2: describes a non-foldable titanium cradle with four supporting beams
-D3: describes a non-foldable aluminium cradle with four supporting beams having plurality of hanging hooks
-Dr. Bhuvan has amended his claim and has drafted the following three versions of claim:
-1. "A titanium cradle comprising a plurality of supporting structures and a provision for hanging toys"
-2. "A foldable titanium cradle comprising at least five supporting structures and a provision for hanging toys"
-3. "A foldable titanium cradle comprising a plurality of supporting structures and a provision for hanging toys"
+    /* ----- Part B1 : Assertion & Reasoning (1 mark) ----- */
+    {
+      section: "Part B1 — Assertion & Reasoning (1 mark each)",
+      qtext: "Assertion (A): In India, for filing a divisional application existence of plurality of inventions is not a sine qua non.\nReasoning (R): A patent applicant may suo-moto file a divisional application in respect of an invention disclosed in the provisional or complete specification or an already filed divisional application.",
+      options: [
+        { label: "a", text: "When both (A) and (R) are true, and (R) is a correct explanation of (A)" },
+        { label: "b", text: "When both (A) and (R) are true, but (R) is NOT a correct explanation of (A)" },
+        { label: "c", text: "When (A) is true but (R) is false" },
+        { label: "d", text: "When (A) is false but (R) is true" }
+      ],
+      correct: [3],
+      reason: "Option (d). Assertion (A) is false — plurality of inventions is required for a divisional application. Reasoning (R) is true — an applicant may file a divisional application suo-moto."
+    },
+    {
+      section: "Part B1 — Assertion & Reasoning (1 mark each)",
+      qtext: "Assertion (A): In India, a sequence listing must be submitted as part of the patent application when the invention involves a nucleotide or amino acid sequence.\nReasoning (R): The requirement for a sequence listing is intended to ensure that the patent office can properly assess the novelty and inventiveness of biotechnological inventions based on specific sequences.",
+      options: [
+        { label: "a", text: "When both (A) and (R) are true, and (R) is a correct explanation of (A)" },
+        { label: "b", text: "When both (A) and (R) are true, but (R) is NOT a correct explanation of (A)" },
+        { label: "c", text: "When (A) is true but (R) is false" },
+        { label: "d", text: "When (A) is false but (R) is true" }
+      ],
+      correct: [0],
+      reason: "Option (a). Both A and R are true, and R correctly explains A. Sequence listings are required and help assess novelty and inventiveness."
+    },
+    {
+      section: "Part B1 — Assertion & Reasoning (1 mark each)",
+      qtext: "Assertion (A): A stamp or label can be considered an article for the purpose of registration of design under the Designs Act, 2000\nReasoning (R): Article must have its existence independent of Design applied to it.",
+      options: [
+        { label: "a", text: "When both (A) and (R) are true, and (R) is a correct explanation of (A)" },
+        { label: "b", text: "When both (A) and (R) are true, but (R) is NOT a correct explanation of (A)" },
+        { label: "c", text: "When (A) is true but (R) is false" },
+        { label: "d", text: "When (A) is false but (R) is true" }
+      ],
+      correct: [3],
+      reason: "Option (d). Assertion (A) is false — a stamp or label is not an article because it has no independent existence apart from the design. Reasoning (R) is true."
+    },
+    {
+      section: "Part B1 — Assertion & Reasoning (1 mark each)",
+      qtext: "Assertion (A): The TRIPS agreement is often seen as both a protector of intellectual property and a tool for equitable access.\nReasoning (R): The design of TRIPS agreement, while promoting a global standard for protection of intellectual property rights, also provides countries with the flexibility to prioritize essential goods, public health and economic development based on local needs.",
+      options: [
+        { label: "a", text: "When both (A) and (R) are true, and (R) is a correct explanation of (A)" },
+        { label: "b", text: "When both (A) and (R) are true, but (R) is NOT a correct explanation of (A)" },
+        { label: "c", text: "When (A) is true but (R) is false" },
+        { label: "d", text: "When (A) is false but (R) is true" }
+      ],
+      correct: [0],
+      reason: "Option (a). Both A and R are true, and R correctly explains A. TRIPS balances IP protection with public health flexibilities."
+    },
+    {
+      section: "Part B1 — Assertion & Reasoning (1 mark each)",
+      qtext: "Assertion (A): The publication of a patent application is an important step in the patent administration system.\nReasoning (R): The publication of a patent application provides the public with information about the invention before the grant of a patent with the option for opposition as per the Act.",
+      options: [
+        { label: "a", text: "When both (A) and (R) are true, and (R) is a correct explanation of (A)" },
+        { label: "b", text: "When both (A) and (R) are true, but (R) is NOT a correct explanation of (A)" },
+        { label: "c", text: "When (A) is true but (R) is false" },
+        { label: "d", text: "When (A) is false but (R) is true" }
+      ],
+      correct: [0],
+      reason: "Option (a). Both A and R are true, and R correctly explains A. Publication informs the public and allows for opposition."
+    },
 
-Q29. Which of the above version(s) of amended claim would be new over the above mentioned documents?`,
- ["1 only","1 and 2 only","2 and 3 only","All above claim versions are new"],"d"),
-Q(`(Refer to the scenario in the previous question — cradle, documents D1–D3 and claim versions 1, 2 and 3.)
+    /* ----- Part B2 : True / False (1 mark) ----- */
+    {
+      section: "Part B2 — True / False Statements (1 mark each)",
+      qtext: "Statement 1: No suit or other proceedings shall be commenced in respect of an infringement committed before the date of grant of the application for patent.\nStatement 2: It shall not be competent for any person in a suit or other such proceeding to take any objection to a patent on the ground that a patent has been granted for more than one invention.",
+      options: [
+        { label: "a", text: "When Statement 1 is True, and Statement 2 is False" },
+        { label: "b", text: "When Statement 1 is False, and Statement 2 is True" },
+        { label: "c", text: "When Both Statements 1 and 2 are True" },
+        { label: "d", text: "When Both Statements 1 and 2 are False" }
+      ],
+      correct: [2],
+      reason: "Option (c). Both statements are true. Infringement proceedings cannot be commenced for acts before grant (1), and a patent cannot be challenged for covering more than one invention in infringement proceedings (2)."
+    },
+    {
+      section: "Part B2 — True / False Statements (1 mark each)",
+      qtext: "Statement 1: Only the registered proprietor of a design may obtain a certified copy of any registered design.\nStatement 2: In one particular design application, a design can be registered for more than one class.",
+      options: [
+        { label: "a", text: "When Statement 1 is True, and Statement 2 is False" },
+        { label: "b", text: "When Statement 1 is False, and Statement 2 is True" },
+        { label: "c", text: "When Both Statements 1 and 2 are True" },
+        { label: "d", text: "When Both Statements 1 and 2 are False" }
+      ],
+      correct: [3],
+      reason: "Option (d). Both statements are false. Any person may obtain a certified copy (1 is false), and a design cannot be registered in more than one class in a single application (2 is false)."
+    },
+    {
+      section: "Part B2 — True / False Statements (1 mark each)",
+      qtext: "Statement 1: In India, the duration of grace period in Designs Act is same as is the Patents Act, when exhibited in the Govt. notified exhibitions.\nStatement 2: In a registered design, the registered proprietor of the design has copyright of the design for 10 years which is extendable for a further period of 5 years.",
+      options: [
+        { label: "a", text: "When Statement 1 is True, and Statement 2 is False" },
+        { label: "b", text: "When Statement 1 is False, and Statement 2 is True" },
+        { label: "c", text: "When Both Statements 1 and 2 are True" },
+        { label: "d", text: "When Both Statements 1 and 2 are False" }
+      ],
+      correct: [1],
+      reason: "Option (b). Statement 1 is false — the grace period under the Designs Act (6 months) differs from the Patents Act (12 months). Statement 2 is true — design copyright is for 10 years, extendable by 5 years."
+    },
+    {
+      section: "Part B2 — True / False Statements (1 mark each)",
+      qtext: "Statement 1: As per definition provided in the Patents Act, a \"patented article\" includes the article which utilizes patented ingredients.\nStatement 2: As per definition provided in the Patents Act, a \"patentee\" includes non-exclusive licensee.",
+      options: [
+        { label: "a", text: "When Statement 1 is True, and Statement 2 is False" },
+        { label: "b", text: "When Statement 1 is False, and Statement 2 is True" },
+        { label: "c", text: "When Both Statements 1 and 2 are True" },
+        { label: "d", text: "When Both Statements 1 and 2 are False" }
+      ],
+      correct: [3],
+      reason: "Option (d). Both statements are false. A 'patented article' does not include articles that merely utilize patented ingredients (1 is false), and a 'patentee' does not include a non-exclusive licensee (2 is false)."
+    },
+    {
+      section: "Part B2 — True / False Statements (1 mark each)",
+      qtext: "Statement 1: A patent of addition application can be filed on another patent of addition application.\nStatement 2: A patent of addition can only be granted after the main application is granted.",
+      options: [
+        { label: "a", text: "When Statement 1 is True, and Statement 2 is False" },
+        { label: "b", text: "When Statement 1 is False, and Statement 2 is True" },
+        { label: "c", text: "When Both Statements 1 and 2 are True" },
+        { label: "d", text: "When Both Statements 1 and 2 are False" }
+      ],
+      correct: [1],
+      reason: "Option (b). Statement 1 is false — a patent of addition cannot be filed on another patent of addition. Statement 2 is true — a patent of addition can only be granted after the main application is granted."
+    },
 
-Q30. Which of the above version(s) of amended claim would be non-obvious over the above mentioned documents?`,
- ["2 only","1 and 2 only","2 and 3 only","All above claim versions are non-obvious"],"a"),
+    /* ----- Part C1 : Matching / Multiple Choice (3 marks) ----- */
+    {
+      section: "Part C1 — Matching / Multiple Choice (3 marks each)",
+      qtext: "With reference to various schemes/programmes related to intellectual property, match the following and select the right option below:\n1. CIPAM          a. WIPO support programme for innovators in developing countries\n2. NIPAM          b. IP programme for Higher Educational Institutes\n3. TISC             c. IP Awareness mission programme\n4. IP Saarthi      d. Professional Body for IP promotion\n5. KAPILA         e. Technology enabled IP Assistant",
+      options: [
+        { label: "a", text: "1-d, 2-c, 3-a, 4-e, 5-b" },
+        { label: "b", text: "1-d, 2-c, 3-e, 4-a, 5-b" },
+        { label: "c", text: "1-c, 2-d, 3-b, 4-e, 5-a" },
+        { label: "d", text: "1-c, 2-d, 3-e, 4-b, 5-a" }
+      ],
+      correct: [0],
+      reason: "Option (a). CIPAM — Professional Body (1-d); NIPAM — IP Awareness mission (2-c); TISC — WIPO support programme (3-a); IP Saarthi — Technology enabled IP Assistant (4-e); KAPILA — IP programme for Higher Educational Institutes (5-b)."
+    },
+    {
+      section: "Part C1 — Matching / Multiple Choice (3 marks each)",
+      qtext: "The Patents Act, while extending certain rights to the patentee, also includes certain exceptions and limitations to balance the exclusive rights. In this context, match the subject of exclusion/limitation to the appropriate availability and sections as given below:\nSubject:\n1. Acts for making a patented product for obtaining regulatory approval from authorities, not an infringement\n2. Experimental use and/or scientific research not meaning infringement\n3. Use of articles on foreign vessels, aircrafts and land vehicles without infringing the patent rights, not an infringement\n4. Exhaustion of patent rights when imported by any person from a duly authorized person under the law\n5. Exceptions and limitations related to farmers' and/or breeders' use of patented inventions\nAvailability of provision in the Act/Rules:\na. No Explicit provision   b. Section 107A(b)   c. Section 107A(a)   d. Section 47(3)   e. Section 49",
+      options: [
+        { label: "a", text: "1-c, 2-d, 3-e, 4-b, 5-a" },
+        { label: "b", text: "1-b, 2-d, 3-e, 4-c, 5-a" },
+        { label: "c", text: "1-d, 2-c, 3-e, 4-b, 5-a" },
+        { label: "d", text: "1-d, 2-a, 3-e, 4-b, 5-c" }
+      ],
+      correct: [0],
+      reason: "Option (a). Regulatory approval: Section 107A(a) (1-c); Experimental use: Section 47(3) (2-d); Foreign vessels: Section 49 (3-e); Exhaustion: Section 107A(b) (4-b); Farmers/breeders: No explicit provision (5-a)."
+    },
+    {
+      section: "Part C1 — Matching / Multiple Choice (3 marks each)",
+      qtext: "Match the following case laws and related subject matter that was highlighted in them:\n1. Microfibres Inc. v. Girdhar & Co\n2. Saurav Chaudhary v. Union of India & ANR\n3. Syngenta v. Controller of Patents\n4. Telefonktiebolaget Lm Ericsson (Publ) v. Lava International Ltd.\n5. Reckitt Benckiser (India) Ltd. v. Wyeth Ltd.\n6. Whirlpool of India Ltd. v. Videocon Industries Ltd.\n\n(a) Regulating Conduct of Patent/TM Agents for negligence\n(b) Indian Jurisprudence related to Standard Essential Patents (SEP)/FRAND\n(c) Copyright and Design overlap, exclusivity and 50 times rule\n(d) Divisional application contents and condition of filing\n(e) Newness and originality of designs\n(f) Right to owner of design for application to articles",
+      options: [
+        { label: "a", text: "1-c, 2-a, 3-d, 4-b, 5-e, 6-f" },
+        { label: "b", text: "1-e, 2-a, 3-d, 4-b, 5-f, 6-c" },
+        { label: "c", text: "1-a, 2-c, 3-b, 4-d, 5-f, 6-e" },
+        { label: "d", text: "1-d, 2-c, 3-a, 4-b, 5-e, 6-f" }
+      ],
+      correct: [0],
+      reason: "Option (a). Microfibres — Copyright/Design overlap (1-c); Saurav Chaudhary — Patent agent negligence (2-a); Syngenta — Divisional applications (3-d); Ericsson v. Lava — SEP/FRAND (4-b); Reckitt Benckiser — Design novelty (5-e); Whirlpool — Design ownership (6-f)."
+    },
+    {
+      section: "Part C1 — Matching / Multiple Choice (3 marks each)",
+      qtext: "Under the provision of the Patents Act and Rules, failure to comply certain requirements may lead to possible consequences with patent application/granted patents. In this context, match the following:\nAction:\n1. Complete Specification not followed within 12 months of Provisional Specification\n2. Contravention to any direction of secrecy\n3. Govt. opines patent as generally prejudicial to public after due procedure\n4. International application not entering in national phase in India within prescribed time\n5. The patentee does not desire to contest or leave his reply and evidence against post grant opposition within prescribed time\nPossible Consequence:\na. Deemed to be revoked   b. Deemed to be withdrawn   c. Deemed to be abandoned   d. Deemed to have been abandoned   e. Deemed to have been revoked",
+      options: [
+        { label: "a", text: "1-b, 2-c, 3-d, 4-a, 5-e" },
+        { label: "b", text: "1-c, 2-b, 3-d, 4-a, 5-e" },
+        { label: "c", text: "1-c, 2-d, 3-a, 4-b, 5-e" },
+        { label: "d", text: "1-d, 2-c, 3-a, 4-b, 5-e" }
+      ],
+      correct: [2],
+      reason: "Option (c). Complete spec not filed: deemed abandoned (1-c); Secrecy contravention: deemed withdrawn (2-d); Public interest: deemed revoked (3-a); PCT national phase not entered: deemed abandoned (4-b); Post-grant opposition not contested: deemed revoked (5-e)."
+    },
+    {
+      section: "Part C1 — Matching / Multiple Choice (3 marks each)",
+      qtext: "The Designs Act, 2000 prohibits certain designs to be registered/published under various sections of the Act. In this context, match the subject-matter to the appropriate section:\n1. a chair design that is nearly identical to a classic iconic chair design that is protected in multiple countries and has won international awards\n2. a camouflage pattern applied to outdoor apparel having application in defense\n3. a design application for a footwear which has a religious symbol engraved\n4. a design application for fibre glass model of the Taj Mahal\n5. a design for luxury kitchenware featuring abstract shapes that subtly resembles nude human body parts\nSections:  a. Section 4(b)   b. Section 46(a)   c. Section 35(1)   d. Section 4(a)   e. Section 4(d)",
+      options: [
+        { label: "a", text: "1-c, 2-a, 3-d, 4-b, 5-e" },
+        { label: "b", text: "1-e, 2-a, 3-d, 4-b, 5-c" },
+        { label: "c", text: "1-a, 2-c, 3-b, 4-d, 5-e" },
+        { label: "d", text: "1-a, 2-b, 3-c, 4-d, 5-e" }
+      ],
+      correct: [3],
+      reason: "Option (d). Chair design: Section 4(a) (1-a); Camouflage: Section 46(a) (2-b); Religious symbol: Section 35(1) (3-c); Taj Mahal model: Section 4(a) (4-d); Nude body parts: Section 4(d) (5-e)."
+    },
 
-S("Part B1 — Assertion & Reasoning (1 mark each)", 1),
-Q(`Assertion (A): In India, for filing a divisional application existence of plurality of inventions is not a sine qua non.
-Reasoning (R): A patent applicant may suo-moto file a divisional application in respect of an invention disclosed in the provisional or complete specification or an already filed divisional application.`, AR, "d"),
-Q(`Assertion (A): In India, a sequence listing must be submitted as part of the patent application when the invention involves a nucleotide or amino acid sequence.
-Reasoning (R): The requirement for a sequence listing is intended to ensure that the patent office can properly assess the novelty and inventiveness of biotechnological inventions based on specific sequences.`, AR, "a"),
-Q(`Assertion (A): A stamp or label can be considered an article for the purpose of registration of design under the Designs Act, 2000
-Reasoning (R): Article must have its existence independent of Design applied to it.`, AR, "d"),
-Q(`Assertion (A): The TRIPS agreement is often seen as both a protector of intellectual property and a tool for equitable access.
-Reasoning (R): The design of TRIPS agreement, while promoting a global standard for protection of intellectual property rights, also provides countries with the flexibility to prioritize essential goods, public health and economic development based on local needs.`, AR, "a"),
-Q(`Assertion (A): The publication of a patent application is an important step in the patent administration system.
-Reasoning (R): The publication of a patent application provides the public with information about the invention before the grant of a patent with the option for opposition as per the Act.`, AR, "a"),
-
-S("Part B2 — True / False Statements (1 mark each)", 1),
-Q(`Statement 1: No suit or other proceedings shall be commenced in respect of an infringement committed before the date of grant of the application for patent.
-Statement 2: It shall not be competent for any person in a suit or other such proceeding to take any objection to a patent on the ground that a patent has been granted for more than one invention.`, TF, "c"),
-Q(`Statement 1: Only the registered proprietor of a design may obtain a certified copy of any registered design.
-Statement 2: In one particular design application, a design can be registered for more than one class.`, TF, "d"),
-Q(`Statement 1: In India, the duration of grace period in Designs Act is same as is the Patents Act, when exhibited in the Govt. notified exhibitions.
-Statement 2: In a registered design, the registered proprietor of the design has copyright of the design for 10 years which is extendable for a further period of 5 years.`, TF, "b"),
-Q(`Statement 1: As per definition provided in the Patents Act, a "patented article" includes the article which utilizes patented ingredients.
-Statement 2: As per definition provided in the Patents Act, a "patentee" includes non-exclusive licensee.`, TF, "d"),
-Q(`Statement 1: A patent of addition application can be filed on another patent of addition application.
-Statement 2: A patent of addition can only be granted after the main application is granted.`, TF, "b"),
-
-S("Part C1 — Matching / Multiple Choice (3 marks each)", 3),
-Q(`With reference to various schemes/programmes related to intellectual property, match the following and select the right option below:
-1. CIPAM          a. WIPO support programme for innovators in developing countries
-2. NIPAM          b. IP programme for Higher Educational Institutes
-3. TISC             c. IP Awareness mission programme
-4. IP Saarthi      d. Professional Body for IP promotion
-5. KAPILA         e. Technology enabled IP Assistant`,
- ["1-d, 2-c, 3-a, 4-e, 5-b","1-d, 2-c, 3-e, 4-a, 5-b","1-c, 2-d, 3-b, 4-e, 5-a","1-c, 2-d, 3-e, 4-b, 5-a"],"a"),
-Q(`The Patents Act, while extending certain rights to the patentee, also includes certain exceptions and limitations to balance the exclusive rights. In this context, match the subject of exclusion/limitation to the appropriate availability and sections as given below:
-Subject:
-1. Acts for making a patented product for obtaining regulatory approval from authorities, not an infringement
-2. Experimental use and/or scientific research not meaning infringement
-3. Use of articles on foreign vessels, aircrafts and land vehicles without infringing the patent rights, not an infringement
-4. Exhaustion of patent rights when imported by any person from a duly authorized person under the law
-5. Exceptions and limitations related to farmers' and/or breeders' use of patented inventions
-Availability of provision in the Act/Rules:
-a. No Explicit provision   b. Section 107A(b)   c. Section 107A(a)   d. Section 47(3)   e. Section 49`,
- ["1-c, 2-d, 3-e, 4-b, 5-a","1-b, 2-d, 3-e, 4-c, 5-a","1-d, 2-c, 3-e, 4-b, 5-a","1-d, 2-a, 3-e, 4-b, 5-c"],"a"),
-Q(`Match the following case laws and related subject matter that was highlighted in them:
-1. Microfibres Inc. v. Girdhar & Co
-2. Saurav Chaudhary v. Union of India & ANR
-3. Syngenta v. Controller of Patents
-4. Telefonktiebolaget Lm Ericsson (Publ) v. Lava International Ltd.
-5. Reckitt Benckiser (India) Ltd. v. Wyeth Ltd.
-6. Whirlpool of India Ltd. v. Videocon Industries Ltd.
-
-(a) Regulating Conduct of Patent/TM Agents for negligence
-(b) Indian Jurisprudence related to Standard Essential Patents (SEP)/FRAND
-(c) Copyright and Design overlap, exclusivity and 50 times rule
-(d) Divisional application contents and condition of filing
-(e) Newness and originality of designs
-(f) Right to owner of design for application to articles`,
- ["1-c, 2-a, 3-d, 4-b, 5-e, 6-f","1-e, 2-a, 3-d, 4-b, 5-f, 6-c","1-a, 2-c, 3-b, 4-d, 5-f, 6-e","1-d, 2-c, 3-a, 4-b, 5-e, 6-f"],"a"),
-Q(`Under the provision of the Patents Act and Rules, failure to comply certain requirements may lead to possible consequences with patent application/granted patents. In this context, match the following:
-Action:
-1. Complete Specification not followed within 12 months of Provisional Specification
-2. Contravention to any direction of secrecy
-3. Govt. opines patent as generally prejudicial to public after due procedure
-4. International application not entering in national phase in India within prescribed time
-5. The patentee does not desire to contest or leave his reply and evidence against post grant opposition within prescribed time
-Possible Consequence:
-a. Deemed to be revoked   b. Deemed to be withdrawn   c. Deemed to be abandoned   d. Deemed to have been abandoned   e. Deemed to have been revoked`,
- ["1-b, 2-c, 3-d, 4-a, 5-e","1-c, 2-b, 3-d, 4-a, 5-e","1-c, 2-d, 3-a, 4-b, 5-e","1-d, 2-c, 3-a, 4-b, 5-e"],"c"),
-Q(`The Designs Act, 2000 prohibits certain designs to be registered/published under various sections of the Act. In this context, match the subject-matter to the appropriate section:
-1. a chair design that is nearly identical to a classic iconic chair design that is protected in multiple countries and has won international awards
-2. a camouflage pattern applied to outdoor apparel having application in defense
-3. a design application for a footwear which has a religious symbol engraved
-4. a design application for fibre glass model of the Taj Mahal
-5. a design for luxury kitchenware featuring abstract shapes that subtly resembles nude human body parts
-Sections:  a. Section 4(b)   b. Section 46(a)   c. Section 35(1)   d. Section 4(a)   e. Section 4(d)`,
- ["1-c, 2-a, 3-d, 4-b, 5-e","1-e, 2-a, 3-d, 4-b, 5-c","1-a, 2-c, 3-b, 4-d, 5-e","1-a, 2-b, 3-c, 4-d, 5-e"],"d"),
-
-S("Part C2 — Multiple Choice (3 marks each)", 3),
-Q(`You have a foreign client which is a company of small scale. While applying for patent in India, the company wishes to take advantage of reduced fee being a small entity (as per the definition in India). Which among the following is/are true?
-1. Small entity fee benefit can only be taken by Indian SMEs as per MSME Act
-2. Your client can take the advantage by filing any other supporting document in support of their claim of being a small entity.
-3. The foreign company can avail fee reduction benefit if they meet the criteria as defined for SME in India
-4. They need to file evidence of registration under MSME Development Act 2006`,
- ["Only 1","Only 2","Both 2 and 3","Both 1 and 4"],"c"),
-Q(`In the prevailing Patents Act and Rules made thereunder, for which of the following act(s), no fee is prescribed:
-i. Application for withdrawing a application
-ii. Filing a statement regarding working of a patented invention on a commercial scale in India
-iii. For preparation of certified copy of priority document and e-transmission through WIPO DAS
-iv. Transmittal fee for international application (for ePCT filing).
-v. Surrendering a patent`,
- ["Only (i), (ii) and (iii)","Only (i), (ii) and (iv)","Only (i), (ii), (iii) and (iv)","All (i), (ii), (iii), (iv) and (v)"],"d"),
-Q(`After due examination process, a patent for efficiently cleaning polluted air and water was granted to Mr. Samayveer on 19/05/2024. Mr. Samayveer comes to you for professional advice regarding payment of renewal fees. Which of the following is/are correct advice to Mr. Samayveer regarding payment of renewal fee:
-i. To keep the granted patent in force, renewal fees shall be payable at the expiration of the second year from the date of the patent or of any succeeding year and the same shall be remitted to the patent office before the expiration of the second or the succeeding year.
-ii. Since the patent is of the nature wherein it solves the public health related issues by efficiently cleaning polluted air and water, there is no need to pay renewal fees for its maintenance.
-iii. Where the renewal fees payable in respect of two or more years is paid in advance through electronic mode for a period of at least 4 years, a 20% per cent reduction in fee shall be applicable for such renewal.
-iv. There is only 10% reduction in fee shall be applicable in case of advance payment of renewal fees for at least 4 years when the fee is paid through physical means of bank draft.`,
- ["Only (i) and (ii)","Only (iii) and (iv)","Only (ii)","Only (i)"],"d"),
-Q(`Which of the following act or order or power of controller as provided in the Patents Act or the Designs Act and Rules is/are NOT appealable?
-i. Controller may refuse to register a design being contrary to public order or morality under the Designs Act, 2000
-ii. Disposal of applications for extension of time by the Controller
-iii. Controller terminates a granted compulsory license under section 84 on an application by the patentee when the circumstance that gave rise to the grant of compulsory license no longer exists
-iv. Controller may, on application by an eligible person, order for rectifying the register of design
-v. Controller may give directions for prohibiting or restricting the publication of information with respect to the invention when it appears to the controller that the invention is relevant for defence of India`,
- ["Only (i) and (ii)","Only (iii) and (iv)","Only (ii) and (v)","Only (iv) and (v)"],"c"),
-Q(`Recently WIPO Member States adopted WIPO Treaty on Intellectual Property, Genetic Resources and Associated Traditional Knowledge. Which of the following is/are NOT correct statement(s) with regard to the same:
-i. The Treaty aims to enhance the efficacy, transparency and quality of the patent system with regard to genetic resources and traditional knowledge associated with genetic resources, and prevent patents from being granted erroneously for inventions that are not novel or inventive with regard to genetic resources and associated TK
-ii. It is first WIPO Treaty to include provisions specifically for Indigenous Peoples as well as local communities
-iii. The Treaty establishes an optional patent disclosure requirement for patent applicants to disclose the country of origin of the genetic resources and/or the Indigenous Peoples or local community providing the associated TK, if the claimed inventions are 'based on' genetic resources and/or associated TK.
-iv. Patent offices would have obligation to verify the authenticity of such disclosures.
-v. Patent applications filed prior to the entry into force of this Treaty would have a grace period of twelve month to comply with the obligations of the treaty.
-vi. This Treaty is open for signature by any eligible Party for one year after its adoption, i.e. up to May 23, 2025. The Treaty will enter into force three months after 15 eligible Parties have deposited their instruments of ratification or accession.`,
- ["Only (ii) and (iv)","Only (iii) and (iv)","Only (iii), (iv) and (v)","Only (vi)"],"c")
-];
-
-/* =====================================================================
-   RENDER
-   ===================================================================== */
-const YEAR = Y2025;
-const totalQuestions = YEAR.filter(item => item.o).length;
-const maxMarks = YEAR.filter(item => item.o).reduce((sum, item) => sum + item.m, 0);
-
-document.getElementById('total').textContent = totalQuestions;
-document.getElementById('maxmarks').textContent = maxMarks;
-
-const quizEl = document.getElementById('quiz');
-const footEl = document.getElementById('foot');
-let attempted = 0, correct = 0, wrong = 0, marks = 0;
-const answered = new Set();
-
-let globalQ = 1;
-let html = '';
-
-YEAR.forEach((section) => {
-  if (section.s) {
-    html += `<h2 class="sechead">${section.s}</h2>`;
-  } else if (section.t) {
-    const q = section;
-    const qIndex = globalQ++;
-    const qId = `q${qIndex}`;
-    const isMulti = q.a.includes(',');
-    const letters = ['a','b','c','d'];
-
-    html += `<div class="qcard" data-qid="${qId}" data-marks="${q.m}" data-answer="${q.a}">`;
-    html += `<div class="qtitle"><span class="qnum">${qIndex}</span>${q.t}</div>`;
-    if (isMulti) {
-      html += `<div class="multi">Multiple correct answers</div>`;
+    /* ----- Part C2 : Multiple Choice (3 marks) ----- */
+    {
+      section: "Part C2 — Multiple Choice (3 marks each)",
+      qtext: "You have a foreign client which is a company of small scale. While applying for patent in India, the company wishes to take advantage of reduced fee being a small entity (as per the definition in India). Which among the following is/are true?\n1. Small entity fee benefit can only be taken by Indian SMEs as per MSME Act\n2. Your client can take the advantage by filing any other supporting document in support of their claim of being a small entity.\n3. The foreign company can avail fee reduction benefit if they meet the criteria as defined for SME in India\n4. They need to file evidence of registration under MSME Development Act 2006",
+      options: [
+        { label: "a", text: "Only 1" },
+        { label: "b", text: "Only 2" },
+        { label: "c", text: "Both 2 and 3" },
+        { label: "d", text: "Both 1 and 4" }
+      ],
+      correct: [2],
+      reason: "Option (c). Foreign companies can avail small entity benefits if they meet the criteria (3), and they can provide supporting documents other than MSME registration (2)."
+    },
+    {
+      section: "Part C2 — Multiple Choice (3 marks each)",
+      qtext: "In the prevailing Patents Act and Rules made thereunder, for which of the following act(s), no fee is prescribed:\ni. Application for withdrawing a application\nii. Filing a statement regarding working of a patented invention on a commercial scale in India\niii. For preparation of certified copy of priority document and e-transmission through WIPO DAS\niv. Transmittal fee for international application (for ePCT filing).\nv. Surrendering a patent",
+      options: [
+        { label: "a", text: "Only (i), (ii) and (iii)" },
+        { label: "b", text: "Only (i), (ii) and (iv)" },
+        { label: "c", text: "Only (i), (ii), (iii) and (iv)" },
+        { label: "d", text: "All (i), (ii), (iii), (iv) and (v)" }
+      ],
+      correct: [3],
+      reason: "Option (d). No fee is prescribed for all listed acts: withdrawing an application (i), filing working statement (ii), certified copy via WIPO DAS (iii), transmittal fee for ePCT (iv), and surrendering a patent (v)."
+    },
+    {
+      section: "Part C2 — Multiple Choice (3 marks each)",
+      qtext: "After due examination process, a patent for efficiently cleaning polluted air and water was granted to Mr. Samayveer on 19/05/2024. Mr. Samayveer comes to you for professional advice regarding payment of renewal fees. Which of the following is/are correct advice to Mr. Samayveer regarding payment of renewal fee:\ni. To keep the granted patent in force, renewal fees shall be payable at the expiration of the second year from the date of the patent or of any succeeding year and the same shall be remitted to the patent office before the expiration of the second or the succeeding year.\nii. Since the patent is of the nature wherein it solves the public health related issues by efficiently cleaning polluted air and water, there is no need to pay renewal fees for its maintenance.\niii. Where the renewal fees payable in respect of two or more years is paid in advance through electronic mode for a period of at least 4 years, a 20% per cent reduction in fee shall be applicable for such renewal.\niv. There is only 10% reduction in fee shall be applicable in case of advance payment of renewal fees for at least 4 years when the fee is paid through physical means of bank draft.",
+      options: [
+        { label: "a", text: "Only (i) and (ii)" },
+        { label: "b", text: "Only (iii) and (iv)" },
+        { label: "c", text: "Only (ii)" },
+        { label: "d", text: "Only (i)" }
+      ],
+      correct: [3],
+      reason: "Option (d). Only statement (i) is correct — renewal fees must be paid before the expiration of the second or succeeding year. Statement (ii) is false (no exemption), and statements (iii) and (iv) are incorrect regarding the reduction amounts."
+    },
+    {
+      section: "Part C2 — Multiple Choice (3 marks each)",
+      qtext: "Which of the following act or order or power of controller as provided in the Patents Act or the Designs Act and Rules is/are NOT appealable?\ni. Controller may refuse to register a design being contrary to public order or morality under the Designs Act, 2000\nii. Disposal of applications for extension of time by the Controller\niii. Controller terminates a granted compulsory license under section 84 on an application by the patentee when the circumstance that gave rise to the grant of compulsory license no longer exists\niv. Controller may, on application by an eligible person, order for rectifying the register of design\nv. Controller may give directions for prohibiting or restricting the publication of information with respect to the invention when it appears to the controller that the invention is relevant for defence of India",
+      options: [
+        { label: "a", text: "Only (i) and (ii)" },
+        { label: "b", text: "Only (iii) and (iv)" },
+        { label: "c", text: "Only (ii) and (v)" },
+        { label: "d", text: "Only (iv) and (v)" }
+      ],
+      correct: [2],
+      reason: "Option (c). Disposal of extension applications (ii) and secrecy directions (v) are not appealable. The other actions (design refusal, compulsory licence termination, rectification) are appealable."
+    },
+    {
+      section: "Part C2 — Multiple Choice (3 marks each)",
+      qtext: "Recently WIPO Member States adopted WIPO Treaty on Intellectual Property, Genetic Resources and Associated Traditional Knowledge. Which of the following is/are NOT correct statement(s) with regard to the same:\ni. The Treaty aims to enhance the efficacy, transparency and quality of the patent system with regard to genetic resources and traditional knowledge associated with genetic resources, and prevent patents from being granted erroneously for inventions that are not novel or inventive with regard to genetic resources and associated TK\nii. It is first WIPO Treaty to include provisions specifically for Indigenous Peoples as well as local communities\niii. The Treaty establishes an optional patent disclosure requirement for patent applicants to disclose the country of origin of the genetic resources and/or the Indigenous Peoples or local community providing the associated TK, if the claimed inventions are 'based on' genetic resources and/or associated TK.\niv. Patent offices would have obligation to verify the authenticity of such disclosures.\nv. Patent applications filed prior to the entry into force of this Treaty would have a grace period of twelve month to comply with the obligations of the treaty.\nvi. This Treaty is open for signature by any eligible Party for one year after its adoption, i.e. up to May 23, 2025. The Treaty will enter into force three months after 15 eligible Parties have deposited their instruments of ratification or accession.",
+      options: [
+        { label: "a", text: "Only (ii) and (iv)" },
+        { label: "b", text: "Only (iii) and (iv)" },
+        { label: "c", text: "Only (iii), (iv) and (v)" },
+        { label: "d", text: "Only (vi)" }
+      ],
+      correct: [2],
+      reason: "Option (c). Statements (iii), (iv), and (v) are NOT correct. The disclosure requirement is mandatory, not optional (iii); patent offices are not obliged to verify authenticity (iv); and there is no grace period for pre-existing applications (v)."
     }
-    q.o.forEach((opt, i) => {
-      html += `<button class="opt" data-opt="${letters[i]}" onclick="selectOption(this)"><b>${letters[i].toUpperCase()}</b><span>${opt}</span></button>`;
+  ];
+
+  /* =====================================================================
+     RENDER & LOGIC
+     ===================================================================== */
+  var form      = document.getElementById("quiz");
+  var submitBtn = document.getElementById("submitBtn");
+  var resetBtn  = document.getElementById("resetBtn");
+  var hint      = document.getElementById("hint");
+  var summary   = document.getElementById("summary");
+  var scoreLine = document.getElementById("scoreLine");
+  var chips     = document.getElementById("chips");
+
+  var submitted = false;
+
+  /* ---------- Build question cards ---------- */
+  function buildQuiz() {
+    form.innerHTML = "";
+    var lastSection = "";
+
+    QUESTIONS.forEach(function (q, idx) {
+      /* section heading */
+      if (q.section && q.section !== lastSection) {
+        lastSection = q.section;
+        var sec = document.createElement("div");
+        sec.className = "section-head";
+        sec.textContent = q.section;
+        form.appendChild(sec);
+      }
+
+      var card = document.createElement("section");
+      card.className = "card";
+      card.id = "card-q" + idx;
+
+      /* header */
+      var head = document.createElement("div");
+      head.className = "qhead";
+      var num = document.createElement("span");
+      num.className = "qnum";
+      num.textContent = "Q" + (idx + 1);
+      head.appendChild(num);
+      card.appendChild(head);
+
+      /* question text */
+      var qtext = document.createElement("p");
+      qtext.className = "qtext";
+      qtext.textContent = q.qtext;
+      card.appendChild(qtext);
+
+      /* options */
+      var optsWrap = document.createElement("div");
+      optsWrap.className = "options";
+
+      q.options.forEach(function (opt, oi) {
+        var label = document.createElement("label");
+        label.className = "option";
+
+        var input = document.createElement("input");
+        input.type = "checkbox";
+        input.name = "q" + idx;
+        input.value = oi;
+
+        var txt = document.createElement("span");
+        txt.className = "txt";
+        txt.innerHTML = "<b>(" + opt.label + ")</b> " + opt.text;
+
+        label.appendChild(input);
+        label.appendChild(txt);
+        optsWrap.appendChild(label);
+      });
+
+      card.appendChild(optsWrap);
+
+      /* feedback placeholder */
+      var fb = document.createElement("div");
+      fb.className = "feedback";
+      fb.id = "fb-q" + idx;
+      card.appendChild(fb);
+
+      form.appendChild(card);
     });
-    if (isMulti) {
-      html += `<button class="check" onclick="checkMulti(this)" disabled>Check answer</button>`;
-    }
-    html += `</div>`;
   }
-});
 
-quizEl.innerHTML = html;
-footEl.innerHTML = `Patent Agent Examination · 2025 Practice Paper · ${totalQuestions} questions · ${maxMarks} marks`;
+  /* ---------- Helpers ---------- */
+  function inputsFor(idx) {
+    return Array.prototype.slice.call(
+      document.querySelectorAll('input[name="q' + idx + '"]')
+    );
+  }
 
-/* ---------- selection / checking ---------- */
-function selectOption(btn) {
-  const card = btn.closest('.qcard');
-  if (card.dataset.done === '1') return;
-  const answer = card.dataset.answer;
-  const isMulti = answer.includes(',');
-  const letters = ['a','b','c','d'];
-  const opts = card.querySelectorAll('.opt');
+  function selectionFor(idx) {
+    return inputsFor(idx)
+      .filter(function (i) { return i.checked; })
+      .map(function (i) { return parseInt(i.value, 10); });
+  }
 
-  if (!isMulti) {
-    const chosen = btn.dataset.opt;
-    if (card.dataset.done === '1') return;
+  function labelOf(input) {
+    return input.closest("label");
+  }
 
-    card.dataset.done = '1';
-    const qid = card.dataset.qid;
-    if (answered.has(qid)) return;
-    answered.add(qid);
+  function pretty(values) {
+    if (!values.length) return "—";
+    return values.map(function (v) {
+      return "(" + String.fromCharCode(97 + v) + ")";
+    }).join(", ");
+  }
 
-    const isCorrect = chosen === answer;
-    opts.forEach(o => {
-      o.disabled = true;
-      const val = o.dataset.opt;
-      if (val === answer) o.classList.add('correct');
-      if (val === chosen && !isCorrect) o.classList.add('wrong');
+  function refreshState() {
+    if (submitted) return;
+    var answered = QUESTIONS.filter(function (q, idx) {
+      return selectionFor(idx).length > 0;
+    }).length;
+    submitBtn.disabled = answered < QUESTIONS.length;
+    hint.textContent = answered < QUESTIONS.length
+      ? answered + " of " + QUESTIONS.length + " questions answered."
+      : "All answered — submit when ready.";
+  }
+
+  /* ---------- Grading ---------- */
+  function isCorrect(idx, sel) {
+    var q = QUESTIONS[idx];
+    if (!sel.length) return false;
+    if (sel.length !== q.correct.length) return false;
+    return q.correct.every(function (v) { return sel.indexOf(v) !== -1; });
+  }
+
+  function renderFeedback(idx, sel, ok) {
+    var q  = QUESTIONS[idx];
+    var fb = document.getElementById("fb-q" + idx);
+
+    fb.innerHTML =
+      '<p class="verdict ' + (ok ? "ok" : "bad") + '">' +
+        (ok ? "&#10004; Correct" : "&#10008; Incorrect") +
+      "</p>" +
+      '<p><span class="lbl">Your answer:</span> ' + pretty(sel) + "</p>" +
+      '<p><span class="lbl">Correct answer:</span> ' + pretty(q.correct) + "</p>" +
+      '<p class="reason">' + q.reason + "</p>";
+
+    fb.classList.add("show");
+
+    inputsFor(idx).forEach(function (inp) {
+      var lab = labelOf(inp);
+      lab.classList.add("locked");
+      var v = parseInt(inp.value, 10);
+      if (q.correct.indexOf(v) !== -1) {
+        lab.classList.add("is-correct");
+      } else if (inp.checked) {
+        lab.classList.add("is-wrong");
+      }
     });
-    if (isCorrect) {
-      correct++;
-      marks += parseFloat(card.dataset.marks);
-    } else {
-      wrong++;
-    }
-    attempted++;
-    updateScore();
-  } else {
-    // multi-select: toggle selection
-    if (!btn.classList.contains('sel')) {
-      btn.classList.add('sel');
-    } else {
-      btn.classList.remove('sel');
-    }
-    const checkBtn = card.querySelector('.check');
-    const anySelected = card.querySelectorAll('.opt.sel').length > 0;
-    checkBtn.disabled = !anySelected;
+
+    var card = document.getElementById("card-q" + idx);
+    card.classList.add(ok ? "correct" : "wrong");
   }
-}
 
-function checkMulti(btn) {
-  const card = btn.closest('.qcard');
-  if (card.dataset.done === '1') return;
-  card.dataset.done = '1';
-  const qid = card.dataset.qid;
-  if (answered.has(qid)) return;
-  answered.add(qid);
+  function submitQuiz() {
+    if (submitted) return;
 
-  const answer = card.dataset.answer.split(',').sort().join(',');
-  const opts = card.querySelectorAll('.opt');
-  let selected = [];
-  opts.forEach(o => {
-    if (o.classList.contains('sel')) {
-      selected.push(o.dataset.opt);
-    }
-    o.disabled = true;
-  });
-  selected.sort();
-  const chosen = selected.join(',');
-  const isCorrect = chosen === answer;
-
-  opts.forEach(o => {
-    const val = o.dataset.opt;
-    if (answer.includes(val)) o.classList.add('correct');
-    if (selected.includes(val) && !answer.includes(val)) o.classList.add('wrong');
-  });
-
-  if (isCorrect) {
-    correct++;
-    marks += parseFloat(card.dataset.marks);
-  } else {
-    wrong++;
-  }
-  attempted++;
-  updateScore();
-  btn.disabled = true;
-}
-
-function updateScore() {
-  document.getElementById('attempted').textContent = attempted;
-  document.getElementById('correct').textContent = correct;
-  document.getElementById('wrong').textContent = wrong;
-  document.getElementById('marks').textContent = marks;
-  const pct = totalQuestions > 0 ? (attempted / totalQuestions * 100) : 0;
-  document.getElementById('bar').style.width = pct + '%';
-}
-
-document.getElementById('resetBtn').addEventListener('click', () => {
-  attempted = 0; correct = 0; wrong = 0; marks = 0; answered.clear();
-  updateScore();
-  document.querySelectorAll('.qcard').forEach(card => {
-    card.dataset.done = '';
-    card.querySelectorAll('.opt').forEach(o => {
-      o.classList.remove('sel', 'correct', 'wrong');
-      o.disabled = false;
+    var results = [];
+    QUESTIONS.forEach(function (q, idx) {
+      var sel = selectionFor(idx);
+      var ok  = isCorrect(idx, sel);
+      results.push({ idx: idx, ok: ok });
+      renderFeedback(idx, sel, ok);
+      inputsFor(idx).forEach(function (i) { i.disabled = true; });
     });
-    const chk = card.querySelector('.check');
-    if (chk) { chk.disabled = true; }
-  });
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-});
 
-updateScore();
+    var score = results.filter(function (r) { return r.ok; }).length;
+
+    scoreLine.innerHTML = "You scored <b>" + score + "</b> out of " + QUESTIONS.length +
+      " &nbsp;&middot;&nbsp; " + (score === QUESTIONS.length ? "Perfect!" : "Review the explanations below.");
+
+    chips.innerHTML = results.map(function (r) {
+      return '<li class="chip ' + (r.ok ? "ok" : "bad") + '">' +
+        "Q" + (r.idx + 1) + " " + (r.ok ? "&#10004;" : "&#10008;") +
+      "</li>";
+    }).join("");
+
+    summary.classList.remove("hidden");
+    summary.scrollIntoView({ behavior: "smooth", block: "start" });
+
+    submitted = true;
+    submitBtn.disabled = true;
+    hint.textContent = "Submitted. Press Reset to try again.";
+  }
+
+  function resetQuiz() {
+    submitted = false;
+    form.reset();
+
+    QUESTIONS.forEach(function (q, idx) {
+      inputsFor(idx).forEach(function (inp) {
+        inp.disabled = false;
+        var lab = labelOf(inp);
+        lab.classList.remove("is-correct", "is-wrong", "locked");
+      });
+      var fb = document.getElementById("fb-q" + idx);
+      fb.innerHTML = "";
+      fb.classList.remove("show");
+      document.getElementById("card-q" + idx).classList.remove("correct", "wrong");
+    });
+
+    summary.classList.add("hidden");
+    chips.innerHTML = "";
+    scoreLine.innerHTML = "";
+    refreshState();
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
+  /* ---------- Init ---------- */
+  buildQuiz();
+  form.addEventListener("change", refreshState);
+  submitBtn.addEventListener("click", submitQuiz);
+  resetBtn.addEventListener("click", resetQuiz);
+  refreshState();
+})();
 </script>
-
-  <script src="timer.js"></script>
 </body>
 </html>
