@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Patent Agent Examination 2023 — Practice Quiz</title>
+<style>
+  :root{
+    --bg:#f4f6fb;
+    --card:#ffffff;
+    --ink:#1f2430;
+    --muted:#6b7280;
+    --accent:#3b5bdb;
+    --accent-dark:#2f49b0;
+    --ok:#1a7f4b;
+    --ok-bg:#e8f7ef;
+    --ok-line:#9ad4b5;
+    --bad:#b42318;
+    --bad-bg:#fdecea;
+    --bad-line:#f3b4ad;
+    --line:#e3e6ec;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0;
+    padding:2rem 1rem 4rem;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    line-height:1.55;
+    font-size:16px;
+  }
+  .wrap{max-width:820px;margin:0 auto}
+
+  header{text-align:center;margin-bottom:1.6rem}
+  header h1{margin:0 0 .35rem;font-size:1.6rem;letter-spacing:-.02em}
+  header p{margin:0;color:var(--muted);font-size:.94rem}
+
+  .summary{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:14px;
+    padding:1.1rem 1.2rem;
+    margin-bottom:1.3rem;
+    box-shadow:0 2px 10px rgba(20,30,60,.05);
+  }
+  .summary h2{margin:0 0 .6rem;font-size:1.15rem}
+  .score-line{font-size:1.02rem;margin:0 0 .8rem}
+  .score-line b{font-size:1.35rem;color:var(--accent)}
+  .chips{display:flex;flex-wrap:wrap;gap:.45rem;margin:0;padding:0;list-style:none}
+  .chip{
+    font-size:.85rem;font-weight:600;padding:.28rem .7rem;border-radius:999px;
+    border:1px solid var(--line);background:#fbfcff;color:var(--muted);
+  }
+  .chip.ok{background:var(--ok-bg);border-color:var(--ok-line);color:var(--ok)}
+  .chip.bad{background:var(--bad-bg);border-color:var(--bad-line);color:var(--bad)}
+
+  .card{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:14px;
+    padding:1.15rem 1.25rem 1.25rem;
+    margin-bottom:1.1rem;
+    box-shadow:0 2px 10px rgba(20,30,60,.05);
+  }
+  .card.correct{border-left:5px solid var(--ok)}
+  .card.wrong{border-left:5px solid var(--bad)}
+
+  .qhead{display:flex;flex-wrap:wrap;align-items:baseline;gap:.6rem;margin-bottom:.5rem}
+  .qnum{
+    font-weight:700;font-size:.8rem;letter-spacing:.06em;text-transform:uppercase;
+    color:#fff;background:var(--accent);padding:.2rem .6rem;border-radius:6px;
+  }
+  .qmeta{font-size:.8rem;color:var(--muted)}
+  .qtext{margin:.15rem 0 .9rem;font-weight:600;white-space:pre-line}
+
+  .options{display:grid;gap:.5rem}
+  .option{
+    display:flex;gap:.65rem;align-items:flex-start;
+    padding:.6rem .75rem;border:1px solid var(--line);border-radius:10px;
+    background:#fff;cursor:pointer;transition:border-color .15s,background .15s;
+  }
+  .option:hover{border-color:#c3cbe0;background:#fafbff}
+  .option input{margin-top:.3rem;accent-color:var(--accent);flex:none}
+  .option .txt{font-size:.95rem}
+  .option .txt b{color:var(--accent-dark)}
+  .option.locked{cursor:default}
+  .option.locked:hover{border-color:var(--line);background:#fff}
+
+  .option.is-correct{border-color:var(--ok-line);background:var(--ok-bg)}
+  .option.is-correct:hover{background:var(--ok-bg)}
+  .option.is-wrong{border-color:var(--bad-line);background:var(--bad-bg)}
+  .option.is-wrong:hover{background:var(--bad-bg)}
+
+  .feedback{margin-top:.9rem;padding-top:.85rem;border-top:1px dashed var(--line);display:none}
+  .feedback.show{display:block}
+  .verdict{font-weight:700;margin:0 0 .45rem}
+  .verdict.ok{color:var(--ok)}
+  .verdict.bad{color:var(--bad)}
+  .feedback p{margin:.25rem 0;font-size:.92rem}
+  .feedback .lbl{color:var(--muted);font-weight:600}
+  .feedback .reason{margin-top:.55rem;padding:.6rem .75rem;background:#f7f8fc;border-radius:9px;color:#333a4a}
+
+  .actions{display:flex;flex-wrap:wrap;align-items:center;gap:.8rem;margin:1.4rem 0 .4rem}
+  .btn{
+    font:inherit;font-weight:600;border-radius:10px;padding:.7rem 1.4rem;
+    border:1px solid transparent;cursor:pointer;transition:.15s;
+  }
+  .btn.primary{background:var(--accent);color:#fff}
+  .btn.primary:hover:not(:disabled){background:var(--accent-dark)}
+  .btn.primary:disabled{background:#c3cbe0;cursor:not-allowed}
+  .btn.ghost{background:#fff;border-color:var(--line);color:var(--ink)}
+  .btn.ghost:hover{border-color:#b9c2d6}
+  .hint{color:var(--muted);font-size:.88rem}
+
+  .desc .model{display:none;margin-top:.9rem;padding:.9rem 1rem;background:#f7f8fc;border-radius:10px}
+  .desc .model.show{display:block}
+  .desc .model h3{margin:.1rem 0 .55rem;font-size:.98rem}
+  .desc .model ul{margin:0;padding-left:1.15rem}
+  .desc .model li{margin:.35rem 0;font-size:.92rem}
+  .desc textarea{
+    width:100%;min-height:90px;resize:vertical;font:inherit;font-size:.93rem;
+    padding:.65rem .75rem;border:1px solid var(--line);border-radius:10px;
+    background:#fff;color:var(--ink);
+  }
+  .desc textarea:focus{outline:2px solid #cdd6f5;outline-offset:1px;border-color:#b9c2d6}
+
+  .note{
+    margin-top:1.6rem;padding:.9rem 1.1rem;border-left:4px solid #d8b04a;
+    background:#fdf8ea;border-radius:0 10px 10px 0;font-size:.9rem;color:#5b4b1e;
+  }
+  .note b{color:#7a641f}
+
+  .hidden{display:none !important}
+  @media (max-width:560px){
+    body{padding:1.2rem .7rem 3rem;font-size:15px}
+    .card{padding:1rem}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <h1>Patent Agent Examination 2023</h1>
+    <p>Paper I &middot; Set B &middot; 50 questions</p>
+  </header>
+
+  <div id="summary" class="summary hidden" aria-live="polite">
+    <h2>Result</h2>
+    <p class="score-line" id="scoreLine"></p>
+    <ul class="chips" id="chips"></ul>
+  </div>
+
+  <form id="quiz" autocomplete="off"></form>
+
+  <div class="actions">
+    <button id="submitBtn" class="btn primary" type="button" disabled>Submit all answers</button>
+    <button id="resetBtn" class="btn ghost" type="button">Reset</button>
+    <span id="hint" class="hint">Answer all 50 questions to submit.</span>
+  </div>
+
+  <div class="note">
+    <b>Answer key:</b> The correct answers and explanations are revealed after you submit.
+  </div>
+
+</div>
+
+<script>
+(function () {
+  "use strict";
+
+  /* =====================================================================
+     2023 — SET B — FULL DATA
+     ===================================================================== */
+  var S = function (title, m) { return { s: title, m: m }; };
+  var Q = function (t, o, a, free) { return { t: t, o: o, a: a, free: !!free }; };
+
+  var TF23 = ["Statement 1 is true, 2 is false","Statement 1 is false, 2 is true","Statement 1 and 2 both are false","Statement 1 and 2 both are true"];
+  var AR   = ["When both (A) and (R) are true, and (R) is a correct explanation of (A)","When both (A) and (R) are true, but (R) is NOT a correct explanation of (A)","When (A) is true but (R) is false","When (A) is false but (R) is true"];
+  var AR24 = ["When Both (A) and (R) are True, and (R) is a correct Explanation of (A)","When Both (A) and (R) are True, but (R) is NOT a correct Explanation of (A)","When (A) is true but (R) is False","When (A) and (R) both are False"];
+  var TF   = ["When Statement 1 is True, and Statement 2 is False","When Statement 1 is False, and Statement 2 is True","When Both Statements 1 and 2 are True","When Both Statements 1 and 2 are False"];
+
+  var DATA = [
+    S("Part A — Multiple Choice (2 marks each)", 2),
+    Q("Sagar, who is an applicant of an invention, drafted the specification himself and filed the patent application, and asked his advocate who is not a patent agent to appear for the hearing. Is it allowed in accordance with the Patents Act?",
+      ["Sagar can draft the specification but only a patent agent can attend the hearing.","As Sagar has drafted and filed the application himself, only he himself can appear for hearing","Sagar can draft the specification and advocate is allowed to attend the hearing.","Only patent agent is allowed to draft the specification and attend the hearing proceedings."],"c"),
+    Q("Students of Easwari Institute of Technology invented a new stabilizer, and designed a particular shape to make it attractive. They have given a name for that stabilizer as 'PASSION'. Further they made an operating manual for the operation of the stabilizer. They need IPR protection for the entire stabilizer. Could you please help them by matching exact legislation?\n\nList 1                                    List 2\n1. Invented stabilizer              (a) Copyright Act\n2. Shape of stabilizer              (b) Trademark Act\n3. PASSION                         (c) Patent Act\n4. Operating manual              (d) Design Act",
+      ["1a, 2b, 3c, 4d","1c, 2d, 3b, 4a","1b, 2a, 3c, 4d","1c, 2d, 3a, 4b"],"b"),
+    Q("Ms. Manisha wishes to file a patent application in India, but she came to know that some inventions are not patentable in accordance with the Indian Patents Act. Match List 1 and List 2 and select the correct code.\n\nList 1                                                      List 2\n1. Method of cultivating Rose flower      (a) Section 3(e)\n2. Method of treating brain tumor           (b) Section 3(f)\n3. Bucket fitted with torch                      (c) Section 3(h)\n4. Solution of sugar and salt                  (d) Section 3(i)",
+      ["1d, 2c, 3a, 4b","1c, 2d, 3b, 4a","1a, 2b, 3c, 4d","1b, 2c, 3d, 4a"],"b"),
+    Q("As part of the PCT procedure, an Indian applicant can receive an international search report and written opinion from –",
+      ["any International Searching Authority under the PCT","any International Searching Authority declared competent by the Receiving Office of India","the International Bureau of WIPO","Both (b) and (c)"],"b"),
+    Q("PRINT INC. is a large corporation having a sizeable portfolio of patents for a single product. The product is very popular in the Indian market and some of the patents have been licensed to other companies. Choose the correct option regarding Form-27 –",
+      ["Form 27 should be filed by PRINT INC. but not by the licensees.","PRINT INC. can file a single Form 27 for multiple patents that are related to the said product.","The Form 27 should be filed before the expiry of a time period of 3 months counted from the end of the previous financial year in respect of which the form is being filed.","PRINT INC. cannot file a single Form 27 for multiple patents that are related to the said product."],"b"),
+    Q("Your client, being a MNC, filed a patent application and paid all the fees applicable. Your client later on becomes uninterested in the patent application and wishes to seek refund. Please select the options available to your client –",
+      ["Your client can assign the application to a natural person and claim refund of 'the difference' in the scale of fees between the fees charged from your client and the fees chargeable from the natural person with regard to all the fees paid previously.","Your client can assign the application to a natural person and claim refund of 'the difference' in the scale of fees between the fees charged from your client and the fees chargeable from the natural person with regard to only the fees paid for request for examination.","Your client can make a request for withdrawal of patent application before the issuance of first statement of objection and claim a refund of 90% of fee paid for request for examination.","Your client can make a request for withdrawal of patent application before the issuance of first statement of objection and claim a refund of 50% of fee paid for request for examination."],"c"),
+    Q("An inventor living in Shimla, Himachal Pradesh wants to file his patent application along with a demand draft for the amount of fee payable. Please select the correct options available to the inventor –",
+      ["The inventor may send his application by a courier company.","The inventor may send his application by speed post.","Both (a) and (b).","Only (a)."],"b"),
+    Q("Your client, a startup which is facing existential challenges, filed a patent application 6 months ago which has not yet been published. Your client recently came to know that a competitor has started selling a product which is based on the invention disclosed in its patent application. The startup seeks your advice on the way forward. Please select the most prudent option(s) –",
+      ["Your client should file a request for expedited examination along with a request for early publication at the earliest.","Your client should send a legal notice to the competitor that he will have to pay the damages, calculated from the date of filing of patent application.","Your client should send a legal notice to the competitor that he will have to pay the damages, calculated from the date of grant of patent.","Your client should file a request for expedited examination, a request for early publication and a request to the Controller of Patents to stop the competitor from infringing his rights."],"a"),
+    Q("A patent was granted within one year from the date of filing of patent application. The patentee will have to pay the renewal fee, without taking any extension:",
+      ["before the expiration of the 2nd year from the date of patent in respect of 3rd year;","before the expiration of the 1st year from the date of patent application in respect of 2nd year;","before the expiration of the 3rd year from the date of patent in respect of 3rd year;","None of the above."],"a"),
+    Q("Marco files a patent application in Colombia on 09.01.2021 and thereafter, claiming priority from said application, he files a PCT International Application on 09.01.2022. Marco is interested to file a national phase patent application in India. The deadline to file in India would be:",
+      ["09.08.2023","09.01.2025","09.08.2024","09.07.2022"],"a"),
+    Q("Nilesh filed a patent application on 24.03.2019 upon which a patent was granted. The fact of grant of patent was published in the Official Journal on 03.01.2022. Nilesh develops a further improvement of the said invention. Upon conducting a patent and non-patent literature search, Nilesh finds out that the 'improvement' is novel as compared to his own patent. However, the 'improvement' was disclosed in someone else's patent application which was published on 23.01.2022. Nilesh is in a position to file the application for patent of addition on 04.01.2023. What should Nilesh do?",
+      ["Nilesh should file an application for a patent of addition as the improvement is novel vis-à-vis his own patent.","Nilesh should not file an application for a patent of addition as his patent application would be devoid of novelty.","Nilesh should not file an application for a patent of addition as the same cannot be filed beyond the expiry of one year from the date of publication of grant of a patent.","None of the above."],"b"),
+    Q("A post grant opposition is filed against the patent owned by the company Shelf Life Pvt. Ltd. The patentee does not desire to contest the opposition or leave his reply and evidence within the prescribed time limit. The patent shall be –",
+      ["deemed to have been abandoned","deemed to have been revoked","deemed to have been withdrawn","deemed to have been terminated"],"b"),
+    Q("Your client PatBio wishes to file a patent application in the Indian patent office for an invention which uses a biological material from India. Arrange the following steps for protection of said invention in the most likely chronological order –\n(1) filing of patent application\n(2) deposition of biological material in recognized depository\n(3) submitting permission from National Biodiversity Authority\n(4) publication of patent application\n(5) grant of patent",
+      ["1, 2, 3, 4, 5","2, 1, 4, 3, 5","2, 3, 1, 4, 5","1, 3, 2, 4, 5"],"b"),
+    Q("Patent application filed by Rajesh is refused by the Controller and the said decision was communicated on 02/05/2023. Rajesh can file an application for the review of the Controller's decision by –",
+      ["02/08/2023","01/06/2023","01/11/2023","02/05/2024"],"b"),
+    Q("Number of members in an opposition board is –",
+      ["2 including chairman","3 including chairman","4 including chairman","5 including chairman"],"b"),
+    Q("James, a citizen of Norway –",
+      ["can file a patent application directly in India.","can file a patent application in India only after filing same in Norway.","can file a patent application in India only through PCT route.","can file application only in Norway and not in India."],"a"),
+    Q("George Sebastian is a US citizen residing at Bangalore and working at a multinational company having offices throughout the world. As part of the research team, George invented a mosquito repellent. However, as per the Company policy, the application for patent should be first filed at the US Patent Office. George approached you for advice as to whether he has to do any formalities with the Indian Patent Office –",
+      ["As George is a US citizen and company is a multi-national one, there is no requirement from Indian Patent office side.","As George is residing at Bangalore, he has to obtain permission from Indian Patent office to file first application in US.","As George is residing at Bangalore, he has to obtain permission from US embassy in India to file first application in US.","As George is a US citizen, he has to obtain permission from Indian embassy in USA for filing first application in US."],"b"),
+    Q("Three applicants applied for a patent and the patent was granted to them. Which of the following is true? (Note: there is no specific contract between them)",
+      ["all are having equal undivided share in patent.","first name holder in the Patent application will get major share.","sharing will be based on the alphabetical order.","sharing will be based on the date of birth."],"a"),
+    Q("Mr. Suresh has two inventions related to a table top grinder. He filed patents for both inventions in the Indian Patent office. Patent was granted for one of the inventions and the other was pending. Mr. Suresh assigned all rights in both the cases to M/s Birdfly Industries. Now which forms are required to update the same in Patent Office records?",
+      ["Form 16 and Form 13","Form 16 and Form 6","Form 6 and Form 13","Two Form 13"],"b"),
+    Q("An application for patent is open to public –",
+      ["Just after filing of application.","Just after publication of application.","Just after filing of pre-grant opposition in the application.","Just after FER is issued in the application."],"b"),
+    Q("Mohan went to London, where he found a bicycle which works without a chain. He realized that this bicycle is not available in India and wishes to import this bicycle to India and to file a patent for it in India. He approaches you for your advice as per the Patents Act, 1970.",
+      ["Mohan can be considered as true and first inventor in India because this bicycle is not available in India.","Mohan can be considered as true and first inventor because he is the first person from India to know about this bicycle.","Mohan can be considered as true and first inventor if he is the first importer of the invention to India.","Mohan cannot be considered as true and first inventor."],"d"),
+    Q("Styl & Co., a US company, was granted a patent for a sewing machine in the US. Joe is an entrepreneur engaged in manufacture and distribution of sewing machines in India. Joe came to know that Styl & Co. has not filed a patent application in India. In that case –",
+      ["Joe will get a patent in India.","Joe will get a patent in Europe.","Joe can freely manufacture the invention and sell it in India.","Joe cannot manufacture the invention in India."],"c"),
+    Q("Mydhili invents a food processor that can chop vegetables and knead flour. Since the work was not complete, she first filed a provisional application on 20.01.2022. She filed complete specification for her invention on 15.04.2022. Later, she invented a fruit juicer unit that can be connected to the food processor. She applied for a patent of addition for the fruit juicer on 15.4.2023. Assuming that both patents will be granted, the patent term will expire on:",
+      ["20.01.2042 for both the patents.","15.4.2043 for both the patents.","15.04.2042 for the first and 15.04.2043 for the second patent.","20.01.2042 for the first and 15.04.2043 for the second patent."],"a"),
+    Q("Gopal has filed a patent application along with necessary fees. But the application was not published. What could be the reason?",
+      ["Gopal did not file a request for Examination.","Gopal did not file a request for publication.","A pre-grant representation was filed against the application.","Gopal filed only a provisional specification."],"d"),
+    Q("Gautham made a model of the speed boat which he invented. He files for a patent for the speed boat. Which of the following statements is correct?",
+      ["Model is part of complete specification and is to be filed at the time of filing of complete specification.","Model is not a part of the complete specification but it has to be filed along with the complete specification.","Model is not a part of the complete specification but has to be furnished if required by the Controller.","The Controller cannot ask for a model."],"c"),
+    Q("Shiva was a great inventor for solar batteries and he filed five patent applications. Though the patents were granted for all the five inventions, Shiva died before the date of grant of patents due to sudden cardiac arrest. Shiva's only son Gana approached you for advice. Which section of the Patents Act will you refer to?",
+      ["Section 21","Section 44","Section 50","Section 53"],"b"),
+    Q("Raju Gomaz, a US citizen, filed two applications with USPTO on 28.04.2017. He filed a convention application in India on 27.04.2018, claiming priority from one of the US applications. He filed a PCT international application on 25.04.2018 claiming priority from the other application and entered PCT national phase in India on 31.03.2019. The date of patent for the convention application and the national phase application are respectively:",
+      ["27.04.2018 and 25.04.2018","28.04.2017 and 31.03.2019","27.04.2018 and 31.03.2019","28.04.2017 and 28.04.2017"],"a"),
+    Q("Your client who filed a PCT international application received the international search report from the International Searching Authority. In the search report, category code X is mentioned against a prior art document. Category code X means that when this document is taken alone, the claimed invention is:",
+      ["not novel but inventive","novel but not inventive","either not novel or not inventive","not industrially applicable"],"c"),
+    Q("Dr. Karan got a patent for a surgical equipment. Dr. Vimala used that patented surgical equipment for research purpose. Dr. Karan issued a legal notice to Dr. Vimala for infringement. Dr. Vimala approached you for your advice. Which one of the following is correct?",
+      ["Dr. Vimala can use it freely for research.","Dr. Vimala can use it for research but has to pay royalty to Dr Karan.","Dr. Vimala can use it for research but has to take written permission from Dr Karan.","Dr. Vimala need not take permission from Dr Karan, but has to inform the Patent Office about it."],"a"),
+    Q("Limera is a start-up in the field of space engineering. They have applied for patents and wish to get them granted at the earliest so that they can carry out their business.",
+      ["Limera should file request for early publication and request for expedited examination.","Limera being a startup is not eligible for expedited examination.","Limera need not file request for early publication and request for expedited examination as they are startup.","Limera should file request for early publication along with recommendation from ISRO."],"a"),
+
+    S("Part B — True / False Statements (1 mark each)", 1),
+    Q("1. Time for putting an application in order for grant under section 21 shall be six months from the date of first statement of objection issued to the applicant.\n2. Time for putting an application in order for grant may be further extended for a period of six months on a request of extension made in Form-4.", TF23, "a"),
+    Q("Company X is having place of business at US and filed initial application at USPTO and after six months from the US application, the company has done some modification and filed patent application for the same at Japan. Within 12 months from the date of US filing, Company X filed an Indian application claiming priority of earlier two applications from US and Japan.\n1. Company X is allowed to claim priority of US application only.\n2. Company X is allowed to claim both the priorities.", TF23, "b"),
+    Q("1. The term of every patent starts from the date of filing of the patent application.\n2. No suit or other proceeding shall be commenced or prosecuted in respect of an infringement committed before the date of publication of the application.", TF23, "d"),
+    Q("Sandip has filed a patent application on 01/01/2019 for his invention missile tracking device and the application is considered to prejudice defence; subsequently on 25/12/2022 said secrecy direction is revoked.\n1. The request for examination shall be made within forty eight months from the date of filing.\n2. The request for examination shall be made within forty eight months from the date of revocation of secrecy direction.", TF23, "a", true),
+    Q("Gautami filed a patent application and wishes to get her application examined at the earliest –\n1. She should file an expedited request for publication.\n2. She should file an express request for examination.", TF23, "c"),
+    Q("1. The claims lack inventive step due to prior art disclosure in a single document combined with common general knowledge.\n2. The claims lack inventive step due to combination of prior art disclosure in two or more citations.", TF23, "d"),
+    Q("In a case where an application processed by a startup is partly transferred to a multinational company –\n1. The new applicant is not required to pay the difference in the scale of fees between the fees charged from a startup and the fees chargeable from multinational company.\n2. The new applicant shall file a request for change in name of applicant.", TF23, "b"),
+    Q("While doing amendments in the specification –\n1. Applicant shall provide a marked copy clearly identifying the amendments carried out.\n2. Applicant shall provide a statement clearly indicating the portion of the specification or drawing being amended along with the reason shall be filed.", TF23, "d"),
+    Q("An application for patent is refused by the Controller. The applicant wishes to challenge the refusal.\n1. Applicant can approach Intellectual Property Appellate Board.\n2. Applicant can approach District Court.", TF23, "c"),
+    Q("1. Legal representative means a person who in law represents the estate of a deceased person.\n2. Legal representative means a person who files an application on behalf of the applicant.", TF23, "a"),
+
+    S("Part C — Multiple Correct Answers (3 marks each; at least two options correct)", 3),
+    Q("Rajesh, a patent agent registered with the Patent Office, may be disqualified on the grounds that –",
+      ["He is an undischarged insolvent.","He has been adjudged by competent court to be of unsound mind.","He being a chartered accountant has been guilty of negligence.","He has been convicted by a competent court outside India of an offence to undergo a term of imprisonment."],"a,b,c,d"),
+    Q("Mr. Ujjwal would like to know time limits generally available for extension of time using Form-4 in accordance with the Patents law –",
+      ["Extension of three months is allowed for filing of declaration of inventorship.","Extension of six months is allowed for filing renewal fees.","Extension of three months is allowed for filing reply to first examination report.","Extension of one month is allowed for filing review petition."],"b,c,d"),
+    Q("After receiving the international search report and written opinion of ISA, the applicant may –",
+      ["Enter national phase.","Submit informal comments to IB.","Amend claims and file a demand for international preliminary examination.","Submit reply to ISR and written opinion to ISA."],"a,b,c"),
+    Q("Patent office has objected to novelty based on a cited document and issued First Statement of Objection to you. You can do the following acts –",
+      ["Show to the satisfaction of the Controller that priority date of the claim of your complete specification is not later than the date on which cited document was published.","You can amend claims of the complete specification to overcome the citation.","You can withdraw your application.","You can challenge the objection of novelty in Court."],"a,b,c"),
+    Q("Term of the Patent application starts from –",
+      ["Date of filing of Provisional specification.","Date of filing of Complete specification, if the Provisional specification is followed by the complete specification.","Date of entry in India in case of PCT national Phase application.","Date of filing in India in case of Convention application."],"a,d"),
+    Q("Who are eligible for Expedited Examination of applications?",
+      ["Natural persons as applicants wherein at least one of them is a female.","Natural persons as applicants wherein at least one of them is an Indian citizen.","Start up but not Small entity.","Start up or Small entity."],"a,d"),
+    Q("Which is true about statement and undertaking regarding foreign applications –",
+      ["Statement and undertaking under Section 8(1) shall be filed within six months from the date of filing the application.","Applicant shall keep informed the Controller regarding details of same application or similar applications filed outside India within 3 months from the date of filing of such application under section 8(1).","Applicant shall furnish information relating to objections, in respect of novelty and patentability of the invention within six months from the date of requirement by the Controller.","Applicant shall furnish information relating to objections, in respect of novelty and patentability of the invention immediately as and when required by the Controller."],"a,c"),
+    Q("Rohan happened to visit Himalaya along with a trekking team. While staying there he wrote a book related to Himalayan mountain ranges, took some video, made a novel and attractive device for easy trekking and discovered a stone naturally occurring there. He wishes to get IP rights on all of them and approached you for filing the application. He can apply/register for –",
+      ["copyright for the book and video.","design for the stone and copyright for the book.","patent for the device, but not design for the device.","patent and design for the device."],"a,d"),
+    Q("A patent application was filed by a company A on 01.01.2021 and was published in the Patent Office Journal on 01.07.2022. The first statement of objections was issued by the Patent Office on 03.08.2022 and the applicant filed a response complying with all the objections on 05.10.2022. On 10.10.2022, the applicant noticed that a competitor, company B, is selling a product which utilises the applicant's invention that was disclosed in the patent application. Choose the correct options –",
+      ["The company A may send a legal notice to the company B.","The company A may file an infringement suit in Court.","Upon the grant of a patent, the company A is entitled to seek damages from 01.01.2021.","Upon the grant of a patent, the company A is entitled to seek damages from 01.07.2022."],"a,d"),
+    Q("A company X files a patent application which upon examination was objected on the ground that the application contains a plurality of distinct inventions. X files a further application in response to the objection raised in the examination report. Choose the correct options –",
+      ["The complete specification of the further application should include only that matter which was not in substance disclosed in the complete specification of the first mentioned application as otherwise it would amount to double patenting.","The Controller may require such amendment of the complete specification filed in pursuance of either the original or the further application as may be necessary to ensure that neither of the said complete specifications includes a claim for any matter claimed in the other.","The complete specification of the further application should not include any matter not in substance disclosed in the complete specification filed in pursuance of the first mentioned application.","Both (a) and (b)."],"b,c")
+  ];
+
+  /* ---------- Flatten questions ---------- */
+  var QUESTIONS = [];
+  var qNum = 0;
+  DATA.forEach(function (item) {
+    if (item.s) {
+      QUESTIONS.push({ section: item.s, marks: item.m });
+    } else {
+      qNum++;
+      QUESTIONS.push({
+        id: "q" + qNum,
+        num: qNum,
+        text: item.t,
+        options: item.o,
+        answer: item.a,
+        marks: item.m || 1,
+        isMulti: Array.isArray(item.a) && item.a.length > 1
+      });
+    }
+  });
+
+  var MCQS = QUESTIONS.filter(function (q) { return q.options; });
+
+  /* ---------- DOM refs ---------- */
+  var form      = document.getElementById("quiz");
+  var submitBtn = document.getElementById("submitBtn");
+  var resetBtn  = document.getElementById("resetBtn");
+  var hint      = document.getElementById("hint");
+  var summary   = document.getElementById("summary");
+  var scoreLine = document.getElementById("scoreLine");
+  var chips     = document.getElementById("chips");
+
+  var submitted = false;
+  var TOTAL = MCQS.length;
+
+  /* ---------- Helpers ---------- */
+  function inputsFor(qid) {
+    return Array.prototype.slice.call(
+      document.querySelectorAll('input[name="' + qid + '"]')
+    );
+  }
+
+  function selectionFor(qid) {
+    return inputsFor(qid)
+      .filter(function (i) { return i.checked; })
+      .map(function (i) { return i.value; });
+  }
+
+  function labelOf(input) {
+    return input.closest("label");
+  }
+
+  function pretty(values) {
+    if (!values.length) return "—";
+    if (values.length === 1) return "(" + values[0].toLowerCase() + ")";
+    return values.map(function (v) { return "(" + v.toLowerCase() + ")"; }).join(" and ");
+  }
+
+  function refreshState() {
+    if (submitted) return;
+    var answered = MCQS.filter(function (q) {
+      return selectionFor(q.id).length > 0;
+    }).length;
+    submitBtn.disabled = answered < TOTAL;
+    hint.textContent = answered < TOTAL
+      ? answered + " of " + TOTAL + " questions answered."
+      : "All answered — submit when ready.";
+  }
+
+  /* ---------- Grading ---------- */
+  function isCorrect(q, sel) {
+    if (!sel.length) return false;
+    if (q.isMulti) {
+      var correctSet = q.answer.split(",");
+      if (sel.length !== correctSet.length) return false;
+      return correctSet.every(function (v) { return sel.indexOf(v) !== -1; });
+    }
+    return sel.length === 1 && sel[0] === q.answer;
+  }
+
+  function renderFeedback(q, sel, ok) {
+    var fb = document.getElementById("fb-" + q.id);
+
+    var correctDisplay;
+    if (q.isMulti) {
+      correctDisplay = q.answer.split(",").map(function (v) {
+        return "(" + v.toLowerCase() + ")";
+      }).join(" and ");
+    } else {
+      correctDisplay = "(" + q.answer.toLowerCase() + ")";
+    }
+
+    fb.innerHTML =
+      '<p class="verdict ' + (ok ? "ok" : "bad") + '">' +
+        (ok ? "&#10004; Correct" : "&#10008; Incorrect") +
+      "</p>" +
+      '<p><span class="lbl">Your answer:</span> ' + pretty(sel) + "</p>" +
+      '<p><span class="lbl">Correct answer:</span> ' + correctDisplay + "</p>";
+
+    fb.classList.add("show");
+
+    /* Mark the option rows */
+    inputsFor(q.id).forEach(function (inp) {
+      var lab = labelOf(inp);
+      lab.classList.add("locked");
+      var v = inp.value;
+      var correctSet = q.isMulti ? q.answer.split(",") : [q.answer];
+      if (correctSet.indexOf(v) !== -1) {
+        lab.classList.add("is-correct");
+      } else if (inp.checked) {
+        lab.classList.add("is-wrong");
+      }
+    });
+
+    var card = document.getElementById("card-" + q.id);
+    card.classList.add(ok ? "correct" : "wrong");
+  }
+
+  function submitQuiz() {
+    if (submitted) return;
+
+    var results = [];
+    MCQS.forEach(function (q) {
+      var sel = selectionFor(q.id);
+      var ok  = isCorrect(q, sel);
+      results.push({ q: q, ok: ok });
+      renderFeedback(q, sel, ok);
+      inputsFor(q.id).forEach(function (i) { i.disabled = true; });
+    });
+
+    var score = results.filter(function (r) { return r.ok; }).length;
+    var totalMarks = results.reduce(function (sum, r) {
+      return sum + (r.ok ? r.q.marks : 0);
+    }, 0);
+    var maxMarks = results.reduce(function (sum, r) {
+      return sum + r.q.marks;
+    }, 0);
+
+    scoreLine.innerHTML = "You scored <b>" + score + "</b> out of " + TOTAL +
+      " questions &nbsp;&middot;&nbsp; <b>" + totalMarks + "</b> / " + maxMarks + " marks" +
+      (score === TOTAL ? " &nbsp;&middot;&nbsp; Perfect run!" : "");
+
+    chips.innerHTML = results.map(function (r) {
+      return '<li class="chip ' + (r.ok ? "ok" : "bad") + '">' +
+        "Q" + r.q.num + " " + (r.ok ? "&#10004;" : "&#10008;") +
+      "</li>";
+    }).join("");
+
+    summary.classList.remove("hidden");
+    summary.scrollIntoView({ behavior: "smooth", block: "start" });
+
+    submitted = true;
+    submitBtn.disabled = true;
+    hint.textContent = "Submitted. Press Reset to try again.";
+  }
+
+  function resetQuiz() {
+    submitted = false;
+    form.reset();
+
+    MCQS.forEach(function (q) {
+      inputsFor(q.id).forEach(function (inp) {
+        inp.disabled = false;
+        var lab = labelOf(inp);
+        lab.classList.remove("is-correct", "is-wrong", "locked");
+      });
+      var fb = document.getElementById("fb-" + q.id);
+      fb.innerHTML = "";
+      fb.classList.remove("show");
+      document.getElementById("card-" + q.id).classList.remove("correct", "wrong");
+    });
+
+    summary.classList.add("hidden");
+    chips.innerHTML = "";
+    scoreLine.innerHTML = "";
+    refreshState();
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
+  /* ---------- Render form ---------- */
+  function renderQuiz() {
+    var html = "";
+    var qIndex = 0;
+
+    DATA.forEach(function (item) {
+      if (item.s) {
+        html += '<h2 class="qmeta" style="margin:1.4rem 0 .6rem;font-size:.85rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);">' + item.s + "</h2>";
+      } else {
+        qIndex++;
+        var q = QUESTIONS.filter(function (x) { return x.num === qIndex; })[0];
+        html += '<section class="card" id="card-' + q.id + '">';
+        html += '<div class="qhead">';
+        html += '<span class="qnum">Q' + q.num + "</span>";
+        html += '<span class="qmeta">' + q.marks + " mark" + (q.marks > 1 ? "s" : "") + (q.isMulti ? " · multiple correct" : "") + "</span>";
+        html += "</div>";
+        html += '<p class="qtext">' + q.text + "</p>";
+        html += '<div class="options">';
+        q.options.forEach(function (opt, oi) {
+          var letter = String.fromCharCode(97 + oi);
+          var inputType = q.isMulti ? "checkbox" : "radio";
+          html += '<label class="option">';
+          html += '<input type="' + inputType + '" name="' + q.id + '" value="' + letter + '">';
+          html += '<span class="txt"><b>(' + letter + ")</b> " + opt + "</span>";
+          html += "</label>";
+        });
+        html += "</div>";
+        html += '<div class="feedback" id="fb-' + q.id + '"></div>';
+        html += "</section>";
+      }
+    });
+
+    form.innerHTML = html;
+  }
+
+  /* ---------- Wiring ---------- */
+  form.addEventListener("change", refreshState);
+  submitBtn.addEventListener("click", submitQuiz);
+  resetBtn.addEventListener("click", resetQuiz);
+
+  renderQuiz();
+  refreshState();
+})();
+</script>
+</body>
+</html>
