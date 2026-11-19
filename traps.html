@@ -1,0 +1,2601 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Patent Agent Exam 2027 · Trap Learning Portal</title>
+  <style>
+    /* ----- RESET & VARIABLES ----- */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+    }
+    :root {
+      --navy: #0b1e33;
+      --navy-light: #1d3a5c;
+      --amber: #d97706;
+      --amber-light: #fef3c7;
+      --red: #b91c1c;
+      --red-light: #fee2e2;
+      --green: #15803d;
+      --green-light: #dcfce7;
+      --gray-bg: #f8fafc;
+      --gray-border: #e2e8f0;
+      --gray-text: #334155;
+      --white: #ffffff;
+      --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+      --radius: 12px;
+      --radius-sm: 8px;
+    }
+    body {
+      background: var(--gray-bg);
+      color: var(--gray-text);
+      display: flex;
+      min-height: 100vh;
+      line-height: 1.5;
+    }
+
+    /* ----- SIDEBAR ----- */
+    .sidebar {
+      width: 260px;
+      background: var(--navy);
+      color: #cbd5e1;
+      padding: 1.5rem 1rem;
+      display: flex;
+      flex-direction: column;
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      overflow-y: auto;
+      z-index: 10;
+    }
+    .sidebar h1 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: white;
+      letter-spacing: 0.3px;
+      margin-bottom: 2rem;
+      line-height: 1.3;
+      padding-left: 0.5rem;
+      border-left: 4px solid var(--amber);
+    }
+    .sidebar nav {
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+      flex: 1;
+    }
+    .sidebar nav a {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.7rem 0.75rem;
+      border-radius: var(--radius-sm);
+      color: #cbd5e1;
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: background 0.2s, color 0.2s;
+      cursor: pointer;
+    }
+    .sidebar nav a:hover,
+    .sidebar nav a.active {
+      background: var(--navy-light);
+      color: white;
+    }
+    .sidebar nav a .icon {
+      font-size: 1.1rem;
+      width: 1.5rem;
+      text-align: center;
+    }
+    .sidebar-footer {
+      margin-top: 1.5rem;
+      font-size: 0.7rem;
+      color: #94a3b8;
+      border-top: 1px solid #1e3a5f;
+      padding-top: 1rem;
+    }
+
+    /* ----- MAIN CONTENT ----- */
+    .main {
+      margin-left: 260px;
+      flex: 1;
+      padding: 1.5rem 2rem 3rem;
+      max-width: 1300px;
+    }
+
+    /* ----- DASHBOARD ----- */
+    .dashboard {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+    .stat-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 1.25rem 1rem;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--gray-border);
+      text-align: center;
+    }
+    .stat-card .label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: #64748b;
+      font-weight: 600;
+    }
+    .stat-card .value {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--navy);
+      margin-top: 0.25rem;
+    }
+    .stat-card .value.amber { color: var(--amber); }
+    .stat-card .value.green { color: var(--green); }
+    .stat-card .value.red { color: var(--red); }
+
+    /* ----- SEARCH & FILTERS ----- */
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+      align-items: center;
+      background: var(--white);
+      padding: 1rem;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      border: 1px solid var(--gray-border);
+    }
+    .search-box {
+      flex: 2;
+      min-width: 220px;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: #f1f5f9;
+      border-radius: 999px;
+      padding: 0.5rem 1rem;
+      border: 1px solid transparent;
+      transition: border 0.2s;
+    }
+    .search-box:focus-within {
+      border-color: var(--amber);
+      background: white;
+    }
+    .search-box input {
+      border: none;
+      background: transparent;
+      width: 100%;
+      font-size: 0.9rem;
+      outline: none;
+      color: var(--gray-text);
+    }
+    .filter-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    .filter-btn {
+      background: #f1f5f9;
+      border: 1px solid var(--gray-border);
+      color: #475569;
+      padding: 0.4rem 0.9rem;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+    .filter-btn:hover {
+      background: #e2e8f0;
+    }
+    .filter-btn.active {
+      background: var(--navy);
+      color: white;
+      border-color: var(--navy);
+    }
+    .filter-btn.amber {
+      background: var(--amber-light);
+      border-color: #fcd34d;
+      color: #92400e;
+    }
+    .filter-btn.amber.active {
+      background: var(--amber);
+      color: white;
+      border-color: var(--amber);
+    }
+
+    /* ----- TRAP CARDS ----- */
+    .trap-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .trap-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      border: 1px solid var(--gray-border);
+      overflow: hidden;
+      transition: border 0.2s;
+    }
+    .trap-card:hover {
+      border-color: #cbd5e1;
+    }
+    .trap-header {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 1rem 1.25rem;
+      cursor: pointer;
+      user-select: none;
+      flex-wrap: wrap;
+    }
+    .trap-header .title {
+      flex: 1;
+      font-weight: 600;
+      color: var(--navy);
+      font-size: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+    .badge {
+      font-size: 0.65rem;
+      padding: 0.2rem 0.55rem;
+      border-radius: 999px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+      white-space: nowrap;
+    }
+    .badge-beginner { background: #dbeafe; color: #1e40af; }
+    .badge-intermediate { background: #fef3c7; color: #92400e; }
+    .badge-advanced { background: #fee2e2; color: #991b1b; }
+    .badge-important { background: var(--amber); color: white; }
+    .badge-highconf { background: var(--red); color: white; }
+    .badge-amendment { background: #7c3aed; color: white; }
+    .trap-header .expand-icon {
+      font-size: 1.1rem;
+      color: #94a3b8;
+      transition: transform 0.25s;
+    }
+    .trap-card.open .expand-icon { transform: rotate(180deg); }
+
+    .trap-body {
+      display: none;
+      padding: 0 1.25rem 1.25rem;
+      border-top: 1px solid var(--gray-border);
+      background: #fcfcfd;
+    }
+    .trap-card.open .trap-body { display: block; }
+
+    .section-block {
+      margin-top: 1rem;
+      border-left: 3px solid #e2e8f0;
+      padding-left: 1rem;
+    }
+    .section-block.provision { border-left-color: var(--navy); }
+    .section-block.trap { border-left-color: var(--amber); }
+    .section-block.simple { border-left-color: var(--green); }
+    .section-block.example { border-left-color: #3b82f6; }
+    .section-block.confusion { border-left-color: var(--red); }
+    .section-block.alert { border-left-color: var(--amber); background: #fffbeb; padding: 0.5rem 1rem; border-radius: 0 8px 8px 0; }
+    .section-block.memory { border-left-color: #8b5cf6; }
+
+    .section-block h4 {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: #64748b;
+      margin-bottom: 0.25rem;
+      font-weight: 700;
+    }
+    .section-block p, .section-block ul {
+      font-size: 0.9rem;
+      color: #1e293b;
+    }
+    .section-block ul { padding-left: 1.2rem; }
+    .section-block li { margin-bottom: 0.25rem; }
+
+    .compare-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 0.75rem 0;
+      font-size: 0.85rem;
+    }
+    .compare-table th {
+      background: #f1f5f9;
+      text-align: left;
+      padding: 0.5rem 0.75rem;
+      border: 1px solid var(--gray-border);
+      font-weight: 600;
+      color: var(--navy);
+    }
+    .compare-table td {
+      padding: 0.5rem 0.75rem;
+      border: 1px solid var(--gray-border);
+      vertical-align: top;
+    }
+    .compare-table tr:nth-child(even) { background: #f8fafc; }
+
+    /* ----- QUIZ ----- */
+    .quiz-block {
+      margin-top: 1rem;
+      background: #f8fafc;
+      border: 1px solid var(--gray-border);
+      border-radius: var(--radius-sm);
+      padding: 0.75rem 1rem;
+    }
+    .quiz-question {
+      font-weight: 600;
+      font-size: 0.9rem;
+      margin-bottom: 0.5rem;
+      color: var(--navy);
+    }
+    .quiz-options {
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+      margin-bottom: 0.5rem;
+    }
+    .quiz-option {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.5rem;
+      font-size: 0.85rem;
+      padding: 0.35rem 0.5rem;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    .quiz-option:hover { background: #e2e8f0; }
+    .quiz-option input[type="radio"] { margin-top: 0.2rem; }
+    .quiz-feedback {
+      font-size: 0.8rem;
+      padding: 0.5rem;
+      border-radius: 6px;
+      margin-top: 0.5rem;
+      display: none;
+    }
+    .quiz-feedback.correct { background: var(--green-light); color: #166534; display: block; }
+    .quiz-feedback.wrong { background: var(--red-light); color: #991b1b; display: block; }
+    .quiz-actions {
+      display: flex;
+      gap: 0.5rem;
+      margin-top: 0.5rem;
+      flex-wrap: wrap;
+    }
+    .btn {
+      padding: 0.4rem 0.9rem;
+      border-radius: 6px;
+      border: 1px solid var(--gray-border);
+      background: white;
+      font-size: 0.8rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.15s;
+      color: var(--gray-text);
+    }
+    .btn:hover { background: #f1f5f9; }
+    .btn-primary { background: var(--navy); color: white; border-color: var(--navy); }
+    .btn-primary:hover { background: var(--navy-light); }
+    .btn-amber { background: var(--amber); color: white; border-color: var(--amber); }
+    .btn-amber:hover { background: #b45309; }
+
+    /* ----- PROGRESS MARKERS ----- */
+    .progress-markers {
+      display: flex;
+      gap: 0.3rem;
+      margin-top: 0.5rem;
+      flex-wrap: wrap;
+    }
+    .progress-btn {
+      font-size: 0.65rem;
+      padding: 0.2rem 0.6rem;
+      border-radius: 999px;
+      border: 1px solid var(--gray-border);
+      background: white;
+      cursor: pointer;
+      transition: all 0.15s;
+      color: #475569;
+      font-weight: 500;
+    }
+    .progress-btn:hover { background: #f1f5f9; }
+    .progress-btn.active[data-status="not-started"] { background: #e2e8f0; border-color: #94a3b8; color: #1e293b; }
+    .progress-btn.active[data-status="learning"] { background: #dbeafe; border-color: #3b82f6; color: #1e40af; }
+    .progress-btn.active[data-status="understood"] { background: var(--green-light); border-color: var(--green); color: #166534; }
+    .progress-btn.active[data-status="needs-revision"] { background: var(--red-light); border-color: var(--red); color: #991b1b; }
+
+    /* ----- REVISION MODE ----- */
+    .revision-mode .trap-body { display: none !important; }
+    .revision-mode .trap-header .title { font-size: 0.95rem; }
+    .revision-mode .trap-header .expand-icon { display: none; }
+    .revision-mode .trap-card { cursor: default; }
+    .revision-mode .trap-header { cursor: default; }
+    .revision-mode .revision-summary { display: block !important; }
+
+    .revision-summary {
+      display: none;
+      padding: 0.5rem 1.25rem 1rem;
+      background: #fcfcfd;
+      border-top: 1px solid var(--gray-border);
+      font-size: 0.85rem;
+    }
+    .revision-summary strong { color: var(--navy); }
+
+    /* ----- RANDOM TEST MODAL ----- */
+    .modal-overlay {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.5);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 100;
+      padding: 1rem;
+    }
+    .modal-overlay.active { display: flex; }
+    .modal {
+      background: white;
+      border-radius: var(--radius);
+      max-width: 600px;
+      width: 100%;
+      max-height: 80vh;
+      overflow-y: auto;
+      padding: 1.5rem;
+      box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1);
+    }
+    .modal h3 { color: var(--navy); margin-bottom: 0.75rem; }
+    .modal .quiz-block { background: #f8fafc; }
+    .modal-close {
+      float: right;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: #64748b;
+    }
+
+    /* ----- RESPONSIVE ----- */
+    @media (max-width: 768px) {
+      .sidebar { width: 100%; position: relative; height: auto; flex-direction: row; flex-wrap: wrap; padding: 1rem; }
+      .sidebar h1 { margin-bottom: 0.5rem; font-size: 1rem; }
+      .sidebar nav { flex-direction: row; flex-wrap: wrap; }
+      .sidebar nav a { padding: 0.4rem 0.6rem; font-size: 0.8rem; }
+      .main { margin-left: 0; padding: 1rem; }
+      .toolbar { flex-direction: column; align-items: stretch; }
+      .filter-group { overflow-x: auto; padding-bottom: 0.25rem; }
+    }
+
+    /* util */
+    .hidden { display: none !important; }
+    .mt-1 { margin-top: 0.5rem; }
+    .text-amber { color: var(--amber); }
+    .text-red { color: var(--red); }
+    .text-green { color: var(--green); }
+    .text-sm { font-size: 0.8rem; }
+    .flex { display: flex; }
+    .gap-1 { gap: 0.5rem; }
+    .items-center { align-items: center; }
+  </style>
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<aside class="sidebar">
+  <h1>⚖️ Patent Agent<br>2027 Trap Portal</h1>
+  <nav>
+    <a href="#" data-view="dashboard" class="active"><span class="icon">📊</span> Dashboard</a>
+    <a href="#" data-view="traps"><span class="icon">🔍</span> All Traps</a>
+    <a href="#" data-view="sections"><span class="icon">📜</span> Act Sections</a>
+    <a href="#" data-view="rules"><span class="icon">📋</span> Rules &amp; Forms</a>
+    <a href="#" data-view="timelines"><span class="icon">⏱️</span> Important Timelines</a>
+    <a href="#" data-view="compare"><span class="icon">📊</span> Compare Provisions</a>
+    <a href="#" data-view="practice"><span class="icon">📝</span> Practice MCQs</a>
+    <a href="#" data-view="revision"><span class="icon">🧠</span> Revision Mode</a>
+  </nav>
+  <div class="sidebar-footer">
+    Based on 2010–2026 papers &amp; amendments<br>
+    Not legal advice · Verify with current Act/Rules
+  </div>
+</aside>
+
+<!-- MAIN -->
+<main class="main" id="mainContent">
+
+  <!-- DASHBOARD VIEW -->
+  <div id="view-dashboard">
+    <h2 style="color: var(--navy); font-size: 1.5rem; margin-bottom: 1.5rem;">Dashboard</h2>
+    <div class="dashboard" id="dashboardStats">
+      <!-- populated by JS -->
+    </div>
+    <div class="toolbar" style="margin-top: 1rem;">
+      <div class="search-box">
+        <span>🔎</span>
+        <input type="text" id="globalSearch" placeholder="Search traps by keyword, section, rule, form…">
+      </div>
+      <button class="btn btn-primary" id="randomTestBtn">🎲 Random Test</button>
+    </div>
+    <div class="trap-list" id="dashboardTrapList"></div>
+  </div>
+
+  <!-- ALL TRAPS VIEW (same as dashboard but with full filters) -->
+  <div id="view-traps" class="hidden">
+    <h2 style="color: var(--navy); font-size: 1.5rem; margin-bottom: 1rem;">All Traps</h2>
+    <div class="toolbar">
+      <div class="search-box">
+        <span>🔎</span>
+        <input type="text" id="trapSearch" placeholder="Search traps…">
+      </div>
+      <div class="filter-group" id="difficultyFilters">
+        <button class="filter-btn active" data-difficulty="all">All</button>
+        <button class="filter-btn" data-difficulty="Beginner">Beginner</button>
+        <button class="filter-btn" data-difficulty="Intermediate">Intermediate</button>
+        <button class="filter-btn" data-difficulty="Advanced">Advanced</button>
+      </div>
+      <div class="filter-group" id="tagFilters">
+        <button class="filter-btn amber active" data-tag="all">All Labels</button>
+        <button class="filter-btn amber" data-tag="Important">⭐ Important</button>
+        <button class="filter-btn amber" data-tag="HighConfusion">🔥 High Confusion</button>
+        <button class="filter-btn amber" data-tag="Amendment">📅 Amendment</button>
+      </div>
+    </div>
+    <div class="trap-list" id="allTrapList"></div>
+  </div>
+
+  <!-- ACT SECTIONS VIEW -->
+  <div id="view-sections" class="hidden">
+    <h2 style="color: var(--navy); font-size: 1.5rem; margin-bottom: 1rem;">Traps by Act Sections</h2>
+    <div class="toolbar">
+      <div class="search-box">
+        <span>🔎</span>
+        <input type="text" id="sectionSearch" placeholder="Filter by section number (e.g., s.4, s.117A)…">
+      </div>
+    </div>
+    <div class="trap-list" id="sectionTrapList"></div>
+  </div>
+
+  <!-- RULES & FORMS VIEW -->
+  <div id="view-rules" class="hidden">
+    <h2 style="color: var(--navy); font-size: 1.5rem; margin-bottom: 1rem;">Traps by Rules &amp; Forms</h2>
+    <div class="toolbar">
+      <div class="search-box">
+        <span>🔎</span>
+        <input type="text" id="ruleSearch" placeholder="Filter by rule or form (e.g., Rule 24B, Form 27)…">
+      </div>
+    </div>
+    <div class="trap-list" id="ruleTrapList"></div>
+  </div>
+
+  <!-- TIMELINES VIEW -->
+  <div id="view-timelines" class="hidden">
+    <h2 style="color: var(--navy); font-size: 1.5rem; margin-bottom: 1rem;">Important Timelines</h2>
+    <div class="toolbar">
+      <div class="search-box">
+        <span>🔎</span>
+        <input type="text" id="timelineSearch" placeholder="Search timelines (e.g., 31 months, 12 months)…">
+      </div>
+    </div>
+    <div class="trap-list" id="timelineTrapList"></div>
+  </div>
+
+  <!-- COMPARE PROVISIONS VIEW -->
+  <div id="view-compare" class="hidden">
+    <h2 style="color: var(--navy); font-size: 1.5rem; margin-bottom: 1rem;">Compare Provisions</h2>
+    <div id="compareTables"></div>
+  </div>
+
+  <!-- PRACTICE MCQs VIEW -->
+  <div id="view-practice" class="hidden">
+    <h2 style="color: var(--navy); font-size: 1.5rem; margin-bottom: 1rem;">Practice MCQs</h2>
+    <div class="toolbar">
+      <div class="search-box">
+        <span>🔎</span>
+        <input type="text" id="practiceSearch" placeholder="Search practice questions…">
+      </div>
+      <button class="btn btn-amber" id="randomPracticeBtn">🎲 Random 5 Questions</button>
+    </div>
+    <div id="practiceList"></div>
+  </div>
+
+  <!-- REVISION MODE VIEW -->
+  <div id="view-revision" class="hidden revision-mode">
+    <h2 style="color: var(--navy); font-size: 1.5rem; margin-bottom: 1rem;">Revision Mode</h2>
+    <p class="text-sm" style="margin-bottom: 1rem; color: #64748b;">Showing only trap title, key provision and memory trick for quick recall.</p>
+    <div class="toolbar">
+      <div class="search-box">
+        <span>🔎</span>
+        <input type="text" id="revisionSearch" placeholder="Search revision notes…">
+      </div>
+    </div>
+    <div class="trap-list" id="revisionTrapList"></div>
+  </div>
+
+</main>
+
+<!-- RANDOM TEST MODAL -->
+<div class="modal-overlay" id="randomModal">
+  <div class="modal">
+    <button class="modal-close" id="closeRandomModal">&times;</button>
+    <h3>🎲 Random Test</h3>
+    <div id="randomTestContent"></div>
+  </div>
+</div>
+
+<script>
+  // ============================================================
+  // 1. TRAP DATA (compiled from source document)
+  // ============================================================
+  const traps = [
+    // --- SECTION 1: OLD ANSWERS NOW WRONG ---
+    {
+      id: 't1',
+      title: 'IPAB Abolished – Appeals Now to High Court',
+      category: 'Appeals',
+      difficulty: 'Intermediate',
+      tags: ['Important', 'Amendment', 'HighConfusion'],
+      provision: 's.117A (Patents Act); Tribunals Reforms Act 2021 (in force 4.4.2021)',
+      trap: 'Old papers (2010–2023) say appeals go to IPAB. IPAB is abolished. Appeals now lie before the High Court under s.117A within 3 months.',
+      simple: 'The Intellectual Property Appellate Board (IPAB) no longer exists. If you want to appeal a Controller’s decision, you must file in the High Court within 3 months. Old exam answers mentioning IPAB are outdated.',
+      example: 'An applicant’s patent is refused by the Controller on 01/01/2025. Under old law they would appeal to IPAB; under current law they must file an appeal in the High Court by 01/04/2025 (3 months).',
+      confusion: 'Revocation and rectification are also before the High Court, not the Controller (except under ss.65, 85, 63).',
+      alert: 'Remember: IPAB abolished → High Court → 3 months. Old answer "IPAB" is a distractor.',
+      memory: '“No IPAB, High Court is the way; 3 months to appeal, don’t delay.”',
+      quiz: [
+        {
+          q: 'Under the current law, where must an appeal against a Controller’s order be filed?',
+          options: ['IPAB', 'High Court', 'Supreme Court', 'District Court'],
+          correct: 1,
+          explanation: 'IPAB was abolished by the Tribunals Reforms Act 2021. Appeals now go to the High Court under s.117A within 3 months.'
+        },
+        {
+          q: 'What is the time limit for filing an appeal to the High Court under s.117A?',
+          options: ['30 days', '60 days', '3 months', '6 months'],
+          correct: 2,
+          explanation: 's.117A prescribes a 3-month period for appeals to the High Court.'
+        }
+      ]
+    },
+    {
+      id: 't2',
+      title: 'RFE Timeline – 31 Months vs Old 48 Months',
+      category: 'Examination and FER',
+      difficulty: 'Advanced',
+      tags: ['Important', 'Amendment', 'HighConfusion'],
+      provision: 'Rule 24B (amended 15.3.2024); s.11B(4)',
+      trap: 'Old papers say RFE (Request for Examination) must be filed within 48 months. The amended Rule 24B (w.e.f. 15.3.2024) reduces this to 31 months from priority/filing, whichever is earlier. Applications filed before 15.3.2024 keep 48 months.',
+      simple: 'RFE is a request to examine your patent application. Previously you had 48 months; now it’s 31 months. But if your application was filed before 15 March 2024, you still get 48 months. This transitional rule is tested.',
+      example: 'Application filed 19.02.2024 → 48 months applies → RFE due 19.02.2028. Application filed 20.03.2024 → 31 months applies → RFE due 20.10.2026. The 2025 paper tests exactly this.',
+      confusion: 'The 31-month period is from priority date or filing date, whichever is earlier. For PCT national phase, it is from international filing date.',
+      alert: 'Cut-off date: 15.03.2024. Before → 48 months; on/after → 31 months. 2025 paper had a question on this.',
+      memory: '“Before March 15, 2024 → 48; after → 31 (short and sweet).”',
+      quiz: [
+        {
+          q: 'An application was filed on 20.03.2024. What is the RFE deadline under the amended rules?',
+          options: ['20.03.2028 (48 months)', '20.10.2026 (31 months)', '20.03.2027 (36 months)', '20.09.2026 (30 months)'],
+          correct: 1,
+          explanation: 'Applications filed on or after 15.03.2024 have 31 months. 20.03.2024 + 31 months = 20.10.2026.'
+        }
+      ]
+    },
+    {
+      id: 't3',
+      title: 'Form 3 – Now Within 3 Months of First FER',
+      category: 'Patent Rules and Forms',
+      difficulty: 'Intermediate',
+      tags: ['Amendment', 'Important'],
+      provision: 'Rule 12(2) (2024 amendment); Form 3; Form 4 (condonation)',
+      trap: 'Old papers say Form 3 (statement of foreign applications) is due within 6 months of filing. The 2024 amendment requires it within 3 months of the first FER. The Controller can ask for a fresh Form 3 within 2 months, and delay can be condoned up to 3 months via Form 4.',
+      simple: 'Form 3 discloses foreign patent applications for the same invention. Now you must file it within 3 months of receiving the First Examination Report (FER), not 6 months from filing.',
+      example: 'First FER issued on 01/01/2025 → Form 3 due by 01/04/2025. If you’re late, you can file Form 4 to condone up to 3 months’ delay.',
+      confusion: 'The Controller may also request a fresh Form 3 within 2 months if circumstances change.',
+      alert: 'Key dates: 3 months from first FER; fresh Form 3 within 2 months if asked; condonation up to 3 months via Form 4.',
+      memory: '“Form 3: 3 months from FER, not 6 from filing.”',
+      quiz: [
+        {
+          q: 'When is Form 3 now required to be filed?',
+          options: ['Within 6 months of filing', 'Within 3 months of the first FER', 'Within 12 months of priority', 'Within 1 month of grant'],
+          correct: 1,
+          explanation: 'Rule 12(2) as amended in 2024 requires Form 3 within 3 months of the first Examination Report.'
+        }
+      ]
+    },
+    {
+      id: 't4',
+      title: 'Form 27 – Once Per 3 Financial Years, No Fee',
+      category: 'Patent Rules and Forms',
+      difficulty: 'Beginner',
+      tags: ['Important'],
+      provision: 'Rule 131; Form 27',
+      trap: 'Old papers say Form 27 (working statement) is filed annually. Current position: once per block of 3 financial years, within 6 months of the block’s end. No fee. Every patentee and licensee must file; one form can cover related patents of the same patentee.',
+      simple: 'Form 27 discloses whether your patent is working in India. You now file it once every 3 financial years, not every year. There is no fee.',
+      example: 'Financial year block 2024-25 to 2026-27 → Form 27 due by 30 September 2027 (6 months after block ends).',
+      confusion: '“Once in the patent’s lifetime” is false. It is once per 3-year block. The revised form asks whether the patent is available for licensing.',
+      alert: 'Block of 3 financial years; 6 months after block end; no fee; every patentee and licensee; one form can cover related patents.',
+      memory: '“Form 27: every 3 years, 6 months after, zero fee.”',
+      quiz: [
+        {
+          q: 'How often must Form 27 (working statement) be filed?',
+          options: ['Annually', 'Once in the patent’s lifetime', 'Once every 3 financial years', 'Every 5 years'],
+          correct: 2,
+          explanation: 'Form 27 is now filed once per block of 3 financial years, within 6 months of the block’s end.'
+        }
+      ]
+    },
+    {
+      id: 't5',
+      title: 'Grace Period – 12 Months, But Only for s.31(a)–(d)',
+      category: 'Patentability',
+      difficulty: 'Advanced',
+      tags: ['Important', 'HighConfusion'],
+      provision: 's.31; Rule 29A; Form 31',
+      trap: 'Old papers say grace period is 6 months. It is now 12 months under s.31, claimed via Form 31. But it covers only s.31(a)–(d): notified exhibition, publication from it, use by others without consent, and a learned-society paper. Your own LinkedIn/social-media post or newspaper article is NOT covered.',
+      simple: 'A grace period protects you if your invention was disclosed before filing. The period is now 12 months, but only for specific disclosures: notified exhibitions, learned-society papers, and certain unauthorised disclosures. A social media post by you is not protected.',
+      example: 'You posted your invention on LinkedIn on 01/01/2025. You file on 01/12/2025 (within 12 months). But since LinkedIn is not covered by s.31, your own post destroys novelty. The 2026 paper tests this.',
+      confusion: 'Designs grace is 6 months; patents grace is 12 months. Do not mix them.',
+      alert: '12 months for patents; only s.31(a)–(d); social media or newspaper articles are not covered.',
+      memory: '“12 months grace, but only exhibitions and papers — not your LinkedIn post!”',
+      quiz: [
+        {
+          q: 'A researcher publishes her invention in a newspaper article and then files a patent within 10 months. Does the grace period protect her?',
+          options: ['Yes, because it is within 12 months', 'No, newspaper articles are not covered under s.31', 'Yes, if she files Form 31', 'No, because the grace period is only 6 months'],
+          correct: 1,
+          explanation: 's.31 grace applies only to notified exhibitions, learned-society papers, etc. A newspaper article is not covered, so it destroys novelty.'
+        }
+      ]
+    },
+    {
+      id: 't6',
+      title: 'Renewal Advance Payment Discount – 10%, Not 20%',
+      category: 'Restoration and Renewal',
+      difficulty: 'Beginner',
+      tags: ['HighConfusion'],
+      provision: 'Rule 80(3)',
+      trap: 'Old papers say 20% discount for advance renewal payment. Current rule gives 10% for 4 or more years paid electronically. 20% is a distractor.',
+      simple: 'If you pay renewal fees in advance electronically for 4 or more years, you get a 10% discount, not 20%.',
+      example: 'Paying renewal for years 3–6 electronically in advance → 10% discount on the total.',
+      confusion: 'The discount is specifically 10%, only for electronic advance payment of 4+ years.',
+      alert: '10% (not 20%) for 4+ years, electronic payment.',
+      memory: '“10% for 4+ years, e-payment — 20% is a trap.”',
+      quiz: [
+        {
+          q: 'What is the discount for paying renewal fees electronically in advance for 4 or more years?',
+          options: ['20%', '15%', '10%', '5%'],
+          correct: 2,
+          explanation: 'Rule 80(3) provides a 10% discount for electronic advance payment covering 4 or more years.'
+        }
+      ]
+    },
+    {
+      id: 't7',
+      title: 'Penalties Under Jan Vishwas Act – Civil, Not Criminal',
+      category: 'Infringement',
+      difficulty: 'Advanced',
+      tags: ['Important', 'Amendment'],
+      provision: 'Jan Vishwas Act (w.e.f. 1.8.2024); ss.120, 121, 122, 123, 124B',
+      trap: 'Old papers say penalties are imprisonment. Jan Vishwas Act converts ss.120, 122, 123 into civil penalties and omits s.121. s.120 up to ₹10 lakh + ₹1,000/day; s.122(1) up to ₹1 lakh + ₹1,000/day; s.122(2) lesser of 0.5% turnover or ₹5 crore; s.123 up to ₹5 lakh + ₹1,000/day. ss.118, 119 remain criminal.',
+      simple: 'Many patent offences are now civil penalties (fines), not imprisonment. Only ss.118 and 119 remain criminal. The amounts and daily penalties are specific.',
+      example: 'Non-compliance with an adjudication order within 90 days → ₹1 lakh fine or up to 1 year imprisonment, or both (s.124B(6)).',
+      confusion: 'Do not memorise old imprisonment provisions for ss.120, 122, 123.',
+      alert: 'Civil penalties; s.121 omitted; s.118 and s.119 still criminal; s.124B(6) for non-compliance with orders.',
+      memory: '“Jan Vishwas decriminalised 120, 122, 123 — 118 and 119 still criminal.”',
+      quiz: [
+        {
+          q: 'Under the Jan Vishwas Act, which section was omitted?',
+          options: ['s.118', 's.119', 's.121', 's.123'],
+          correct: 2,
+          explanation: 's.121 was omitted by the Jan Vishwas Act, while ss.120, 122, and 123 became civil penalties.'
+        }
+      ]
+    },
+    {
+      id: 't8',
+      title: 's.4 Atomic Energy Bar – SHANTI Act 2025',
+      category: 'Patentability',
+      difficulty: 'Advanced',
+      tags: ['Amendment', 'HighConfusion'],
+      provision: 's.4; Atomic Energy Act 1962 s.20(1); SHANTI Act 2025 s.38',
+      trap: 'Old papers say s.4 bars atomic energy inventions. The SHANTI Act 2025 amends this. 2026 paper asks: Atomic Energy Act 1962, s.20(1), SHANTI Act s.38. Distractors: s.21 and 1961.',
+      simple: 'Inventions related to atomic energy are not patentable under s.4. The reference is to the Atomic Energy Act 1962, specifically s.20(1), as amended by the SHANTI Act 2025 (s.38).',
+      example: 'A new nuclear reactor design → s.4 bar applies. The correct statutory references are Atomic Energy Act 1962, s.20(1), and SHANTI Act 2025 s.38.',
+      confusion: 's.21 is a distractor; 1961 is a distractor. SHANTI Act 2025 made consequential changes to ss.39 and 65 as well.',
+      alert: 'Atomic Energy Act 1962, s.20(1), SHANTI Act s.38. Check ss.39 and 65 for consequential changes.',
+      memory: '“Atomic 1962 s.20(1) — SHANTI 2025 s.38.”',
+      quiz: [
+        {
+          q: 'Which section of the Atomic Energy Act 1962 is referenced in the amended s.4 of the Patents Act?',
+          options: ['s.20(1)', 's.21', 's.18', 's.14'],
+          correct: 0,
+          explanation: 'The SHANTI Act 2025 amendments reference s.20(1) of the Atomic Energy Act 1962.'
+        }
+      ]
+    },
+    {
+      id: 't9',
+      title: 'Evidence Act in Adjudication – Bharatiya Sakshya Adhiniyam',
+      category: 'Infringement',
+      difficulty: 'Intermediate',
+      tags: ['Amendment'],
+      provision: 'Bharatiya Sakshya Adhiniyam 2023',
+      trap: 'Old papers refer to the Indian Evidence Act. The new law is the Bharatiya Sakshya Adhiniyam 2023, and the adjudicating officer is not bound by it.',
+      simple: 'In adjudication proceedings under the Patents Act, the adjudicating officer is not bound by the strict rules of evidence under the Bharatiya Sakshya Adhiniyam 2023.',
+      example: 'An adjudicating officer can rely on documents and submissions without following the strict evidence rules.',
+      confusion: 'The Indian Evidence Act has been replaced by the Bharatiya Sakshya Adhiniyam 2023.',
+      alert: 'Bharatiya Sakshya Adhiniyam 2023; adjudicating officer not bound by it.',
+      memory: '“New Evidence Law: Bharatiya Sakshya 2023; adjudicator not bound.”',
+      quiz: [
+        {
+          q: 'Which law replaced the Indian Evidence Act in adjudication under the Patents Act?',
+          options: ['Bharatiya Sakshya Adhiniyam 2023', 'Code of Civil Procedure 1908', 'Bharatiya Nyaya Sanhita 2023', 'Evidence Act 1872'],
+          correct: 0,
+          explanation: 'The Bharatiya Sakshya Adhiniyam 2023 is the new evidence law, and the adjudicating officer is not bound by it.'
+        }
+      ]
+    },
+
+    // --- SECTION 2: ADJUDICATION AND FORMS ---
+    {
+      id: 't10',
+      title: 'Form 32 vs Form 33 – Complaint and Appeal (Nov 2025 Rules)',
+      category: 'Patent Rules and Forms',
+      difficulty: 'Advanced',
+      tags: ['Important', 'Amendment', 'HighConfusion'],
+      provision: 'Chapter XIVA (Nov 2025 rules, G.S.R. 865(E)); Form 32 (complaint), Form 33 (appeal)',
+      trap: 'March 2024 amendments used Form 31 for complaint and Form 32 for appeal. This collided with Form 31 = Grace period. Nov 2025 rules replaced Chapter XIVA: Form 32 = complaint, Form 33 = appeal. Both electronic; complaint by “any person”.',
+      simple: 'If you want to complain against someone posing as a patent agent, use Form 32 (electronic, any person). If you want to appeal, use Form 33. Do not use Form 31 (that is for grace period).',
+      example: 'A person pretends to be a registered patent agent. Anyone can file a complaint via Form 32 electronically. The 2026 key confirms: Form 32, electronically, by any person.',
+      confusion: 'Old Form 31/32 for complaint/appeal are replaced. Form 31 is now only for grace period.',
+      alert: 'Form 32 = complaint; Form 33 = appeal; both electronic; complaint by any person (not limited to “person aggrieved”).',
+      memory: '“32 complaint, 33 appeal, 31 grace — don’t mix.”',
+      quiz: [
+        {
+          q: 'Under the Nov 2025 rules, which form is used to file a complaint against an unregistered person posing as a patent agent?',
+          options: ['Form 31', 'Form 32', 'Form 33', 'Form 30'],
+          correct: 1,
+          explanation: 'Form 32 is the complaint form under the Nov 2025 rules, and it can be filed electronically by any person.'
+        }
+      ]
+    },
+    {
+      id: 't11',
+      title: 'Adjudication Timelines – 7 Days, 3 Months, 60 Days',
+      category: 'Patent Rules and Forms',
+      difficulty: 'Advanced',
+      tags: ['Important', 'Amendment'],
+      provision: 'Rule 107C; s.124B(5)',
+      trap: 'Show-cause notice of at least 7 days; inquiry finished within 3 months of Rule 107C(3) notice; appeal within 60 days of receipt of order. Appeal disposal “ordinarily” 6 months under rule but 60 days under s.124B(5).',
+      simple: 'After a complaint, a show-cause notice gives at least 7 days. The inquiry must finish within 3 months. An appeal must be filed within 60 days of receiving the order. The appellate authority sits at least one rank above the adjudicating officer.',
+      example: 'Complaint filed 01/01/2025 → show-cause notice issued → inquiry completed by 01/04/2025 (3 months) → order received 15/04/2025 → appeal by 14/06/2025 (60 days).',
+      confusion: 'Rule says “ordinarily 6 months” for appeal disposal, but s.124B(5) says 60 days. Read the question for Act vs Rule.',
+      alert: '7 days show-cause; 3 months inquiry; 60 days appeal; 60 days vs 6 months disposal (Act vs Rule).',
+      memory: '“7 days notice, 3 months inquiry, 60 days appeal — don’t mix Act and Rule.”',
+      quiz: [
+        {
+          q: 'Under the adjudication rules, within how many days must an appeal be filed after receipt of the order?',
+          options: ['30 days', '60 days', '90 days', '6 months'],
+          correct: 1,
+          explanation: 'The appeal must be filed within 60 days of receipt of the order.'
+        }
+      ]
+    },
+
+    // --- SECTION 3: WORDING TRAPS ---
+    {
+      id: 't12',
+      title: '“Deemed Abandoned” vs “Deemed Withdrawn” vs “Deemed Revoked”',
+      category: 'Examination and FER',
+      difficulty: 'Advanced',
+      tags: ['HighConfusion', 'Important'],
+      provision: 'ss.9(1), 21, 40, 11B(4), 66',
+      trap: 'Different situations use different “deemed” phrases. Deemed abandoned: no complete spec within 12 months (s.9(1)); failure to comply within s.21 period. Deemed to have been abandoned: contravention of secrecy or s.39 (s.40). Deemed withdrawn: no RFE (s.11B(4)); PCT never enters national phase. Deemed revoked: patentee doesn’t contest opposition; s.66 public-interest revocation.',
+      simple: 'The law uses specific phrases for specific failures. “Deemed abandoned” is not the same as “deemed withdrawn” or “deemed revoked”.',
+      example: 'No RFE filed → deemed withdrawn. No complete spec within 12 months → deemed abandoned. Secrecy contravention → deemed abandoned under s.40 (post-facto permission not available).',
+      confusion: 'The 2025 key is “deemed abandoned under s.40”, with Form 25 option as a distractor.',
+      alert: 'Match the exact phrase to the exact provision. Do not generalise.',
+      memory: '“Abandoned: 9(1)/21/40. Withdrawn: 11B(4)/PCT. Revoked: 66/opposition.”',
+      quiz: [
+        {
+          q: 'Failure to file a Request for Examination (RFE) leads to:',
+          options: ['Deemed abandoned', 'Deemed withdrawn', 'Deemed revoked', 'Deemed granted'],
+          correct: 1,
+          explanation: 'Under s.11B(4), if no RFE is filed, the application is deemed withdrawn.'
+        }
+      ]
+    },
+    {
+      id: 't13',
+      title: 's.66 Public-Interest Revocation – Central Government Only',
+      category: 'Revocation',
+      difficulty: 'Advanced',
+      tags: ['Important', 'HighConfusion'],
+      provision: 's.66',
+      trap: 's.66 requires the Central Government, “mischievous to the State or generally prejudicial to the public”, a hearing, and a Gazette declaration. “State Government”, “prejudicial” alone, or “High Court” are distractors.',
+      simple: 'Only the Central Government can revoke a patent in the public interest under s.66, after a hearing and by Gazette notification. The standard is high: “mischievous to the State or generally prejudicial to the public”.',
+      example: 'A patent is causing harm to public health. The Central Government can initiate revocation under s.66, hold a hearing, and declare revocation in the Gazette.',
+      confusion: 'The Controller cannot revoke suo motu on biological-source ground. s.64 revocation is different.',
+      alert: 'Central Government; “mischievous to the State or generally prejudicial to the public”; hearing; Gazette declaration.',
+      memory: '“s.66: Central Govt, public harm, hearing, Gazette.”',
+      quiz: [
+        {
+          q: 'Who can revoke a patent under s.66 for public interest?',
+          options: ['State Government', 'High Court', 'Central Government', 'Controller'],
+          correct: 2,
+          explanation: 'Only the Central Government can revoke a patent under s.66, after a hearing and by Gazette declaration.'
+        }
+      ]
+    },
+    {
+      id: 't14',
+      title: 's.64 Revocation – No Suo Motu by Controller',
+      category: 'Revocation',
+      difficulty: 'Intermediate',
+      tags: ['Important'],
+      provision: 's.64; ss.65, 85, 63',
+      trap: 'Revocation under s.64 is on petition of a person interested or the Central Government, or by counter-claim. The Controller cannot revoke suo motu on the biological-source ground. Revocation is not before the Controller except under ss.65, 85, and 63.',
+      simple: 'A patent can be revoked by the High Court on a petition or counter-claim. The Controller generally cannot revoke on their own; they only have specific powers under ss.65, 85, and 63.',
+      example: 'A person interested files a revocation petition in the High Court under s.64. The Controller cannot independently revoke for lack of biological-source disclosure.',
+      confusion: 'Do not think the Controller can revoke for any ground. The High Court is the forum for s.64.',
+      alert: 's.64: High Court, petition or counter-claim. Controller cannot revoke suo motu on biological-source ground.',
+      memory: '“s.64 → High Court, not Controller’s own motion.”',
+      quiz: [
+        {
+          q: 'Under s.64, who can revoke a patent?',
+          options: ['Controller suo motu', 'High Court on petition or counter-claim', 'Central Government only', 'District Court'],
+          correct: 1,
+          explanation: 's.64 revocation is by the High Court on petition of a person interested or the Central Government, or by counter-claim.'
+        }
+      ]
+    },
+
+    // --- SECTION 4: NUMBERS AND DATES ---
+    {
+      id: 't15',
+      title: 'Patent Term – 20 Years from Filing, PCT from International Filing Date',
+      category: 'Grant of Patent',
+      difficulty: 'Intermediate',
+      tags: ['Important'],
+      provision: 's.53',
+      trap: 'Patent term is 20 years from filing date. For PCT-NP, it is the international filing date, not the priority date and not the NP entry date. Convention and ordinary applications filed the same day expire on the same date. A PCT-NP with an earlier IFD expires first, not last.',
+      simple: 'The 20-year term starts from the filing date. For PCT applications, it starts from the international filing date (IFD). If two applications are filed the same day, they expire the same day.',
+      example: 'PCT filed 01/01/2020, enters India 01/06/2021 → term ends 01/01/2040 (20 years from IFD). Not from NP entry.',
+      confusion: 'A patent of addition co-terminates with the main patent and pays no renewal fees.',
+      alert: 'PCT-NP: 20 years from IFD. Earlier IFD → earlier expiry. Statement I true, Statement II false in 2026 paper.',
+      memory: '“20 from filing; PCT from IFD — not priority, not NP.”',
+      quiz: [
+        {
+          q: 'For a PCT national phase application, the 20-year patent term is calculated from:',
+          options: ['Priority date', 'International filing date', 'National phase entry date', 'Grant date'],
+          correct: 1,
+          explanation: 'Under s.53, for PCT-NP applications the term runs from the international filing date.'
+        }
+      ]
+    },
+    {
+      id: 't16',
+      title: 'PCT Timelines – Chapter II Demand, Art.19, National Phase',
+      category: 'Priority and Filing',
+      difficulty: 'Advanced',
+      tags: ['Important'],
+      provision: 'PCT Articles; Rule 20; 2026 key A=12, B=16, C=18, D=22, E=28, F=30/31',
+      trap: 'Chapter II demand: 3 months from ISR/WO or 22 months from priority, whichever is later. Art. 19 amendments: 2 months. National phase: 31 months. 2026 timeline key: A=12, B=16, C=18, D=22, E=28, F=30/31.',
+      simple: 'Different PCT actions have different deadlines. Chapter II demand is the later of 3 months from ISR/WO or 22 months from priority. Article 19 amendments are due in 2 months. National phase entry is at 31 months.',
+      example: 'Priority date 01/01/2024 → Chapter II demand due by 01/11/2025 (22 months) or 3 months from ISR/WO, whichever is later. National phase by 01/08/2026 (31 months).',
+      confusion: 'Do not mix 22 months (Chapter II) with 31 months (national phase) or 12 months (priority).',
+      alert: 'Chapter II: 22 months or 3 months from ISR/WO (later). Art.19: 2 months. NP: 31 months.',
+      memory: '“Ch II: 22 or 3+ISR (later); Art19: 2; NP: 31.”',
+      quiz: [
+        {
+          q: 'What is the deadline for filing a Chapter II demand under the PCT?',
+          options: ['12 months from priority', '3 months from ISR or 22 months from priority, whichever is later', '18 months from priority', '31 months from priority'],
+          correct: 1,
+          explanation: 'Chapter II demand can be filed within 3 months from the ISR/WO or 22 months from priority, whichever is later.'
+        }
+      ]
+    },
+    {
+      id: 't17',
+      title: 'Priority Date for Combined Claim – Use the Later Date',
+      category: 'Priority and Filing',
+      difficulty: 'Advanced',
+      tags: ['HighConfusion', 'Important'],
+      provision: 's.11(5) (distinguish)',
+      trap: 'Where a claim is A + B and B was first disclosed in the later application, the priority date is the later one (15/06/2024 in the 2026 question). Do not apply the “earlier date” rule of s.11(5) here.',
+      simple: 'If your claim combines features from two applications, the priority date is the date of the later application if a feature was first disclosed there. This is a specific trap.',
+      example: 'Application 1 (01/01/2024) discloses A. Application 2 (15/06/2024) discloses B. Claim A+B in Application 2 → priority date is 15/06/2024, not 01/01/2024.',
+      confusion: 's.11(5) “earlier date” rule does not apply to this combined-claim situation.',
+      alert: 'Combined claim A+B with B first in later application → later date (15/06/2024).',
+      memory: '“A+B where B is later → later date, not earlier.”',
+      quiz: [
+        {
+          q: 'Claim 1 combines feature A (disclosed in a 2023 application) and feature B (first disclosed in a June 2024 application). What is the priority date for Claim 1?',
+          options: ['2023 application date', 'June 2024 application date', 'Earlier of the two', 'Filing date of the combined application'],
+          correct: 1,
+          explanation: 'Because feature B was first disclosed in the later application, the priority date for the combined claim is the later date (June 2024).'
+        }
+      ]
+    },
+    {
+      id: 't18',
+      title: 'Publication – 18 Months from Priority, or Secrecy Cessation (Later)',
+      category: 'Examination and FER',
+      difficulty: 'Intermediate',
+      tags: ['Important'],
+      provision: 's.11A',
+      trap: 'Publication is 18 months from priority, or on cessation of secrecy, whichever is later. In the 2025 scenario, that is one month from 01/12/2024, not from 06/06/2024.',
+      simple: 'Normally publication is at 18 months from priority. But if secrecy directions apply, it is published after they cease, if that is later.',
+      example: 'Priority 06/06/2024 → 18 months = 06/12/2025. Secrecy ceases 01/12/2024 → publication one month later = 01/01/2025? No — whichever is later: 18 months from priority (06/12/2025) is later, so publication is 06/12/2025. In the 2025 scenario, the key used one month from 01/12/2024, meaning secrecy cessation was the later event.',
+      confusion: 'Read the question carefully: “whichever is later”.',
+      alert: '18 months from priority OR secrecy cessation, whichever is LATER.',
+      memory: '“18 months or secrecy end — whichever is later.”',
+      quiz: [
+        {
+          q: 'An application has a priority date of 06/06/2024. Secrecy directions cease on 01/12/2024. When is it published?',
+          options: ['06/12/2025 (18 months from priority)', '01/01/2025 (one month from secrecy cessation)', '06/06/2025', '01/12/2024'],
+          correct: 0,
+          explanation: 'Publication is 18 months from priority or on cessation of secrecy, whichever is later. 06/12/2025 is later than 01/12/2024, so publication is at 18 months.'
+        }
+      ]
+    },
+    {
+      id: 't19',
+      title: 'Renewal, Extension and Restoration – 6 Months, 18 Months',
+      category: 'Restoration and Renewal',
+      difficulty: 'Advanced',
+      tags: ['Important'],
+      provision: 'Rules 80, 81; Form 4; Form 15',
+      trap: 'Renewal due before end of year 2 for year 3. Extension up to 6 months via Form 4. Restoration (Form 15) within 18 months from cessation, which is after the extended period. In the 2024 scenario, 14 months late is restorable but 25 months late is not. Opposition to restoration is only on “not unintentional” or “undue delay”.',
+      simple: 'If you miss a renewal deadline, you can extend by 6 months using Form 4. After that, you can apply for restoration within 18 months from cessation (which is after the extension period). The opposition grounds are limited.',
+      example: 'Renewal due 01/01/2025 → extended to 01/07/2025 (6 months). If still not paid, cessation is 01/07/2025 → restoration deadline 01/01/2027 (18 months).',
+      confusion: 'Restoration is 18 months from cessation, not from the original due date.',
+      alert: '6 months extension; 18 months restoration from cessation; opposition grounds: not unintentional, undue delay.',
+      memory: '“6 months extend, then 18 months restore from cessation.”',
+      quiz: [
+        {
+          q: 'Within how many months from cessation can restoration be applied for?',
+          options: ['6 months', '12 months', '18 months', '24 months'],
+          correct: 2,
+          explanation: 'Restoration (Form 15) must be applied for within 18 months from the date of cessation.'
+        }
+      ]
+    },
+    {
+      id: 't20',
+      title: 'Post-dating – Max 6 Months, Not Suo Motu, Before Grant',
+      category: 'Priority and Filing',
+      difficulty: 'Intermediate',
+      tags: ['Important'],
+      provision: 's.17(1); s.136(3)',
+      trap: 'Post-dating needs the applicant’s request and fee, maximum 6 months, before grant, and not suo motu (2026 key: I, III, IV). A convention application cannot be post-dated beyond the date it could have been filed (s.136(3)).',
+      simple: 'Post-dating changes your filing date to a later date. You must request it, pay a fee, it cannot exceed 6 months, and it must be before grant. The Controller cannot do it on their own.',
+      example: 'Filing date 01/01/2025 → post-dating request → new date can be up to 01/07/2025 (6 months). Convention application: cannot go beyond the date it could have been filed.',
+      confusion: 'Not suo motu. Not after grant.',
+      alert: 'Applicant’s request + fee; max 6 months; before grant; not suo motu; convention cap under s.136(3).',
+      memory: '“Post-date: request + fee, 6 months max, before grant, no suo motu.”',
+      quiz: [
+        {
+          q: 'What is the maximum period by which an application can be post-dated?',
+          options: ['3 months', '6 months', '12 months', '18 months'],
+          correct: 1,
+          explanation: 'Under s.17(1), post-dating is allowed for a maximum of 6 months from the original filing date.'
+        }
+      ]
+    },
+    {
+      id: 't21',
+      title: 'Rule 138 – Extension/Condonation Up to 6 Months, But Not s.9 Period',
+      category: 'Patent Rules and Forms',
+      difficulty: 'Advanced',
+      tags: ['Important', 'HighConfusion'],
+      provision: 'Rule 138; Rule 137(2); s.9',
+      trap: 'Rule 138 allows extension or condonation up to 6 months by Form 4, and requests can be repeated. Rule 137(2) lists items it cannot extend. The 12-month s.9 period is statutory, so Form 4 won’t extend it.',
+      simple: 'Many deadlines can be extended up to 6 months using Form 4. But some cannot, including the 12-month period for filing a complete specification (statutory under s.9).',
+      example: 'Provisional filed 01/01/2024 → complete spec due 01/01/2025 (12 months). Form 4 cannot extend this because s.9 is statutory.',
+      confusion: 'Rule 138 is broad but has exclusions in Rule 137(2).',
+      alert: '6 months via Form 4; can be repeated; s.9 12-month period cannot be extended.',
+      memory: '“Rule 138: 6 months, repeatable — but s.9 is untouchable.”',
+      quiz: [
+        {
+          q: 'Can the 12-month period for filing a complete specification under s.9 be extended using Form 4?',
+          options: ['Yes, up to 6 months', 'Yes, up to 3 months', 'No, it is statutory', 'Yes, if the Controller allows'],
+          correct: 2,
+          explanation: 'The 12-month period under s.9 is statutory and cannot be extended via Rule 138/Form 4.'
+        }
+      ]
+    },
+    {
+      id: 't22',
+      title: 'Compulsory Licence – s.84 (3 Years from Grant) vs s.85 (2 Years)',
+      category: 'Grant of Patent',
+      difficulty: 'Advanced',
+      tags: ['Important'],
+      provision: 'ss.84, 85',
+      trap: 's.84 can be invoked 3 years from grant, and the reasonable negotiating period is about 6 months, with exceptions. s.85 revocation: 2 years from the first CL order, by the Central Government or any person interested. The Controller can’t do it alone. A distractor says “3 years”.',
+      simple: 'You can apply for a compulsory licence 3 years after grant. If the CL is not worked, revocation under s.85 can be sought 2 years after the first CL order. The Central Government or any person interested can apply.',
+      example: 'Patent granted 01/01/2022 → CL application possible from 01/01/2025. First CL order 01/06/2025 → s.85 revocation possible from 01/06/2027 (2 years).',
+      confusion: 's.85 revocation is 2 years, not 3.',
+      alert: 's.84: 3 years from grant, ~6 months negotiation. s.85: 2 years from first CL order, by Central Govt or person interested.',
+      memory: '“CL: 3 years from grant; CL revocation: 2 years from first CL order.”',
+      quiz: [
+        {
+          q: 'After how many years from the first compulsory licence order can revocation under s.85 be sought?',
+          options: ['1 year', '2 years', '3 years', '5 years'],
+          correct: 1,
+          explanation: 's.85 allows revocation 2 years after the first compulsory licence order.'
+        }
+      ]
+    },
+    {
+      id: 't23',
+      title: 'Opposition – Pre-grant vs Post-grant Forms and Timelines',
+      category: 'Opposition',
+      difficulty: 'Intermediate',
+      tags: ['Important'],
+      provision: 'ss.25(1), 25(2); Rules 55, 56; Form 7A, Form 7',
+      trap: 'Pre-grant (s.25(1)): any person, Form 7A. Post-grant (s.25(2)): person interested, within 1 year of grant publication, Form 7, e-filing only. Rules 55 and 56 now give 1 month for Controller’s prima facie order and 2 months for replies. A pre-grant opponent has no appeal against the Controller’s order.',
+      simple: 'Pre-grant opposition can be filed by anyone using Form 7A. Post-grant opposition requires a person interested, must be filed within 1 year of grant publication using Form 7 (e-filing only). There is no appeal for a pre-grant opponent.',
+      example: 'Patent granted and published 01/01/2025 → post-grant opposition due by 01/01/2026 (1 year). Pre-grant opposition can be filed anytime before grant.',
+      confusion: 'Pre-grant opponent has no appeal. Rules 55/56: 1 month prima facie order, 2 months reply.',
+      alert: 'Pre-grant: any person, Form 7A, no appeal. Post-grant: person interested, 1 year, Form 7, e-filing.',
+      memory: '“7A pre-grant (anyone); 7 post-grant (interested, 1 year).”',
+      quiz: [
+        {
+          q: 'Who can file a pre-grant opposition under s.25(1)?',
+          options: ['Only a person interested', 'Any person', 'Only the Central Government', 'Only a licensee'],
+          correct: 1,
+          explanation: 's.25(1) allows any person to file a pre-grant opposition using Form 7A.'
+        }
+      ]
+    },
+    {
+      id: 't24',
+      title: 'Rectification and Name Changes – Form 12 Within 3 Months',
+      category: 'Amendments',
+      difficulty: 'Advanced',
+      tags: ['Important'],
+      provision: 's.26; Form 12; s.28; Form 8A',
+      trap: 'After a successful s.25(2) “obtaining” ground, patent amendment into the opponent’s name is by Form 12 within 3 months (s.26). It is not Form 10 or 17. s.28 inventor mention must be requested before grant. After grant the s.28 route is closed, and the 2025 key says “cannot be included now”. The new option is the Certificate of Inventorship (Form 8A, Rule 70A).',
+      simple: 'If a patent was obtained by the wrong person, the true owner can apply to have the patent amended into their name using Form 12 within 3 months under s.26. Adding an inventor under s.28 must be done before grant; after grant, use Form 8A for a certificate of inventorship.',
+      example: 'Post-grant opposition succeeds on “obtaining” ground → the opponent can apply via Form 12 within 3 months to have the patent put in their name.',
+      confusion: 'Form 10 (deceased applicant), Form 17 (compulsory licence) are distractors.',
+      alert: 's.26 → Form 12, 3 months. s.28 before grant; after grant → Form 8A (Certificate of Inventorship).',
+      memory: '“s.26 name change: Form 12, 3 months. s.28 after grant: Form 8A.”',
+      quiz: [
+        {
+          q: 'After a successful post-grant opposition on the “obtaining” ground, which form is used to amend the patent into the opponent’s name?',
+          options: ['Form 10', 'Form 12', 'Form 17', 'Form 8A'],
+          correct: 1,
+          explanation: 'Under s.26, the patent can be amended into the opponent’s name using Form 12 within 3 months.'
+        }
+      ]
+    },
+
+    // --- SECTION 5: FORMS MIX-UPS ---
+    {
+      id: 't25',
+      title: 'Forms 3, 4, 5, 6 – Quick Drill',
+      category: 'Patent Rules and Forms',
+      difficulty: 'Beginner',
+      tags: ['HighConfusion'],
+      provision: 'Form 3 (s.8), Form 4 (time), Form 5 (inventorship), Form 6 (s.20 change of applicant)',
+      trap: 'Candidates mix up these common forms. Form 3: s.8 (foreign applications). Form 4: time extension/condonation. Form 5: inventorship declaration. Form 6: s.20, change of applicant.',
+      simple: 'Each form has a specific purpose. Memorise the numbers.',
+      example: 'Need more time? Form 4. Changing applicant? Form 6. Declaring inventorship? Form 5.',
+      confusion: 'Form 3 is not for time extension; Form 4 is.',
+      alert: '3 = s.8; 4 = time; 5 = inventorship; 6 = change of applicant.',
+      memory: '“3 foreign, 4 time, 5 inventor, 6 applicant change.”',
+      quiz: [
+        {
+          q: 'Which form is used for an extension of time?',
+          options: ['Form 3', 'Form 4', 'Form 5', 'Form 6'],
+          correct: 1,
+          explanation: 'Form 4 is used for extension/condonation of time under the Patents Rules.'
+        }
+      ]
+    },
+    {
+      id: 't26',
+      title: 'Forms 7, 7A, 8, 8A – Opposition and Inventorship',
+      category: 'Patent Rules and Forms',
+      difficulty: 'Intermediate',
+      tags: ['HighConfusion'],
+      provision: 'Form 7 (post-grant), Form 7A (pre-grant), Form 8 (s.28), Form 8A (inventorship certificate)',
+      trap: 'Form 7 and 7A are oppositions: 7A is pre-grant, 7 is post-grant. Form 8 is s.28 (inventor mention), Form 8A is the Certificate of Inventorship (Rule 70A).',
+      simple: 'Remember: 7A pre-grant, 7 post-grant; 8 s.28, 8A certificate.',
+      example: 'After grant, use Form 7 for opposition. Before grant, use Form 7A. To add an inventor before grant, use Form 8; after grant, Form 8A.',
+      confusion: 'Do not use Form 8 after grant for inventor addition.',
+      alert: '7A = pre-grant; 7 = post-grant; 8 = s.28; 8A = inventorship certificate.',
+      memory: '“7A before, 7 after; 8 before, 8A after.”',
+      quiz: [
+        {
+          q: 'Which form is used for a post-grant opposition?',
+          options: ['Form 7A', 'Form 7', 'Form 8', 'Form 8A'],
+          correct: 1,
+          explanation: 'Form 7 is used for post-grant opposition under s.25(2). Form 7A is for pre-grant opposition.'
+        }
+      ]
+    },
+    {
+      id: 't27',
+      title: 'Forms 12, 13, 14, 15 – Grant, Amendment, Restoration',
+      category: 'Patent Rules and Forms',
+      difficulty: 'Intermediate',
+      tags: ['HighConfusion'],
+      provision: 'Form 12 (s.26 and 52 grant), Form 13 (s.57 amendment), Form 14 (oppose amendment/restoration etc.), Form 15 (restoration)',
+      trap: 'Form 12 is for s.26 and s.52 grant. Form 13 is for s.57 amendment. Form 14 is for opposing amendment, restoration, surrender, CL terms, or clerical correction. Form 15 is for restoration.',
+      simple: 'Each form has a distinct role. Form 15 is specifically restoration.',
+      example: 'Patent lapsed → restoration via Form 15. Amendment → Form 13. Opposing an amendment → Form 14.',
+      confusion: 'Form 12 is not just for grant; it also covers s.26 name changes.',
+      alert: '12 = s.26/52; 13 = s.57; 14 = oppose; 15 = restoration.',
+      memory: '“12 grant/name, 13 amend, 14 oppose, 15 restore.”',
+      quiz: [
+        {
+          q: 'Which form is used for restoration of a lapsed patent?',
+          options: ['Form 12', 'Form 13', 'Form 14', 'Form 15'],
+          correct: 3,
+          explanation: 'Form 15 is used to apply for restoration of a patent that has ceased.'
+        }
+      ]
+    },
+    {
+      id: 't28',
+      title: 'Forms 22, 23, 24, 25, 26 – Agent and Miscellaneous',
+      category: 'Patent Rules and Forms',
+      difficulty: 'Advanced',
+      tags: ['HighConfusion'],
+      provision: 'Form 22 (agent registration), Form 23 (agent name restoration), Form 24 (review/set aside), Form 25 (s.39 permission), Form 26 (agent authorisation)',
+      trap: 'Agent registration is Form 22. Agent name restoration is Form 23 (option order shuffled in 2025). Form 24 is review or set aside. Form 25 is s.39 permission. Form 26 is agent authorisation.',
+      simple: 'Memorise these agent-related forms.',
+      example: 'Patent agent’s name removed → restoration via Form 23. Need permission for foreign filing → Form 25.',
+      confusion: 'Form 25 is s.39 permission, not restoration. Form 23 is agent restoration.',
+      alert: '22 = agent registration; 23 = agent restoration; 24 = review; 25 = s.39; 26 = authorisation.',
+      memory: '“22 register agent, 23 restore agent, 24 review, 25 s.39, 26 authorise.”',
+      quiz: [
+        {
+          q: 'Which form is used for restoration of a patent agent’s name?',
+          options: ['Form 22', 'Form 23', 'Form 24', 'Form 25'],
+          correct: 1,
+          explanation: 'Form 23 is used for restoration of a patent agent’s name to the register.'
+        }
+      ]
+    },
+
+    // --- SECTION 6: SUBSTANTIVE LAW TRAPS ---
+    {
+      id: 't29',
+      title: 'Prior Art – Publication Anywhere, Prior-Filed Indian Application',
+      category: 'Patentability',
+      difficulty: 'Advanced',
+      tags: ['Important', 'HighConfusion'],
+      provision: 'ss.13(1)(b), 25(1)(c)',
+      trap: '“New invention” is tested on non-publication anywhere, not just India. Under s.13(1)(b) and s.25(1)(c), a prior-filed Indian application published later destroys novelty. A foreign application filed earlier but published later does NOT. (2026: “only IV”.)',
+      simple: 'Novelty is destroyed by publication anywhere in the world. A prior Indian application that publishes later also destroys novelty (whole-of-contents approach). A foreign application that publishes later does not.',
+      example: 'Indian application filed 01/01/2024, published 01/01/2025. Your application filed 01/06/2024 → prior-filed Indian application destroys novelty even though published later.',
+      confusion: 'Foreign earlier-filed but later-published application does not destroy novelty.',
+      alert: 'Publication anywhere; prior-filed Indian application published later destroys novelty; foreign does not.',
+      memory: '“Indian prior-filed later-published → novelty killer; foreign → no.”',
+      quiz: [
+        {
+          q: 'A prior-filed Indian patent application was published after the filing date of your application. Does it destroy novelty?',
+          options: ['Yes, under s.13(1)(b)', 'No, only publication before filing counts', 'Yes, but only if it is a PCT application', 'No, unless it is a foreign application'],
+          correct: 0,
+          explanation: 'A prior-filed Indian application published later destroys novelty under s.13(1)(b) and s.25(1)(c).'
+        }
+      ]
+    },
+    {
+      id: 't30',
+      title: 'Anticipation – Arithmetic or Implicit',
+      category: 'Patentability',
+      difficulty: 'Intermediate',
+      tags: ['Important'],
+      provision: 'Novelty principles',
+      trap: 'Anticipation can be arithmetic or implicit. The ophthalmic container example: total 2000 µm minus inner 500 µm gives outer 1500 µm, so there is no novelty.',
+      simple: 'Even if a prior document does not explicitly state a feature, if it can be calculated or is implicit, novelty is destroyed.',
+      example: 'Prior art discloses total thickness 2000 µm and inner layer 500 µm. Claimed outer layer is 1500 µm → anticipatory by arithmetic.',
+      confusion: 'Do not require explicit disclosure of every numerical value.',
+      alert: 'Arithmetic or implicit disclosure anticipates.',
+      memory: '“If you can calculate it, it’s anticipated.”',
+      quiz: [
+        {
+          q: 'A prior art document discloses a total thickness of 2000 µm and an inner layer of 500 µm. A claim recites an outer layer of 1500 µm. Is the claim novel?',
+          options: ['Yes, because outer layer is not explicitly disclosed', 'No, because 1500 µm is implicit by arithmetic', 'Yes, because the prior art does not mention “outer layer”', 'No, because the claim is not enabled'],
+          correct: 1,
+          explanation: 'The outer layer thickness is implicit by simple arithmetic (2000 – 500 = 1500), so the claim lacks novelty.'
+        }
+      ]
+    },
+    {
+      id: 't31',
+      title: 'Claim Analysis – Dependent Claim Can Survive Obviousness',
+      category: 'Patentability',
+      difficulty: 'Advanced',
+      tags: ['HighConfusion'],
+      provision: 'Inventive step analysis',
+      trap: 'Combining D1 and D2 can defeat claim 1 as obvious, but a dependent claim carrying a feature D found in no document survives. “Dependent on an obvious claim” does not make it obvious. Always test novelty first (single document), then inventive step.',
+      simple: 'Even if the main claim is obvious, a dependent claim with an additional non-obvious feature can be patentable.',
+      example: 'Claim 1 = A+B (obvious over D1+D2). Claim 2 = A+B+C, where C is not in any document → Claim 2 survives.',
+      confusion: 'Do not assume dependent claims fall with the independent claim.',
+      alert: 'Dependent claim with unique feature can survive. Test novelty first (single doc), then inventive step.',
+      memory: '“Independent falls, dependent may stand if it has a unique feature.”',
+      quiz: [
+        {
+          q: 'If independent claim 1 is obvious over D1 + D2, what happens to dependent claim 2 which includes a feature not found in any prior art?',
+          options: ['It also falls as obvious', 'It survives because of the unique feature', 'It is invalid for dependency', 'It must be merged into claim 1'],
+          correct: 1,
+          explanation: 'A dependent claim with an additional feature not found in any prior art can be non-obvious and survive even if the independent claim is obvious.'
+        }
+      ]
+    },
+    {
+      id: 't32',
+      title: 'Definitions – Industrial Application, Inventive Step, True Inventor',
+      category: 'Patentability',
+      difficulty: 'Beginner',
+      tags: ['HighConfusion'],
+      provision: 'ss.2(1)(ac), 2(1)(ja), 2(1)(y)',
+      trap: '“Capable of industrial application” means made or used in an industry. Inventive step is (technical advance or economic significance) AND non-obviousness. “True and first inventor” excludes importers.',
+      simple: 'Know the exact statutory definitions. Industrial application = made or used in industry. Inventive step = technical/economic advance + non-obvious. True inventor does not include someone who merely imports.',
+      example: 'A new use of a known substance may lack industrial application if it cannot be made or used in industry.',
+      confusion: 'Inventive step requires both technical advance AND non-obviousness.',
+      alert: 'Industrial application: made/used in industry. Inventive step: technical/economic + non-obvious. True inventor: not importer.',
+      memory: '“Industrial = made/used; Inventive = advance + non-obvious; Inventor ≠ importer.”',
+      quiz: [
+        {
+          q: 'What does “capable of industrial application” mean under the Patents Act?',
+          options: ['Capable of being sold', 'Made or used in an industry', 'Capable of being manufactured by hand', 'Useful in agriculture only'],
+          correct: 1,
+          explanation: 's.2(1)(ac) defines “capable of industrial application” as made or used in an industry.'
+        }
+      ]
+    },
+    {
+      id: 't33',
+      title: 's.3(d) – Therapeutic Efficacy Only, Not New Property',
+      category: 'Patentability',
+      difficulty: 'Advanced',
+      tags: ['Important', 'HighConfusion'],
+      provision: 's.3(d); Novartis',
+      trap: 'Efficacy means therapeutic efficacy (Novartis). A new use or property of a known substance is excluded. Use of a known process is allowed only if it gives a new product or uses a new reactant.',
+      simple: 's.3(d) prevents patenting new forms of known substances unless they show enhanced therapeutic efficacy. A mere new property or use is not enough.',
+      example: 'A new crystalline form of a known drug without enhanced therapeutic efficacy → excluded under s.3(d).',
+      confusion: 'A new use of a known process is allowed only if it results in a new product or uses a new reactant.',
+      alert: 'Therapeutic efficacy; not any new property or use. Novartis is key.',
+      memory: '“3(d): therapeutic efficacy or bust.”',
+      quiz: [
+        {
+          q: 'Under s.3(d), what type of efficacy must be shown for a new form of a known substance?',
+          options: ['Commercial efficacy', 'Therapeutic efficacy', 'Industrial efficacy', 'Cosmetic efficacy'],
+          correct: 1,
+          explanation: 's.3(d) requires enhanced therapeutic efficacy, as held in Novartis.'
+        }
+      ]
+    },
+    {
+      id: 't34',
+      title: 'Medical Methods – s.3(i) Bars Treatment Claims',
+      category: 'Patentability',
+      difficulty: 'Intermediate',
+      tags: ['Important'],
+      provision: 's.3(i)',
+      trap: 's.3(i) bars method of treatment claims. For the Alzheimer antibody draft, claim the antibody by CDR sequences, with sequence listing, plus the preparation process. 3(k) bars software “per se”, so AI air-purifier claims must recite hardware and an adaptive flow path.',
+      simple: 'You cannot claim a method of treating a disease. Instead, claim the substance (e.g., antibody by CDR sequences) or the preparation process.',
+      example: 'Method of treating Alzheimer’s by administering an antibody → barred by s.3(i). Claim the antibody per se and its preparation process.',
+      confusion: '3(k) bars software per se; hardware integration can make it patentable.',
+      alert: 'No method of treatment claims. Claim substance and process. AI claims need hardware.',
+      memory: '“3(i): no treatment methods; claim the drug, not the method.”',
+      quiz: [
+        {
+          q: 'A claim to a method of treating Alzheimer’s disease by administering an antibody is likely to be rejected under:',
+          options: ['s.3(d)', 's.3(i)', 's.3(k)', 's.3(e)'],
+          correct: 1,
+          explanation: 's.3(i) bars method of treatment claims. The antibody itself and its preparation process can be claimed.'
+        }
+      ]
+    },
+    {
+      id: 't35',
+      title: 'Patent of Addition – Same Date, No Renewal, No Inventive Step',
+      category: 'Patent of Addition',
+      difficulty: 'Advanced',
+      tags: ['Important', 'HighConfusion'],
+      provision: 'ss.54, 56; Form 1',
+      trap: 'A patent of addition can be filed on the same date as the main application (s.54(3)), not only later. Grant only after main grant. No inventive-step objection based on the main invention (s.56). An independent patent filed earlier than the “main” cannot be converted. A PoA on another PoA is false per the keys. More than one PoA per main invention is allowed.',
+      simple: 'A patent of addition is linked to a main patent. It can be filed the same day. It gets no separate renewal fee and cannot be attacked for obviousness over the main patent.',
+      example: 'Main application filed 01/01/2024 → PoA can be filed 01/01/2024 (same day). No renewal fees for PoA.',
+      confusion: 'A PoA on another PoA is not allowed. Multiple PoAs on one main are allowed.',
+      alert: 'Same date allowed; no renewal; no inventive step vs main; no PoA on PoA; multiple PoAs allowed.',
+      memory: '“PoA: same day OK, no renewal, no obviousness over main.”',
+      quiz: [
+        {
+          q: 'Can a patent of addition be filed on the same date as the main application?',
+          options: ['No, it must be filed later', 'Yes, under s.54(3)', 'Only after grant of the main patent', 'Only with the Controller’s permission'],
+          correct: 1,
+          explanation: 's.54(3) allows a patent of addition to be filed on the same date as the main application.'
+        }
+      ]
+    },
+    {
+      id: 't36',
+      title: 'Divisionals – Any Time Before Grant, Even Suo Motu',
+      category: 'Priority and Filing',
+      difficulty: 'Advanced',
+      tags: ['Important', 'Amendment'],
+      provision: 'Rule 13(2A)',
+      trap: 'Divisionals can be filed any time before grant, even suo motu. Rule 13(2A) now allows divisionals of divisionals and of provisional-disclosed inventions. Not only after FER, and the filing date is the parent’s.',
+      simple: 'You can file a divisional application anytime before grant, even if the Controller raises it. The divisional gets the parent’s filing date.',
+      example: 'Parent filed 01/01/2024 → divisional filed 01/06/2025 → divisional filing date is 01/01/2024.',
+      confusion: 'Not limited to after FER; divisionals of divisionals are allowed.',
+      alert: 'Any time before grant; even suo motu; divisionals of divisionals allowed; parent’s filing date.',
+      memory: '“Divisional: any time before grant, parent’s date.”',
+      quiz: [
+        {
+          q: 'When can a divisional application be filed?',
+          options: ['Only after the First Examination Report', 'Any time before grant', 'Only within 12 months of filing', 'Only after grant'],
+          correct: 1,
+          explanation: 'Under Rule 13(2A), a divisional can be filed any time before grant, even suo motu, and divisionals of divisionals are allowed.'
+        }
+      ]
+    },
+    {
+      id: 't37',
+      title: 'Entitlement – Employer with Assignment Clause is Applicant',
+      category: 'Patentability',
+      difficulty: 'Intermediate',
+      tags: ['HighConfusion'],
+      provision: 's.6',
+      trap: 'An employer with an assignment clause is the applicant. The legal heir does not override it. There is no Controller “determination” step under s.6.',
+      simple: 'If an employee has assigned inventions to the employer, the employer is the applicant. The legal heir of the employee cannot claim it.',
+      example: 'Employee signs an assignment clause → employer files patent application. Legal heir of deceased employee cannot override the assignment.',
+      confusion: 's.6 does not require a Controller determination.',
+      alert: 'Employer with assignment clause = applicant; no Controller determination under s.6.',
+      memory: '“Assignment clause → employer owns, no s.6 determination.”',
+      quiz: [
+        {
+          q: 'An employee has an assignment clause in their employment contract. Who is the applicant for a patent on the employee’s invention?',
+          options: ['The employee', 'The employer', 'The legal heir', 'The Controller decides'],
+          correct: 1,
+          explanation: 'An employer with an assignment clause is the applicant. There is no Controller determination step under s.6.'
+        }
+      ]
+    },
+    {
+      id: 't38',
+      title: 'Co-owners – Work for Own Benefit, No Licence Without Consent',
+      category: 'Grant of Patent',
+      difficulty: 'Intermediate',
+      tags: ['Important'],
+      provision: 'ss.50–51; Form 11',
+      trap: 'Each co-owner can work the patent for their own benefit. No licence or assignment without the others’ consent. Controller directions on application (Form 11).',
+      simple: 'Co-owners can use the patent themselves but cannot license or assign it without the others’ consent.',
+      example: 'A and B co-own a patent. A can manufacture and sell for their own benefit. A cannot grant a licence to C without B’s consent.',
+      confusion: 'Working for own benefit is allowed; licensing is not.',
+      alert: 'Own use allowed; licence/assignment requires consent; Controller directions via Form 11.',
+      memory: '“Co-owner: use yes, licence no (without consent).”',
+      quiz: [
+        {
+          q: 'Can one co-owner grant a licence to a third party without the other co-owner’s consent?',
+          options: ['Yes, each co-owner can license independently', 'No, consent of all co-owners is required', 'Yes, if the Controller approves', 'Only if the other co-owner is not using the patent'],
+          correct: 1,
+          explanation: 'Under s.50–51, a licence or assignment requires the consent of all co-owners. Each can work the patent for their own benefit only.'
+        }
+      ]
+    },
+    {
+      id: 't39',
+      title: 'Licence Clauses – Tie-ins, Grant-backs, Challenge Bars Void',
+      category: 'Infringement',
+      difficulty: 'Advanced',
+      tags: ['HighConfusion'],
+      provision: 's.140',
+      trap: 'Tie-ins, exclusive grant-back, challenge bars and package licensing are void. A “no validity challenge” clause is invalid. Exclusive licensee’s standing to seek revocation is a separate question.',
+      simple: 'Certain restrictive licence clauses are automatically void, including clauses that stop the licensee from challenging validity.',
+      example: 'A licence clause says “licensee shall not challenge the patent’s validity” → void under s.140.',
+      confusion: 'Exclusive licensee can still have standing to seek revocation separately.',
+      alert: 'Tie-ins, exclusive grant-back, challenge bars, package licensing → void.',
+      memory: '“s.140: no tie-ins, no challenge bars, no exclusive grant-backs.”',
+      quiz: [
+        {
+          q: 'A licence clause prohibiting the licensee from challenging the validity of the patent is:',
+          options: ['Valid if both parties agree', 'Void under s.140', 'Valid if the patentee pays consideration', 'Valid only for exclusive licences'],
+          correct: 1,
+          explanation: 's.140 makes challenge-bar clauses void.'
+        }
+      ]
+    },
+    {
+      id: 't40',
+      title: 'Amendments – Only Disclaimer, Correction, Explanation',
+      category: 'Amendments',
+      difficulty: 'Intermediate',
+      tags: ['Important'],
+      provision: 'ss.57, 59',
+      trap: 'Amendments are only by disclaimer, correction or explanation (s.59). Cannot be opposed after grant except by notice under s.57(4) for the amendment itself, within the prescribed time, by a person interested.',
+      simple: 'You can only amend to narrow the scope (disclaimer), fix errors (correction), or clarify (explanation). You cannot broaden the claims.',
+      example: 'Adding a new feature that expands the claim → not allowed. Correcting a typo → allowed.',
+      confusion: 'After grant, opposition to amendment is limited to notice under s.57(4).',
+      alert: 'Disclaimer, correction, explanation only. No broadening. s.57(4) notice for post-grant amendment opposition.',
+      memory: '“Amend: narrow, fix, clarify — never broaden.”',
+      quiz: [
+        {
+          q: 'Which of the following amendments is NOT permitted under s.59?',
+          options: ['Disclaimer', 'Correction', 'Explanation', 'Broadening the claim scope'],
+          correct: 3,
+          explanation: 's.59 permits only disclaimer, correction, and explanation. Broadening the claim is not allowed.'
+        }
+      ]
+    },
+
+    // --- SECTION 7: ENFORCEMENT TRAPS ---
+    {
+      id: 't41',
+      title: 'Suit Forum – District Court or High Court with Counter-claim',
+      category: 'Infringement',
+      difficulty: 'Intermediate',
+      tags: ['Important'],
+      provision: 's.104',
+      trap: 'A suit can be filed in a District Court at minimum. With a counter-claim for revocation, the suit moves to the High Court.',
+      simple: 'You can file an infringement suit in a District Court. But if the defendant counter-claims for revocation, the case goes to the High Court.',
+      example: 'Patentee files infringement suit in District Court → defendant counter-claims revocation → case transferred to High Court.',
+      confusion: 'Without counter-claim, District Court is fine.',
+      alert: 'District Court minimum; counter-claim revocation → High Court.',
+      memory: '“Infringement: District Court; counter-claim revocation → High Court.”',
+      quiz: [
+        {
+          q: 'If a defendant in an infringement suit files a counter-claim for revocation, where does the suit proceed?',
+          options: ['District Court', 'High Court', 'IPAB', 'Supreme Court'],
+          correct: 1,
+          explanation: 'With a counter-claim for revocation, the suit moves to the High Court under s.104.'
+        }
+      ]
+    },
+    {
+      id: 't42',
+      title: 'No Infringement Suit Before Grant; Damages from Publication',
+      category: 'Infringement',
+      difficulty: 'Intermediate',
+      tags: ['Important'],
+      provision: 's.11A(7) proviso',
+      trap: 'No infringement suit can be filed before grant (s.11A(7) proviso). Damages are reckoned from publication date for the pre-grant period, not from filing.',
+      simple: 'You cannot sue for infringement until the patent is granted. However, once granted, you can claim damages for the period from publication.',
+      example: 'Application published 01/06/2024, granted 01/01/2025. Infringement from 01/07/2024 → damages from 01/06/2024 (publication).',
+      confusion: 'Damages from publication, not filing.',
+      alert: 'No suit before grant; damages from publication date.',
+      memory: '“Sue after grant; damages from publication.”',
+      quiz: [
+        {
+          q: 'From what date can damages be claimed for pre-grant infringement?',
+          options: ['Filing date', 'Priority date', 'Publication date', 'Grant date'],
+          correct: 2,
+          explanation: 'Under s.11A(7) proviso, damages for the pre-grant period are reckoned from the publication date.'
+        }
+      ]
+    },
+    {
+      id: 't43',
+      title: 's.111 – “Patented” Without Number No Constructive Awareness',
+      category: 'Infringement',
+      difficulty: 'Advanced',
+      tags: ['HighConfusion'],
+      provision: 's.111',
+      trap: 's.111: “Patented” without the patent number does not give constructive awareness, so damages can be refused. Injunctions are still available.',
+      simple: 'If you mark your product “Patented” without the patent number, you cannot claim damages from an infringer on the basis of constructive notice. But you can still get an injunction.',
+      example: 'Product marked “Patented” but no number → infringer not deemed aware → damages may be refused, injunction still available.',
+      confusion: 'Injunction is not affected; only damages may be refused.',
+      alert: '“Patented” without number → no constructive awareness → damages may be refused; injunction still available.',
+      memory: '“No number, no notice — injunction yes, damages maybe no.”',
+      quiz: [
+        {
+          q: 'A product is marked “Patented” but without the patent number. What is the effect under s.111?',
+          options: ['It is an offence', 'It gives constructive awareness to infringers', 'It does not give constructive awareness, so damages may be refused', 'It invalidates the patent'],
+          correct: 2,
+          explanation: 's.111 provides that “Patented” without the patent number does not give constructive awareness, so damages can be refused. Injunctions are still available.'
+        }
+      ]
+    },
+    {
+      id: 't44',
+      title: 's.106 Groundless Threats – Mere Notification Not a Threat',
+      category: 'Infringement',
+      difficulty: 'Advanced',
+      tags: ['Important'],
+      provision: 's.106',
+      trap: 'A mere notification of a patent’s existence is not a threat. Relief is declaration, injunction and damages, unless the defendant proves infringement. s.105 non-infringement declaration requires a prior written request, and validity cannot be raised.',
+      simple: 'If you threaten someone with patent infringement, they can sue you for groundless threats. Merely informing them that a patent exists is not a threat.',
+      example: 'Letter saying “we have a patent” → not a threat. Letter saying “you are infringing and we will sue” → threat.',
+      confusion: 's.105 declaration cannot challenge validity.',
+      alert: 'Mere notification ≠ threat. s.105 requires prior written request; validity cannot be raised.',
+      memory: '“s.106: mere notice no threat; s.105: no validity challenge.”',
+      quiz: [
+        {
+          q: 'A letter merely stating that a patent exists is:',
+          options: ['A groundless threat under s.106', 'Not a threat under s.106', 'An infringement notice', 'A challenge to validity'],
+          correct: 1,
+          explanation: 'A mere notification of a patent’s existence is not a groundless threat under s.106.'
+        }
+      ]
+    },
+    {
+      id: 't45',
+      title: 'Burden of Proof Shift – Process Patents for New Products',
+      category: 'Infringement',
+      difficulty: 'Intermediate',
+      tags: ['Important'],
+      provision: 's.104A',
+      trap: 'Burden shift applies to process patents for new products or where there is substantial likelihood that the infringer used the process.',
+      simple: 'In certain process patent cases, the burden shifts to the defendant to prove they did not use the patented process.',
+      example: 'Process patent for a new product → defendant must prove they used a different process.',
+      confusion: 'Not all process patents; only new products or substantial likelihood.',
+      alert: 's.104A: new products or substantial likelihood → burden on defendant.',
+      memory: '“Process patent + new product → burden shifts.”',
+      quiz: [
+        {
+          q: 'Under s.104A, the burden of proof shifts to the defendant in a process patent suit when:',
+          options: ['The patent is for a new product', 'The patent is for any process', 'The defendant is a foreign company', 'The patentee requests it'],
+          correct: 0,
+          explanation: 's.104A shifts the burden for process patents for new products or where there is a substantial likelihood of infringement.'
+        }
+      ]
+    },
+    {
+      id: 't46',
+      title: 'Exclusive Licensee – Can Sue, Patentee Added as Defendant',
+      category: 'Infringement',
+      difficulty: 'Intermediate',
+      tags: ['Important'],
+      provision: 's.109',
+      trap: 'Exclusive licensee (s.109) can sue for infringement after the licence date, and the patentee is added as defendant with no costs unless they appear. s.84 licensee (s.110) must first call on the patentee, with a 2-month wait.',
+      simple: 'An exclusive licensee can sue for infringement without joining the patentee as plaintiff, but the patentee must be added as a defendant. A compulsory licensee must first ask the patentee to sue.',
+      example: 'Exclusive licence from 01/01/2025 → infringement after that date → licensee can sue; patentee added as defendant.',
+      confusion: 'Compulsory licensee (s.110) must first call on patentee and wait 2 months.',
+      alert: 's.109: exclusive licensee can sue; patentee added as defendant. s.110: CL must first call on patentee (2 months).',
+      memory: '“Exclusive licensee sues; patentee added as defendant.”',
+      quiz: [
+        {
+          q: 'An exclusive licensee wants to sue for infringement. What is the procedural requirement regarding the patentee?',
+          options: ['Patentee must be the plaintiff', 'Patentee is added as a defendant', 'Patentee need not be involved', 'Patentee must give written consent'],
+          correct: 1,
+          explanation: 'Under s.109, the exclusive licensee can sue, and the patentee is added as a defendant (with no costs unless they appear).'
+        }
+      ]
+    },
+
+    // --- SECTION 8: PCT, CONVENTION, FOREIGN FILING ---
+    {
+      id: 't47',
+      title: 's.39 – PCT at RO/IN by Indian Resident Still Needs Permission',
+      category: 'Foreign Filing Permission',
+      difficulty: 'Advanced',
+      tags: ['Important', 'HighConfusion'],
+      provision: 's.39',
+      trap: 'A PCT application filed at RO/IN by an Indian resident still needs s.39 permission (2026 key: “Yes”). The first-filing-in-India six-weeks route avoids it.',
+      simple: 'Even if you file a PCT application in India, you need permission under s.39 if you are an Indian resident, unless you first file in India and wait six weeks.',
+      example: 'Indian resident files PCT at RO/IN without first filing in India → s.39 permission required. First file in India and wait 6 weeks → no permission needed.',
+      confusion: 'The first-filing-in-India route avoids s.39 permission.',
+      alert: 'PCT at RO/IN + Indian resident → s.39 permission needed. First file in India + 6 weeks → exempt.',
+      memory: '“PCT at RO/IN: permission needed; first India + 6 weeks: exempt.”',
+      quiz: [
+        {
+          q: 'An Indian resident files a PCT application at RO/IN without first filing in India. Do they need s.39 permission?',
+          options: ['Yes', 'No', 'Only if the invention is in atomic energy', 'Only if they are a company'],
+          correct: 0,
+          explanation: 's.39 permission is required for an Indian resident filing a PCT application at RO/IN unless they first file in India and wait six weeks.'
+        }
+      ]
+    },
+    {
+      id: 't48',
+      title: 'Convention Priority – 12 Months from Earliest, Cannot Extend',
+      category: 'Priority and Filing',
+      difficulty: 'Beginner',
+      tags: ['Important'],
+      provision: 's.135',
+      trap: 'Convention priority is 12 months from the earliest basic application. Cannot be extended by Form 4.',
+      simple: 'You have 12 months from your first application to file in other convention countries. This period cannot be extended.',
+      example: 'First application 01/01/2024 → convention filing due by 01/01/2025. Form 4 cannot extend.',
+      confusion: '12 months from earliest, not from later applications.',
+      alert: '12 months from earliest; no extension.',
+      memory: '“Convention: 12 months from earliest, no extension.”',
+      quiz: [
+        {
+          q: 'What is the convention priority period, and can it be extended?',
+          options: ['12 months; extendable by 6 months', '12 months; cannot be extended', '6 months; extendable by 3 months', '18 months; cannot be extended'],
+          correct: 1,
+          explanation: 'The convention priority period is 12 months from the earliest basic application and cannot be extended.'
+        }
+      ]
+    },
+    {
+      id: 't49',
+      title: 'Competent ISAs – Japan Non-Competent (2025 Key)',
+      category: 'Foreign Filing Permission',
+      difficulty: 'Advanced',
+      tags: ['Needs Legal Verification'],
+      provision: 'PCT ISAs; 2025 key',
+      trap: 'The 2025 key treats Japan as the non-competent ISA for Indian applicants (Australia, Austria, Sweden are competent). Re-verify against the current notified list.',
+      simple: 'For Indian applicants, certain ISAs are competent. The 2025 key says Japan is not. Always check the current list.',
+      example: 'Indian applicant choosing an ISA → Japan not competent per 2025 key.',
+      confusion: 'The list may change; flag for verification.',
+      alert: '2025 key: Japan non-competent. Verify current list.',
+      memory: '“Japan was the odd one out in 2025 — but verify.”',
+      quiz: [
+        {
+          q: 'According to the 2025 key, which of the following ISAs is NOT competent for Indian applicants?',
+          options: ['Australia', 'Austria', 'Sweden', 'Japan'],
+          correct: 3,
+          explanation: 'The 2025 key treats Japan as non-competent for Indian applicants. However, this should be verified against the current notified list.'
+        }
+      ]
+    },
+    {
+      id: 't50',
+      title: 'WIPO Treaty on GR/TK – Mandatory Disclosure, 15 Ratifications',
+      category: 'Patentability',
+      difficulty: 'Advanced',
+      tags: ['Amendment', 'Important'],
+      provision: 'WIPO Treaty on GR/TK 2024',
+      trap: 'The disclosure requirement is mandatory for applicants, not optional. Patent offices have no duty to verify. Grace of 12 months for pre-existing applications is false. 15 ratifications are needed, and entry into force is 3 months after.',
+      simple: 'The new WIPO treaty requires applicants to disclose genetic resources and traditional knowledge. It is mandatory, not optional. Patent offices do not verify.',
+      example: 'Applicant uses traditional knowledge → must disclose source. Not optional.',
+      confusion: 'The question saying “optional” is false. Grace of 12 months is also false.',
+      alert: 'Mandatory disclosure; no verification duty; 15 ratifications; 3 months to entry into force.',
+      memory: '“GR/TK: mandatory, 15 ratifications, 3 months.”',
+      quiz: [
+        {
+          q: 'Under the WIPO Treaty on GR/TK 2024, the disclosure requirement for applicants is:',
+          options: ['Optional', 'Mandatory', 'Only for foreign applicants', 'Only for pharmaceutical inventions'],
+          correct: 1,
+          explanation: 'The disclosure requirement is mandatory for applicants, not optional.'
+        }
+      ]
+    },
+
+    // --- SECTION 9: DESIGNS ---
+    {
+      id: 't51',
+      title: 'Designs – “Article” Means Separately Manufactured and Sold',
+      category: 'Grant of Patent',
+      difficulty: 'Intermediate',
+      tags: ['Important'],
+      provision: 'Designs Act; s.2(a)',
+      trap: '“Article” means separately manufactured and sold. A non-removable built-in dashboard fails; a bottle cap sold separately passes. A natural stone sculpture with no industrial application fails.',
+      simple: 'For design registration, the article must be separately manufactured and sold. If it is built into another product permanently, it is not a separate article.',
+      example: 'Non-removable dashboard → not an article. Bottle cap sold separately → article.',
+      confusion: 'Natural stone sculpture with no industrial application → not registrable.',
+      alert: 'Separately manufactured and sold. Non-removable = not article.',
+      memory: '“Design article: separate sale required.”',
+      quiz: [
+        {
+          q: 'A non-removable built-in dashboard is:',
+          options: ['A registrable design article', 'Not a registrable article because it is not separately manufactured and sold', 'A registrable design if it is novel', 'A registrable design if it has aesthetic appeal'],
+          correct: 1,
+          explanation: 'A design must be applied to an article that is separately manufactured and sold. A non-removable built-in dashboard does not qualify.'
+        }
+      ]
+    },
+    {
+      id: 't52',
+      title: 'Designs Grace Period – 6 Months (Patents 12 Months)',
+      category: 'Patentability',
+      difficulty: 'Beginner',
+      tags: ['HighConfusion'],
+      provision: 'Designs Act',
+      trap: 'Designs grace for exhibitions is 6 months; patents is 12. So “same duration” is false.',
+      simple: 'Designs have a 6-month grace period; patents have 12 months. They are not the same.',
+      example: 'Design disclosed at exhibition → 6 months to file. Patent disclosed at exhibition → 12 months.',
+      confusion: 'Do not apply the 12-month patent grace to designs.',
+      alert: 'Designs: 6 months. Patents: 12 months.',
+      memory: '“Designs 6, Patents 12.”',
+      quiz: [
+        {
+          q: 'What is the grace period for design registration after disclosure at a notified exhibition?',
+          options: ['6 months', '12 months', '18 months', '24 months'],
+          correct: 0,
+          explanation: 'Designs have a 6-month grace period; patents have 12 months.'
+        }
+      ]
+    },
+    {
+      id: 't53',
+      title: 'Design Copyright – 10 + 5 Years; Ends After 50 Articles',
+      category: 'Grant of Patent',
+      difficulty: 'Intermediate',
+      tags: ['Important'],
+      provision: 'Designs Act; Copyright Act',
+      trap: 'Design copyright term is 10 years plus 5. Under the Copyright Act, copyright ends once a design is applied to more than 50 articles by industrial process.',
+      simple: 'A registered design is protected for 10 years, renewable for 5 more. Copyright in an artistic work ends when the design is applied industrially to more than 50 articles.',
+      example: 'Design registered → 10 years + 5 years renewal. Artistic work applied to 51 articles → copyright ends.',
+      confusion: 'Do not confuse design copyright with patent term.',
+      alert: '10 + 5 years; 50-article limit for copyright.',
+      memory: '“Design: 10+5; copyright dies after 50.”',
+      quiz: [
+        {
+          q: 'What is the term of a registered design?',
+          options: ['10 years, renewable for 5', '20 years from filing', '15 years from grant', '5 years, renewable for 10'],
+          correct: 0,
+          explanation: 'A registered design is protected for 10 years, renewable for 5 years.'
+        }
+      ]
+    },
+    {
+      id: 't54',
+      title: 'Designs Cancellation – Person Interested, Prior Publication Anywhere',
+      category: 'Revocation',
+      difficulty: 'Advanced',
+      tags: ['Important'],
+      provision: 'Designs Act s.19',
+      trap: 'Cancellation (s.19): person interested. Grounds include prior registration or publication anywhere (US publication counts), not new or original, and not a design (e.g., contains a property mark). The 2025 key: “all of the above”.',
+      simple: 'A person interested can seek cancellation of a registered design. Prior publication anywhere in the world is a ground.',
+      example: 'Design published in a US magazine before registration → ground for cancellation in India.',
+      confusion: 'Publication anywhere counts, not just India.',
+      alert: 'Person interested; publication anywhere; not new/original; property mark.',
+      memory: '“s.19: interested person, publication anywhere.”',
+      quiz: [
+        {
+          q: 'Which of the following is a ground for cancellation of a registered design under s.19?',
+          options: ['Prior publication only in India', 'Prior publication anywhere in the world', 'Only lack of novelty in India', 'Only if the design is functional'],
+          correct: 1,
+          explanation: 'Under s.19, prior publication anywhere in the world is a ground for cancellation, among others.'
+        }
+      ]
+    },
+    {
+      id: 't55',
+      title: 'Designs – Abandoned Application Not Prior Art; Second Design Fee Lower',
+      category: 'Patent Rules and Forms',
+      difficulty: 'Advanced',
+      tags: ['HighConfusion'],
+      provision: 'Designs Rules',
+      trap: 'A design application that is abandoned can be re-filed, and the earlier one is not prior art. Earlier registration prejudices any later similar design, whoever the applicant. Form 10 assignment fee for two designs is per design, but the second is cheaper than the first (2026 key, Y < X).',
+      simple: 'An abandoned design application does not become prior art. If you assign two designs, the second design’s fee is lower than the first.',
+      example: 'Design application abandoned → re-file without the abandoned one being prior art. Assign two designs → fee X for first, Y for second (Y < X).',
+      confusion: 'Earlier registration still prejudices later similar designs.',
+      alert: 'Abandoned ≠ prior art. Second design assignment fee lower.',
+      memory: '“Abandoned design no prior art; second assignment fee cheaper.”',
+      quiz: [
+        {
+          q: 'An abandoned design application:',
+          options: ['Becomes prior art for later applications', 'Does not become prior art and can be re-filed', 'Can never be re-filed', 'Is automatically registered'],
+          correct: 1,
+          explanation: 'An abandoned design application does not become prior art and can be re-filed.'
+        }
+      ]
+    },
+
+    // --- SECTION 10: PATENT AGENT TRAPS ---
+    {
+      id: 't56',
+      title: 'Patent Agent Qualifications – Citizen, 21, Science Degree, Exam',
+      category: 'Patent Rules and Forms',
+      difficulty: 'Beginner',
+      tags: ['Important'],
+      provision: 's.126',
+      trap: 'Qualifications: Indian citizen, 21 years, science/engineering/technology degree, passed exam. A separate route exists for 10-year ex-examiners and controllers.',
+      simple: 'To be a patent agent, you must be an Indian citizen, at least 21, have a science/engineering/technology degree, and pass the exam.',
+      example: 'A 22-year-old Indian citizen with a B.Tech who passes the exam → eligible.',
+      confusion: 'A non-agent advocate can attend a hearing only (s.132).',
+      alert: 'Citizen, 21, science degree, exam. Ex-examiner/controller route.',
+      memory: '“Citizen, 21, science, exam.”',
+      quiz: [
+        {
+          q: 'What is the minimum age to be a patent agent?',
+          options: ['18 years', '21 years', '25 years', 'No minimum age'],
+          correct: 1,
+          explanation: 'Under s.126, the minimum age is 21 years.'
+        }
+      ]
+    },
+    {
+      id: 't57',
+      title: 's.131(2) – Controller Must Refuse Agent Without Indian Residence/Office',
+      category: 'Patent Rules and Forms',
+      difficulty: 'Advanced',
+      tags: ['Important'],
+      provision: 's.131(2)',
+      trap: 's.129: companies cannot practise as patent agents. s.131(2): the Controller MUST refuse an agent who has no residence or place of business in India.',
+      simple: 'A company cannot be a patent agent. An individual without an Indian residence or business place must be refused registration.',
+      example: 'Foreign applicant with no Indian address → Controller must refuse agent registration.',
+      confusion: 'A non-agent advocate can attend a hearing only.',
+      alert: 'Companies cannot practise. No Indian residence/office → must refuse.',
+      memory: '“No Indian address → mandatory refusal.”',
+      quiz: [
+        {
+          q: 'Under s.131(2), if an applicant for patent agent registration has no residence or place of business in India, the Controller:',
+          options: ['May allow with conditions', 'Must refuse', 'May allow if they pay a fee', 'Must refer to the High Court'],
+          correct: 1,
+          explanation: 's.131(2) uses “must refuse” for an agent with no residence or place of business in India.'
+        }
+      ]
+    },
+    {
+      id: 't58',
+      title: 'Annual Continuance Fee – 1 April; Restoration Form 23',
+      category: 'Patent Rules and Forms',
+      difficulty: 'Beginner',
+      tags: ['Important'],
+      provision: 'Rule 108; Form 23',
+      trap: 'Annual continuance fee is paid each 1 April. Restoration is Form 23 plus the continuation fee.',
+      simple: 'Patent agents must pay an annual fee by 1 April. If removed, restoration is via Form 23 plus fee.',
+      example: 'Agent fails to pay by 1 April → name removed. Restoration via Form 23 + continuation fee.',
+      confusion: 'Form 23 is for agent restoration, not patent restoration.',
+      alert: '1 April deadline. Form 23 restoration + fee.',
+      memory: '“April 1 pay; Form 23 restore.”',
+      quiz: [
+        {
+          q: 'When is the annual continuance fee for patent agents due?',
+          options: ['1 January', '1 April', '1 July', '31 December'],
+          correct: 1,
+          explanation: 'The annual continuance fee is paid each 1 April.'
+        }
+      ]
+    }
+  ];
+
+  // ============================================================
+  // 2. STATE MANAGEMENT
+  // ============================================================
+  const STORAGE_KEY = 'patentAgent2027';
+  let state = {
+    progress: {}, // trapId -> 'not-started' | 'learning' | 'understood' | 'needs-revision'
+    quizResults: {}, // trapId -> { correct: n, total: n }
+    currentView: 'dashboard',
+    searchQuery: '',
+    difficultyFilter: 'all',
+    tagFilter: 'all',
+    sectionFilter: '',
+    ruleFilter: '',
+    timelineFilter: ''
+  };
+
+  function loadState() {
+    const saved = localStorage.getItem(STORAGE_KEY);
+    if (saved) {
+      try {
+        const parsed = JSON.parse(saved);
+        state = { ...state, ...parsed };
+      } catch (e) { /* ignore */ }
+    }
+  }
+
+  function saveState() {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+  }
+
+  // ============================================================
+  // 3. RENDERING
+  // ============================================================
+  function renderDashboard() {
+    const total = traps.length;
+    let understood = 0, needsRevision = 0, learning = 0;
+    let quizCorrect = 0, quizTotal = 0;
+    Object.values(state.progress).forEach(p => {
+      if (p === 'understood') understood++;
+      else if (p === 'needs-revision') needsRevision++;
+      else if (p === 'learning') learning++;
+    });
+    Object.values(state.quizResults).forEach(r => {
+      quizCorrect += r.correct;
+      quizTotal += r.total;
+    });
+    const quizPercent = quizTotal > 0 ? Math.round((quizCorrect / quizTotal) * 100) : 0;
+
+    const statsHtml = `
+      <div class="stat-card"><div class="label">Total Traps</div><div class="value">${total}</div></div>
+      <div class="stat-card"><div class="label">Understood</div><div class="value green">${understood}</div></div>
+      <div class="stat-card"><div class="label">Needs Revision</div><div class="value red">${needsRevision}</div></div>
+      <div class="stat-card"><div class="label">Learning</div><div class="value amber">${learning}</div></div>
+      <div class="stat-card"><div class="label">Quiz Score</div><div class="value">${quizPercent}%</div></div>
+    `;
+    document.getElementById('dashboardStats').innerHTML = statsHtml;
+
+    // also render trap list in dashboard
+    renderTrapList('dashboardTrapList', traps.slice(0, 10), 'dashboard');
+  }
+
+  function renderTrapList(containerId, trapArray, context) {
+    const container = document.getElementById(containerId);
+    if (!container) return;
+
+    if (trapArray.length === 0) {
+      container.innerHTML = '<p style="text-align:center; padding:2rem; color:#64748b;">No traps match your search/filter.</p>';
+      return;
+    }
+
+    // For revision mode, hide body
+    const isRevision = context === 'revision';
+
+    let html = '';
+    trapArray.forEach(trap => {
+      const status = state.progress[trap.id] || 'not-started';
+      const statusLabels = {
+        'not-started': 'Not Started',
+        'learning': 'Learning',
+        'understood': 'Understood',
+        'needs-revision': 'Needs Revision'
+      };
+      const difficultyClass = trap.difficulty === 'Beginner' ? 'badge-beginner' :
+        trap.difficulty === 'Intermediate' ? 'badge-intermediate' : 'badge-advanced';
+      const tagsHtml = trap.tags.map(tag => {
+        if (tag === 'Important') return '<span class="badge badge-important">⭐ Important</span>';
+        if (tag === 'HighConfusion') return '<span class="badge badge-highconf">🔥 High Confusion</span>';
+        if (tag === 'Amendment') return '<span class="badge badge-amendment">📅 Amendment</span>';
+        return `<span class="badge" style="background:#e2e8f0; color:#475569;">${tag}</span>`;
+      }).join(' ');
+
+      // Build sections
+      let sectionsHtml = '';
+      const addSection = (label, content, cls) => {
+        if (content) {
+          sectionsHtml += `<div class="section-block ${cls}"><h4>${label}</h4>${content}</div>`;
+        }
+      };
+
+      addSection('Relevant Legal Provision', `<p>${trap.provision}</p>`, 'provision');
+      addSection('What is the Trap?', `<p>${trap.trap}</p>`, 'trap');
+      addSection('Understand in Simple Language', `<p>${trap.simple}</p>`, 'simple');
+      addSection('Example / Practical Situation', `<p>${trap.example}</p>`, 'example');
+      addSection('Common Confusion', `<p>${trap.confusion}</p>`, 'confusion');
+      addSection('Exam Alert', `<p>${trap.alert}</p>`, 'alert');
+      addSection('Memory Trick', `<p>${trap.memory}</p>`, 'memory');
+
+      // Quiz
+      let quizHtml = '';
+      if (trap.quiz && trap.quiz.length > 0) {
+        quizHtml += '<div class="quiz-block"><h4 style="font-size:0.8rem; text-transform:uppercase; color:#64748b; margin-bottom:0.5rem;">Test Your Understanding</h4>';
+        trap.quiz.forEach((q, qi) => {
+          const qid = `quiz-${trap.id}-${qi}`;
+          quizHtml += `<div class="quiz-question">${q.q}</div>`;
+          quizHtml += `<div class="quiz-options" data-quizid="${qid}">`;
+          q.options.forEach((opt, oi) => {
+            quizHtml += `<label class="quiz-option"><input type="radio" name="${qid}" value="${oi}" data-trapid="${trap.id}" data-qindex="${qi}"> ${opt}</label>`;
+          });
+          quizHtml += '</div>';
+          quizHtml += `<div class="quiz-actions"><button class="btn btn-primary btn-check-answer" data-quizid="${qid}" data-trapid="${trap.id}" data-qindex="${qi}">Check Answer</button></div>`;
+          quizHtml += `<div class="quiz-feedback" id="feedback-${qid}"></div>`;
+        });
+        quizHtml += '</div>';
+      }
+
+      // Progress markers
+      const progressHtml = `
+        <div class="progress-markers">
+          ${['not-started', 'learning', 'understood', 'needs-revision'].map(s =>
+            `<button class="progress-btn ${status === s ? 'active' : ''}" data-status="${s}" data-trapid="${trap.id}">${statusLabels[s]}</button>`
+          ).join('')}
+        </div>
+      `;
+
+      // Revision summary
+      const revisionSummary = isRevision ? `<div class="revision-summary"><strong>Provision:</strong> ${trap.provision}<br><strong>Memory:</strong> ${trap.memory}</div>` : '';
+
+      html += `
+        <div class="trap-card" data-trapid="${trap.id}" data-difficulty="${trap.difficulty}" data-tags="${trap.tags.join(',')}">
+          <div class="trap-header">
+            <div class="title">${trap.title} ${tagsHtml} <span class="badge ${difficultyClass}">${trap.difficulty}</span></div>
+            <span class="expand-icon">▼</span>
+          </div>
+          <div class="trap-body">
+            ${sectionsHtml}
+            ${quizHtml}
+            ${progressHtml}
+          </div>
+          ${revisionSummary}
+        </div>
+      `;
+    });
+
+    container.innerHTML = html;
+
+    // Attach expand/collapse
+    container.querySelectorAll('.trap-header').forEach(header => {
+      header.addEventListener('click', () => {
+        if (isRevision) return;
+        const card = header.closest('.trap-card');
+        card.classList.toggle('open');
+      });
+    });
+
+    // Attach progress buttons
+    container.querySelectorAll('.progress-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const trapId = btn.dataset.trapid;
+        const status = btn.dataset.status;
+        state.progress[trapId] = status;
+        saveState();
+        // update active state
+        const parent = btn.closest('.progress-markers');
+        parent.querySelectorAll('.progress-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        renderDashboard();
+      });
+    });
+
+    // Attach quiz check buttons
+    container.querySelectorAll('.btn-check-answer').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const qid = btn.dataset.quizid;
+        const trapId = btn.dataset.trapid;
+        const qIndex = parseInt(btn.dataset.qindex);
+        const trap = traps.find(t => t.id === trapId);
+        const q = trap.quiz[qIndex];
+        const selected = container.querySelector(`input[name="${qid}"]:checked`);
+        const feedbackEl = document.getElementById(`feedback-${qid}`);
+        if (!selected) {
+          feedbackEl.className = 'quiz-feedback wrong';
+          feedbackEl.textContent = 'Please select an answer.';
+          return;
+        }
+        const selectedValue = parseInt(selected.value);
+        if (selectedValue === q.correct) {
+          feedbackEl.className = 'quiz-feedback correct';
+          feedbackEl.textContent = '✅ Correct! ' + q.explanation;
+        } else {
+          feedbackEl.className = 'quiz-feedback wrong';
+          feedbackEl.textContent = '❌ Incorrect. The correct answer is: ' + q.options[q.correct] + '. ' + q.explanation;
+        }
+        // Update quiz results
+        if (!state.quizResults[trapId]) state.quizResults[trapId] = { correct: 0, total: 0 };
+        state.quizResults[trapId].total++;
+        if (selectedValue === q.correct) state.quizResults[trapId].correct++;
+        saveState();
+        renderDashboard();
+      });
+    });
+
+    // If revision mode, don't allow expand
+    if (isRevision) {
+      container.querySelectorAll('.trap-header').forEach(h => h.style.cursor = 'default');
+    }
+  }
+
+  // ============================================================
+  // 4. FILTERS & SEARCH
+  // ============================================================
+  function filterTraps(trapArray, query, difficulty, tag, sectionQuery, ruleQuery, timelineQuery) {
+    return trapArray.filter(trap => {
+      // Search
+      if (query) {
+        const q = query.toLowerCase();
+        const searchable = (trap.title + ' ' + trap.provision + ' ' + trap.trap + ' ' + trap.simple + ' ' + trap.example + ' ' + trap.confusion + ' ' + trap.alert + ' ' + trap.memory + ' ' + trap.category).toLowerCase();
+        if (!searchable.includes(q)) return false;
+      }
+      // Difficulty
+      if (difficulty && difficulty !== 'all' && trap.difficulty !== difficulty) return false;
+      // Tag
+      if (tag && tag !== 'all' && !trap.tags.includes(tag)) return false;
+      // Section filter
+      if (sectionQuery) {
+        const sq = sectionQuery.toLowerCase();
+        if (!trap.provision.toLowerCase().includes(sq) && !trap.title.toLowerCase().includes(sq)) return false;
+      }
+      // Rule filter
+      if (ruleQuery) {
+        const rq = ruleQuery.toLowerCase();
+        if (!trap.provision.toLowerCase().includes(rq) && !trap.title.toLowerCase().includes(rq)) return false;
+      }
+      // Timeline filter
+      if (timelineQuery) {
+        const tq = timelineQuery.toLowerCase();
+        const timelineContent = (trap.trap + ' ' + trap.example + ' ' + trap.alert).toLowerCase();
+        if (!timelineContent.includes(tq)) return false;
+      }
+      return true;
+    });
+  }
+
+  // ============================================================
+  // 5. VIEW SWITCHING
+  // ============================================================
+  function switchView(view) {
+    state.currentView = view;
+    // Hide all views
+    document.querySelectorAll('.main > div').forEach(el => el.classList.add('hidden'));
+    // Show selected
+    const viewEl = document.getElementById(`view-${view}`);
+    if (viewEl) viewEl.classList.remove('hidden');
+    // Update sidebar active
+    document.querySelectorAll('.sidebar nav a').forEach(a => a.classList.remove('active'));
+    const activeLink = document.querySelector(`.sidebar nav a[data-view="${view}"]`);
+    if (activeLink) activeLink.classList.add('active');
+
+    // Render view
+    if (view === 'dashboard') {
+      renderDashboard();
+    } else if (view === 'traps') {
+      const filtered = filterTraps(traps, state.searchQuery, state.difficultyFilter, state.tagFilter, '', '', '');
+      renderTrapList('allTrapList', filtered, 'traps');
+    } else if (view === 'sections') {
+      const filtered = filterTraps(traps, '', 'all', 'all', state.sectionFilter, '', '');
+      renderTrapList('sectionTrapList', filtered, 'sections');
+    } else if (view === 'rules') {
+      const filtered = filterTraps(traps, '', 'all', 'all', '', state.ruleFilter, '');
+      renderTrapList('ruleTrapList', filtered, 'rules');
+    } else if (view === 'timelines') {
+      const filtered = filterTraps(traps, '', 'all', 'all', '', '', state.timelineFilter);
+      renderTrapList('timelineTrapList', filtered, 'timelines');
+    } else if (view === 'compare') {
+      renderCompareTables();
+    } else if (view === 'practice') {
+      renderPractice();
+    } else if (view === 'revision') {
+      const filtered = filterTraps(traps, state.searchQuery, 'all', 'all', '', '', '');
+      renderTrapList('revisionTrapList', filtered, 'revision');
+    }
+  }
+
+  // ============================================================
+  // 6. COMPARE TABLES
+  // ============================================================
+  function renderCompareTables() {
+    const container = document.getElementById('compareTables');
+    const tables = [
+      {
+        title: 'RFE Timeline: Old vs New',
+        headers: ['Situation', 'Old Rule', 'Current Rule'],
+        rows: [
+          ['Application filed before 15.03.2024', '48 months', '48 months (transitional)'],
+          ['Application filed on/after 15.03.2024', '48 months', '31 months'],
+          ['PCT National Phase', '48 months', '31 months (if filed after 15.03.2024)']
+        ]
+      },
+      {
+        title: 'Grace Period: Patents vs Designs',
+        headers: ['Type', 'Grace Period', 'Coverage'],
+        rows: [
+          ['Patents (s.31)', '12 months', 'Only s.31(a)–(d); not social media/newspaper'],
+          ['Designs', '6 months', 'Exhibition disclosure']
+        ]
+      },
+      {
+        title: '“Deemed” Phrases',
+        headers: ['Phrase', 'Provision', 'Situation'],
+        rows: [
+          ['Deemed abandoned', 's.9(1), s.21', 'No complete spec within 12 months; failure to comply with s.21'],
+          ['Deemed to have been abandoned', 's.40', 'Contravention of secrecy or s.39'],
+          ['Deemed withdrawn', 's.11B(4); PCT', 'No RFE; PCT never enters national phase'],
+          ['Deemed revoked', 's.66; opposition', 'Patentee doesn’t contest opposition; public-interest revocation']
+        ]
+      },
+      {
+        title: 'Forms 7 vs 7A',
+        headers: ['Form', 'Opposition Type', 'Who', 'Timeline'],
+        rows: [
+          ['Form 7A', 'Pre-grant (s.25(1))', 'Any person', 'Before grant'],
+          ['Form 7', 'Post-grant (s.25(2))', 'Person interested', 'Within 1 year of grant publication']
+        ]
+      },
+      {
+        title: 'Appeal vs Revocation Forums',
+        headers: ['Action', 'Forum', 'Time Limit'],
+        rows: [
+          ['Appeal against Controller', 'High Court (s.117A)', '3 months'],
+          ['Revocation (s.64)', 'High Court', 'Petition or counter-claim'],
+          ['Rectification', 'High Court', '—'],
+          ['Compulsory Licence Revocation (s.85)', 'Central Govt or person interested (Controller)', '2 years from first CL order']
+        ]
+      },
+      {
+        title: 'Patent Agent Forms',
+        headers: ['Form', 'Purpose'],
+        rows: [
+          ['Form 22', 'Agent registration'],
+          ['Form 23', 'Agent name restoration'],
+          ['Form 24', 'Review or set aside'],
+          ['Form 25', 's.39 permission'],
+          ['Form 26', 'Agent authorisation']
+        ]
+      }
+    ];
+
+    let html = '';
+    tables.forEach(t => {
+      html += `<div style="margin-bottom:2rem;">
+        <h3 style="color:var(--navy); margin-bottom:0.75rem;">${t.title}</h3>
+        <table class="compare-table">
+          <thead><tr>${t.headers.map(h => `<th>${h}</th>`).join('')}</tr></thead>
+          <tbody>${t.rows.map(row => `<tr>${row.map(cell => `<td>${cell}</td>`).join('')}</tr>`).join('')}</tbody>
+        </table>
+      </div>`;
+    });
+    container.innerHTML = html;
+  }
+
+  // ============================================================
+  // 7. PRACTICE MCQs
+  // ============================================================
+  function renderPractice() {
+    const container = document.getElementById('practiceList');
+    const allQuestions = [];
+    traps.forEach(trap => {
+      if (trap.quiz) {
+        trap.quiz.forEach((q, qi) => {
+          allQuestions.push({ ...q, trapId: trap.id, trapTitle: trap.title, qIndex: qi });
+        });
+      }
+    });
+
+    const query = (state.searchQuery || '').toLowerCase();
+    const filtered = query ? allQuestions.filter(q =>
+      q.q.toLowerCase().includes(query) ||
+      q.options.some(o => o.toLowerCase().includes(query)) ||
+      q.trapTitle.toLowerCase().includes(query)
+    ) : allQuestions;
+
+    if (filtered.length === 0) {
+      container.innerHTML = '<p style="text-align:center; padding:2rem; color:#64748b;">No practice questions match your search.</p>';
+      return;
+    }
+
+    let html = '';
+    filtered.forEach((q, idx) => {
+      const qid = `practice-${idx}`;
+      html += `<div class="trap-card" style="margin-bottom:1rem;">
+        <div style="padding:1rem 1.25rem;">
+          <div style="font-size:0.75rem; color:#64748b; margin-bottom:0.25rem;">${q.trapTitle}</div>
+          <div class="quiz-question">${q.q}</div>
+          <div class="quiz-options" data-quizid="${qid}">
+            ${q.options.map((opt, oi) =>
+              `<label class="quiz-option"><input type="radio" name="${qid}" value="${oi}"> ${opt}</label>`
+            ).join('')}
+          </div>
+          <div class="quiz-actions">
+            <button class="btn btn-primary btn-practice-check" data-quizid="${qid}" data-correct="${q.correct}" data-explanation="${q.explanation.replace(/"/g, '&quot;')}">Check Answer</button>
+          </div>
+          <div class="quiz-feedback" id="feedback-${qid}"></div>
+        </div>
+      </div>`;
+    });
+    container.innerHTML = html;
+
+    container.querySelectorAll('.btn-practice-check').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const qid = btn.dataset.quizid;
+        const correct = parseInt(btn.dataset.correct);
+        const explanation = btn.dataset.explanation;
+        const selected = container.querySelector(`input[name="${qid}"]:checked`);
+        const feedbackEl = document.getElementById(`feedback-${qid}`);
+        if (!selected) {
+          feedbackEl.className = 'quiz-feedback wrong';
+          feedbackEl.textContent = 'Please select an answer.';
+          return;
+        }
+        const selectedValue = parseInt(selected.value);
+        if (selectedValue === correct) {
+          feedbackEl.className = 'quiz-feedback correct';
+          feedbackEl.textContent = '✅ Correct! ' + explanation;
+        } else {
+          feedbackEl.className = 'quiz-feedback wrong';
+          feedbackEl.textContent = '❌ Incorrect. ' + explanation;
+        }
+      });
+    });
+  }
+
+  // ============================================================
+  // 8. RANDOM TEST
+  // ============================================================
+  function openRandomTest() {
+    const allQuestions = [];
+    traps.forEach(trap => {
+      if (trap.quiz) {
+        trap.quiz.forEach((q, qi) => {
+          allQuestions.push({ ...q, trapId: trap.id, trapTitle: trap.title });
+        });
+      }
+    });
+    // Shuffle and pick 5
+    const shuffled = allQuestions.sort(() => Math.random() - 0.5).slice(0, 5);
+    let html = '';
+    shuffled.forEach((q, idx) => {
+      const qid = `random-${idx}`;
+      html += `<div class="quiz-block" style="margin-bottom:1rem;">
+        <div style="font-size:0.75rem; color:#64748b; margin-bottom:0.25rem;">${q.trapTitle}</div>
+        <div class="quiz-question">${q.q}</div>
+        <div class="quiz-options" data-quizid="${qid}">
+          ${q.options.map((opt, oi) =>
+            `<label class="quiz-option"><input type="radio" name="${qid}" value="${oi}"> ${opt}</label>`
+          ).join('')}
+        </div>
+        <div class="quiz-actions">
+          <button class="btn btn-primary btn-random-check" data-quizid="${qid}" data-correct="${q.correct}" data-explanation="${q.explanation.replace(/"/g, '&quot;')}">Check Answer</button>
+        </div>
+        <div class="quiz-feedback" id="feedback-${qid}"></div>
+      </div>`;
+    });
+    document.getElementById('randomTestContent').innerHTML = html;
+    document.getElementById('randomModal').classList.add('active');
+
+    // Attach check handlers
+    document.querySelectorAll('.btn-random-check').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const qid = btn.dataset.quizid;
+        const correct = parseInt(btn.dataset.correct);
+        const explanation = btn.dataset.explanation;
+        const selected = document.querySelector(`input[name="${qid}"]:checked`);
+        const feedbackEl = document.getElementById(`feedback-${qid}`);
+        if (!selected) {
+          feedbackEl.className = 'quiz-feedback wrong';
+          feedbackEl.textContent = 'Please select an answer.';
+          return;
+        }
+        const selectedValue = parseInt(selected.value);
+        if (selectedValue === correct) {
+          feedbackEl.className = 'quiz-feedback correct';
+          feedbackEl.textContent = '✅ Correct! ' + explanation;
+        } else {
+          feedbackEl.className = 'quiz-feedback wrong';
+          feedbackEl.textContent = '❌ Incorrect. ' + explanation;
+        }
+      });
+    });
+  }
+
+  // ============================================================
+  // 9. EVENT LISTENERS
+  // ============================================================
+  function init() {
+    loadState();
+
+    // Sidebar navigation
+    document.querySelectorAll('.sidebar nav a').forEach(a => {
+      a.addEventListener('click', (e) => {
+        e.preventDefault();
+        const view = a.dataset.view;
+        switchView(view);
+      });
+    });
+
+    // Global search (dashboard)
+    document.getElementById('globalSearch').addEventListener('input', (e) => {
+      state.searchQuery = e.target.value;
+      renderDashboard();
+    });
+
+    // Trap search (all traps view)
+    document.getElementById('trapSearch').addEventListener('input', (e) => {
+      state.searchQuery = e.target.value;
+      const filtered = filterTraps(traps, state.searchQuery, state.difficultyFilter, state.tagFilter, '', '', '');
+      renderTrapList('allTrapList', filtered, 'traps');
+    });
+
+    // Difficulty filters
+    document.querySelectorAll('#difficultyFilters .filter-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('#difficultyFilters .filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        state.difficultyFilter = btn.dataset.difficulty;
+        const filtered = filterTraps(traps, state.searchQuery, state.difficultyFilter, state.tagFilter, '', '', '');
+        renderTrapList('allTrapList', filtered, 'traps');
+      });
+    });
+
+    // Tag filters
+    document.querySelectorAll('#tagFilters .filter-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('#tagFilters .filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        state.tagFilter = btn.dataset.tag;
+        const filtered = filterTraps(traps, state.searchQuery, state.difficultyFilter, state.tagFilter, '', '', '');
+        renderTrapList('allTrapList', filtered, 'traps');
+      });
+    });
+
+    // Section search
+    document.getElementById('sectionSearch').addEventListener('input', (e) => {
+      state.sectionFilter = e.target.value;
+      const filtered = filterTraps(traps, '', 'all', 'all', state.sectionFilter, '', '');
+      renderTrapList('sectionTrapList', filtered, 'sections');
+    });
+
+    // Rule search
+    document.getElementById('ruleSearch').addEventListener('input', (e) => {
+      state.ruleFilter = e.target.value;
+      const filtered = filterTraps(traps, '', 'all', 'all', '', state.ruleFilter, '');
+      renderTrapList('ruleTrapList', filtered, 'rules');
+    });
+
+    // Timeline search
+    document.getElementById('timelineSearch').addEventListener('input', (e) => {
+      state.timelineFilter = e.target.value;
+      const filtered = filterTraps(traps, '', 'all', 'all', '', '', state.timelineFilter);
+      renderTrapList('timelineTrapList', filtered, 'timelines');
+    });
+
+    // Revision search
+    document.getElementById('revisionSearch').addEventListener('input', (e) => {
+      state.searchQuery = e.target.value;
+      const filtered = filterTraps(traps, state.searchQuery, 'all', 'all', '', '', '');
+      renderTrapList('revisionTrapList', filtered, 'revision');
+    });
+
+    // Practice search
+    document.getElementById('practiceSearch').addEventListener('input', (e) => {
+      state.searchQuery = e.target.value;
+      renderPractice();
+    });
+
+    // Random test
+    document.getElementById('randomTestBtn').addEventListener('click', openRandomTest);
+    document.getElementById('closeRandomModal').addEventListener('click', () => {
+      document.getElementById('randomModal').classList.remove('active');
+    });
+    document.getElementById('randomModal').addEventListener('click', (e) => {
+      if (e.target === document.getElementById('randomModal')) {
+        document.getElementById('randomModal').classList.remove('active');
+      }
+    });
+
+    // Random practice
+    document.getElementById('randomPracticeBtn').addEventListener('click', () => {
+      const allQuestions = [];
+      traps.forEach(trap => {
+        if (trap.quiz) {
+          trap.quiz.forEach(q => allQuestions.push({ ...q, trapId: trap.id, trapTitle: trap.title }));
+        }
+      });
+      const shuffled = allQuestions.sort(() => Math.random() - 0.5).slice(0, 5);
+      // render directly in practice list
+      const container = document.getElementById('practiceList');
+      let html = '';
+      shuffled.forEach((q, idx) => {
+        const qid = `randpractice-${idx}`;
+        html += `<div class="trap-card" style="margin-bottom:1rem;">
+          <div style="padding:1rem 1.25rem;">
+            <div style="font-size:0.75rem; color:#64748b; margin-bottom:0.25rem;">${q.trapTitle}</div>
+            <div class="quiz-question">${q.q}</div>
+            <div class="quiz-options" data-quizid="${qid}">
+              ${q.options.map((opt, oi) =>
+                `<label class="quiz-option"><input type="radio" name="${qid}" value="${oi}"> ${opt}</label>`
+              ).join('')}
+            </div>
+            <div class="quiz-actions">
+              <button class="btn btn-primary btn-randpractice-check" data-quizid="${qid}" data-correct="${q.correct}" data-explanation="${q.explanation.replace(/"/g, '&quot;')}">Check Answer</button>
+            </div>
+            <div class="quiz-feedback" id="feedback-${qid}"></div>
+          </div>
+        </div>`;
+      });
+      container.innerHTML = html;
+      container.querySelectorAll('.btn-randpractice-check').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const qid = btn.dataset.quizid;
+          const correct = parseInt(btn.dataset.correct);
+          const explanation = btn.dataset.explanation;
+          const selected = container.querySelector(`input[name="${qid}"]:checked`);
+          const feedbackEl = document.getElementById(`feedback-${qid}`);
+          if (!selected) {
+            feedbackEl.className = 'quiz-feedback wrong';
+            feedbackEl.textContent = 'Please select an answer.';
+            return;
+          }
+          const selectedValue = parseInt(selected.value);
+          if (selectedValue === correct) {
+            feedbackEl.className = 'quiz-feedback correct';
+            feedbackEl.textContent = '✅ Correct! ' + explanation;
+          } else {
+            feedbackEl.className = 'quiz-feedback wrong';
+            feedbackEl.textContent = '❌ Incorrect. ' + explanation;
+          }
+        });
+      });
+    });
+
+    // Initial render
+    switchView('dashboard');
+  }
+
+  // Start
+  document.addEventListener('DOMContentLoaded', init);
+</script>
+</body>
+</html>
