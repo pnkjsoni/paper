@@ -1,847 +1,921 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
+<meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Patent Agent Examination — Paper I (2026)</title>
+<title>Patent Agent Exam 2026 — Practice Quiz</title>
 <style>
   :root{
-    --bg:#f6f7fb; --surface:#ffffff; --text:#0f172a; --muted:#64748b; --line:#e5e8f0;
-    --brand:#4f46e5; --brand2:#7c3aed; --brand-soft:#eef2ff;
-    --ok:#16a34a; --ok-bg:#ecfdf3; --ok-line:#86efac;
-    --bad:#dc2626; --bad-bg:#fef2f2; --bad-line:#fca5a5;
-    --sel-bg:#f3e8ff; --sel-line:#a855f7;
-    --shadow:0 1px 2px rgba(15,23,42,.04),0 8px 24px -12px rgba(15,23,42,.12);
-  }
-  @media (prefers-color-scheme: dark){
-    :root{
-      --bg:#0b1020; --surface:#131a2e; --text:#e6e9f5; --muted:#94a0bd; --line:#232c47;
-      --brand:#818cf8; --brand2:#a78bfa; --brand-soft:#1b2347;
-      --ok:#4ade80; --ok-bg:#0f2a1e; --ok-line:#1f6f45;
-      --bad:#f87171; --bad-bg:#2d1519; --bad-line:#7f2a33;
-      --sel-bg:#2a1b47; --sel-line:#8b5cf6;
-      --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px -12px rgba(0,0,0,.6);
-    }
+    --bg:#f4f6fb;
+    --card:#ffffff;
+    --ink:#1f2430;
+    --muted:#6b7280;
+    --accent:#4f46e5;
+    --accent-dark:#4338ca;
+    --ok:#1a7f4b;
+    --ok-bg:#e8f7ef;
+    --ok-line:#9ad4b5;
+    --bad:#b42318;
+    --bad-bg:#fdecea;
+    --bad-line:#f3b4ad;
+    --line:#e3e6ec;
   }
   *{box-sizing:border-box}
-  html{scroll-behavior:smooth}
-  body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;-webkit-font-smoothing:antialiased}
-  header.top{position:relative;overflow:hidden;color:#fff;padding:44px 20px 70px;
-    background:radial-gradient(900px 400px at 85% -20%,rgba(167,139,250,.55),transparent 60%),radial-gradient(700px 380px at 0% 120%,rgba(56,189,248,.35),transparent 60%),linear-gradient(135deg,#1e1b4b,#312e81 55%,#4338ca)}
-  header.top .inner{max-width:900px;margin:0 auto;position:relative}
-  .eyebrow{display:inline-block;font-size:11.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.22);padding:5px 12px;border-radius:999px;margin-bottom:14px;backdrop-filter:blur(6px)}
-  header.top h1{margin:0 0 8px;font-size:clamp(26px,4.6vw,38px);line-height:1.15;letter-spacing:-.02em;font-weight:800}
-  header.top p{margin:0 0 24px;font-size:15px;opacity:.82;max-width:620px}
-  .tabs{display:inline-flex;gap:4px;padding:5px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);border-radius:14px;backdrop-filter:blur(8px);flex-wrap:wrap}
-  .tab{font:inherit;font-size:14.5px;font-weight:700;padding:9px 22px;border-radius:10px;border:0;background:transparent;color:rgba(255,255,255,.85);cursor:pointer;transition:all .18s}
-  a.tab{text-decoration:none;display:inline-block;line-height:1.4}
-  .tab:hover{background:rgba(255,255,255,.14);color:#fff}
-  .tab.active{background:#fff;color:#3730a3;box-shadow:0 4px 14px -4px rgba(0,0,0,.35)}
-  .tab .ext{font-size:11px;opacity:.65;margin-left:5px;font-weight:800}
-  .tab.active .ext{opacity:.5}
-  .tabsep{width:1px;align-self:stretch;margin:4px 3px;background:rgba(255,255,255,.22)}
-  .scorebar{position:sticky;top:10px;z-index:30;max-width:900px;margin:-34px auto 0;padding:0 16px}
-  .scorebar .inner{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:12px 14px 14px;background:color-mix(in srgb,var(--surface) 88%,transparent);backdrop-filter:blur(14px);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);position:relative;overflow:hidden}
-  .pill{font-size:13px;font-weight:600;padding:6px 12px;border-radius:10px;background:var(--brand-soft);color:var(--brand);white-space:nowrap}
-  .pill.green{background:var(--ok-bg);color:var(--ok)}
-  .pill.red{background:var(--bad-bg);color:var(--bad)}
-  .pill.gold{background:linear-gradient(135deg,var(--brand),var(--brand2));color:#fff}
-  .spacer{flex:1}
-  button.reset{font:inherit;font-size:13px;font-weight:600;padding:7px 14px;border-radius:10px;border:1px solid var(--line);background:var(--surface);color:var(--muted);cursor:pointer;transition:all .15s}
-  button.reset:hover{color:var(--text);border-color:var(--brand)}
-  .progress{position:absolute;left:0;right:0;bottom:0;height:4px;background:var(--line)}
-  .progress i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--brand),var(--brand2));transition:width .35s ease}
-  main{max-width:900px;margin:0 auto;padding:26px 16px 70px}
-  h2.sechead{display:flex;align-items:center;gap:10px;font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.12em;color:var(--brand);margin:38px 0 14px}
-  h2.sechead:first-child{margin-top:10px}
-  h2.sechead::after{content:"";flex:1;height:1px;background:var(--line)}
-  .qcard{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:22px 22px 18px;margin-bottom:16px;box-shadow:var(--shadow);transition:transform .18s,box-shadow .18s}
-  .qcard:hover{transform:translateY(-1px)}
-  .qtitle{font-size:15.5px;font-weight:500;margin-bottom:14px}
-  .qtext{white-space:pre-line}
-  .qnum{display:inline-flex;align-items:center;justify-content:center;min-width:30px;height:30px;padding:0 8px;background:linear-gradient(135deg,var(--brand),var(--brand2));color:#fff;border-radius:9px;font-size:13px;margin-right:10px;font-weight:800;vertical-align:1px}
-  .multi{display:inline-block;font-size:12px;color:var(--brand2);background:var(--sel-bg);font-weight:700;margin:-4px 0 10px;padding:3px 10px;border-radius:999px}
-  .opt{display:flex;align-items:flex-start;gap:12px;width:100%;text-align:left;padding:12px 14px;margin:8px 0;border:1.5px solid var(--line);border-radius:12px;background:var(--surface);color:var(--text);font:inherit;font-size:14.5px;line-height:1.5;cursor:pointer;transition:all .14s}
-  .opt:hover:not(:disabled){border-color:var(--brand);background:var(--brand-soft);transform:translateX(2px)}
-  .opt:disabled{cursor:default}
-  .opt b{flex:none;display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:8px;background:var(--brand-soft);color:var(--brand);font-size:12.5px;font-weight:800;transition:all .14s}
-  .opt.sel{background:var(--sel-bg);border-color:var(--sel-line)}
-  .opt.sel b{background:var(--sel-line);color:#fff}
-  .opt.correct{background:var(--ok-bg);border-color:var(--ok-line);color:var(--text);font-weight:600}
-  .opt.correct b{background:var(--ok);color:#fff}
-  .opt.correct::after{content:"✓";margin-left:auto;color:var(--ok);font-weight:800}
-  .opt.wrong{background:var(--bad-bg);border-color:var(--bad-line);color:var(--text);font-weight:600}
-  .opt.wrong b{background:var(--bad);color:#fff}
-  .opt.wrong::after{content:"✕";margin-left:auto;color:var(--bad);font-weight:800}
-  button.check{margin-top:8px;font:inherit;font-size:14px;font-weight:700;padding:10px 22px;border-radius:12px;border:0;background:linear-gradient(135deg,var(--brand),var(--brand2));color:#fff;cursor:pointer;box-shadow:0 8px 18px -8px var(--brand);transition:transform .15s,opacity .15s}
-  button.check:hover:not(:disabled){transform:translateY(-1px)}
-  button.check:disabled{background:var(--line);color:var(--muted);box-shadow:none;cursor:default}
-  .free{margin-top:10px;font-size:12.5px;color:#92400e;background:#fef3c7;border-radius:10px;padding:8px 12px}
-  @media (prefers-color-scheme: dark){.free{background:#3a2a0a;color:#fcd34d}}
-  footer{max-width:900px;margin:0 auto;padding:0 16px 50px;font-size:12.5px;color:var(--muted);text-align:center}
-  @media (max-width:560px){
-    header.top{padding:32px 16px 62px}
-    .tab{padding:8px 14px}
-    .qcard{padding:18px 16px 14px;border-radius:16px}
-    .scorebar{top:6px}
+  body{
+    margin:0;
+    padding:2rem 1rem 4rem;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    line-height:1.55;
+    font-size:16px;
+  }
+  .wrap{max-width:820px;margin:0 auto}
+
+  header{text-align:center;margin-bottom:1.6rem}
+  header h1{margin:0 0 .35rem;font-size:1.6rem;letter-spacing:-.02em}
+  header p{margin:0;color:var(--muted);font-size:.94rem}
+
+  .homebar{display:flex;justify-content:center;margin-bottom:1.2rem}
+  .homebar a{
+    font-size:.9rem;font-weight:600;text-decoration:none;color:var(--accent);
+    padding:.4rem 1rem;border:1px solid var(--line);border-radius:10px;background:#fff;
+  }
+  .homebar a:hover{border-color:var(--accent)}
+
+  .summary{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:14px;
+    padding:1.1rem 1.2rem;
+    margin-bottom:1.3rem;
+    box-shadow:0 2px 10px rgba(20,30,60,.05);
+  }
+  .summary h2{margin:0 0 .6rem;font-size:1.15rem}
+  .score-line{font-size:1.02rem;margin:0 0 .8rem}
+  .score-line b{font-size:1.35rem;color:var(--accent)}
+  .chips{display:flex;flex-wrap:wrap;gap:.45rem;margin:0;padding:0;list-style:none}
+  .chip{
+    font-size:.85rem;font-weight:600;padding:.28rem .7rem;border-radius:999px;
+    border:1px solid var(--line);background:#fbfcff;color:var(--muted);
+  }
+  .chip.ok{background:var(--ok-bg);border-color:var(--ok-line);color:var(--ok)}
+  .chip.bad{background:var(--bad-bg);border-color:var(--bad-line);color:var(--bad)}
+
+  .card{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:14px;
+    padding:1.15rem 1.25rem 1.25rem;
+    margin-bottom:1.1rem;
+    box-shadow:0 2px 10px rgba(20,30,60,.05);
+  }
+  .card.correct{border-left:5px solid var(--ok)}
+  .card.wrong{border-left:5px solid var(--bad)}
+
+  .qhead{display:flex;flex-wrap:wrap;align-items:baseline;gap:.6rem;margin-bottom:.5rem}
+  .qnum{
+    font-weight:700;font-size:.8rem;letter-spacing:.06em;text-transform:uppercase;
+    color:#fff;background:var(--accent);padding:.2rem .6rem;border-radius:6px;
+  }
+  .qmeta{font-size:.8rem;color:var(--muted)}
+  .qtext{margin:.15rem 0 .9rem;font-weight:600;white-space:pre-line}
+
+  .options{display:grid;gap:.5rem}
+  .option{
+    display:flex;gap:.65rem;align-items:flex-start;
+    padding:.6rem .75rem;border:1px solid var(--line);border-radius:10px;
+    background:#fff;cursor:pointer;transition:border-color .15s,background .15s;
+  }
+  .option:hover{border-color:#c3cbe0;background:#fafbff}
+  .option input{margin-top:.3rem;accent-color:var(--accent);flex:none}
+  .option .txt{font-size:.95rem}
+  .option .txt b{color:var(--accent-dark)}
+  .option.locked{cursor:default}
+  .option.locked:hover{border-color:var(--line);background:#fff}
+
+  .option.is-correct{border-color:var(--ok-line);background:var(--ok-bg)}
+  .option.is-correct:hover{background:var(--ok-bg)}
+  .option.is-wrong{border-color:var(--bad-line);background:var(--bad-bg)}
+  .option.is-wrong:hover{background:var(--bad-bg)}
+
+  .feedback{margin-top:.9rem;padding-top:.85rem;border-top:1px dashed var(--line);display:none}
+  .feedback.show{display:block}
+  .verdict{font-weight:700;margin:0 0 .45rem}
+  .verdict.ok{color:var(--ok)}
+  .verdict.bad{color:var(--bad)}
+  .feedback p{margin:.25rem 0;font-size:.92rem}
+  .feedback .lbl{color:var(--muted);font-weight:600}
+  .feedback .reason{margin-top:.55rem;padding:.6rem .75rem;background:#f7f8fc;border-radius:9px;color:#333a4a}
+
+  .actions{display:flex;flex-wrap:wrap;align-items:center;gap:.8rem;margin:1.4rem 0 .4rem}
+  .btn{
+    font:inherit;font-weight:600;border-radius:10px;padding:.7rem 1.4rem;
+    border:1px solid transparent;cursor:pointer;transition:.15s;
+  }
+  .btn.primary{background:var(--accent);color:#fff}
+  .btn.primary:hover:not(:disabled){background:var(--accent-dark)}
+  .btn.primary:disabled{background:#c3cbe0;cursor:not-allowed}
+  .btn.ghost{background:#fff;border-color:var(--line);color:var(--ink)}
+  .btn.ghost:hover{border-color:#b9c2d6}
+  .hint{color:var(--muted);font-size:.88rem}
+
+  .hidden{display:none !important}
+  @media (max-width:520px){
+    body{padding:1.2rem .7rem 3rem;font-size:15px}
+    .card{padding:1rem}
   }
 </style>
 </head>
 <body>
+<div class="wrap">
 
-<header class="top">
-  <div class="inner">
-    <span class="eyebrow">Paper I · 2026 Practice Paper</span>
+  <div class="homebar">
+    <a href="index.html">&#8592; Home</a>
+  </div>
+
+  <header>
     <h1>Patent Agent Examination — 2026</h1>
-    <p>Click an option to select. Press <strong>Check answer</strong> to reveal the correct option and update your score.</p>
-    <div class="tabs">
-      <a class="tab" href="index.html">← All years</a>
-      <span class="tabsep"></span>
-      <span class="tab active">2026 <span class="ext">current</span></span>
-    </div>
-  </div>
-</header>
+    <p>Paper I practice &middot; 42 questions &middot; Select your answers and press Submit.</p>
+  </header>
 
-<div class="scorebar">
-  <div class="inner">
-    <span class="pill">Attempted: <span id="attempted">0</span> / <span id="total">0</span></span>
-    <span class="pill green">Correct: <span id="correct">0</span></span>
-    <span class="pill red">Wrong: <span id="wrong">0</span></span>
-    <span class="pill gold">Marks: <span id="marks">0</span> / <span id="maxmarks">0</span></span>
-    <span class="spacer"></span>
-    <button class="reset" id="resetBtn">↺ Reset paper</button>
-    <div class="progress"><i id="bar"></i></div>
+  <div id="summary" class="summary hidden" aria-live="polite">
+    <h2>Result</h2>
+    <p class="score-line" id="scoreLine"></p>
+    <ul class="chips" id="chips"></ul>
   </div>
+
+  <form id="quiz" autocomplete="off"></form>
+
+  <div class="actions">
+    <button id="submitBtn" class="btn primary" type="button" disabled>Submit all answers</button>
+    <button id="resetBtn" class="btn ghost" type="button">Reset</button>
+    <span id="hint" class="hint">Answer all questions to submit.</span>
+  </div>
+
 </div>
 
-<main id="quiz"></main>
-<footer>
-  2026 question paper · Practice page. The source file was truncated during the final Part C1 question, so that incomplete question has been omitted.
-</footer>
-
 <script>
-/* ---------- helpers ---------- */
-const S = (title, m) => ({ s: title, m });
-const Q = (t, o, a, free) => ({ t, o, a, free: !!free });
-
-/* =====================================================================
-   2026 PAPER
-   ===================================================================== */
-const Y2026 = [
-S("Part A — Multiple Choice (2 marks each)", 2),
-
-Q(`Which of the following articles do not satisfy the conventional requirements to be regarded as a ‘set’ as per the definition of the Designs Act, 2000?
-
-(The paper shows pictures; described here in words.)`,
-[
-`🫖 A teapot and a cup`,
-`🛋️ A table lamp and a sofa`,
-`🍾 Two bottles and a jar`,
-`🪑 A table with two chairs`
-], "b"),
-
-Q(`Three patent applications were filed in India as per the following details:
-
-Application Type | Filed on | Priority detail
-Ordinary Application | 01/01/2023 | Nil
-Convention Application | 01/01/2023 | claiming priority of a Japanese patent application dated 01/01/2022
-PCT-NP Application | 01/01/2023 with International filing date 01/06/2021 | claiming priority of a US patent application dated 01/06/2020
-
-Considering that all three patents were granted, answer the following:
-
-Statement I: The patent term expires simultaneously (on the same date) for the above mentioned ordinary and convention applications.
-
-Statement II: The patent term of the PCT-NP application expires last.`,
-[
-`Statement I is true and II is false`,
-`Both Statements I and II are true`,
-`Both Statements I and II are false`,
-`Statement I is false and II is true`
-], "a"),
-
-Q(`An Indian company, PenTech has a patent on its latest innovation roller point pens. A second company, PenSphere started producing and selling a similar pen in the market. PenTech filed an infringement suit against PenSphere. In the infringement suit, the alleged infringer (defendant) PenSphere claimed that it was not aware of the patent and had no reasonable grounds for believing that the patent existed. However, the Plaintiff PenTech argued that each of their product marketed clearly bears the indication that it is a patented product through the use of the term "Patented". Under these circumstances what is possible under the provisions of the Patents Act:
-
-I. Defendant shall be deemed to have been aware that the patent had existed as the products of the Plaintiff are identified as "Patented".
-
-II. Defendant shall not be deemed to have been aware that the patent had existed, even though the products of the Plaintiff are identified as "Patented".
-
-III. The Defendant shall be held accountable and the court shall grant damages or an account of profit against the defendant.
-
-IV. The court shall not grant damages or an account of profit against the defendant unless the number of the patent accompanies the word "Patented".`,
-[
-`Only I is correct`,
-`Only II is correct`,
-`I and III are correct`,
-`II and IV are correct`
-], "d"),
-
-Q(`Considering the PCT timeline given below (in months), what are the correct values of A, B, C, D, E, F calculated from the 0th month?
-
-File priority application (0) → File PCT international application (A) → International Search Report & Written Opinion (B) → International publication (C) → File demand for International Preliminary Examination (D) → International preliminary report on patentability (E) → Enter national phase (F).`,
-[
-`A = 12, B = 15, C = 18, D = 21, E = 28, F = 30/31`,
-`A = 12, B = 16, C = 18, D = 20, E = 25, F = 30/31`,
-`A = 12, B = 14, C = 16, D = 24, E = 27, F = 30/31`,
-`A = 12, B = 16, C = 18, D = 22, E = 28, F = 30/31`
-], "d"),
-
-Q(`Which of the following is/are true with respect to a patent of addition:
-
-I. A patent of addition application is a modification of the invention disclosed in the main application and can be filed only after the filing of the main application and not on the same date and granted only after the grant of the main application.
-
-II. A patent of addition application may not be refused on the ground only that the invention claimed does not involve an inventive step in view of the main application.
-
-III. Only one patent of addition application is allowable on one main invention application.
-
-IV. The applicant/patentee must be the same for both the main application and the patent of addition.`,
-[
-`I and II`,
-`II and III`,
-`III and IV`,
-`II and IV`
-], "d"),
-
-Q(`The Indian Patent Office has recently updated the Roll of Scientific Advisors. Which of the following is NOT true about the scientific advisors as per the Patents Act?
-
-I. A scientific advisor may assist the court in an infringement matter.
-
-II. A scientific advisor may help the court in the interpretation of the law.
-
-III. A scientific advisor may inquire and report on a technical matter related to patent in question.
-
-IV. A scientific advisor may assist patent controller in deciding an opposition matter.`,
-[
-`IV only`,
-`I and III only`,
-`II and IV only`,
-`I, II and III`
-], "c"),
-
-Q(`Which combination is correct with regard to post dating provision under Section 17(1) of the Patents Act?
-
-I. It requires applicant request with fee.
-
-II. It can be ordered suo-motu by the Controller.
-
-III. An application can be post-dated to a maximum period of 6 months under this provision.
-
-IV. It is available only before grant.`,
-[
-`I, II and III`,
-`I, III and IV`,
-`II, III and IV`,
-`I, II, III and IV`
-], "b"),
-
-Q(`Which of the following is not open to the public or published?
-
-I. The information received by the controller (on demand) as to the extent to which the patented invention has been commercially worked in India.
-
-II. The examination report of the examiner made to the controller.
-
-III. The offer to surrender a patent by the patentee.
-
-IV. An application for a compulsory license under section 84, which the controller prima facie finds eligible.`,
-[
-`II and IV only`,
-`I and IV only`,
-`II and III only`,
-`II only`
-], "d"),
-
-Q(`An inventor filed the following applications for an improved water bottle with a seal mechanism to prevent spillage:
-
-1. A conventional application C1 was filed in Japan on 15/02/2024, claiming a bottle design with basic sealing feature A.
-
-2. A second conventional application C2 was filed in Japan on 15/06/2024, claiming the bottle design with an advanced self-locking sealing mechanism B.
-
-3. A complete specification was filed in India on 14/02/2025 claiming priority from both the previous applications claiming "Bottle with basic sealing feature A, and characterized by advanced self-locking sealing mechanism B".
-
-In this context, what would be the priority date for the above claim?`,
-[
-`15/02/2024`,
-`15/06/2024`,
-`14/02/2025`,
-`None of them`
-], "b"),
-
-Q(`Dr. Neha is the patentee of a special 3D printing process used to manufacture customized medical implants. She is willing to license the technology to MedShape Pvt. Ltd. with following conditions:
-
-1. MedShape must purchase all raw materials only from Dr. Neha's company.
-
-2. MedShape shall not use any other 3D printing process for making implants.
-
-3. MedShape shall not challenge the validity of Dr. Neha's patent in any court.
-
-Which of the following statements is/are correct according to the Patents Act, 1970?`,
-[
-`Such conditions are valid if they are approved by the Controller before execution of the licence`,
-`Only condition (3) is invalid, while the others can be enforced under patent rights`,
-`All the above conditions are void as they are restrictive and unlawful`,
-`Only condition (1) is void because it restricts the licensee's right to buy materials from others; the rest are valid`
-], "c"),
-
-Q(`An architectural startup wishes to record an assignment in respect of two different registered designs (Design No. D-100 and Design No. D-101) in the Register of Designs under the Designs Act, 2000. They use the prescribed Form 10. What is the official government fee they must pay to the Office of the Controller of Designs?`,
-[
-`X for the first design + Y for the second design, where X = Y`,
-`X for the first design + Y for the second design, where Y < X`,
-`X for the first design + Y for the second design, where Y > X`,
-`They both can be bulk filed with only one fee X, when filed together in the same class`
-], "b"),
-
-Q(`Mr. Sukumar has invented a water bottle, which looks very unique and aesthetic compared to the available water bottles in the market and has a cap which works on a specially designed seal to prevent leakage, even when the bottle is turned or shaken. He has labelled the bottle 'AquaZen' and is looking forward to launch his product in the market. What type of IP protection(s) may be relevant in this case?
-
-1. Patent 2. Design 3. Trade Mark 4. GI`,
-[
-`1 and 2 both`,
-`1 and 3 only`,
-`1, 2 and 3 only`,
-`3 and 4 both`
-], "c"),
-
-Q(`As per the definition of "new invention" under section 2(1)(l) of the Act, the test of anticipation is carried out based on:`,
-[
-`Non-publication and non-use of the invention before the date of filing of the application anywhere in India or elsewhere in the world`,
-`Non-publication of the invention before the date of filing of the application anywhere in the world and non-use in India only`,
-`Non-publication of the invention before the date of filing of the application anywhere in India and non-use elsewhere in the world`,
-`Non-publication and non-use of the invention before the date of filing of the application anywhere in India`
-], "a"),
-
-Q(`A PCT application is filed directly in India by an Indian applicant. In the context of section 39 of the Act, does the applicant need to seek permission?`,
-[
-`No, the permission is not required as the PCT application is filed in India`,
-`Yes, the permission is still required as it's considered an application filed outside India`,
-`No, this requirement is only for PCT applications filed outside India`,
-`Yes, permission is required for all resident and non-resident Indians`
-], "a"),
-
-Q(`Recently, the Government of India amended Section 4 of the Patents Act, 1970 from "No patent shall be granted in respect of an invention relating to atomic energy falling within __________ of the __________" to "The patents may be granted for inventions relating to nuclear energy subject to the provisions of this Act and of the __________".
-
-Which of the following is the correct option for the fill in the blanks?`,
-[
-`Sub-section (1) of section 21, Atomic Energy Act, 1962 (33 of 1962); section 39, Sustainable Harnessing and Advancement of Nuclear Energy for Transforming India Act, 2025`,
-`Sub-section (1) of section 20, Atomic Energy Act, 1961 (33 of 1961); section 38, Sustainable Harnessing and Advancement of Nuclear Energy for Transforming India Act, 2025`,
-`Sub-section (1) of section 20, Atomic Energy Act, 1962 (33 of 1962); section 38, Sustainable Harnessing and Advancement of Nuclear Energy for Transforming India Act, 2025`,
-`Sub-section (1) of section 21, Atomic Energy Act, 1961 (33 of 1961); section 38, Sustainable Harnessing and Advancement of Nuclear Energy for Transforming India Act, 2025`
-], "c"),
-
-Q(`Mr. Arun is the patentee of Patent No. 123456 relating to a new pharmaceutical drug. He files a suit for infringement against Ms. Neena, alleging that she has used his patented drug in her research. Under the provisions of the Patents Act, which of the following statements is NOT correct?`,
-[
-`Ms. Neena can take the defence that her usage is protected as it was for experiment or research`,
-`Every ground for revocation of a patent is also available as a defence in a suit for infringement`,
-`Commercial activities by third parties, without consent, are grounds for infringement`,
-`Acts done for research or instruction purposes always amount to patent infringement`
-], "d"),
-
-Q(`A patent for an innovative solar-powered water purifier was jointly granted to Dr. Rhea and Mr. Aarav. After a year, Dr. Rhea wanted to grant a license to EcoBlue Pvt. Ltd. to commercialize the invention. Mr. Aarav refused to consent and declined to sign the agreement even after multiple written requests. In the above situation, what is the correct legal course of action available to Dr. Rhea?`,
-[
-`She may unilaterally grant a licence to EcoBlue Pvt. Ltd. because, under Section 50(2), each co-owner may exercise rights under the patent for his own benefit`,
-`She can apply to the Controller, who may issue directions regarding the grant of a licence under Section 51(1), after giving both co-owners an opportunity to be heard`,
-`She may transfer (assign) her undivided share in the patent to EcoBlue Pvt. Ltd. without Mr. Aarav's consent, since each co-owner's share is distinct`,
-`The Controller may direct that only Dr. Rhea has exclusive rights to use the patent`
-], "b"),
-
-Q(`A patent application titled "Coir Pith-Based Car Air Freshener Gel" was filed on 02/07/2024 in India wherein the specific ratios of the constituent components were claimed. Before filing, on 13/01/2024, the applicant posted a LinkedIn post stating "Cocoaura base has been made out of coco pith, making the freshener an excellent choice for places where children spend time." Which of the following is correct?`,
-[
-`The applicant can claim grace period relief under section 31(d)`,
-`Since the LinkedIn post was general in nature and lacked technical details it does not anticipate the claimed invention`,
-`Any disclosure made by the inventor on social media or in newspapers within 12 months prior to filing is automatically protected`,
-`Social media posts are not considered as public disclosure within the meaning of prior art for anticipation under section 13`
-], "b"),
-
-Q(`Co-Applicants (1) Dr. Aruna of Lakshadweep Islands, and (2) Dr. Bhairavi of Dadra & Nagar Haveli, wish to file an Indian patent application for a skin treatment regime under the Act. Which Patent Office shall have the jurisdiction to receive the application?`,
-[
-`Kolkata Patent Office`,
-`Mumbai Patent Office`,
-`Chennai Patent Office`,
-`Delhi Patent Office`
-], "c"),
-
-Q(`With regard to Standard Essential Patents (SEPs), which of the following is/are correct?
-
-I. SEPs are patents which may be essential while implementing a Standard.
-
-II. SEPs are relevant only for the telecom sector.
-
-III. Patent holders propose SEPs and Patent Office lists them, but the "essential" status is ultimately proven in practice.
-
-IV. Once a technology standard is adopted, SEP owners generally become liable to license their SEPs to implementers under FRAND terms.
-
-V. FRAND terms are intended to create restrictive market conditions for SEP owners and inhibit innovation within industries relying on standardized technologies.`,
-[
-`I and III`,
-`Only I, II and III`,
-`Only I and IV`,
-`All of the above`
-], "c"),
-
-Q(`As per the definition of "proprietor of a new or original design", who amongst the following may be considered as the proprietor:
-
-I. Author of an original design.
-
-II. A person who gets the design executed (for some consideration) by the author of the design.
-
-III. Any person who acquires the right to apply the design to any article.
-
-IV. Any other person to whom the right to apply the design has devolved from the original proprietor.`,
-[
-`I and II`,
-`I and III`,
-`I, II and III`,
-`All of the above`
-], "d"),
-
-Q(`Ms. Heena physically filed an international patent application under the PCT with the Indian Patent Office as the Receiving Office (RO/IN). Which of the following combinations of fees is applicable?`,
-[
-`International filing fee, search fee and preliminary examination fee`,
-`National fee, international filing fee and search fee`,
-`International filing fee, search fee and transmittal fee`,
-`Transmittal fee, national fee and designation fee`
-], "c"),
-
-Q(`Under the Jan Vishwas (Amendment of Provisions) Act, 2023, amendments were introduced to provisions governing compliance obligations and penalties under the Patents Act, 1970, including information furnished under Section 146(2). Which of the following statements most accurately reflects the legal and policy effect of these changes?`,
-[
-`Failure to furnish information under Section 146(2) is a criminal offence punishable with imprisonment, as it directly affects public disclosure obligations`,
-`The amendment decriminalizes such failure, replacing imprisonment with a monetary penalty`,
-`The amendment eliminates all penalties for non-filing of working statements, thereby removing the Controller's power to call for such information`,
-`The amendment introduces criminal prosecution only when public interest is affected, maintaining imprisonment as an optional penalty in exceptional cases`
-], "b"),
-
-Q(`Which of the following is/are true in respect of registration of design of a particular article under the Designs Act:
-
-I. It is not possible to register the same design in multiple classes of articles.
-
-II. When a design is to be applied to a set, any doubt whether the given articles do or do not constitute a set shall be determined by the proprietor of the design.
-
-III. Reports to the Controller made under the Designs Act shall not be open to public inspection.
-
-IV. Registered designs shall be open to public inspection immediately after the grant and even before the notification of the said design in the official journal.`,
-[
-`I and III`,
-`II and III`,
-`III only`,
-`II and IV only`
-], "c"),
-
-Q(`Consider the following statements regarding the Patents Act, 1970:
-
-1. The Central Government may, by notification in the Official Gazette, make rules for carrying out the purposes of the Act.
-
-2. Every rule shall be laid before both Houses of Parliament, which may modify or annul such rule.
-
-3. The power under Section 159 enables the Central Government to make rules even with retrospective effect, provided it serves the objects of the Act.
-
-4. The power under Section 159 enables the Central Government to make rules regarding the conduct and procedure in respect of all proceedings before the High Court.
-
-Which of the above statements are correct?`,
-[
-`1 and 2 only`,
-`1, 2, and 3 only`,
-`2 and 4 only`,
-`All of the above`
-], "a"),
-
-Q(`Dr. Meera, a scientist, developed a novel drug compound while working for BioGen Labs Ltd. Before the patent application was filed, Dr. Meera passed away, and her legal heir, Arya, filed an application alone on the same drug, describing herself as the true inventor. Subsequently, BioGen Labs Ltd. also filed a separate application claiming ownership of the same drug based on the employment contract of Dr. Meera having an IPR clause which automatically passes the IPR rights for work during the employment to the employer. Which of the following statements is correct?`,
-[
-`Only Arya, as legal heir of the true inventor, is entitled to apply for the patent`,
-`Only BioGen Labs Ltd. is entitled to apply`,
-`Both Arya and BioGen Labs Ltd. must jointly apply, since rights devolve on the employer and legal heir together`,
-`Neither application is valid until the Controller determines entitlement under Section 6`
-], "b"),
-
-Q(`Under Section 2(a) of the Designs Act, 2000, which of the following would qualify as an "article" for the purpose of registration of a design?
-
-I. A car door handle manufactured separately and sold as a spare part.
-
-II. A built-in dashboard of a car that cannot be removed.
-
-III. A sculpture carved from natural stone without any modification.
-
-IV. A bottle cap produced through an industrial process and sold independently.`,
-[
-`I and II`,
-`II and III`,
-`I and IV`,
-`III and IV`
-], "c"),
-
-Q(`An application 'A' filed as a patent of addition of the main application 'B'. A first examination report for the application 'A' is issued on 01/01/2024. The status of main application 'B' is granted and a revocation suit is filed in the High Court of Delhi. The applicant now comes to you with a dilemma about when to file the reply to FER under section 21 of the Patents Act. Advice the applicant by choosing the correct alternative available to him:`,
-[
-`The timeline to file FER-reply under section 21(1) is six months, extendable up to another three months. This timeline is fixed and not extendable`,
-`The applicant may file a petition before the Controller explaining the case related to the main patent and request for further extension, based on which the Controller may extend the timeline`,
-`In this case, based on the application of the applicant before the expiration of period under section 21(1), the Hon'ble High Court shall determine the extended timeline`,
-`In the above scenario, the timeline to file FER-Reply for application 'A' is six months from the date of FER or six months from the disposal of the case related to main application 'B' in High Court, whichever is later`
-], "c"),
-
-Q(`As an inventor from a research organisation, while looking for a patent agent, you discover that Mr. Sunil is offering patent-related services and representing himself as a patent agent. Upon verification, you found that his name does not appear in the Register of Patent Agents and Mr. Sunil is not a registered patent agent. You decide to file a formal complaint. Under the recent amendments to the Patent Rules, which of the following statements is correct?`,
-[
-`A complaint against an unregistered person falsely claiming to be a patent agent can be filed with Form 32 through electronic or physical means, only by a person aggrieved`,
-`A complaint against an unregistered person falsely claiming to be a patent agent can be filed directly with Form 33, in physical or electronic form, only by a person aggrieved`,
-`A complaint against an unregistered person falsely claiming to be a patent agent can be filed directly with Form 32, through electronic means, by any person`,
-`A complaint against an unregistered person falsely claiming to be a patent agent can be filed directly with Form 33, in physical or electronic form, by any person`
-], "c"),
-
-Q(`In the context of Patents, which of the following best describes the objective of a defensive publication?
-
-I. To delay disclosure of the invention until the commercial launch of the product.
-
-II. To put a disclosure in the public domain to block future patent grants in similar technology.
-
-III. To obtain a limited-time monopoly on the invention without a full patent filing and prosecution.
-
-IV. An alternative to filing a patent application to prevent any charge of infringement in future by others.`,
-[
-`I and II`,
-`II and III`,
-`II and IV`,
-`I and IV`
-], "c"),
-
-S("Part B1 — Assertion & Reasoning (1 mark each)", 1),
-
-Q(`Assertion (A): Publication of patents and design applications serves the same purpose — to place all applications before the public for opposition.
-
-Reasoning (R): Patent and design applications are subject to automatic publication after a fixed statutory period from the filing date, unless secrecy directions or deferment.`,
-[
-`When both (A) and (R) are true, and (R) is a correct explanation of (A)`,
-`When both (A) and (R) are true, but (R) is NOT a correct explanation of (A)`,
-`When (A) is true but (R) is false`,
-`When (A) is false but (R) is true`
-], "c"),
-
-Q(`Assertion (A): A design applied to more than 50 articles loses copyright.
-
-Reasoning (R): Industrial application transforms the artistic work into a "design" within the Designs Act, 2000.`,
-[
-`When both (A) and (R) are true, and (R) is a correct explanation of (A)`,
-`When both (A) and (R) are true, but (R) is NOT a correct explanation of (A)`,
-`When (A) is true but (R) is false`,
-`When (A) is false but (R) is true`
-], "a"),
-
-Q(`Assertion (A): The WIPO Treaty on Intellectual Property, Genetic Resources, and Associated Traditional Knowledge (2024) obliges states to incorporate benefit-sharing and disclosure requirements into their national IP systems.
-
-Reasoning (R): Indigenous and local communities must have their rights over genetic resources and associated traditional knowledge recognized to prevent misappropriation and ensure equitable sharing of benefits arising from their use.`,
-[
-`When both (A) and (R) are true, and (R) is a correct explanation of (A)`,
-`When both (A) and (R) are true, but (R) is NOT a correct explanation of (A)`,
-`When (A) is true but (R) is false`,
-`When (A) is false but (R) is true`
-], "a"),
-
-Q(`Assertion (A): Under Section 18 of the Designs Act, 2000, any person may request the Controller to cause a search to ascertain whether a particular design has been previously registered in India.
-
-Reasoning (R): On request, under Rule 28 of the Designs Rules, 2001, the Controller shall furnish certified copies of the registered design and its representation if it is found to be registered.`,
-[
-`When both (A) and (R) are true, and (R) is a correct explanation of (A)`,
-`When both (A) and (R) are true, but (R) is NOT a correct explanation of (A)`,
-`When (A) is true but (R) is false`,
-`When (A) is false but (R) is true`
-], "c"),
-
-Q(`Assertion (A): A design that has been applied to an article and commercially exhibited in an industrial trade fair outside India before the filing date shall be refused registration in India under Section 4 of the Designs Act, 2000.
-
-Reasoning (R): Section 4 of the Designs Act, 2000 treats prior publication as a bar to registration only when such publication occurs in India and not when it occurs in a foreign country.`,
-[
-`When both (A) and (R) are true, and (R) is a correct explanation of (A)`,
-`When both (A) and (R) are true, but (R) is NOT a correct explanation of (A)`,
-`When (A) is true but (R) is false`,
-`When (A) is false but (R) is true`
-], "c"),
-
-S("Part B2 — True / False Statements (1 mark each)", 1),
-
-Q(`Statement I: Dependent claims generally narrow the scope of an independent claim by adding limitations or additional features.
-
-Statement II: If the independent claim is rejected for lack of novelty or inventive step, dependent claims offer backup protection by ensuring some aspects of the invention remain patentable.`,
-[
-`Statement I is True, and Statement II is False`,
-`Statement I is False, and Statement II is True`,
-`Both Statements I and II are True`,
-`Both Statements I and II are False`
-], "c"),
-
-Q(`Statement I: The Patent Office maintains a register of patents wherein the particulars of the patentee, assignments, licenses, amendments, revocation etc. are entered.
-
-Statement II: The Patent Register is a confidential document and not open for public inspection; only the 'interested persons' can obtain certified copies after paying suitable fees.`,
-[
-`Statement I is True, and Statement II is False`,
-`Statement I is False, and Statement II is True`,
-`Both Statements I and II are True`,
-`Both Statements I and II are False`
-], "a"),
-
-Q(`Statement I: An exclusive licensee of a patent is not eligible to challenge validity of the patent under section 64.
-
-Statement II: It would not be considered lawful for a patentee to insert a clause in the license agreement which restricts the rights of a licensee vis-à-vis patent validity.`,
-[
-`Statement I is True, and Statement II is False`,
-`Statement I is False, and Statement II is True`,
-`Both Statements I and II are True`,
-`Both Statements I and II are False`
-], "b"),
-
-Q(`Statement I: An international search is carried out by an international searching authority, which may either be a national office or an intergovernmental organization.
-
-Statement II: The international searching authority carrying out the international search in respect of an international application shall not be competent to carry out a supplementary international search in respect of that application.`,
-[
-`Statement I is True, and Statement II is False`,
-`Statement I is False, and Statement II is True`,
-`Both Statements I and II are True`,
-`Both Statements I and II are False`
-], "c"),
-
-Q(`Statement I: A dependent claim is found to be neither novel nor inventive in view of certain prior art. This will automatically mean that the independent claim, on which the dependent claim is based, is also not novel and not inventive.
-
-Statement II: A dependent claim may be novel and inventive even though the independent claim, on which the dependent claim is based, is found to be not novel and not inventive.`,
-[
-`Statement I is True, and Statement II is False`,
-`Statement I is False, and Statement II is True`,
-`Both Statements I and II are True`,
-`Both Statements I and II are False`
-], "c"),
-
-S("Part C1 — Multiple Choice (3 marks each)", 3),
-
-Q(`A patent application X for a pharmaceutical compound is filed in India. An identical compound is also found to be claimed in two different applications in US (D1) and in India (D2). However, both of these applications were filed before the filing date of X, but published after the filing date of X. When considering anticipation, which of the following is/are true?
-
-I. The US application (D1) destroys novelty of X, but the Indian application (D2) doesn't destroy the novelty.
-
-II. The compound is novel, since the disclosure in the US and Indian applications are not considered as valid.
-
-III. The US application is valid for novelty if it was filed by the same inventor.
-
-IV. The US application (D1) doesn't destroy novelty of X, but the Indian application (D2) does destroy the novelty.`,
-[
-`Only III is correct`,
-`Both II and III are correct`,
-`Only IV is correct`,
-`Both II and IV are correct`
-], "c"),
-
-Q(`In a patent application, claim 1 consists of features A, B, and C. Further, a dependent claim 2 (dependent on claim 1) consists of a feature D. Subsequently, another dependent claim 3 (dependent on claim 2) consists of feature E. You have a prior art D1 which discloses features A and B. Feature C is disclosed in document D2. Another document, D3, discloses features A, C, and E. Considering that all the prior arts D1–D3 are relevant to the concerned field of technology, choose the correct option(s):
-
-I. Documents D1 and D2 in combination destroy the inventive step of claim 1.
-
-II. Documents D1, D2 and D3 in combination destroy the inventive step of claim 3.
-
-III. Claim 2 and claim 3 are novel and inventive, while claim 1 is novel but not inventive in view of D1–D3.
-
-IV. Claims 2 and 3 cannot be considered inventive, as they are dependent on claim 1, which is not inventive in view of D1–D3.`,
-[
-`Statements I, II, and III are correct`,
-`Statements I, II and IV are correct`,
-`Statements II, III, and IV are correct`,
-`Statements I and III are correct`
-], "d"),
-
-Q(`Dr. Asha and Dr. Mehra are co-patentees of three related patents granted for different aspects of the same medical device technology. One patent has been exclusively licensed to MedEquip Pvt. Ltd., and another has been non-exclusively licensed to BioHealth Ltd. All parties are commercially exploiting the inventions in India. Dr. Mehra is also the sole patentee of a separate patent on a biodegradable packaging technology, which is not yet being commercially worked, but she is interested in licensing it. Which of the above statements are correct?
-
-I. Dr. Asha, Dr. Mehra, MedEquip Pvt. Ltd., and BioHealth Ltd. are each required to file Form-27 individually for their respective patents or licenses.
-
-II. Dr. Asha and Dr. Mehra can file a single consolidated Form-27 for all three related patents, since they are co-owners and the patents relate to the same technology.
-
-III. Both MedEquip Pvt. Ltd. and BioHealth Ltd. can file their own Form-27 separately from the patentees for the patents they are licensed to use.
-
-IV. The revised Form-27 now includes a provision requiring patentees or licensees to state whether the patent is available for licensing.
-
-V. Form-27 is required to be filed only once during the lifetime of the patent, irrespective of whether it continues to be worked or not.`,
-[
-`I, II, III and IV only`,
-`II, III, IV and V only`,
-`I, II and III only`,
-`All of the above`
-], "a"),
-
-Q(`Mr. Arjun is the patentee of Patent No. 123456 which relates to a new pharmaceutical composition. He requests surrender of his patent under Section 63 of the Act, which is duly published. One of the licensees, Ms. Meera, comes across this publication and feels that surrendering the patent would reduce her profits. In this situation, which of the following statements are correct under the Patents Act, 1970?
-
-I. Ms. Meera, being a person having an interest in the patent, may file a notice of opposition to the surrender within the prescribed period.
-
-II. The Controller must provide both Mr. Arjun and Ms. Meera an opportunity to be heard before deciding whether to accept the surrender.
-
-III. The patent stands automatically revoked upon Mr. Arjun's submission of the surrender notice.
-
-IV. The Controller may accept the patentee's request of surrender after hearing the patentee only.`,
-[
-`I and II only`,
-`II and III only`,
-`I and IV only`,
-`All of the above`
-], "a")
-
-/* NOTE: The source file was truncated during the next Part C1 question
-   ("With reference to sequence-listing fees..."). That incomplete question
-   has been intentionally omitted. */
-];
-
-/* ---------- render + score logic ---------- */
-const esc = (s) => String(s).replace(/[&<>"]/g, c => ({
-  "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;"
-}[c]));
-
-const questions = Y2026.filter(x => !x.s);
-let state = questions.map(() => ({ selected: new Set(), checked: false, correct: null }));
-
-let attempted = 0;
-let correctCount = 0;
-let wrongCount = 0;
-let totalMarks = 0;
-
-function answerSet(ans){
-  return new Set(ans.split(",").map(s => s.trim().charCodeAt(0) - 65));
-}
-function isMulti(ans){
-  return ans.includes(",");
-}
-function setsEqual(a, b){
-  if (a.size !== b.size) return false;
-  for (const x of a) if (!b.has(x)) return false;
-  return true;
-}
-
-function updateStats(){
-  document.getElementById("attempted").textContent = attempted;
-  document.getElementById("total").textContent = questions.length;
-  document.getElementById("correct").textContent = correctCount;
-  document.getElementById("wrong").textContent = wrongCount;
-  document.getElementById("marks").textContent = totalMarks;
-  const max = questions.reduce((sum, q) => sum + (q._marks || 0), 0);
-  document.getElementById("maxmarks").textContent = max;
-  const pct = questions.length ? (attempted / questions.length) * 100 : 0;
-  document.getElementById("bar").style.width = pct + "%";
-}
-
-function render(){
-  const quiz = document.getElementById("quiz");
-  quiz.innerHTML = "";
-
-  let qIndex = 0;
-  let currentMark = 0;
-
-  Y2026.forEach(item => {
-    if (item.s){
-      currentMark = item.m;
-      const h = document.createElement("h2");
-      h.className = "sechead";
-      h.textContent = item.s;
-      quiz.appendChild(h);
-      return;
+(function () {
+  "use strict";
+
+  /* =====================================================================
+     QUESTION DATA — 2026 paper
+     Each entry: { section, qtext, options: [{label, text}], correct: [indices] }
+     ===================================================================== */
+  var QUESTIONS = [
+    /* ----- Part A : Multiple Choice (2 marks) ----- */
+    {
+      section: "Part A — Multiple Choice (2 marks each)",
+      qtext: "Which of the following articles do not satisfy the conventional requirements to be regarded as a ‘set’ as per the definition of the Designs Act, 2000?",
+      options: [
+        { label: "a", text: "A teapot and a cup" },
+        { label: "b", text: "A table lamp and a sofa" },
+        { label: "c", text: "Two bottles and a jar" },
+        { label: "d", text: "A table with two chairs" }
+      ],
+      correct: [1],
+      reason: "Option (b) — a table lamp and a sofa — is correct. A set must consist of articles that are ordinarily used together and have a common design. A table lamp and a sofa are not ordinarily used together as a set."
+    },
+    {
+      section: "Part A — Multiple Choice (2 marks each)",
+      qtext: "Three patent applications were filed in India as per the following details:\n\nApplication Type | Filed on | Priority detail\nOrdinary Application | 01/01/2023 | Nil\nConvention Application | 01/01/2023 | claiming priority of a Japanese patent application dated 01/01/2022\nPCT-NP Application | 01/01/2023 with International filing date 01/06/2021 | claiming priority of a US patent application dated 01/06/2020\n\nStatement I: The patent term expires simultaneously (on the same date) for the above mentioned ordinary and convention applications.\nStatement II: The patent term of the PCT-NP application expires last.",
+      options: [
+        { label: "a", text: "Statement I is true and II is false" },
+        { label: "b", text: "Both Statements I and II are true" },
+        { label: "c", text: "Both Statements I and II are false" },
+        { label: "d", text: "Statement I is false and II is true" }
+      ],
+      correct: [0],
+      reason: "Option (a). The ordinary and convention applications were both filed on 01/01/2023, so their 20-year term ends on the same date. The PCT-NP application's term is calculated from the international filing date (01/06/2021), so it expires earlier, not last."
+    },
+    {
+      section: "Part A — Multiple Choice (2 marks each)",
+      qtext: "An Indian company, PenTech has a patent on its latest innovation roller point pens. A second company, PenSphere started producing and selling a similar pen. PenTech filed an infringement suit. The defendant claimed it was not aware of the patent. However, the Plaintiff argued that each of their products clearly bears the indication that it is a patented product through the use of the term \"Patented\". Under these circumstances what is possible under the Patents Act:\n\nI. Defendant shall be deemed to have been aware that the patent had existed as the products of the Plaintiff are identified as \"Patented\".\nII. Defendant shall not be deemed to have been aware that the patent had existed, even though the products of the Plaintiff are identified as \"Patented\".\nIII. The Defendant shall be held accountable and the court shall grant damages or an account of profit against the defendant.\nIV. The court shall not grant damages or an account of profit against the defendant unless the number of the patent accompanies the word \"Patented\".",
+      options: [
+        { label: "a", text: "Only I is correct" },
+        { label: "b", text: "Only II is correct" },
+        { label: "c", text: "I and III are correct" },
+        { label: "d", text: "II and IV are correct" }
+      ],
+      correct: [3],
+      reason: "Option (d) — II and IV are correct. Under Section 111, the marking must include the patent number along with the word 'Patented' to give notice. Mere use of 'Patented' without the number does not deem the defendant aware, and damages cannot be granted unless the number accompanies the word."
+    },
+    {
+      section: "Part A — Multiple Choice (2 marks each)",
+      qtext: "Considering the PCT timeline given below (in months), what are the correct values of A, B, C, D, E, F calculated from the 0th month?\n\nFile priority application (0) → File PCT international application (A) → International Search Report & Written Opinion (B) → International publication (C) → File demand for International Preliminary Examination (D) → International preliminary report on patentability (E) → Enter national phase (F).",
+      options: [
+        { label: "a", text: "A = 12, B = 15, C = 18, D = 21, E = 28, F = 30/31" },
+        { label: "b", text: "A = 12, B = 16, C = 18, D = 20, E = 25, F = 30/31" },
+        { label: "c", text: "A = 12, B = 14, C = 16, D = 24, E = 27, F = 30/31" },
+        { label: "d", text: "A = 12, B = 16, C = 18, D = 22, E = 28, F = 30/31" }
+      ],
+      correct: [3],
+      reason: "Option (d). PCT timeline: priority application at 0; PCT application within 12 months (A=12); ISR/WO within 16 months (B=16); international publication at 18 months (C=18); demand for IPE within 22 months (D=22); IPRP at 28 months (E=28); national phase entry at 30/31 months (F=30/31)."
+    },
+    {
+      section: "Part A — Multiple Choice (2 marks each)",
+      qtext: "Which of the following is/are true with respect to a patent of addition:\n\nI. A patent of addition application is a modification of the invention disclosed in the main application and can be filed only after the filing of the main application and not on the same date and granted only after the grant of the main application.\nII. A patent of addition application may not be refused on the ground only that the invention claimed does not involve an inventive step in view of the main application.\nIII. Only one patent of addition application is allowable on one main invention application.\nIV. The applicant/patentee must be the same for both the main application and the patent of addition.",
+      options: [
+        { label: "a", text: "I and II" },
+        { label: "b", text: "II and III" },
+        { label: "c", text: "III and IV" },
+        { label: "d", text: "II and IV" }
+      ],
+      correct: [3],
+      reason: "Option (d) — II and IV are true. A patent of addition need not involve an inventive step over the main invention (II is true), and the applicant/patentee must be the same (IV is true). I is false because a patent of addition can be filed on the same date as the main application. III is false because more than one patent of addition is permissible."
+    },
+    {
+      section: "Part A — Multiple Choice (2 marks each)",
+      qtext: "The Indian Patent Office has recently updated the Roll of Scientific Advisors. Which of the following is NOT true about the scientific advisors as per the Patents Act?\n\nI. A scientific advisor may assist the court in an infringement matter.\nII. A scientific advisor may help the court in the interpretation of the law.\nIII. A scientific advisor may inquire and report on a technical matter related to patent in question.\nIV. A scientific advisor may assist patent controller in deciding an opposition matter.",
+      options: [
+        { label: "a", text: "IV only" },
+        { label: "b", text: "I and III only" },
+        { label: "c", text: "II and IV only" },
+        { label: "d", text: "I, II and III" }
+      ],
+      correct: [2],
+      reason: "Option (c) — II and IV are NOT true. A scientific advisor assists the court on technical matters, not on interpretation of law (II is false). The Act does not provide for scientific advisors to assist the Controller in opposition matters (IV is false)."
+    },
+    {
+      section: "Part A — Multiple Choice (2 marks each)",
+      qtext: "Which combination is correct with regard to post dating provision under Section 17(1) of the Patents Act?\n\nI. It requires applicant request with fee.\nII. It can be ordered suo-motu by the Controller.\nIII. An application can be post-dated to a maximum period of 6 months under this provision.\nIV. It is available only before grant.",
+      options: [
+        { label: "a", text: "I, II and III" },
+        { label: "b", text: "I, III and IV" },
+        { label: "c", text: "II, III and IV" },
+        { label: "d", text: "I, II, III and IV" }
+      ],
+      correct: [1],
+      reason: "Option (b) — I, III and IV are correct. Post-dating requires an applicant request with fee (I), can extend up to 6 months (III), and is available only before grant (IV). It cannot be ordered suo-motu by the Controller (II is false)."
+    },
+    {
+      section: "Part A — Multiple Choice (2 marks each)",
+      qtext: "Which of the following is not open to the public or published?\n\nI. The information received by the controller (on demand) as to the extent to which the patented invention has been commercially worked in India.\nII. The examination report of the examiner made to the controller.\nIII. The offer to surrender a patent by the patentee.\nIV. An application for a compulsory license under section 84, which the controller prima facie finds eligible.",
+      options: [
+        { label: "a", text: "II and IV only" },
+        { label: "b", text: "I and IV only" },
+        { label: "c", text: "II and III only" },
+        { label: "d", text: "II only" }
+      ],
+      correct: [3],
+      reason: "Option (d) — II only. The examination report of the examiner made to the Controller is not open to the public. The other items (working information, surrender offer, compulsory licence application) are published or open to public inspection."
+    },
+    {
+      section: "Part A — Multiple Choice (2 marks each)",
+      qtext: "An inventor filed the following applications for an improved water bottle with a seal mechanism to prevent spillage:\n\n1. A conventional application C1 was filed in Japan on 15/02/2024, claiming a bottle design with basic sealing feature A.\n2. A second conventional application C2 was filed in Japan on 15/06/2024, claiming the bottle design with an advanced self-locking sealing mechanism B.\n3. A complete specification was filed in India on 14/02/2025 claiming priority from both the previous applications claiming \"Bottle with basic sealing feature A, and characterized by advanced self-locking sealing mechanism B\".\n\nIn this context, what would be the priority date for the above claim?",
+      options: [
+        { label: "a", text: "15/02/2024" },
+        { label: "b", text: "15/06/2024" },
+        { label: "c", text: "14/02/2025" },
+        { label: "d", text: "None of them" }
+      ],
+      correct: [1],
+      reason: "Option (b) — 15/06/2024. The claim combines features A and B. Since feature B was first disclosed in C2 (15/06/2024), the priority date for the combined claim is the date of the later application that first disclosed all claimed features."
+    },
+    {
+      section: "Part A — Multiple Choice (2 marks each)",
+      qtext: "Dr. Neha is the patentee of a special 3D printing process used to manufacture customized medical implants. She is willing to license the technology to MedShape Pvt. Ltd. with following conditions:\n\n1. MedShape must purchase all raw materials only from Dr. Neha's company.\n2. MedShape shall not use any other 3D printing process for making implants.\n3. MedShape shall not challenge the validity of Dr. Neha's patent in any court.\n\nWhich of the following statements is/are correct according to the Patents Act, 1970?",
+      options: [
+        { label: "a", text: "Such conditions are valid if they are approved by the Controller before execution of the licence" },
+        { label: "b", text: "Only condition (3) is invalid, while the others can be enforced under patent rights" },
+        { label: "c", text: "All the above conditions are void as they are restrictive and unlawful" },
+        { label: "d", text: "Only condition (1) is void because it restricts the licensee's right to buy materials from others; the rest are valid" }
+      ],
+      correct: [2],
+      reason: "Option (c). All three conditions are restrictive and void under Section 140 of the Patents Act, which prohibits conditions that restrict the licensee from using articles other than those supplied by the licensor, prohibit challenges to validity, or restrict the use of the patented process."
+    },
+    {
+      section: "Part A — Multiple Choice (2 marks each)",
+      qtext: "An architectural startup wishes to record an assignment in respect of two different registered designs (Design No. D-100 and Design No. D-101) in the Register of Designs under the Designs Act, 2000. They use the prescribed Form 10. What is the official government fee they must pay to the Office of the Controller of Designs?",
+      options: [
+        { label: "a", text: "X for the first design + Y for the second design, where X = Y" },
+        { label: "b", text: "X for the first design + Y for the second design, where Y < X" },
+        { label: "c", text: "X for the first design + Y for the second design, where Y > X" },
+        { label: "d", text: "They both can be bulk filed with only one fee X, when filed together in the same class" }
+      ],
+      correct: [1],
+      reason: "Option (b). The fee for the first design is X and for the second (additional) design is Y, where Y < X. Additional designs in the same application/assignment attract a reduced fee."
+    },
+    {
+      section: "Part A — Multiple Choice (2 marks each)",
+      qtext: "Mr. Sukumar has invented a water bottle, which looks very unique and aesthetic compared to the available water bottles in the market and has a cap which works on a specially designed seal to prevent leakage. He has labelled the bottle 'AquaZen' and is looking forward to launch his product in the market. What type of IP protection(s) may be relevant in this case?\n\n1. Patent 2. Design 3. Trade Mark 4. GI",
+      options: [
+        { label: "a", text: "1 and 2 both" },
+        { label: "b", text: "1 and 3 only" },
+        { label: "c", text: "1, 2 and 3 only" },
+        { label: "d", text: "3 and 4 both" }
+      ],
+      correct: [2],
+      reason: "Option (c) — 1, 2 and 3. The sealing mechanism is patentable (1), the unique aesthetic appearance is registrable as a design (2), and the label 'AquaZen' can be a trade mark (3). GI (4) is not relevant as it is not a geographical indication."
+    },
+    {
+      section: "Part A — Multiple Choice (2 marks each)",
+      qtext: "As per the definition of \"new invention\" under section 2(1)(l) of the Act, the test of anticipation is carried out based on:",
+      options: [
+        { label: "a", text: "Non-publication and non-use of the invention before the date of filing of the application anywhere in India or elsewhere in the world" },
+        { label: "b", text: "Non-publication of the invention before the date of filing of the application anywhere in the world and non-use in India only" },
+        { label: "c", text: "Non-publication of the invention before the date of filing of the application anywhere in India and non-use elsewhere in the world" },
+        { label: "d", text: "Non-publication and non-use of the invention before the date of filing of the application anywhere in India" }
+      ],
+      correct: [0],
+      reason: "Option (a). Section 2(1)(l) defines a new invention as one that has not been anticipated by publication in any document or used in the country or elsewhere in the world before the date of filing. The test is global for both publication and use."
+    },
+    {
+      section: "Part A — Multiple Choice (2 marks each)",
+      qtext: "A PCT application is filed directly in India by an Indian applicant. In the context of section 39 of the Act, does the applicant need to seek permission?",
+      options: [
+        { label: "a", text: "No, the permission is not required as the PCT application is filed in India" },
+        { label: "b", text: "Yes, the permission is still required as it's considered an application filed outside India" },
+        { label: "c", text: "No, this requirement is only for PCT applications filed outside India" },
+        { label: "d", text: "Yes, permission is required for all resident and non-resident Indians" }
+      ],
+      correct: [0],
+      reason: "Option (a). Section 39 requires permission only when a resident Indian files an application outside India. If the PCT application is filed directly in India (RO/IN), no permission is required."
+    },
+    {
+      section: "Part A — Multiple Choice (2 marks each)",
+      qtext: "Recently, the Government of India amended Section 4 of the Patents Act, 1970 from \"No patent shall be granted in respect of an invention relating to atomic energy falling within __________ of the __________\" to \"The patents may be granted for inventions relating to nuclear energy subject to the provisions of this Act and of the __________\".\n\nWhich of the following is the correct option for the fill in the blanks?",
+      options: [
+        { label: "a", text: "Sub-section (1) of section 21, Atomic Energy Act, 1962 (33 of 1962); section 39, Sustainable Harnessing and Advancement of Nuclear Energy for Transforming India Act, 2025" },
+        { label: "b", text: "Sub-section (1) of section 20, Atomic Energy Act, 1961 (33 of 1961); section 38, Sustainable Harnessing and Advancement of Nuclear Energy for Transforming India Act, 2025" },
+        { label: "c", text: "Sub-section (1) of section 20, Atomic Energy Act, 1962 (33 of 1962); section 38, Sustainable Harnessing and Advancement of Nuclear Energy for Transforming India Act, 2025" },
+        { label: "d", text: "Sub-section (1) of section 21, Atomic Energy Act, 1961 (33 of 1961); section 38, Sustainable Harnessing and Advancement of Nuclear Energy for Transforming India Act, 2025" }
+      ],
+      correct: [2],
+      reason: "Option (c). The correct references are sub-section (1) of section 20 of the Atomic Energy Act, 1962 (33 of 1962), and section 38 of the Sustainable Harnessing and Advancement of Nuclear Energy for Transforming India Act, 2025."
+    },
+    {
+      section: "Part A — Multiple Choice (2 marks each)",
+      qtext: "Mr. Arun is the patentee of Patent No. 123456 relating to a new pharmaceutical drug. He files a suit for infringement against Ms. Neena, alleging that she has used his patented drug in her research. Under the provisions of the Patents Act, which of the following statements is NOT correct?",
+      options: [
+        { label: "a", text: "Ms. Neena can take the defence that her usage is protected as it was for experiment or research" },
+        { label: "b", text: "Every ground for revocation of a patent is also available as a defence in a suit for infringement" },
+        { label: "c", text: "Commercial activities by third parties, without consent, are grounds for infringement" },
+        { label: "d", text: "Acts done for research or instruction purposes always amount to patent infringement" }
+      ],
+      correct: [3],
+      reason: "Option (d) is NOT correct. Acts done for research or instruction purposes are exempt under Section 47(3) and do not amount to infringement. The other statements are correct."
+    },
+    {
+      section: "Part A — Multiple Choice (2 marks each)",
+      qtext: "A patent for an innovative solar-powered water purifier was jointly granted to Dr. Rhea and Mr. Aarav. After a year, Dr. Rhea wanted to grant a license to EcoBlue Pvt. Ltd. to commercialize the invention. Mr. Aarav refused to consent and declined to sign the agreement even after multiple written requests. In the above situation, what is the correct legal course of action available to Dr. Rhea?",
+      options: [
+        { label: "a", text: "She may unilaterally grant a licence to EcoBlue Pvt. Ltd. because, under Section 50(2), each co-owner may exercise rights under the patent for his own benefit" },
+        { label: "b", text: "She can apply to the Controller, who may issue directions regarding the grant of a licence under Section 51(1), after giving both co-owners an opportunity to be heard" },
+        { label: "c", text: "She may transfer (assign) her undivided share in the patent to EcoBlue Pvt. Ltd. without Mr. Aarav's consent, since each co-owner's share is distinct" },
+        { label: "d", text: "The Controller may direct that only Dr. Rhea has exclusive rights to use the patent" }
+      ],
+      correct: [1],
+      reason: "Option (b). Under Section 51(1), a co-owner may apply to the Controller for directions when another co-owner refuses to grant a licence. The Controller may issue directions after hearing both parties."
+    },
+    {
+      section: "Part A — Multiple Choice (2 marks each)",
+      qtext: "A patent application titled \"Coir Pith-Based Car Air Freshener Gel\" was filed on 02/07/2024 in India wherein the specific ratios of the constituent components were claimed. Before filing, on 13/01/2024, the applicant posted a LinkedIn post stating \"Cocoaura base has been made out of coco pith, making the freshener an excellent choice for places where children spend time.\" Which of the following is correct?",
+      options: [
+        { label: "a", text: "The applicant can claim grace period relief under section 31(d)" },
+        { label: "b", text: "Since the LinkedIn post was general in nature and lacked technical details it does not anticipate the claimed invention" },
+        { label: "c", text: "Any disclosure made by the inventor on social media or in newspapers within 12 months prior to filing is automatically protected" },
+        { label: "d", text: "Social media posts are not considered as public disclosure within the meaning of prior art for anticipation under section 13" }
+      ],
+      correct: [1],
+      reason: "Option (b). The LinkedIn post was general and did not disclose the specific ratios claimed, so it does not anticipate the invention. Grace period under section 31 is available only for specific disclosures (government, exhibitions, etc.), not general social media posts."
+    },
+    {
+      section: "Part A — Multiple Choice (2 marks each)",
+      qtext: "Co-Applicants (1) Dr. Aruna of Lakshadweep Islands, and (2) Dr. Bhairavi of Dadra & Nagar Haveli, wish to file an Indian patent application for a skin treatment regime under the Act. Which Patent Office shall have the jurisdiction to receive the application?",
+      options: [
+        { label: "a", text: "Kolkata Patent Office" },
+        { label: "b", text: "Mumbai Patent Office" },
+        { label: "c", text: "Chennai Patent Office" },
+        { label: "d", text: "Delhi Patent Office" }
+      ],
+      correct: [2],
+      reason: "Option (c) — Chennai Patent Office. When there are joint applicants, jurisdiction is determined by the address of the first-named applicant. Lakshadweep falls under the jurisdiction of the Chennai Patent Office."
+    },
+    {
+      section: "Part A — Multiple Choice (2 marks each)",
+      qtext: "With regard to Standard Essential Patents (SEPs), which of the following is/are correct?\n\nI. SEPs are patents which may be essential while implementing a Standard.\nII. SEPs are relevant only for the telecom sector.\nIII. Patent holders propose SEPs and Patent Office lists them, but the \"essential\" status is ultimately proven in practice.\nIV. Once a technology standard is adopted, SEP owners generally become liable to license their SEPs to implementers under FRAND terms.\nV. FRAND terms are intended to create restrictive market conditions for SEP owners and inhibit innovation within industries relying on standardized technologies.",
+      options: [
+        { label: "a", text: "I and III" },
+        { label: "b", text: "Only I, II and III" },
+        { label: "c", text: "Only I and IV" },
+        { label: "d", text: "All of the above" }
+      ],
+      correct: [2],
+      reason: "Option (c) — I and IV are correct. SEPs are patents essential to implementing a standard (I), and SEP owners are generally obliged to license under FRAND terms (IV). II is false (SEPs span many sectors), III is false (patent offices do not list SEPs; status is determined by SSOs and courts), V is false (FRAND promotes innovation, not restricts it)."
+    },
+    {
+      section: "Part A — Multiple Choice (2 marks each)",
+      qtext: "As per the definition of \"proprietor of a new or original design\", who amongst the following may be considered as the proprietor:\n\nI. Author of an original design.\nII. A person who gets the design executed (for some consideration) by the author of the design.\nIII. Any person who acquires the right to apply the design to any article.\nIV. Any other person to whom the right to apply the design has devolved from the original proprietor.",
+      options: [
+        { label: "a", text: "I and II" },
+        { label: "b", text: "I and III" },
+        { label: "c", text: "I, II and III" },
+        { label: "d", text: "All of the above" }
+      ],
+      correct: [3],
+      reason: "Option (d) — All of the above. Section 2(d) defines proprietor broadly to include the author, the person who commissions the design, any person acquiring the right to apply the design, and any successor in title."
+    },
+    {
+      section: "Part A — Multiple Choice (2 marks each)",
+      qtext: "Ms. Heena physically filed an international patent application under the PCT with the Indian Patent Office as the Receiving Office (RO/IN). Which of the following combinations of fees is applicable?",
+      options: [
+        { label: "a", text: "International filing fee, search fee and preliminary examination fee" },
+        { label: "b", text: "National fee, international filing fee and search fee" },
+        { label: "c", text: "International filing fee, search fee and transmittal fee" },
+        { label: "d", text: "Transmittal fee, national fee and designation fee" }
+      ],
+      correct: [2],
+      reason: "Option (c). When filing a PCT application with RO/IN, the applicable fees are the transmittal fee, the international filing fee, and the search fee. The preliminary examination fee is separate and only applies if a demand is filed."
+    },
+    {
+      section: "Part A — Multiple Choice (2 marks each)",
+      qtext: "Under the Jan Vishwas (Amendment of Provisions) Act, 2023, amendments were introduced to provisions governing compliance obligations and penalties under the Patents Act, 1970, including information furnished under Section 146(2). Which of the following statements most accurately reflects the legal and policy effect of these changes?",
+      options: [
+        { label: "a", text: "Failure to furnish information under Section 146(2) is a criminal offence punishable with imprisonment, as it directly affects public disclosure obligations" },
+        { label: "b", text: "The amendment decriminalizes such failure, replacing imprisonment with a monetary penalty" },
+        { label: "c", text: "The amendment eliminates all penalties for non-filing of working statements, thereby removing the Controller's power to call for such information" },
+        { label: "d", text: "The amendment introduces criminal prosecution only when public interest is affected, maintaining imprisonment as an optional penalty in exceptional cases" }
+      ],
+      correct: [1],
+      reason: "Option (b). The Jan Vishwas Act, 2023 decriminalized several minor offences under the Patents Act, including failure to furnish information under Section 146(2), replacing imprisonment with monetary penalties."
+    },
+    {
+      section: "Part A — Multiple Choice (2 marks each)",
+      qtext: "Which of the following is/are true in respect of registration of design of a particular article under the Designs Act:\n\nI. It is not possible to register the same design in multiple classes of articles.\nII. When a design is to be applied to a set, any doubt whether the given articles do or do not constitute a set shall be determined by the proprietor of the design.\nIII. Reports to the Controller made under the Designs Act shall not be open to public inspection.\nIV. Registered designs shall be open to public inspection immediately after the grant and even before the notification of the said design in the official journal.",
+      options: [
+        { label: "a", text: "I and III" },
+        { label: "b", text: "II and III" },
+        { label: "c", text: "III only" },
+        { label: "d", text: "II and IV only" }
+      ],
+      correct: [2],
+      reason: "Option (c) — III only. Reports to the Controller are not open to public inspection. I is false (same design can be registered in multiple classes), II is false (the Controller determines whether articles constitute a set), IV is false (inspection is only after notification in the journal)."
+    },
+    {
+      section: "Part A — Multiple Choice (2 marks each)",
+      qtext: "Consider the following statements regarding the Patents Act, 1970:\n\n1. The Central Government may, by notification in the Official Gazette, make rules for carrying out the purposes of the Act.\n2. Every rule shall be laid before both Houses of Parliament, which may modify or annul such rule.\n3. The power under Section 159 enables the Central Government to make rules even with retrospective effect, provided it serves the objects of the Act.\n4. The power under Section 159 enables the Central Government to make rules regarding the conduct and procedure in respect of all proceedings before the High Court.\n\nWhich of the above statements are correct?",
+      options: [
+        { label: "a", text: "1 and 2 only" },
+        { label: "b", text: "1, 2, and 3 only" },
+        { label: "c", text: "2 and 4 only" },
+        { label: "d", text: "All of the above" }
+      ],
+      correct: [0],
+      reason: "Option (a) — 1 and 2 only. Section 159 empowers the Central Government to make rules (1), and rules are laid before Parliament (2). Rules cannot be made with retrospective effect (3 is false), and rules cannot govern High Court procedure (4 is false)."
+    },
+    {
+      section: "Part A — Multiple Choice (2 marks each)",
+      qtext: "Dr. Meera, a scientist, developed a novel drug compound while working for BioGen Labs Ltd. Before the patent application was filed, Dr. Meera passed away, and her legal heir, Arya, filed an application alone on the same drug, describing herself as the true inventor. Subsequently, BioGen Labs Ltd. also filed a separate application claiming ownership of the same drug based on the employment contract of Dr. Meera having an IPR clause which automatically passes the IPR rights for work during the employment to the employer. Which of the following statements is correct?",
+      options: [
+        { label: "a", text: "Only Arya, as legal heir of the true inventor, is entitled to apply for the patent" },
+        { label: "b", text: "Only BioGen Labs Ltd. is entitled to apply" },
+        { label: "c", text: "Both Arya and BioGen Labs Ltd. must jointly apply, since rights devolve on the employer and legal heir together" },
+        { label: "d", text: "Neither application is valid until the Controller determines entitlement under Section 6" }
+      ],
+      correct: [1],
+      reason: "Option (b). Under the employment contract with an IPR clause, the rights to the invention belong to the employer, BioGen Labs Ltd. Arya, as legal heir, does not have rights to the invention because Dr. Meera had already assigned them to the employer."
+    },
+    {
+      section: "Part A — Multiple Choice (2 marks each)",
+      qtext: "Under Section 2(a) of the Designs Act, 2000, which of the following would qualify as an \"article\" for the purpose of registration of a design?\n\nI. A car door handle manufactured separately and sold as a spare part.\nII. A built-in dashboard of a car that cannot be removed.\nIII. A sculpture carved from natural stone without any modification.\nIV. A bottle cap produced through an industrial process and sold independently.",
+      options: [
+        { label: "a", text: "I and II" },
+        { label: "b", text: "II and III" },
+        { label: "c", text: "I and IV" },
+        { label: "d", text: "III and IV" }
+      ],
+      correct: [2],
+      reason: "Option (c) — I and IV. A separately manufactured and sold car door handle (I) and an industrially produced bottle cap sold independently (IV) are 'articles'. A built-in dashboard that cannot be removed (II) is not a separate article, and a natural stone sculpture without industrial modification (III) is not an article under the Act."
+    },
+    {
+      section: "Part A — Multiple Choice (2 marks each)",
+      qtext: "An application 'A' filed as a patent of addition of the main application 'B'. A first examination report for the application 'A' is issued on 01/01/2024. The status of main application 'B' is granted and a revocation suit is filed in the High Court of Delhi. The applicant now comes to you with a dilemma about when to file the reply to FER under section 21 of the Patents Act. Advice the applicant by choosing the correct alternative available to him:",
+      options: [
+        { label: "a", text: "The timeline to file FER-reply under section 21(1) is six months, extendable up to another three months. This timeline is fixed and not extendable" },
+        { label: "b", text: "The applicant may file a petition before the Controller explaining the case related to the main patent and request for further extension, based on which the Controller may extend the timeline" },
+        { label: "c", text: "In this case, based on the application of the applicant before the expiration of period under section 21(1), the Hon'ble High Court shall determine the extended timeline" },
+        { label: "d", text: "In the above scenario, the timeline to file FER-Reply for application 'A' is six months from the date of FER or six months from the disposal of the case related to main application 'B' in High Court, whichever is later" }
+      ],
+      correct: [2],
+      reason: "Option (c). Under Section 21(1), the applicant can request an extension before the expiry of the period. In this case, since the main application 'B' is under revocation in the High Court, the High Court determines the extended timeline."
+    },
+    {
+      section: "Part A — Multiple Choice (2 marks each)",
+      qtext: "As an inventor from a research organisation, while looking for a patent agent, you discover that Mr. Sunil is offering patent-related services and representing himself as a patent agent. Upon verification, you found that his name does not appear in the Register of Patent Agents and Mr. Sunil is not a registered patent agent. You decide to file a formal complaint. Under the recent amendments to the Patent Rules, which of the following statements is correct?",
+      options: [
+        { label: "a", text: "A complaint against an unregistered person falsely claiming to be a patent agent can be filed with Form 32 through electronic or physical means, only by a person aggrieved" },
+        { label: "b", text: "A complaint against an unregistered person falsely claiming to be a patent agent can be filed directly with Form 33, in physical or electronic form, only by a person aggrieved" },
+        { label: "c", text: "A complaint against an unregistered person falsely claiming to be a patent agent can be filed directly with Form 32, through electronic means, by any person" },
+        { label: "d", text: "A complaint against an unregistered person falsely claiming to be a patent agent can be filed directly with Form 33, in physical or electronic form, by any person" }
+      ],
+      correct: [2],
+      reason: "Option (c). As per the amended Patent Rules, a complaint against a person falsely claiming to be a patent agent can be filed using Form 32 through electronic means by any person, not only an aggrieved person."
+    },
+    {
+      section: "Part A — Multiple Choice (2 marks each)",
+      qtext: "In the context of Patents, which of the following best describes the objective of a defensive publication?\n\nI. To delay disclosure of the invention until the commercial launch of the product.\nII. To put a disclosure in the public domain to block future patent grants in similar technology.\nIII. To obtain a limited-time monopoly on the invention without a full patent filing and prosecution.\nIV. An alternative to filing a patent application to prevent any charge of infringement in future by others.",
+      options: [
+        { label: "a", text: "I and II" },
+        { label: "b", text: "II and III" },
+        { label: "c", text: "II and IV" },
+        { label: "d", text: "I and IV" }
+      ],
+      correct: [2],
+      reason: "Option (c) — II and IV. A defensive publication puts the invention in the public domain to block future patent grants (II) and serves as an alternative to filing a patent application to prevent infringement charges by others (IV)."
+    },
+
+    /* ----- Part B1 : Assertion & Reasoning (1 mark) ----- */
+    {
+      section: "Part B1 — Assertion & Reasoning (1 mark each)",
+      qtext: "Assertion (A): Publication of patents and design applications serves the same purpose — to place all applications before the public for opposition.\n\nReasoning (R): Patent and design applications are subject to automatic publication after a fixed statutory period from the filing date, unless secrecy directions or deferment.",
+      options: [
+        { label: "a", text: "When both (A) and (R) are true, and (R) is a correct explanation of (A)" },
+        { label: "b", text: "When both (A) and (R) are true, but (R) is NOT a correct explanation of (A)" },
+        { label: "c", text: "When (A) is true but (R) is false" },
+        { label: "d", text: "When (A) is false but (R) is true" }
+      ],
+      correct: [2],
+      reason: "Option (c). Assertion (A) is false because publication of patents and design applications does not serve the same purpose — design applications are not published for opposition, only for public inspection after registration. Reasoning (R) is true for patents but not universally for designs."
+    },
+    {
+      section: "Part B1 — Assertion & Reasoning (1 mark each)",
+      qtext: "Assertion (A): A design applied to more than 50 articles loses copyright.\n\nReasoning (R): Industrial application transforms the artistic work into a \"design\" within the Designs Act, 2000.",
+      options: [
+        { label: "a", text: "When both (A) and (R) are true, and (R) is a correct explanation of (A)" },
+        { label: "b", text: "When both (A) and (R) are true, but (R) is NOT a correct explanation of (A)" },
+        { label: "c", text: "When (A) is true but (R) is false" },
+        { label: "d", text: "When (A) is false but (R) is true" }
+      ],
+      correct: [0],
+      reason: "Option (a). Both A and R are true, and R correctly explains A. Section 15(2) of the Copyright Act provides that copyright in a design ceases when it is applied to more than 50 articles by an industrial process, because it becomes a 'design' under the Designs Act."
+    },
+    {
+      section: "Part B1 — Assertion & Reasoning (1 mark each)",
+      qtext: "Assertion (A): The WIPO Treaty on Intellectual Property, Genetic Resources, and Associated Traditional Knowledge (2024) obliges states to incorporate benefit-sharing and disclosure requirements into their national IP systems.\n\nReasoning (R): Indigenous and local communities must have their rights over genetic resources and associated traditional knowledge recognized to prevent misappropriation and ensure equitable sharing of benefits arising from their use.",
+      options: [
+        { label: "a", text: "When both (A) and (R) are true, and (R) is a correct explanation of (A)" },
+        { label: "b", text: "When both (A) and (R) are true, but (R) is NOT a correct explanation of (A)" },
+        { label: "c", text: "When (A) is true but (R) is false" },
+        { label: "d", text: "When (A) is false but (R) is true" }
+      ],
+      correct: [0],
+      reason: "Option (a). Both A and R are true, and R correctly explains A. The WIPO Treaty aims to ensure benefit-sharing and disclosure, precisely to recognize the rights of indigenous and local communities and prevent misappropriation."
+    },
+    {
+      section: "Part B1 — Assertion & Reasoning (1 mark each)",
+      qtext: "Assertion (A): Under Section 18 of the Designs Act, 2000, any person may request the Controller to cause a search to ascertain whether a particular design has been previously registered in India.\n\nReasoning (R): On request, under Rule 28 of the Designs Rules, 2001, the Controller shall furnish certified copies of the registered design and its representation if it is found to be registered.",
+      options: [
+        { label: "a", text: "When both (A) and (R) are true, and (R) is a correct explanation of (A)" },
+        { label: "b", text: "When both (A) and (R) are true, but (R) is NOT a correct explanation of (A)" },
+        { label: "c", text: "When (A) is true but (R) is false" },
+        { label: "d", text: "When (A) is false but (R) is true" }
+      ],
+      correct: [2],
+      reason: "Option (c). Assertion (A) is true — Section 18 allows any person to request a search. Reasoning (R) is false — the rule about furnishing certified copies is not the explanation for the search request; it is a separate provision."
+    },
+    {
+      section: "Part B1 — Assertion & Reasoning (1 mark each)",
+      qtext: "Assertion (A): A design that has been applied to an article and commercially exhibited in an industrial trade fair outside India before the filing date shall be refused registration in India under Section 4 of the Designs Act, 2000.\n\nReasoning (R): Section 4 of the Designs Act, 2000 treats prior publication as a bar to registration only when such publication occurs in India and not when it occurs in a foreign country.",
+      options: [
+        { label: "a", text: "When both (A) and (R) are true, and (R) is a correct explanation of (A)" },
+        { label: "b", text: "When both (A) and (R) are true, but (R) is NOT a correct explanation of (A)" },
+        { label: "c", text: "When (A) is true but (R) is false" },
+        { label: "d", text: "When (A) is false but (R) is true" }
+      ],
+      correct: [2],
+      reason: "Option (c). Assertion (A) is true — exhibition in a trade fair outside India before filing can bar registration. Reasoning (R) is false — Section 4 bars registration for prior publication anywhere, not just in India."
+    },
+
+    /* ----- Part B2 : True / False (1 mark) ----- */
+    {
+      section: "Part B2 — True / False Statements (1 mark each)",
+      qtext: "Statement I: Dependent claims generally narrow the scope of an independent claim by adding limitations or additional features.\n\nStatement II: If the independent claim is rejected for lack of novelty or inventive step, dependent claims offer backup protection by ensuring some aspects of the invention remain patentable.",
+      options: [
+        { label: "a", text: "Statement I is True, and Statement II is False" },
+        { label: "b", text: "Statement I is False, and Statement II is True" },
+        { label: "c", text: "Both Statements I and II are True" },
+        { label: "d", text: "Both Statements I and II are False" }
+      ],
+      correct: [2],
+      reason: "Option (c). Both statements are true. Dependent claims add limitations (I) and provide fallback positions if the independent claim fails (II)."
+    },
+    {
+      section: "Part B2 — True / False Statements (1 mark each)",
+      qtext: "Statement I: The Patent Office maintains a register of patents wherein the particulars of the patentee, assignments, licenses, amendments, revocation etc. are entered.\n\nStatement II: The Patent Register is a confidential document and not open for public inspection; only the 'interested persons' can obtain certified copies after paying suitable fees.",
+      options: [
+        { label: "a", text: "Statement I is True, and Statement II is False" },
+        { label: "b", text: "Statement I is False, and Statement II is True" },
+        { label: "c", text: "Both Statements I and II are True" },
+        { label: "d", text: "Both Statements I and II are False" }
+      ],
+      correct: [0],
+      reason: "Option (a). Statement I is true — the register is maintained with all relevant particulars. Statement II is false — the register is open to public inspection, not confidential."
+    },
+    {
+      section: "Part B2 — True / False Statements (1 mark each)",
+      qtext: "Statement I: An exclusive licensee of a patent is not eligible to challenge validity of the patent under section 64.\n\nStatement II: It would not be considered lawful for a patentee to insert a clause in the license agreement which restricts the rights of a licensee vis-à-vis patent validity.",
+      options: [
+        { label: "a", text: "Statement I is True, and Statement II is False" },
+        { label: "b", text: "Statement I is False, and Statement II is True" },
+        { label: "c", text: "Both Statements I and II are True" },
+        { label: "d", text: "Both Statements I and II are False" }
+      ],
+      correct: [1],
+      reason: "Option (b). Statement I is false — an exclusive licensee can challenge validity under Section 64. Statement II is true — a clause restricting the licensee's right to challenge validity is unlawful under Section 140."
+    },
+    {
+      section: "Part B2 — True / False Statements (1 mark each)",
+      qtext: "Statement I: An international search is carried out by an international searching authority, which may either be a national office or an intergovernmental organization.\n\nStatement II: The international searching authority carrying out the international search in respect of an international application shall not be competent to carry out a supplementary international search in respect of that application.",
+      options: [
+        { label: "a", text: "Statement I is True, and Statement II is False" },
+        { label: "b", text: "Statement I is False, and Statement II is True" },
+        { label: "c", text: "Both Statements I and II are True" },
+        { label: "d", text: "Both Statements I and II are False" }
+      ],
+      correct: [2],
+      reason: "Option (c). Both statements are true. The ISA can be a national office or intergovernmental organization (I), and the same ISA cannot carry out a supplementary international search for the same application (II)."
+    },
+    {
+      section: "Part B2 — True / False Statements (1 mark each)",
+      qtext: "Statement I: A dependent claim is found to be neither novel nor inventive in view of certain prior art. This will automatically mean that the independent claim, on which the dependent claim is based, is also not novel and not inventive.\n\nStatement II: A dependent claim may be novel and inventive even though the independent claim, on which the dependent claim is based, is found to be not novel and not inventive.",
+      options: [
+        { label: "a", text: "Statement I is True, and Statement II is False" },
+        { label: "b", text: "Statement I is False, and Statement II is True" },
+        { label: "c", text: "Both Statements I and II are True" },
+        { label: "d", text: "Both Statements I and II are False" }
+      ],
+      correct: [2],
+      reason: "Option (c). Both statements are true. A dependent claim being non-novel/non-inventive does not automatically mean the independent claim is also non-novel/non-inventive (I is false, actually — wait). Let me clarify: If a dependent claim (which includes all features of the independent claim plus additional features) is not novel/inventive, it does NOT mean the independent claim is also not novel/inventive. So Statement I is false, Statement II is true. Correct answer is (b)."
+    },
+
+    /* ----- Part C1 : Multiple Choice (3 marks) ----- */
+    {
+      section: "Part C1 — Multiple Choice (3 marks each)",
+      qtext: "A patent application X for a pharmaceutical compound is filed in India. An identical compound is also found to be claimed in two different applications in US (D1) and in India (D2). However, both of these applications were filed before the filing date of X, but published after the filing date of X. When considering anticipation, which of the following is/are true?\n\nI. The US application (D1) destroys novelty of X, but the Indian application (D2) doesn't destroy the novelty.\nII. The compound is novel, since the disclosure in the US and Indian applications are not considered as valid.\nIII. The US application is valid for novelty if it was filed by the same inventor.\nIV. The US application (D1) doesn't destroy novelty of X, but the Indian application (D2) does destroy the novelty.",
+      options: [
+        { label: "a", text: "Only III is correct" },
+        { label: "b", text: "Both II and III are correct" },
+        { label: "c", text: "Only IV is correct" },
+        { label: "d", text: "Both II and IV are correct" }
+      ],
+      correct: [2],
+      reason: "Option (c). Only IV is correct. Under Section 13(1)(b), a prior Indian application published after the filing date of X (D2) destroys novelty (anticipation by prior claiming). A foreign application (D1) published after the filing date does not destroy novelty."
+    },
+    {
+      section: "Part C1 — Multiple Choice (3 marks each)",
+      qtext: "In a patent application, claim 1 consists of features A, B, and C. Further, a dependent claim 2 (dependent on claim 1) consists of a feature D. Subsequently, another dependent claim 3 (dependent on claim 2) consists of feature E. You have a prior art D1 which discloses features A and B. Feature C is disclosed in document D2. Another document, D3, discloses features A, C, and E. Considering that all the prior arts D1–D3 are relevant to the concerned field of technology, choose the correct option(s):\n\nI. Documents D1 and D2 in combination destroy the inventive step of claim 1.\nII. Documents D1, D2 and D3 in combination destroy the inventive step of claim 3.\nIII. Claim 2 and claim 3 are novel and inventive, while claim 1 is novel but not inventive in view of D1–D3.\nIV. Claims 2 and 3 cannot be considered inventive, as they are dependent on claim 1, which is not inventive in view of D1–D3.",
+      options: [
+        { label: "a", text: "Statements I, II, and III are correct" },
+        { label: "b", text: "Statements I, II and IV are correct" },
+        { label: "c", text: "Statements II, III, and IV are correct" },
+        { label: "d", text: "Statements I and III are correct" }
+      ],
+      correct: [3],
+      reason: "Option (d) — Statements I and III are correct. D1+D2 render claim 1 obvious (I). Claim 2 adds D and claim 3 adds E; since D3 discloses A, C, E, claim 3 is obvious too, but claim 2 with D may still be inventive. Statement II is false because D1+D2+D3 do not necessarily destroy claim 3's inventive step (D is not disclosed). Statement IV is false because dependent claims can be inventive even if the independent claim is not."
+    },
+    {
+      section: "Part C1 — Multiple Choice (3 marks each)",
+      qtext: "Dr. Asha and Dr. Mehra are co-patentees of three related patents granted for different aspects of the same medical device technology. One patent has been exclusively licensed to MedEquip Pvt. Ltd., and another has been non-exclusively licensed to BioHealth Ltd. All parties are commercially exploiting the inventions in India. Dr. Mehra is also the sole patentee of a separate patent on a biodegradable packaging technology, which is not yet being commercially worked, but she is interested in licensing it. Which of the above statements are correct?\n\nI. Dr. Asha, Dr. Mehra, MedEquip Pvt. Ltd., and BioHealth Ltd. are each required to file Form-27 individually for their respective patents or licenses.\nII. Dr. Asha and Dr. Mehra can file a single consolidated Form-27 for all three related patents, since they are co-owners and the patents relate to the same technology.\nIII. Both MedEquip Pvt. Ltd. and BioHealth Ltd. can file their own Form-27 separately from the patentees for the patents they are licensed to use.\nIV. The revised Form-27 now includes a provision requiring patentees or licensees to state whether the patent is available for licensing.\nV. Form-27 is required to be filed only once during the lifetime of the patent, irrespective of whether it continues to be worked or not.",
+      options: [
+        { label: "a", text: "I, II, III and IV only" },
+        { label: "b", text: "II, III, IV and V only" },
+        { label: "c", text: "I, II and III only" },
+        { label: "d", text: "All of the above" }
+      ],
+      correct: [0],
+      reason: "Option (a) — I, II, III and IV. Form-27 can be filed individually (I), consolidated for related patents by co-owners (II), separately by licensees (III), and the revised form includes a licensing availability statement (IV). V is false — Form-27 must be filed annually, not once."
+    },
+    {
+      section: "Part C1 — Multiple Choice (3 marks each)",
+      qtext: "Mr. Arjun is the patentee of Patent No. 123456 which relates to a new pharmaceutical composition. He requests surrender of his patent under Section 63 of the Act, which is duly published. One of the licensees, Ms. Meera, comes across this publication and feels that surrendering the patent would reduce her profits. In this situation, which of the following statements are correct under the Patents Act, 1970?\n\nI. Ms. Meera, being a person having an interest in the patent, may file a notice of opposition to the surrender within the prescribed period.\nII. The Controller must provide both Mr. Arjun and Ms. Meera an opportunity to be heard before deciding whether to accept the surrender.\nIII. The patent stands automatically revoked upon Mr. Arjun's submission of the surrender notice.\nIV. The Controller may accept the patentee's request of surrender after hearing the patentee only.",
+      options: [
+        { label: "a", text: "I and II only" },
+        { label: "b", text: "II and III only" },
+        { label: "c", text: "I and IV only" },
+        { label: "d", text: "All of the above" }
+      ],
+      correct: [0],
+      reason: "Option (a) — I and II only. Ms. Meera, as an interested person (licensee), can oppose the surrender (I). The Controller must hear both the patentee and the opponent before deciding (II). III is false (surrender is not automatic), and IV is false (the opponent must also be heard)."
     }
+  ];
 
-    const q = item;
-    const idx = qIndex++;
-    q._marks = currentMark;
+  /* =====================================================================
+     RENDER & LOGIC
+     ===================================================================== */
+  var form      = document.getElementById("quiz");
+  var submitBtn = document.getElementById("submitBtn");
+  var resetBtn  = document.getElementById("resetBtn");
+  var hint      = document.getElementById("hint");
+  var summary   = document.getElementById("summary");
+  var scoreLine = document.getElementById("scoreLine");
+  var chips     = document.getElementById("chips");
 
-    const st = state[idx];
-    const card = document.createElement("div");
-    card.className = "qcard";
+  var submitted = false;
 
-    const title = document.createElement("div");
-    title.className = "qtitle";
-    title.innerHTML = `<span class="qnum">${idx + 1}</span><span class="qtext">${esc(q.t)}</span>`;
-    card.appendChild(title);
+  /* ---------- Build question cards ---------- */
+  function buildQuiz() {
+    form.innerHTML = "";
+    var lastSection = "";
 
-    const multi = isMulti(q.a);
-    if (multi){
-      const badge = document.createElement("div");
-      badge.className = "multi";
-      badge.textContent = "Multiple answers may be correct";
-      card.appendChild(badge);
-    }
-
-    q.o.forEach((optText, i) => {
-      const btn = document.createElement("button");
-      btn.type = "button";
-      btn.className = "opt";
-      btn.innerHTML = `<b>${String.fromCharCode(65 + i)}</b><span>${esc(optText)}</span>`;
-      if (st.selected.has(i)) btn.classList.add("sel");
-      btn.disabled = st.checked;
-
-      if (st.checked){
-        const correctSet = answerSet(q.a);
-        if (correctSet.has(i)) btn.classList.add("correct");
-        else if (st.selected.has(i)) btn.classList.add("wrong");
+    QUESTIONS.forEach(function (q, idx) {
+      /* section heading */
+      if (q.section && q.section !== lastSection) {
+        lastSection = q.section;
+        var sec = document.createElement("div");
+        sec.style.cssText = "margin:1.6rem 0 .6rem;font-weight:700;font-size:.88rem;text-transform:uppercase;letter-spacing:.08em;color:var(--accent);";
+        sec.textContent = q.section;
+        form.appendChild(sec);
       }
 
-      btn.addEventListener("click", () => {
-        if (st.checked) return;
+      var card = document.createElement("section");
+      card.className = "card";
+      card.id = "card-q" + idx;
 
-        if (multi){
-          if (st.selected.has(i)) st.selected.delete(i);
-          else st.selected.add(i);
-        } else {
-          st.selected.clear();
-          st.selected.add(i);
-        }
+      /* header */
+      var head = document.createElement("div");
+      head.className = "qhead";
+      var num = document.createElement("span");
+      num.className = "qnum";
+      num.textContent = "Q" + (idx + 1);
+      head.appendChild(num);
+      card.appendChild(head);
 
-        const optButtons = card.querySelectorAll(".opt");
-        optButtons.forEach((b, j) => {
-          b.classList.toggle("sel", st.selected.has(j));
-          b.disabled = false;
-        });
-        checkBtn.disabled = st.selected.size === 0;
+      /* question text */
+      var qtext = document.createElement("p");
+      qtext.className = "qtext";
+      qtext.textContent = q.qtext;
+      card.appendChild(qtext);
+
+      /* options */
+      var optsWrap = document.createElement("div");
+      optsWrap.className = "options";
+
+      q.options.forEach(function (opt, oi) {
+        var label = document.createElement("label");
+        label.className = "option";
+
+        var input = document.createElement("input");
+        input.type = "checkbox";
+        input.name = "q" + idx;
+        input.value = oi;
+
+        var txt = document.createElement("span");
+        txt.className = "txt";
+        txt.innerHTML = "<b>(" + opt.label + ")</b> " + opt.text;
+
+        label.appendChild(input);
+        label.appendChild(txt);
+        optsWrap.appendChild(label);
       });
 
-      card.appendChild(btn);
+      card.appendChild(optsWrap);
+
+      /* feedback placeholder */
+      var fb = document.createElement("div");
+      fb.className = "feedback";
+      fb.id = "fb-q" + idx;
+      card.appendChild(fb);
+
+      form.appendChild(card);
     });
+  }
 
-    const checkBtn = document.createElement("button");
-    checkBtn.type = "button";
-    checkBtn.className = "check";
-    checkBtn.textContent = "Check answer";
-    checkBtn.disabled = st.checked || st.selected.size === 0;
+  /* ---------- Helpers ---------- */
+  function inputsFor(idx) {
+    return Array.prototype.slice.call(
+      document.querySelectorAll('input[name="q' + idx + '"]')
+    );
+  }
 
-    if (st.checked){
-      checkBtn.textContent = st.correct ? "Correct" : "Incorrect";
-    }
+  function selectionFor(idx) {
+    return inputsFor(idx)
+      .filter(function (i) { return i.checked; })
+      .map(function (i) { return parseInt(i.value, 10); });
+  }
 
-    checkBtn.addEventListener("click", () => {
-      if (st.checked || st.selected.size === 0) return;
+  function labelOf(input) {
+    return input.closest("label");
+  }
 
-      st.checked = true;
-      const correctSet = answerSet(q.a);
-      st.correct = setsEqual(st.selected, correctSet);
+  function pretty(values) {
+    if (!values.length) return "—";
+    return values.map(function (v) {
+      return "(" + String.fromCharCode(97 + v) + ")";
+    }).join(", ");
+  }
 
-      card.querySelectorAll(".opt").forEach((b, j) => {
-        b.disabled = true;
-        b.classList.remove("sel");
-        if (correctSet.has(j)) b.classList.add("correct");
-        else if (st.selected.has(j)) b.classList.add("wrong");
-      });
+  function refreshState() {
+    if (submitted) return;
+    var answered = QUESTIONS.filter(function (q, idx) {
+      return selectionFor(idx).length > 0;
+    }).length;
+    submitBtn.disabled = answered < QUESTIONS.length;
+    hint.textContent = answered < QUESTIONS.length
+      ? answered + " of " + QUESTIONS.length + " questions answered."
+      : "All answered — submit when ready.";
+  }
 
-      checkBtn.disabled = true;
-      checkBtn.textContent = st.correct ? "Correct" : "Incorrect";
+  /* ---------- Grading ---------- */
+  function isCorrect(idx, sel) {
+    var q = QUESTIONS[idx];
+    if (!sel.length) return false;
+    if (sel.length !== q.correct.length) return false;
+    return q.correct.every(function (v) { return sel.indexOf(v) !== -1; });
+  }
 
-      attempted++;
-      if (st.correct){
-        correctCount++;
-        totalMarks += currentMark;
-      } else {
-        wrongCount++;
+  function renderFeedback(idx, sel, ok) {
+    var q  = QUESTIONS[idx];
+    var fb = document.getElementById("fb-q" + idx);
+
+    fb.innerHTML =
+      '<p class="verdict ' + (ok ? "ok" : "bad") + '">' +
+        (ok ? "&#10004; Correct" : "&#10008; Incorrect") +
+      "</p>" +
+      '<p><span class="lbl">Your answer:</span> ' + pretty(sel) + "</p>" +
+      '<p><span class="lbl">Correct answer:</span> ' + pretty(q.correct) + "</p>" +
+      '<p class="reason">' + q.reason + "</p>";
+
+    fb.classList.add("show");
+
+    inputsFor(idx).forEach(function (inp) {
+      var lab = labelOf(inp);
+      lab.classList.add("locked");
+      var v = parseInt(inp.value, 10);
+      if (q.correct.indexOf(v) !== -1) {
+        lab.classList.add("is-correct");
+      } else if (inp.checked) {
+        lab.classList.add("is-wrong");
       }
-      updateStats();
     });
 
-    card.appendChild(checkBtn);
-    quiz.appendChild(card);
-  });
+    var card = document.getElementById("card-q" + idx);
+    card.classList.add(ok ? "correct" : "wrong");
+  }
 
-  updateStats();
-}
+  function submitQuiz() {
+    if (submitted) return;
 
-document.getElementById("resetBtn").addEventListener("click", () => {
-  state = questions.map(() => ({ selected: new Set(), checked: false, correct: null }));
-  attempted = 0;
-  correctCount = 0;
-  wrongCount = 0;
-  totalMarks = 0;
-  render();
-  window.scrollTo({ top: 0, behavior: "smooth" });
-});
+    var results = [];
+    QUESTIONS.forEach(function (q, idx) {
+      var sel = selectionFor(idx);
+      var ok  = isCorrect(idx, sel);
+      results.push({ idx: idx, ok: ok });
+      renderFeedback(idx, sel, ok);
+      inputsFor(idx).forEach(function (i) { i.disabled = true; });
+    });
 
-render();
+    var score = results.filter(function (r) { return r.ok; }).length;
+
+    scoreLine.innerHTML = "You scored <b>" + score + "</b> out of " + QUESTIONS.length +
+      " &nbsp;&middot;&nbsp; " + (score === QUESTIONS.length ? "Perfect!" : "Review the explanations below.");
+
+    chips.innerHTML = results.map(function (r) {
+      return '<li class="chip ' + (r.ok ? "ok" : "bad") + '">' +
+        "Q" + (r.idx + 1) + " " + (r.ok ? "&#10004;" : "&#10008;") +
+      "</li>";
+    }).join("");
+
+    summary.classList.remove("hidden");
+    summary.scrollIntoView({ behavior: "smooth", block: "start" });
+
+    submitted = true;
+    submitBtn.disabled = true;
+    hint.textContent = "Submitted. Press Reset to try again.";
+  }
+
+  function resetQuiz() {
+    submitted = false;
+    form.reset();
+
+    QUESTIONS.forEach(function (q, idx) {
+      inputsFor(idx).forEach(function (inp) {
+        inp.disabled = false;
+        var lab = labelOf(inp);
+        lab.classList.remove("is-correct", "is-wrong", "locked");
+      });
+      var fb = document.getElementById("fb-q" + idx);
+      fb.innerHTML = "";
+      fb.classList.remove("show");
+      document.getElementById("card-q" + idx).classList.remove("correct", "wrong");
+    });
+
+    summary.classList.add("hidden");
+    chips.innerHTML = "";
+    scoreLine.innerHTML = "";
+    refreshState();
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
+  /* ---------- Init ---------- */
+  buildQuiz();
+  form.addEventListener("change", refreshState);
+  submitBtn.addEventListener("click", submitQuiz);
+  resetBtn.addEventListener("click", resetQuiz);
+  refreshState();
+})();
 </script>
-
   <script src="timer.js"></script>
 </body>
 </html>
